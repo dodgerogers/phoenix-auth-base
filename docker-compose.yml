@@ -1,0 +1,32 @@
+version: '2'
+services:
+  db:
+    image: postgres
+  web:
+    build: .
+    command: bash script/setup.sh
+    environment:
+      - PORT=4000
+      - MIX_ENV=dev
+      - DB_ENV_POSTGRES_USER=postgres
+      - DB_ENV_POSTGRES_PASSWORD=postgres
+      - DB_ENV_POSTGRES_HOST=db
+    volumes:
+      - .:/app
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+  test:
+    image: teebox_web
+    command: mix test
+    environment:
+      - MIX_ENV=test
+      - PORT=4001
+      - DB_ENV_POSTGRES_USER=postgres
+      - DB_ENV_POSTGRES_PASSWORD=postgres
+      - DB_ENV_POSTGRES_HOST=db
+    volumes_from:
+      - web
+    depends_on:
+      - db
