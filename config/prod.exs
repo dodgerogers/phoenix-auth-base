@@ -13,8 +13,24 @@ use Mix.Config
 # which you typically run after static files are built.
 config :teebox, Teebox.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/manifest.json"
+  url: [host: "${HOST}", port: {:system, "PORT"}], # This is critical for ensuring web-sockets properly authorize.
+  # cache_static_manifest: "priv/static/manifest.json",
+  code_reloader: false,
+  server: true,
+  root: ".",
+  version: Mix.Project.config[:version]
+
+config :teebox, Teebox.Endpoint,
+  secret_key_base: "${SECRET_KEY_BASE}"
+
+# Configure your database
+config :teebox, Teebox.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  hostname: "${DB_ENV_POSTGRES_HOST}",
+  database: "${DB_ENV_NAME}",
+  username: "${DB_ENV_POSTGRES_USER}",
+  password: "${DB_ENV_POSTGRES_PASSWORD}",
+  pool_size: 20
 
 # Do not print debug messages in production
 config :logger, level: :info
@@ -48,14 +64,14 @@ config :logger, level: :info
 # If you are doing OTP releases, you need to instruct Phoenix
 # to start the server for all endpoints:
 #
-#     config :phoenix, :serve_endpoints, true
+    # config :phoenix, :serve_endpoints, true
 #
 # Alternatively, you can configure exactly which server to
 # start per endpoint:
 #
-#     config :teebox, Teebox.Endpoint, server: true
+    # config :teebox, Teebox.Endpoint, server: true
 #
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"

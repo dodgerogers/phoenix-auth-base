@@ -9,3 +9,12 @@ To start your app:
   * Run the tests `docker-compose run --rm test`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+To deploy the application  
+
+  * Make a build `docker-compose exec web mix docker.build`
+  * Make a release `docker-compose exec web mix docker.release`
+  * Publish release `docker-compose exec web mix docker.publish`
+  * All three `docker-compose exec web mix docker.shipit`
+  * Run the release locally `docker run -t --rm -p 5000:5000 --env-file config/release.env dodgerogers/teebox:release foreground`
+  * Remove stale images `docker rmi -f $(docker images -f "dangling=true" -q)`
