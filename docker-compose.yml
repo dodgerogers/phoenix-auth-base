@@ -1,7 +1,5 @@
 version: '2'
 services:
-  db:
-    image: postgres
   web:
     build: .
     command: bash script/dev/setup.sh
@@ -10,7 +8,7 @@ services:
       - MIX_ENV=dev
       - DB_ENV_POSTGRES_USER=postgres
       - DB_ENV_POSTGRES_PASSWORD=postgres
-      - DB_ENV_POSTGRES_HOST=db
+      - DB_ENV_POSTGRES_HOST=dev_db
       - DB_ENV_NAME=teebox_dev
     volumes:
       - .:/app
@@ -21,20 +19,47 @@ services:
       - "4000:4000"
     privileged: true
     depends_on:
-      - db
-  test_db:
+      - dev_db
+
+  dev_db:
     image: postgres
+
   test:
     image: teebox_web
+    volumes_from:
+      - web
     command: mix test
     environment:
       - MIX_ENV=test
       - PORT=4001
       - DB_ENV_POSTGRES_USER=postgres
       - DB_ENV_POSTGRES_PASSWORD=postgres
-      - DB_ENV_POSTGRES_HOST=db
+      - DB_ENV_POSTGRES_HOST=test_db
       - DB_ENV_NAME=teebox_test
-    volumes_from:
-      - web
     depends_on:
       - test_db
+
+  test_db:
+    image: postgres
+
+  run_release:
+    image: dodgerogers/teebox:release
+    command: foreground
+    environment:
+      - MIX_ENV=prod
+      - PORT=5001
+      - DB_ENV_POSTGRES_USER=postgres
+      - DB_ENV_POSTGRES_PASSWORD=postgres
+      - DB_ENV_POSTGRES_HOST=release_db
+      - DB_ENV_NAME=teebox_release
+    ports:
+      - "5001:5001"
+    depends_on:
+      - release_db
+
+  release_db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=teebox_release
