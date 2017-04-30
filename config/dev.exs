@@ -7,9 +7,9 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :teebox, Teebox.Endpoint,
-  http: [port: 4000],
+  http: [port: {:system, "PORT"}],
   debug_errors: true,
-  code_reloader: true,
+  code_reloader: false,
   check_origin: false,
   watchers: []
 
@@ -28,15 +28,14 @@ config :teebox, Teebox.Endpoint,
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 
-# Set a higher stacktrace during development. Avoid configuring such
-# in production as building large stacktraces may be expensive.
-config :phoenix, :stacktrace_depth, 20
-
-# Configure your database
 config :teebox, Teebox.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: System.get_env("DB_ENV_POSTGRES_USER"),
   password: System.get_env("DB_ENV_POSTGRES_PASSWORD"),
   hostname: System.get_env("DB_ENV_POSTGRES_HOST"),
-  database: "teebox_dev",
+  database: System.get_env("DB_ENV_NAME"),
   pool_size: 10
+
+# Set a higher stacktrace during development. Avoid configuring such
+# in production as building large stacktraces may be expensive.
+config :phoenix, :stacktrace_depth, 20

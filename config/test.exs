@@ -15,5 +15,5 @@ config :teebox, Teebox.Repo,
   username: System.get_env("DB_ENV_POSTGRES_USER"),
   password: System.get_env("DB_ENV_POSTGRES_PASSWORD"),
   hostname: System.get_env("DB_ENV_POSTGRES_HOST"),
-  database: "teebox_test",
+  database: System.get_env("DB_ENV_NAME"),
   pool: Ecto.Adapters.SQL.Sandbox

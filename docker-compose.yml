@@ -4,19 +4,26 @@ services:
     image: postgres
   web:
     build: .
-    command: bash script/setup.sh
+    command: bash script/dev/setup.sh
     environment:
       - PORT=4000
       - MIX_ENV=dev
       - DB_ENV_POSTGRES_USER=postgres
       - DB_ENV_POSTGRES_PASSWORD=postgres
       - DB_ENV_POSTGRES_HOST=db
+      - DB_ENV_NAME=teebox_dev
     volumes:
       - .:/app
+      - /var/run/docker.sock:/tmp/sock
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
     ports:
       - "4000:4000"
+    privileged: true
     depends_on:
       - db
+  test_db:
+    image: postgres
   test:
     image: teebox_web
     command: mix test
@@ -26,7 +33,8 @@ services:
       - DB_ENV_POSTGRES_USER=postgres
       - DB_ENV_POSTGRES_PASSWORD=postgres
       - DB_ENV_POSTGRES_HOST=db
+      - DB_ENV_NAME=teebox_test
     volumes_from:
       - web
     depends_on:
-      - db
+      - test_db
