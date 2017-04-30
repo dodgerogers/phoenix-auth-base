@@ -31,6 +31,7 @@ environment :prod do
   set include_erts: true
   set include_src: false
   set cookie: :":^/fSZ,|ftLoCp3a9H>,Z@Ykv{@3yJ7s@M[,aCV{0<E]urNyJNU9u;llsw!hWggV"
+  set post_start_hook: "rel/commands/migrate.sh"
 end
 
 # You may define one or more releases in this file.
@@ -44,8 +45,6 @@ release :teebox do
     :runtime_tools, :mix_docker
   ]
   set commands: [
-    "ecto.migrate": "rel/commands/migrate.sh",
-    # "ecto.create": "rel/commands/create",
-    # "ecto.drop": "rel/commands/ecto_drop"
+    "migrate": "rel/commands/migrate.sh",
   ]
 end
