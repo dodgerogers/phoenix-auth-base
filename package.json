@@ -1,10 +1,13 @@
 {
   "license": "MIT",
-  "name": "teebox",
-  "version": "0.0.1",
-  "description": "An example module to illustrate the usage of a package.json",
   "author": "Andy Rogers",
-  "scripts": {},
-  "dependencies": {},
-  "devDependencies": {}
+  "scripts": {
+    "watch": "cd client && npm run watch",
+    "release": "cd client && npm run release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/dodgerogers/teebox.io.git"
+  },
+  "homepage": "https://bitbucket.org/dodgerogers/teebox.io#readme"
 }

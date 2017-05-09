@@ -11,11 +11,7 @@ config :teebox, Teebox.Endpoint,
   debug_errors: true,
   code_reloader: false,
   check_origin: false,
-  watchers: []
-
-
-# Watch static and templates for browser reloading.
-config :teebox, Teebox.Endpoint,
+  watchers: [npm: ["run", "watch"]],
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},

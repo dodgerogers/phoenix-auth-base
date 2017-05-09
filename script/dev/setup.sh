@@ -1,5 +1,6 @@
 #!/bin/bash
 
+npm install;
 mix deps.get;
 mix compile;
 mix ecto.create;

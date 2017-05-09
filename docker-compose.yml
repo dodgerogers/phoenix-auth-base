@@ -48,6 +48,7 @@ services:
     environment:
       - MIX_ENV=prod
       - PORT=5001
+      - SECRET_KEY_BASE=secret_key_base
       - DB_ENV_POSTGRES_USER=postgres
       - DB_ENV_POSTGRES_PASSWORD=postgres
       - DB_ENV_POSTGRES_HOST=release_db

@@ -29,4 +29,8 @@ RUN npm install
 
 COPY . .
 
+# Compile the client
+RUN npm run release
+
+# Build the release
 RUN mix release --env=prod --verbose
