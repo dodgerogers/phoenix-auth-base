@@ -1,4 +1,4 @@
-defmodule Teebox.ErrorHelpers do
+defmodule Teebox.Web.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """

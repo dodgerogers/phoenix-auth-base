@@ -1,4 +1,4 @@
-defmodule Teebox.PageController do
+defmodule Teebox.Web.PageController do
   use Teebox.Web, :controller
 
   def index(conn, _params) do

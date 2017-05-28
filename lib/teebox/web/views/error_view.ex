@@ -1,4 +1,4 @@
-defmodule Teebox.ErrorView do
+defmodule Teebox.Web.ErrorView do
   use Teebox.Web, :view
 
   def render("404.html", _assigns) do

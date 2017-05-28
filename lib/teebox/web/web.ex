@@ -28,20 +28,21 @@ defmodule Teebox.Web do
 
   def controller do
     quote do
-      use Phoenix.Controller
+      use Phoenix.Controller, namespace: Teebox.Web
 
       alias Teebox.Repo
       import Ecto
       import Ecto.Query
 
-      import Teebox.Router.Helpers
-      import Teebox.Gettext
+      import Teebox.Web.Router.Helpers
+      import Teebox.Web.Gettext
     end
   end
 
   def view do
     quote do
-      use Phoenix.View, root: "web/templates"
+      use Phoenix.View, root: "lib/teebox/web/templates",
+                        namespace: Teebox.Web
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
@@ -49,9 +50,9 @@ defmodule Teebox.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import Teebox.Router.Helpers
-      import Teebox.ErrorHelpers
-      import Teebox.Gettext
+      import Teebox.Web.Router.Helpers
+      import Teebox.Web.ErrorHelpers
+      import Teebox.Web.Gettext
     end
   end
 
@@ -68,7 +69,7 @@ defmodule Teebox.Web do
       alias Teebox.Repo
       import Ecto
       import Ecto.Query
-      import Teebox.Gettext
+      import Teebox.Web.Gettext
     end
   end
 

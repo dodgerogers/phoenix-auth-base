@@ -1,4 +1,4 @@
-defmodule Teebox.UserSocket do
+defmodule Teebox.Web.UserSocket do
   use Phoenix.Socket
 
   ## Channels

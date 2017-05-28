@@ -1,7 +1,7 @@
-defmodule Teebox.Endpoint do
+defmodule Teebox.Web.Endpoint do
   use Phoenix.Endpoint, otp_app: :teebox
 
-  socket "/socket", Teebox.UserSocket
+  socket "/socket", Teebox.Web.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -38,5 +38,5 @@ defmodule Teebox.Endpoint do
     key: "_teebox_key",
     signing_salt: "g8yHrKa6"
 
-  plug Teebox.Router
+  plug Teebox.Web.Router
 end

@@ -6,18 +6,18 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :teebox, Teebox.Endpoint,
+config :teebox, Teebox.Web.Endpoint,
   http: [port: {:system, "PORT"}],
   debug_errors: true,
   code_reloader: false,
   check_origin: false,
-  watchers: [npm: ["run", "watch"]],
+  watchers: [npm: ["run", "watch", cd: Path.expand("../assets", __DIR__)]],
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{web/views/.*(ex)$},
-      ~r{web/templates/.*(eex)$}
+      ~r{lib/teebox/web/views/.*(ex)$},
+      ~r{lib/teebox/web/templates/.*(eex)$}
     ]
   ]
 

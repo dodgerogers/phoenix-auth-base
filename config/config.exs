@@ -10,10 +10,10 @@ config :teebox,
   ecto_repos: [Teebox.Repo]
 
 # Configures the endpoint
-config :teebox, Teebox.Endpoint,
+config :teebox, Teebox.Web.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "tdBlSUk3KNY68in1w2uRCg8/zhYPfnfAlzS+DZu5YQKn12o1lFehHhL8vJZdklWc",
-  render_errors: [view: Teebox.ErrorView, accepts: ~w(html json)],
+  render_errors: [view: Teebox.Web.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Teebox.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
