@@ -1,4 +1,4 @@
-defmodule Teebox.Router do
+defmodule Teebox.Web.Router do
   use Teebox.Web, :router
 
   pipeline :browser do
@@ -13,7 +13,7 @@ defmodule Teebox.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Teebox do
+  scope "/", Teebox.Web do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index

@@ -2,8 +2,8 @@
   "license": "MIT",
   "author": "Andy Rogers",
   "scripts": {
-    "watch": "cd client && npm run watch",
-    "release": "cd client && npm run release"
+    "watch": "cd ../client && npm run watch",
+    "release": "cd ../client && npm run release"
   },
   "repository": {
     "type": "git",

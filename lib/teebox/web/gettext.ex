@@ -1,4 +1,4 @@
-defmodule Teebox.Gettext do
+defmodule Teebox.Web.Gettext do
   @moduledoc """
   A module providing Internationalization with a gettext-based API.
 
