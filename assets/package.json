@@ -1,6 +1,7 @@
 {
   "license": "MIT",
   "author": "Andy Rogers",
+  "description": "Phoenix assets",
   "scripts": {
     "watch": "cd ../client && npm run watch",
     "release": "cd ../client && npm run release"

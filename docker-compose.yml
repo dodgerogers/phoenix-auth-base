@@ -46,8 +46,8 @@ services:
     image: dodgerogers/teebox:release
     command: foreground
     environment:
-      - MIX_ENV=prod
       - PORT=5001
+      - MIX_ENV=prod
       - SECRET_KEY_BASE=secret_key_base
       - DB_ENV_POSTGRES_USER=postgres
       - DB_ENV_POSTGRES_PASSWORD=postgres
@@ -60,7 +60,3 @@ services:
 
   release_db:
     image: postgres
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=teebox_release

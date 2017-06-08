@@ -16,5 +16,5 @@ To deploy the application
   * Make a release `docker-compose exec web mix docker.release`
   * Publish release `docker-compose exec web mix docker.publish`
   * All three `docker-compose exec web mix docker.shipit`
-  * Run the release locally `docker run -t --rm -p 5000:5000 --env-file config/release.env dodgerogers/teebox:release foreground`
+  * Run the release locally `docker-compose up run_release` || `docker run -t --rm -p 5000:5000 --env-file config/release.env dodgerogers/teebox:release foreground`
   * Remove stale images `docker rmi -f $(docker images -f "dangling=true" -q)`

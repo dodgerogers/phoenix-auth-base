@@ -23,14 +23,13 @@ ENV MIX_ENV=prod
 COPY mix.exs mix.lock ./
 RUN mix do deps.get, deps.compile
 
-# Cache node deps
-COPY package.json ./
-RUN npm install
-
 COPY . .
 
+# Cache node deps
+RUN npm --prefix client/ install
+
 # Compile the client
-RUN npm run release
+RUN npm --prefix client/ run release
 
 # Build the release
 RUN mix release --env=prod --verbose
