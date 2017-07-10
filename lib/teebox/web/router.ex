@@ -19,8 +19,11 @@ defmodule Teebox.Web.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Teebox do
-  #   pipe_through :api
-  # end
+  scope "/auth", Teebox.Web do
+    pipe_through :browser
+
+    get "/:provider", Teebox.Web.AuthController, :request
+    get "/:provider/callback", Teebox.Web.AuthController, :callback
+    post "/identity/callback", Teebox.Web.AuthController, :identity_callback
+  end
 end

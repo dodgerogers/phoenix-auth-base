@@ -22,7 +22,26 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-config :mix_docker, image: "dodgerogers/teebox"
+config :mix_docker, image: "377092858912.dkr.ecr.us-east-1.amazonaws.com/teebox.io"
+
+config :ueberauth, Ueberauth,
+  providers: [
+    facebook: {Ueberauth.Strategy.Facebook, [default_scope: "email,public_profile", profile_fields: "name,email"]}
+  ]
+
+config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
+  client_id: System.get_env("FACEBOOK_CLIENT_ID"),
+  client_secret: System.get_env("FACEBOOK_CLIENT_SECRET")
+
+  config :guardian, Guardian,
+    allowed_algos: ["HS512"], # optional
+    verify_module: Guardian.JWT,  # optional
+    issuer: "teebox",
+    ttl: { 30, :days },
+    allowed_drift: 2000,
+    verify_issuer: true, # optional
+    secret_key: "lHYk5/k7ur9asn4DXe3Zulu81LGiN3d7eTYE+TfO5xLVaN2hU/G8M43oifjQfljJ", # Secrets
+    serializer: MyApp.GuardianSerializer
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
