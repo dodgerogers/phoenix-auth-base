@@ -32,12 +32,13 @@ defmodule Authentication.FindOrCreateOmniauthUserTest do
         }
       }
     }
-    {:ok, %{auth: auth, repo: Repo}}
+
+    {:ok, %{auth: auth}}
   end
 
   defp user_count, do: Repo.one(from u in User, select: count(u.id))
 
-  test "it creates a new authorization and user when there is neither", %{auth: auth} do
+  test "it creates a new user when there is neither", %{auth: auth} do
     before_users = user_count()
 
     {:ok, user} = Teebox.Authentication.FindOrCreateOmniauthUser.call(auth)
@@ -48,27 +49,38 @@ defmodule Authentication.FindOrCreateOmniauthUserTest do
     assert user.email == @email
   end
 
-  # test "it returns the existing user when the authorization and user both exist", %{auth: auth} do
-  #   {:ok, user} = User.registration_changeset(%User{}, %{email: @email, name: @name}) |> Repo.insert
-  #   {:ok, _authorization} = Authorization.changeset(
-  #     Ecto.build_assoc(user, :authorizations),
-  #     %{
-  #       provider: to_string(@provider),
-  #       uid: @uid,
-  #       token: @token,
-  #       refresh_token: @refresh_token,
-  #       expires_at: Guardian.Utils.timestamp + 500
-  #     }
-  #   ) |> Repo.insert
-  #
-  #   before_users = user_count()
-  #   before_authorizations = authorization_count()
-  #   {:ok, user_from_auth} = UserFromAuth.get_or_insert(auth, nil, Repo)
-  #   assert user_from_auth.id == user.id
-  #
-  #   assert user_count == before_users
-  #   assert authorization_count == before_authorizations
-  # end
+  test "it returns an error tuple when omniauth hash is not a UeberAuth struct", %{auth: %{}} do
+    {:error, reason} = Teebox.Authentication.FindOrCreateOmniauthUser.call(%{})
+
+    assert "Invalid Omniauth hash provided", reason
+  end
+
+  test "it returns an error tuple when omniauth provider is not supported", %{auth: auth} do
+    invalid_auth = Map.merge(auth, %{provider: :unsupported})
+
+    {:error, reason} = Teebox.Authentication.FindOrCreateOmniauthUser.call(invalid_auth)
+
+    assert "Unsupported provider #{invalid_auth.provider}" == reason
+  end
+
+  test "it returns the existing user when they exist with given credentials", %{auth: auth} do
+    {:ok, existing_user} = User.changeset(%User{}, %{
+      email: @email,
+      name: @name,
+      provider: to_string(@provider),
+      uid: @uid,
+      token: @token,
+      refresh_token: @refresh_token,
+      expires_at: Guardian.Utils.timestamp + 500
+    }) |> Repo.insert
+
+    before_users = user_count()
+
+    {:ok, user} = Teebox.Authentication.FindOrCreateOmniauthUser.call(auth)
+
+    assert existing_user.id == user.id
+    assert user_count() == before_users
+  end
   #
   # test "it returns an existing user when the user has the same email", %{auth: auth} do
   #   {:ok, user} = User.registration_changeset(%User{}, %{email: @email, name: @name}) |> Repo.insert
