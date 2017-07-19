@@ -37,11 +37,11 @@ config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
     allowed_algos: ["HS512"], # optional
     verify_module: Guardian.JWT,  # optional
     issuer: "teebox",
-    ttl: { 30, :days },
+    ttl: { 14, :days },
     allowed_drift: 2000,
     verify_issuer: true, # optional
     secret_key: "lHYk5/k7ur9asn4DXe3Zulu81LGiN3d7eTYE+TfO5xLVaN2hU/G8M43oifjQfljJ", # Secrets
-    serializer: MyApp.GuardianSerializer
+    serializer: Teebox.Authentication.TokenSerializer
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

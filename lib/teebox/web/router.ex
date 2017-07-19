@@ -11,10 +11,16 @@ defmodule Teebox.Web.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :put_secure_browser_headers
+  end
+
+  pipeline :api_auth do
+    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    plug Guardian.Plug.LoadResource
   end
 
   scope "/", Teebox.Web do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :browser
 
     get "/", PageController, :index
   end
@@ -22,8 +28,12 @@ defmodule Teebox.Web.Router do
   scope "/auth", Teebox.Web do
     pipe_through :browser
 
-    get "/:provider", Teebox.Web.AuthController, :request
-    get "/:provider/callback", Teebox.Web.AuthController, :callback
-    post "/identity/callback", Teebox.Web.AuthController, :identity_callback
+    get "/:provider", AuthController, :index
+    get "/:provider/callback", AuthController, :callback
+    post "/identity/callback", AuthController, :identity_callback
+  end
+
+  scope "/api", Teebox.Web do
+    pipe_through :api
   end
 end
