@@ -1,15 +1,10 @@
 defmodule Teebox.UserTest do
   use Teebox.ModelCase
+  import Teebox.Factory
 
   alias Teebox.User
 
-  @valid_attrs %{
-    email: "some@email.com",
-    name: "test",
-    provider: to_string(:identity),
-    uid: Ecto.UUID.generate(),
-    token: Ecto.UUID.generate()
-  }
+  @valid_attrs params_for(:user)
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

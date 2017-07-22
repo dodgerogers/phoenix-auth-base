@@ -15,14 +15,12 @@ defmodule Teebox.User do
     field :refresh_token, :string
     field :expires_at, :integer
     field :password_hash, :string
-    field :password, :string, virtual: true
-    field :password_confirmation, :string, virtual: true
 
     timestamps()
   end
 
   @optional_fields ~w(avatar refresh_token expires_at)a
-  @required_fields ~w(name email provider uid token)a
+  @required_fields ~w(name email provider uid token password_hash)a
 
   def changeset(struct, params \\ %{}) do
     struct

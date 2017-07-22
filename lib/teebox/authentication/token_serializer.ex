@@ -1,12 +1,12 @@
 defmodule Teebox.Authentication.TokenSerializer do
   @behaviour Guardian.Serializer
+  @repo Application.get_env(:teebox, :user_repo)
 
-  alias Teebox.Repo
   alias Teebox.User
 
   def for_token(%User{} = user), do: { :ok, "User:#{user.id}" }
   def for_token(_), do: { :error, "Unknown resource type" }
 
-  def from_token("User:" <> id), do: { :ok, Repo.get(User, id) }
+  def from_token("User:" <> id), do: { :ok, @repo.find_by_id(String.to_integer(id)) }
   def from_token(_), do: { :error, "Unknown resource type" }
 end

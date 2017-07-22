@@ -18,4 +18,6 @@ config :teebox, Teebox.Repo,
   database: System.get_env("DB_ENV_NAME"),
   pool: Ecto.Adapters.SQL.Sandbox
 
-config :comeonin, :pbkdf2_rounds, 1  
+config :comeonin, :pbkdf2_rounds, 1
+
+config :teebox, :user_repo, Teebox.Persistance.Users.Mock
