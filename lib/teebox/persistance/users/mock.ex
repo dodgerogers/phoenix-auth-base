@@ -5,11 +5,11 @@ defmodule Teebox.Persistance.Users.Mock do
 
   def update(value), do: Agent.update(__MODULE__, fn _users -> value end)
 
-  defp users, do: Agent.get(__MODULE__, &(&1))
+  def all, do: Map.values(users())
 
   def clear, do: update(%{})
 
-  def all, do: Map.values(users())
+  defp users, do: Agent.get(__MODULE__, &(&1))
 
   def find_by_id(id), do: Map.get(users(), id)
 
@@ -28,6 +28,6 @@ defmodule Teebox.Persistance.Users.Mock do
   end
 
   defp find_by(_attributes) do
-    Enum.find(all(), fn(user) -> match?(_attributes, user) end)
+    all() |> Enum.find(fn(user) -> match?(_attributes, user) end)
   end
 end
