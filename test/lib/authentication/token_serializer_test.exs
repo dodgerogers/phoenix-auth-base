@@ -5,9 +5,9 @@ defmodule Authentication.TokenSerializerTest do
   @unknown_resource "Unknown resource type"
 
   setup do
-    Teebox.Persistance.Users.Mock.clear()
+    Teebox.Persistance.UsersRepositoryMock.clear()
 
-    {:ok, user} = build(:user, id: 1) |> Teebox.Persistance.Users.Mock.create()
+    {:ok, user} = build(:user, id: 1) |> Teebox.Persistance.UsersRepositoryMock.create()
 
     {:ok, %{user: user}}
   end

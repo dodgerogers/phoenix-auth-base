@@ -1,4 +1,4 @@
-defmodule Teebox.Persistance.Users.Api do
+defmodule Teebox.Persistance.UsersRepository do
   alias Teebox.Repo
   alias Teebox.User
   alias Ecto.Changeset

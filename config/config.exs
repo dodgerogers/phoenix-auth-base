@@ -54,8 +54,8 @@ config :guardian, Guardian,
   secret_key: "lHYk5/k7ur9asn4DXe3Zulu81LGiN3d7eTYE+TfO5xLVaN2hU/G8M43oifjQfljJ", # Secrets
   serializer: Teebox.Authentication.TokenSerializer
 
-config :teebox, :user_repo, Teebox.Persistance.Users.Api
-config :teebox, :omni_auth_login, Teebox.Authentication.OmniAuthLogin.Api
+config :teebox, :user_repo, Teebox.Persistance.UsersRepository
+config :teebox, :omni_auth_login, Teebox.Authentication.OmniAuthLogin
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

@@ -6,4 +6,4 @@ Ecto.Adapters.SQL.Sandbox.mode(Teebox.Repo, :manual)
 
 Faker.start
 
-Teebox.Persistance.Users.Mock.start_link()
+Teebox.Persistance.UsersRepositoryMock.start_link()

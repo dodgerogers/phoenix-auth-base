@@ -1,4 +1,4 @@
-defmodule Teebox.Persistance.Users.Mock do
+defmodule Teebox.Persistance.UsersRepositoryMock do
   import Ecto.Changeset
 
   def start_link, do: Agent.start_link(fn -> %{} end, name: __MODULE__)
