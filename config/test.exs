@@ -17,3 +17,8 @@ config :teebox, Teebox.Repo,
   hostname: System.get_env("DB_ENV_POSTGRES_HOST"),
   database: System.get_env("DB_ENV_NAME"),
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :comeonin, :pbkdf2_rounds, 1
+
+config :teebox, :user_repo, Teebox.Persistance.Users.Mock
+config :teebox, :omni_auth_login, Teebox.Authentication.OmniAuthLogin.Mock

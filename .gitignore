@@ -27,3 +27,5 @@ erl_crash.dump
 
 # Env conf files
 /config/*.env
+
+secrets.env

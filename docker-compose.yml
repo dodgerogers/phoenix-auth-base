@@ -3,6 +3,8 @@ services:
   web:
     build: .
     command: bash script/dev/setup.sh
+    env_file:
+      - secrets.env
     environment:
       - PORT=4000
       - MIX_ENV=dev
@@ -45,6 +47,8 @@ services:
   run_release:
     image: dodgerogers/teebox:release
     command: foreground
+    env_file:
+      - secrets.env
     environment:
       - PORT=5001
       - MIX_ENV=prod
