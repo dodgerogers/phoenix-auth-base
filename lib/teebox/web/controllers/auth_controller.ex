@@ -1,13 +1,12 @@
 defmodule Teebox.Web.AuthController do
   use Teebox.Web, :controller
+
   plug Ueberauth
 
-  def request(_conn, _params) do
-  end
+  @omni_auth_login Application.get_env(:teebox, :omni_auth_login)
 
   def callback(%Plug.Conn{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    result = Teebox.Authentication.FindOrCreateOmniauthUser.call(auth)
-    handleCallback(result, conn)
+    @omni_auth_login.call(auth) |> handle_callback(conn)
   end
   def callback(%Plug.Conn{assigns: %{ueberauth_failure: failure}} = conn, _params) do
     conn
@@ -15,7 +14,7 @@ defmodule Teebox.Web.AuthController do
       |> json(%{message: hd(failure.errors).message})
   end
 
-  defp handleCallback({:ok, user}, conn) do
+  defp handle_callback({:ok, user}, conn) do
     new_conn = Guardian.Plug.api_sign_in(conn, user)
     jwt = Guardian.Plug.current_token(new_conn)
     {:ok, claims} = Guardian.Plug.claims(new_conn)
@@ -26,7 +25,7 @@ defmodule Teebox.Web.AuthController do
       |> put_resp_header("x-expires", to_string(exp))
       |> json(%{jwt: jwt, exp: exp, user: user})
   end
-  defp handleCallback({:error, reason}, conn) do
+  defp handle_callback({:error, reason}, conn) do
     conn
       |> put_status(400)
       |> json(%{message: reason})

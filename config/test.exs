@@ -21,3 +21,4 @@ config :teebox, Teebox.Repo,
 config :comeonin, :pbkdf2_rounds, 1
 
 config :teebox, :user_repo, Teebox.Persistance.Users.Mock
+config :teebox, :omni_auth_login, Teebox.Authentication.OmniAuthLogin.Mock

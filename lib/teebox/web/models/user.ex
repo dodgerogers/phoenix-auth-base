@@ -1,8 +1,8 @@
 defmodule Teebox.User do
   use Teebox.Web, :model
 
-  # Don't like this
-  @derive {Poison.Encoder, only: [:name, :email, :avatar, :provider]}
+  # TODO: domain object should implement this
+  @derive {Poison.Encoder, only: [:id, :uid, :name, :avatar, :provider]}
 
   schema "users" do
     field :name, :string, null: false

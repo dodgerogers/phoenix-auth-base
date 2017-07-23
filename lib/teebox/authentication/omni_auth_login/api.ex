@@ -1,4 +1,4 @@
-defmodule Teebox.Authentication.FindOrCreateOmniauthUser do
+defmodule Teebox.Authentication.OmniAuthLogin.Api do
   alias Teebox.User
   alias Ueberauth.Auth
 
