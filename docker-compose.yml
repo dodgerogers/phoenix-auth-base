@@ -45,7 +45,7 @@ services:
     image: postgres
 
   run_release:
-    image: dodgerogers/teebox:release
+    image: 377092858912.dkr.ecr.us-east-1.amazonaws.com/teebox.io:0.0.3.20-eb3bc36809
     command: foreground
     env_file:
       - secrets.env
@@ -64,3 +64,7 @@ services:
 
   release_db:
     image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=teebox_release

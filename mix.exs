@@ -25,6 +25,7 @@ defmodule Teebox.Mixfile do
         :cowboy,
         :faker,
         :gettext,
+        :guardian,
         :logger,
         :phoenix,
         :phoenix_pubsub,
@@ -52,17 +53,17 @@ defmodule Teebox.Mixfile do
       {:ex_machina, "~> 2.0", only: :test},
       {:faker, "~> 0.8"},
       {:gettext, "~> 0.11"},
-      {:guardian, "~> 0.12.0"},
+      {:guardian, "~> 0.14.5"},
       {:mix_docker, "~> 0.4.1"},
       {:mock, "~> 0.2.0", only: :test},
-      {:phoenix, "~> 1.3.0-rc"},
+      {:phoenix, "~> 1.3.0-rc", override: true}, # Guardian does not support 1.3
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.6"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:ueberauth, "~> 0.4"},
-      {:ueberauth_facebook, "~> 0.6"},
+      {:ueberauth_facebook, "~> 0.7"},
       {:ueberauth_identity, "~> 0.2"}
     ]
   end
