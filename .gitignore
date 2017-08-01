@@ -9,7 +9,7 @@ teebox.tar.gz
 /rel/teebox/
 node_modules
 assets/node_modules
-assets/npm-debug.log
+npm-debug.log
 
 priv/static
 priv/static/**/*

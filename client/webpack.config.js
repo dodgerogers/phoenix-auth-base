@@ -19,10 +19,16 @@ var config = {
     modules: false,
   },
 
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    modules: ['node_modules']
+  },
+
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)?$/,
+        include: APP_DIR + '/app/',
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
@@ -46,10 +52,6 @@ var config = {
         loader: 'url-loader?limit=10000'
       }
     ],
-  },
-
-  resolve: {
-    modules: ['node_modules']
   },
 
   plugins: [

@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginForm matches component snapshot 1`] = `
+<div
+  className="LoginForm"
+>
+  <Button
+    as="button"
+    color="facebook"
+    fluid={true}
+  >
+    <Icon
+      as="i"
+      name="facebook"
+    />
+     Facebook
+  </Button>
+  <div
+    style={
+      Object {
+        "height": "5px",
+      }
+    }
+  />
+  <Button
+    as="button"
+    color="google plus"
+    fluid={true}
+  >
+    <Icon
+      as="i"
+      name="google"
+    />
+     Google
+  </Button>
+  <Divider
+    horizontal={true}
+  >
+    Or
+  </Divider>
+  <Form
+    as="form"
+    size="large"
+  >
+    <FormInput
+      as={[Function]}
+      control={[Function]}
+      fluid={true}
+      icon="user"
+      iconPosition="left"
+      placeholder="Email"
+    />
+    <FormInput
+      as={[Function]}
+      control={[Function]}
+      fluid={true}
+      icon="lock"
+      iconPosition="left"
+      placeholder="Password"
+      type="password"
+    />
+    <Button
+      as="button"
+      color="teal"
+      fluid={true}
+      size="large"
+    >
+      Login
+    </Button>
+  </Form>
+</div>
+`;

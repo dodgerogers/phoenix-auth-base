@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Header, Divider, Message, Button, Icon } from 'semantic-ui-react';
+import { Form, Header, Divider, Button, Icon } from 'semantic-ui-react';
 
 
 function LoginForm(props) {
@@ -27,11 +27,8 @@ function LoginForm(props) {
           iconPosition='left'
           placeholder='Password'
         />
-      <Button fluid size='large' color="teal">Login</Button>
+        <Button fluid size='large' color="teal">Login</Button>
       </Form>
-      <Message>
-        New to us{'?'} <a href='#'>Sign Up</a>
-      </Message>
     </div>
   );
 }

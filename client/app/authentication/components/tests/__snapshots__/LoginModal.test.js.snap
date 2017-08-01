@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginModal matches snapshot 1`] = `
+<Modal
+  closeOnDimmerClick={true}
+  closeOnDocumentClick={true}
+  dimmer={false}
+  size="mini"
+>
+  <ModalHeader
+    as="h2"
+  >
+    Login
+  </ModalHeader>
+  <ModalContent>
+    <LoginForm />
+  </ModalContent>
+  <ModalActions>
+    <a
+      href="#"
+    >
+      Sign Up
+    </a>
+    <Button
+      as="button"
+    >
+      Close
+    </Button>
+  </ModalActions>
+</Modal>
+`;

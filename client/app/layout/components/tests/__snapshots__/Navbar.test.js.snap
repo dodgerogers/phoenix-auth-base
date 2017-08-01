@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar matches component snapshot 1`] = `
+<navbar>
+  <Menu
+    attached="top"
+  >
+    <Container>
+      <MenuItem>
+        <Header>
+          Teebox.io
+        </Header>
+      </MenuItem>
+      <MenuMenu
+        position="right"
+      >
+        <MenuItem>
+          <LoginModal
+            trigger={
+              <Button
+                as="button"
+                color="teal"
+              >
+                Login
+              </Button>
+            }
+          />
+        </MenuItem>
+      </MenuMenu>
+    </Container>
+  </Menu>
+</navbar>
+`;
