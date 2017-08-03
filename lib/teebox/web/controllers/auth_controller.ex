@@ -11,7 +11,7 @@ defmodule Teebox.Web.AuthController do
   def callback(%Plug.Conn{assigns: %{ueberauth_failure: failure}} = conn, _params) do
     conn
       |> put_status(400)
-      |> json(%{message: hd(failure.errors).message})
+      |> redirect(to: page_path(conn, :index, %{errors: hd(failure.errors).message}))
   end
 
   defp handle_callback({:ok, user}, conn) do
@@ -21,13 +21,14 @@ defmodule Teebox.Web.AuthController do
     exp = Map.get(claims, "exp")
 
     new_conn
-      |> put_resp_header("authorization", "Bearer #{jwt}")
-      |> put_resp_header("x-expires", to_string(exp))
-      |> json(%{jwt: jwt, exp: exp, user: user})
+      # |> put_resp_header("authorization", "Bearer #{jwt}")
+      # |> put_resp_header("x-expires", to_string(exp))
+      # TODO: Redirect to some other path with params
+      |> redirect(to: page_path(new_conn, :index, %{auth_token: jwt, expiry: exp, uid: user.uid}))
   end
   defp handle_callback({:error, reason}, conn) do
     conn
       |> put_status(400)
-      |> json(%{message: reason})
+      |> redirect(to: page_path(conn, :index, %{errors: reason}))
   end
 end

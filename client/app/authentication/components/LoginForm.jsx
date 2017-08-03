@@ -1,17 +1,26 @@
 import React from 'react'
+import OAuthSignInButton from '../containers/OAuthSignInButton';
 import { Form, Header, Divider, Button, Icon } from 'semantic-ui-react';
 
 
 function LoginForm(props) {
   return (
     <div className="LoginForm">
-      <Button fluid={true} color='facebook'>
+      <OAuthSignInButton
+        fluid={true}
+        color="facebook"
+        provider="facebook"
+      >
         <Icon name='facebook' /> Facebook
-      </Button>
+      </OAuthSignInButton>
       <div style={{ height: '5px' }} />
-      <Button fluid={true} color='google plus'>
+      <OAuthSignInButton
+        fluid={true}
+        color="google plus"
+        provider="google_oauth2"
+      >
         <Icon name='google' /> Google
-      </Button>
+      </OAuthSignInButton>
       <Divider horizontal>Or</Divider>
       <Form size='large'>
         <Form.Input
