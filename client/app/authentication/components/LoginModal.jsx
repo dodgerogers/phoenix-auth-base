@@ -6,8 +6,8 @@ const LoginModal = (props) => (
   <Modal
     size="mini"
     dimmer={false}
-    closeOnDocumentClick={true}
     trigger={props.trigger}
+    closeOnDocumentClick={true}
   >
     <Modal.Header as="h2">
       Login

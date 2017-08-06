@@ -1,18 +1,24 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { fromJS } from 'immutable';
 import toJson from 'enzyme-to-json';
-import Navbar from '../Navbar';
+import Navbar, { PureComponent } from '../Navbar';
 
 
 describe('Navbar', () => {
-  const fullProps = {};
-
   const pureComponent = (props) => shallow(
-    <Navbar {...props} />
+    <PureComponent {...props} />
   );
 
-  it('matches component snapshot', () => {
-    const wrapper = pureComponent(fullProps);
+  it('matches pure component snapshot', () => {
+    const wrapper = pureComponent({});
+
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+
+  it('matches pure component when currentUser is present snapshot', () => {
+    const props = { currentUser: fromJS({ name: 'name' }) };
+    const wrapper = pureComponent(props);
 
     expect(toJson(wrapper)).toMatchSnapshot();
   });

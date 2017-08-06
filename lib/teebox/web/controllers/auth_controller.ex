@@ -15,6 +15,7 @@ defmodule Teebox.Web.AuthController do
   end
 
   defp handle_callback({:ok, user}, conn) do
+    # TODO: Should this move?
     new_conn = Guardian.Plug.api_sign_in(conn, user)
     jwt = Guardian.Plug.current_token(new_conn)
     {:ok, claims} = Guardian.Plug.claims(new_conn)

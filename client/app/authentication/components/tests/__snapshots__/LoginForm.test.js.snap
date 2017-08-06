@@ -4,17 +4,17 @@ exports[`LoginForm matches component snapshot 1`] = `
 <div
   className="LoginForm"
 >
-  <Button
-    as="button"
+  <Connect(OAuthSignInButton)
     color="facebook"
     fluid={true}
+    provider="facebook"
   >
     <Icon
       as="i"
       name="facebook"
     />
      Facebook
-  </Button>
+  </Connect(OAuthSignInButton)>
   <div
     style={
       Object {
@@ -22,17 +22,17 @@ exports[`LoginForm matches component snapshot 1`] = `
       }
     }
   />
-  <Button
-    as="button"
+  <Connect(OAuthSignInButton)
     color="google plus"
     fluid={true}
+    provider="google_oauth2"
   >
     <Icon
       as="i"
       name="google"
     />
      Google
-  </Button>
+  </Connect(OAuthSignInButton)>
   <Divider
     horizontal={true}
   >

@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from 'semantic-ui-react';
 import { oAuthSignIn } from 'redux-oauth';
@@ -6,14 +7,17 @@ import { oAuthSignIn } from 'redux-oauth';
 
 const OAuthSignInButton = (props) => {
   const handleClick = () => {
-    const { provider, dispatch } = props;
-    dispatch(oAuthSignIn({ provider }));
+    const { provider } = props;
+    props.oAuthSignIn({ provider });
   };
 
   return (
     <Button
+      fluid={props.fluid}
+      color={props.color}
+      loading={props.loading}
+      disabled={props.disabled}
       onClick={handleClick}
-      {...props}
     >
       {props.children}
     </Button>
@@ -21,16 +25,18 @@ const OAuthSignInButton = (props) => {
 }
 
 OAuthSignInButton.propTypes = {
+  oAuthSignIn: PropTypes.func.isRequired,
   provider: PropTypes.string.isRequired,
   children: PropTypes.node,
   dispatch: PropTypes.func,
   disabled: PropTypes.bool,
   loading: PropTypes.bool,
+  fluid: PropTypes.bool,
+  color: PropTypes.string,
 };
 
 OAuthSignInButton.defaultProps = {
   children: <span>OAuth Sign In</span>,
-  icon: null
 };
 
 function mapStateToProps({ auth }, ownProps) {
@@ -40,4 +46,5 @@ function mapStateToProps({ auth }, ownProps) {
   }
 }
 
-export default connect(mapStateToProps, null)(OAuthSignInButton);
+export { OAuthSignInButton as PureComponent };
+export default connect(mapStateToProps, { oAuthSignIn })(OAuthSignInButton);

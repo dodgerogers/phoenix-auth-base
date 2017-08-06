@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Navbar matches component snapshot 1`] = `
+exports[`Navbar matches pure component snapshot 1`] = `
 <navbar>
   <Menu
     attached="top"
@@ -25,6 +25,30 @@ exports[`Navbar matches component snapshot 1`] = `
               </Button>
             }
           />
+        </MenuItem>
+      </MenuMenu>
+    </Container>
+  </Menu>
+</navbar>
+`;
+
+exports[`Navbar matches pure component when currentUser is present snapshot 1`] = `
+<navbar>
+  <Menu
+    attached="top"
+  >
+    <Container>
+      <MenuItem>
+        <Header>
+          Teebox.io
+        </Header>
+      </MenuItem>
+      <MenuMenu
+        position="right"
+      >
+        <MenuItem>
+          Logged in as 
+          name
         </MenuItem>
       </MenuMenu>
     </Container>
