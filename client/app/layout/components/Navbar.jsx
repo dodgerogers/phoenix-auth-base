@@ -1,20 +1,37 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Menu, Button, Header, Container } from 'semantic-ui-react';
-import CurrentUser from '../../hocs/CurrentUser';
+import { Menu, Button, Header, Container, Dropdown, Image } from 'semantic-ui-react';
 import LoginModal from '../../authentication/components/LoginModal';
+import LoginButtonContainer from '../containers/LoginButtonContainer';
+
+
 
 const Navbar = (props) => {
-  const loggedInLinks = () => (
-    <Menu.Item>Logged in as {props.currentUser.get('name')}</Menu.Item>
-  );
+  const loggedInLinks = () => {
+    const trigger = (
+      <span>
+        <Image avatar src={props.currentUser.get('avatar')} />
+        <span>{props.currentUser.get('name')}</span>
+      </span>
+    );
+
+    return (
+      <Dropdown item trigger={trigger}>
+        <Dropdown.Menu>
+          <Dropdown.Header>My Account</Dropdown.Header>
+          <Dropdown.Item>
+            <a onClick={props.signOut}>Sign out</a>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    );
+  }
+
 
   const nonLoggedInLinks = () => (
     <Menu.Item>
-      <LoginModal
-        trigger={<Button color="teal">Login</Button>}
-        {...props}
-      />
+      <LoginButtonContainer />
     </Menu.Item>
   )
 
@@ -38,7 +55,7 @@ const Navbar = (props) => {
 
 Navbar.propTypes = {
   currentUser: ImmutablePropTypes.map,
+  signOut: PropTypes.func.isRequired,
 };
 
-export { Navbar as PureComponent };
-export default CurrentUser(Navbar);
+export default Navbar;

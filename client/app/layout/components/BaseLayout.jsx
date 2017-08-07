@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import functional from 'react-functional';
 import { initialize } from 'redux-oauth';
-import Navbar from './Navbar.jsx';
-import Footer from './Footer.jsx';
+import NavbarContainer from '../containers/NavbarContainer';
+import ModalsContainer from '../../common/modals/containers/ModalsContainer';
+import Footer from './Footer';
 
 
 const reduxOauthConfig = {
@@ -24,11 +25,12 @@ const reduxOauthConfig = {
 
 const BaseLayout = (props) => (
   <div className="BaseLayout">
-    <Navbar {...props} />
+    <NavbarContainer {...props} />
     <div className="main">
       {props.children}
     </div>
     <Footer {...props} />
+    <ModalsContainer />
   </div>
 );
 
