@@ -8,7 +8,7 @@ var BUILD_DIR = path.resolve(__dirname, '../priv/static/js');
 var entry = APP_DIR + '/app/index.js';
 
 var config = {
-  entry: [entry],
+  entry: ['babel-polyfill', entry],
   output: {
     path: BUILD_DIR,
     filename: 'app.js',

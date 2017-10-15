@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import LoginModal from '../../../authentication/components/LoginModal';
+import LoginModalContainer from '../../../authentication/containers/LoginModalContainer';
 import { hideModal } from '../actions/modalActions';
 import { modalIds } from '../modalConstants';
 
@@ -9,14 +9,14 @@ import { modalIds } from '../modalConstants';
 const ModalsContainer = (props) => {
   // TODO: ids as constants
   const modals = [
-    { component: LoginModal, id: modalIds.loginModal },
+    { component: LoginModalContainer, id: modalIds.loginModal },
   ];
 
   function renderModals() {
     return modals.map(modal => {
       const Component = modal.component;
       return (
-        <LoginModal
+        <Component
           show={props.modals.get(modal.id)}
           close={() => props.hideModal(modal.id)}
         />
