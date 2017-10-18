@@ -15,16 +15,7 @@ exports[`Navbar matches pure component snapshot 1`] = `
         position="right"
       >
         <MenuItem>
-          <LoginModal
-            trigger={
-              <Button
-                as="button"
-                color="teal"
-              >
-                Login
-              </Button>
-            }
-          />
+          <Connect(LoginButtonContainer) />
         </MenuItem>
       </MenuMenu>
     </Container>
@@ -46,10 +37,44 @@ exports[`Navbar matches pure component when currentUser is present snapshot 1`] 
       <MenuMenu
         position="right"
       >
-        <MenuItem>
-          Logged in as 
-          name
-        </MenuItem>
+        <Dropdown
+          additionLabel="Add "
+          additionPosition="top"
+          closeOnBlur={true}
+          icon="dropdown"
+          item={true}
+          minCharacters={1}
+          noResultsMessage="No results found."
+          openOnFocus={true}
+          renderLabel={[Function]}
+          searchInput="text"
+          selectOnBlur={true}
+          trigger={
+            <span>
+              <Image
+                as="img"
+                avatar={true}
+                ui={true}
+              />
+              <span>
+                Billy
+              </span>
+            </span>
+          }
+        >
+          <DropdownMenu>
+            <DropdownHeader>
+              My Account
+            </DropdownHeader>
+            <DropdownItem>
+              <a
+                onClick={[Function]}
+              >
+                Sign out
+              </a>
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
       </MenuMenu>
     </Container>
   </Menu>

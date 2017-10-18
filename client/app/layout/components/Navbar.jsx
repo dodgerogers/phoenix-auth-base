@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Menu, Button, Header, Container, Dropdown, Image } from 'semantic-ui-react';
 import LoginModal from '../../authentication/components/LoginModal';
-import LoginButtonContainer from '../containers/LoginButtonContainer';
-
+import LoginButtonContainer from '../../common/containers/LoginButtonContainer';
 
 
 const Navbar = (props) => {

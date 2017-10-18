@@ -5,31 +5,27 @@ defmodule Teebox.Web.AuthController do
 
   @omni_auth_login Application.get_env(:teebox, :omni_auth_login)
 
+  def show(conn, _params) do
+    render conn, "index.html"
+  end
+
   def callback(%Plug.Conn{assigns: %{ueberauth_auth: auth}} = conn, _params) do
     @omni_auth_login.call(auth) |> handle_callback(conn)
   end
   def callback(%Plug.Conn{assigns: %{ueberauth_failure: failure}} = conn, _params) do
-    conn
-      |> put_status(400)
-      |> redirect(to: page_path(conn, :index, %{errors: hd(failure.errors).message}))
+    conn |> redirect(to: auth_path(conn, :show, %{errors: hd(failure.errors).message}))
   end
 
   defp handle_callback({:ok, user}, conn) do
-    # TODO: Should this move?
+    # TODO: Move this to a helper function
     new_conn = Guardian.Plug.api_sign_in(conn, user)
     jwt = Guardian.Plug.current_token(new_conn)
     {:ok, claims} = Guardian.Plug.claims(new_conn)
     exp = Map.get(claims, "exp")
 
-    new_conn
-      # |> put_resp_header("authorization", "Bearer #{jwt}")
-      # |> put_resp_header("x-expires", to_string(exp))
-      # TODO: Redirect to some other path with params
-      |> redirect(to: page_path(new_conn, :index, %{auth_token: jwt, expiry: exp, uid: user.uid}))
+    new_conn |> redirect(to: auth_path(new_conn, :show, %{auth_token: jwt, expiry: exp, uid: user.uid}))
   end
   defp handle_callback({:error, reason}, conn) do
-    conn
-      |> put_status(400)
-      |> redirect(to: page_path(conn, :index, %{errors: reason}))
+    conn |> redirect(to: auth_path(conn, :show, %{errors: reason}))
   end
 end

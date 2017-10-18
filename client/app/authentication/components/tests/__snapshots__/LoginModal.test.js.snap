@@ -5,6 +5,7 @@ exports[`LoginModal matches snapshot 1`] = `
   closeOnDimmerClick={true}
   closeOnDocumentClick={true}
   dimmer={false}
+  onClose={[Function]}
   size="mini"
 >
   <ModalHeader
@@ -13,7 +14,9 @@ exports[`LoginModal matches snapshot 1`] = `
     Login
   </ModalHeader>
   <ModalContent>
-    <LoginForm />
+    <LoginForm
+      close={[Function]}
+    />
   </ModalContent>
   <ModalActions>
     <a
@@ -23,6 +26,7 @@ exports[`LoginModal matches snapshot 1`] = `
     </a>
     <Button
       as="button"
+      onClick={[Function]}
     >
       Close
     </Button>

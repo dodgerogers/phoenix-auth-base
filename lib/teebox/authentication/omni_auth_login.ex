@@ -2,16 +2,17 @@ defmodule Teebox.Authentication.OmniAuthLogin do
   alias Teebox.User
   alias Ueberauth.Auth
 
-  @repo Application.get_env(:teebox, :user_repo)
+  @user_repo Application.get_env(:teebox, :user_repo)
   @services ~w(facebook google)a
 
+  # TODO: Move all of the identity stuff out
   def call(%Auth{} = auth) do
     find_user_by_provider_and_uid(auth) |> update_or_create_user(auth)
   end
   def call(_), do: {:error, "Invalid Omniauth hash provided"}
 
   defp find_user_by_provider_and_uid(auth) do
-    @repo.find_by_provider_and_uid(auth.provider, auth.uid)
+    @user_repo.find_by_provider_and_uid(auth.provider, auth.uid)
   end
 
   defp update_or_create_user(existing_user, %{provider: :identity} = auth) do
@@ -28,7 +29,7 @@ defmodule Teebox.Authentication.OmniAuthLogin do
   defp update_or_create_user_from_auth(existing_user, auth) do
     generate_user_changeset_from_auth(existing_user, auth)
       |> add_user_id(existing_user)
-      |> @repo.insert_or_update()
+      |> @user_repo.insert_or_update()
   end
 
   defp generate_user_changeset_from_auth(existing_user, auth) do

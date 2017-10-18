@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import { Button } from 'semantic-ui-react';
 import functional from 'react-functional';
 import LoginModal from '../components/LoginModal';
-import { hideModal } from '../../common/modals/actions/modalActions';
 import { modalIds } from '../../common/modals/modalConstants';
-
 
 function mapStateToProps({ auth }, ownProps) {
   return {
@@ -15,11 +13,12 @@ function mapStateToProps({ auth }, ownProps) {
 }
 
 const options = {
-  componentDidUpdate: (prevProps, nextProps) => {
+  componentDidUpdate: (nextProps, prevProps) => {
     if (!prevProps.isSignedIn && nextProps.isSignedIn) {
-      props.hideModal(modalIds.loginModal);
+      nextProps.close(modalIds.loginModal);
     }
   }
 }
 
-export default connect(mapStateToProps, { hideModal })(functional(LoginModal, options));
+export const FunctionalComponent = functional(LoginModal, options);
+export default connect(mapStateToProps, null)(FunctionalComponent);

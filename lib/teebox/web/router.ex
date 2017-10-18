@@ -30,7 +30,8 @@ defmodule Teebox.Web.Router do
 
     get "/:provider", AuthController, :index
     get "/:provider/callback", AuthController, :callback
-    post "/identity/callback", AuthController, :identity_callback
+    # post "/identity/callback", AuthController, :identity_callback
+    get "/", AuthController, :show
   end
 
   scope "/api", Teebox.Web do

@@ -7,7 +7,7 @@ defmodule Teebox.Web.TokensController do
   plug Guardian.Plug.LoadResource
 
   def validate_token(conn, _params) do
-    conn |> render_resource(Guardian.Plug.current_resource(conn))
+    render_resource(conn, Guardian.Plug.current_resource(conn))
   end
 
   defp render_resource(conn, %User{} = user) do

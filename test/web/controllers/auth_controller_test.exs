@@ -22,15 +22,7 @@ defmodule Teebox.AuthControllerTest do
       |> assign(:ueberauth_auth, auth)
       |> get("/auth/identity/callback")
 
-    assert match?(%{"exp" => _, "jwt" => _}, json_response(conn, 200))
-  end
-
-  test "GET /auth/identity/callback failure with invalid parameters" do
-    conn = build_conn()
-      |> assign(:ueberauth_auth, %{})
-      |> get("/auth/identity/callback", %{})
-
-    assert match?(%{"message" => _}, json_response(conn, 400))
+    assert redirected_to(conn) =~ "/auth?auth_token="
   end
 
   test "GET /auth/identity/callback Ueberauth failure", %{ueberauth_failure: auth} do
@@ -38,6 +30,14 @@ defmodule Teebox.AuthControllerTest do
       |> assign(:ueberauth_failure, auth)
       |> get("/auth/identity/callback")
 
-    assert match?(%{"message" => @error_message}, json_response(conn, 400))
+    assert redirected_to(conn) =~ "/auth?errors="
+  end
+
+  test "GET /auth/identity/callback failure with invalid parameters" do
+    conn = build_conn()
+      |> assign(:ueberauth_auth, %{})
+      |> get("/auth/identity/callback")
+
+    assert redirected_to(conn) =~ "/auth?errors="
   end
 end

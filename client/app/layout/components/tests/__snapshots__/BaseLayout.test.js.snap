@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BaseLayout PureComponent matches snapshot 1`] = `
+<div
+  className="BaseLayout"
+>
+  <Connect(Connect(Wrapper))>
+    <div>
+      content
+    </div>
+  </Connect(Connect(Wrapper))>
+  <div
+    className="main"
+  >
+    <div>
+      content
+    </div>
+  </div>
+  <Footer>
+    <div>
+      content
+    </div>
+  </Footer>
+  <Connect(ModalsContainer) />
+</div>
+`;

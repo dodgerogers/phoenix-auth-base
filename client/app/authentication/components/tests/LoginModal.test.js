@@ -5,7 +5,9 @@ import LoginModal from '../LoginModal';
 
 
 describe('LoginModal', () => {
-  const fullProps = {};
+  const fullProps = {
+    close: jest.fn(),
+  };
 
   const pureComponent = (props) => shallow(
     <LoginModal {...props} />

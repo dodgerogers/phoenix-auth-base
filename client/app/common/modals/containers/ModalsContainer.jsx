@@ -7,7 +7,6 @@ import { modalIds } from '../modalConstants';
 
 
 const ModalsContainer = (props) => {
-  // TODO: ids as constants
   const modals = [
     { component: LoginModalContainer, id: modalIds.loginModal },
   ];
