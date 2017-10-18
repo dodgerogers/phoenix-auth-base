@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar matches pure component snapshot 1`] = `
+<navbar>
+  <Menu
+    attached="top"
+  >
+    <Container>
+      <MenuItem>
+        <Header>
+          Teebox.io
+        </Header>
+      </MenuItem>
+      <MenuMenu
+        position="right"
+      >
+        <MenuItem>
+          <Connect(LoginButtonContainer) />
+        </MenuItem>
+      </MenuMenu>
+    </Container>
+  </Menu>
+</navbar>
+`;
+
+exports[`Navbar matches pure component when currentUser is present snapshot 1`] = `
+<navbar>
+  <Menu
+    attached="top"
+  >
+    <Container>
+      <MenuItem>
+        <Header>
+          Teebox.io
+        </Header>
+      </MenuItem>
+      <MenuMenu
+        position="right"
+      >
+        <Dropdown
+          additionLabel="Add "
+          additionPosition="top"
+          closeOnBlur={true}
+          icon="dropdown"
+          item={true}
+          minCharacters={1}
+          noResultsMessage="No results found."
+          openOnFocus={true}
+          renderLabel={[Function]}
+          searchInput="text"
+          selectOnBlur={true}
+          trigger={
+            <span>
+              <Image
+                as="img"
+                avatar={true}
+                ui={true}
+              />
+              <span>
+                Billy
+              </span>
+            </span>
+          }
+        >
+          <DropdownMenu>
+            <DropdownHeader>
+              My Account
+            </DropdownHeader>
+            <DropdownItem>
+              <a
+                onClick={[Function]}
+              >
+                Sign out
+              </a>
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </MenuMenu>
+    </Container>
+  </Menu>
+</navbar>
+`;

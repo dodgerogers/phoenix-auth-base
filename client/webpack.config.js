@@ -5,13 +5,13 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var APP_DIR = path.resolve(__dirname);
 var BUILD_DIR = path.resolve(__dirname, '../priv/static/js');
-var entry = APP_DIR + '/app.js';
+var entry = APP_DIR + '/app/index.js';
 
 var config = {
-  entry: [entry],
+  entry: ['babel-polyfill', entry],
   output: {
     path: BUILD_DIR,
-    filename: 'app.js'
+    filename: 'app.js',
   },
 
   stats: {
@@ -19,10 +19,16 @@ var config = {
     modules: false,
   },
 
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    modules: ['node_modules']
+  },
+
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)?$/,
+        include: APP_DIR + '/app/',
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
@@ -39,7 +45,7 @@ var config = {
       },
       {
         test: /\.(ttf|eot|svg|woff2?)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file-loader'
+        loader: 'url-loader?name=[name].[ext]'
       },
       {
         test: /\.(png|jpg|jpeg)$/,
@@ -48,9 +54,15 @@ var config = {
     ],
   },
 
-  resolve: {
-    modules: [ 'node_modules']
-  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.AggressiveMergingPlugin()
+  ],
 };
 
 module.exports = config;

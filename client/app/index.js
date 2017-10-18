@@ -1,17 +1,15 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
+import store from './store'
 import Routes from './routes';
-import logger from './lib/middleware/logger';
 
+// TODO put in layout component
 import 'semantic-ui-css/semantic.min.css';
-
-const store = createStore(() => {}, applyMiddleware(thunk, logger));
+import '../assets/app.scss'
 
 render(
-  <Provider store={store}>
+  <Provider store={store()}>
     <Routes />
   </Provider>,
   document.getElementById("app")

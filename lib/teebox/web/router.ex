@@ -14,10 +14,10 @@ defmodule Teebox.Web.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api_auth do
-    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
-    plug Guardian.Plug.LoadResource
-  end
+  # pipeline :api_auth do
+  #   plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+  #   plug Guardian.Plug.LoadResource
+  # end
 
   scope "/", Teebox.Web do
     pipe_through :browser
@@ -30,10 +30,13 @@ defmodule Teebox.Web.Router do
 
     get "/:provider", AuthController, :index
     get "/:provider/callback", AuthController, :callback
-    post "/identity/callback", AuthController, :identity_callback
+    # post "/identity/callback", AuthController, :identity_callback
+    get "/", AuthController, :show
   end
 
   scope "/api", Teebox.Web do
     pipe_through :api
+
+    get "/validate_token", TokensController, :validate_token
   end
 end

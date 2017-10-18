@@ -19,7 +19,7 @@ RUN mix local.hex --force && \
 
 WORKDIR /opt/app
 
-ENV MIX_ENV=prod
+ENV MIX_ENV=prod NODE_ENV=production
 
 # Cache elixir deps
 # https://github.com/Recruitee/mix_docker/issues/29
