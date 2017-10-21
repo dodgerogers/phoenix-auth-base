@@ -5,7 +5,7 @@ import { Form, Header, Divider, Button, Icon } from 'semantic-ui-react';
 
 function LoginForm(props) {
   return (
-    <div className="LoginForm">
+    <div className="login-form">
       <OAuthSignInButton
         fluid={true}
         color="facebook"
@@ -25,7 +25,7 @@ function LoginForm(props) {
       <Form size='large'>
         <Form.Input
           fluid
-          icon='user'
+          icon='mail'
           iconPosition='left'
           placeholder='Email'
         />

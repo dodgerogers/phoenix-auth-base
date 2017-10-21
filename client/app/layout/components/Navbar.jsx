@@ -4,6 +4,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Menu, Button, Header, Container, Dropdown, Image } from 'semantic-ui-react';
 import LoginModal from '../../authentication/components/LoginModal';
 import LoginButtonContainer from '../../common/containers/LoginButtonContainer';
+import RegistrationButtonContainer from '../../common/containers/RegistrationButtonContainer';
 
 
 const Navbar = (props) => {
@@ -28,15 +29,14 @@ const Navbar = (props) => {
   }
 
 
-  const nonLoggedInLinks = () => (
-    <Menu.Item>
-      <LoginButtonContainer />
-    </Menu.Item>
-  )
+  const nonLoggedInLinks = () => ([
+    <LoginButtonContainer wrapper={Menu.Item} />,
+    <RegistrationButtonContainer wrapper={Menu.Item} />,
+  ]);
 
   return (
     <navbar>
-      <Menu attached='top'>
+      <Menu fixed="top">
         <Container>
           <Menu.Item>
             <Header>

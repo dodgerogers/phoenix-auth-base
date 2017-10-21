@@ -8,9 +8,12 @@ import { modalIds } from '../../common/modals/modalConstants';
 
 const LoginButtonContainer = (props) => {
   const showLoginModal = () => props.showModal(modalIds.loginModal);
+  const Wrapper = props.wrapper;
 
   return (
-    <Button color="teal" onClick={showLoginModal}>Login</Button>
+    <Wrapper onClick={showLoginModal}>
+      Login
+    </Wrapper>
   )
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import CurrentUser from '../../hocs/CurrentUser';
+import currentUser from '../../hocs/CurrentUser';
 import Navbar from '../components/Navbar';
 import { signOut } from 'redux-oauth';
 
@@ -17,4 +17,4 @@ NavbarContainer.propTypes = {
 };
 
 export { NavbarContainer as PureComponent };
-export default connect(null, { signOut })(CurrentUser(NavbarContainer));
+export default connect(null, { signOut })(currentUser(NavbarContainer));

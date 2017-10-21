@@ -8,4 +8,5 @@ export const actionTypes = mirrorCreator([
 
 export const modalIds = mirrorCreator([
   'loginModal',
+  'registrationModal',
 ])
