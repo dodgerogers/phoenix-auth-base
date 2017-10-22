@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalTrigger PureComponent matches snapshot 1`] = `
+<Button
+  as="button"
+  onClick={[Function]}
+>
+  Open my modal
+</Button>
+`;
+
+exports[`ModalTrigger PureComponent matches snapshot with custom wrapping component 1`] = `
+<MenuItem
+  onClick={[Function]}
+>
+  Open my modal
+</MenuItem>
+`;

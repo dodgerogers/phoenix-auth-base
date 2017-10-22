@@ -3,7 +3,7 @@
 exports[`Navbar matches pure component snapshot 1`] = `
 <navbar>
   <Menu
-    attached="top"
+    fixed="top"
   >
     <Container>
       <MenuItem>
@@ -14,9 +14,16 @@ exports[`Navbar matches pure component snapshot 1`] = `
       <MenuMenu
         position="right"
       >
-        <MenuItem>
-          <Connect(LoginButtonContainer) />
-        </MenuItem>
+        <Connect(ModalTrigger)
+          id="loginModal"
+          text="Login"
+          wrapper={[Function]}
+        />
+        <Connect(ModalTrigger)
+          id="registrationModal"
+          text="Sign up"
+          wrapper={[Function]}
+        />
       </MenuMenu>
     </Container>
   </Menu>
@@ -26,7 +33,7 @@ exports[`Navbar matches pure component snapshot 1`] = `
 exports[`Navbar matches pure component when currentUser is present snapshot 1`] = `
 <navbar>
   <Menu
-    attached="top"
+    fixed="top"
   >
     <Container>
       <MenuItem>

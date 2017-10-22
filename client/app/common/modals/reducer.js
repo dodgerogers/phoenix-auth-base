@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { actionTypes } from './modalConstants';
+import { actionTypes } from './constants';
 
 export const initialState = fromJS({
   modals: fromJS({}),

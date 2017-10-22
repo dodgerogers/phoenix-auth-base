@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Button } from 'semantic-ui-react';
 import functional from 'react-functional';
 import LoginModal from '../components/LoginModal';
-import { modalIds } from '../../common/modals/modalConstants';
+import { ModalIds } from '../../common/modals';
 
 function mapStateToProps({ auth }, ownProps) {
   return {
@@ -15,7 +15,7 @@ function mapStateToProps({ auth }, ownProps) {
 const options = {
   componentDidUpdate: (nextProps, prevProps) => {
     if (!prevProps.isSignedIn && nextProps.isSignedIn) {
-      nextProps.close(modalIds.loginModal);
+      nextProps.close(ModalIds.loginModal);
     }
   }
 }
