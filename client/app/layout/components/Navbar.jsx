@@ -28,8 +28,8 @@ const Navbar = (props) => {
 
 
   const nonLoggedInLinks = () => ([
-    <ModalTrigger key="login" text="Login" modalId={ModalIds.loginModal} wrapper={Menu.Item} />,
-    <ModalTrigger key="signup" text="Sign up" modalId={ModalIds.signUpModal} wrapper={Menu.Item} />,
+    <ModalTrigger key="login" text="Login" id={ModalIds.loginModal} wrapper={Menu.Item} />,
+    <ModalTrigger key="signup" text="Sign up" id={ModalIds.registrationModal} wrapper={Menu.Item} />,
   ]);
 
   return (

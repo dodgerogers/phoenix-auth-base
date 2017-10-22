@@ -10,7 +10,7 @@ const ModalTrigger = (props) => {
   const Wrapper = props.wrapper || Button;
 
   return (
-    <Wrapper onClick={props.showModal(props.id)}>
+    <Wrapper onClick={() => props.showModal(props.id)}>
       {props.text}
     </Wrapper>
   )
