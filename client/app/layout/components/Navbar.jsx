@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Menu, Button, Header, Container, Dropdown, Image } from 'semantic-ui-react';
-import LoginModal from '../../authentication/components/LoginModal';
-import LoginButtonContainer from '../../common/containers/LoginButtonContainer';
-import RegistrationButtonContainer from '../../common/containers/RegistrationButtonContainer';
+import { ModalIds, ModalTrigger } from '../../common/modals';
 
 
 const Navbar = (props) => {
@@ -30,8 +28,8 @@ const Navbar = (props) => {
 
 
   const nonLoggedInLinks = () => ([
-    <LoginButtonContainer wrapper={Menu.Item} />,
-    <RegistrationButtonContainer wrapper={Menu.Item} />,
+    <ModalTrigger key="login" text="Login" modalId={ModalIds.loginModal} wrapper={Menu.Item} />,
+    <ModalTrigger key="signup" text="Sign up" modalId={ModalIds.signUpModal} wrapper={Menu.Item} />,
   ]);
 
   return (

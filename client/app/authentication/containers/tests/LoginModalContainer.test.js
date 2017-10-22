@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { Button } from 'semantic-ui-react';
 import { FunctionalComponent } from '../LoginModalContainer';
-import { modalIds } from '../../../common/modals/modalConstants';
+import { ModalIds } from '../../../common/modals';
 
 
 describe('LoginModalContainer', () => {
@@ -27,7 +27,7 @@ describe('LoginModalContainer', () => {
 
       component.setProps({ isSignedIn: true });
 
-      expect(props.close).toHaveBeenCalledWith(modalIds.loginModal);
+      expect(props.close).toHaveBeenCalledWith(ModalIds.loginModal);
     });
 
     it('does not call hideModal if the user is not logged in', () => {
@@ -35,7 +35,7 @@ describe('LoginModalContainer', () => {
       const component = functionalComponent(props);
 
       component.setProps({ isSignedIn: false });
-    
+
       expect(props.close).not.toHaveBeenCalled();
     });
   });

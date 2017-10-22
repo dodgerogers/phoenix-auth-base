@@ -8,7 +8,7 @@ export const isRequired = (value, allValues, props, name) => {
 
 export const minLength = (length) => {
   return (value, allValues, props, name) => {
-    if (!value.length >= length) {
+    if (value.length < length) {
       return `${normalizeName(name)} is too short. ${length} minimum`;
     }
   }

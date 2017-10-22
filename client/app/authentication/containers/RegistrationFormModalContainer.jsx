@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import functional from 'react-functional';
 import RegistrationFormModal from '../components/RegistrationFormModal';
-import { modalIds } from '../../common/modals/modalConstants';
+import { modalIds } from '../../common/modals';
 
 function mapStateToProps({ auth }, ownProps) {
   return {

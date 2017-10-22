@@ -1,4 +1,4 @@
-import { actionTypes } from '../modalConstants';
+import { actionTypes } from './constants';
 
 export function showModal(id) {
   return {

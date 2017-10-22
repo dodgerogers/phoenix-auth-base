@@ -1,9 +1,9 @@
 import React from 'react'
-import OAuthSignInButton from '../containers/OAuthSignInButton';
 import { Field } from 'redux-form/immutable';
-import Input from '../../common/components/Input';
-import { isRequired, isEmail } from '../utils/validation';
 import { Form, Message, Button, Icon } from 'semantic-ui-react';
+import OAuthSignInButton from '../containers/OAuthSignInButton';
+import Input from '../../common/components/Input';
+import { isRequired, isEmail } from '../../lib/utils/validation';
 
 
 function RegistrationForm(props) {

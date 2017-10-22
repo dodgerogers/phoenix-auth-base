@@ -2,7 +2,7 @@
 
 exports[`LoginForm matches component snapshot 1`] = `
 <div
-  className="LoginForm"
+  className="login-form"
 >
   <Connect(OAuthSignInButton)
     color="facebook"
@@ -46,7 +46,7 @@ exports[`LoginForm matches component snapshot 1`] = `
       as={[Function]}
       control={[Function]}
       fluid={true}
-      icon="user"
+      icon="mail"
       iconPosition="left"
       placeholder="Email"
     />
