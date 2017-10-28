@@ -2,7 +2,7 @@ defmodule Teebox.UserTest do
   use Teebox.ModelCase
   import Teebox.Factory
 
-  alias Teebox.User
+  alias Teebox.Accounts.User
 
   @valid_attrs params_for(:user)
   @invalid_attrs %{}

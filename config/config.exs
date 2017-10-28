@@ -27,6 +27,7 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+ # TODO: Secrets
 config :mix_docker, image: "377092858912.dkr.ecr.us-east-1.amazonaws.com/teebox.io"
 
 config :ueberauth, Ueberauth,
@@ -51,8 +52,17 @@ config :guardian, Guardian,
   ttl: { 1, :days },
   allowed_drift: 2000,
   verify_issuer: true, # optional
-  secret_key: "lHYk5/k7ur9asn4DXe3Zulu81LGiN3d7eTYE+TfO5xLVaN2hU/G8M43oifjQfljJ", # Secrets
+  secret_key: "lHYk5/k7ur9asn4DXe3Zulu81LGiN3d7eTYE+TfO5xLVaN2hU/G8M43oifjQfljJ", # TODO: Secrets
   serializer: Teebox.Authentication.TokenSerializer
+
+# Phauxth authentication configuration
+config :phauxth,
+  token_salt: "8jrxjuja",
+  endpoint: Teebox.Web.Endpoint
+
+# Mailer configuration
+config :teebox, Teebox.Mailer,
+  adapter: Bamboo.LocalAdapter
 
 config :teebox, :user_repo, Teebox.Persistance.UsersRepository
 config :teebox, :omni_auth_login, Teebox.Authentication.OmniAuthLogin

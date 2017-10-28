@@ -1,6 +1,10 @@
 defmodule Teebox.Web.Router do
   use Teebox.Web, :router
 
+  if Mix.env == :dev do
+    forward "/sent_emails", Bamboo.SentEmailViewerPlug
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -11,7 +15,7 @@ defmodule Teebox.Web.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug :put_secure_browser_headers
+    plug Phauxth.Authenticate, method: :token
   end
 
   # pipeline :api_auth do
@@ -30,13 +34,22 @@ defmodule Teebox.Web.Router do
 
     get "/:provider", AuthController, :index
     get "/:provider/callback", AuthController, :callback
-    # post "/identity/callback", AuthController, :identity_callback
     get "/", AuthController, :show
   end
+
+  # scope "/api", Teebox.Web do
+  #   pipe_through :api
+  #
+  #   get "/validate_token", TokensController, :validate_token
+  # end
 
   scope "/api", Teebox.Web do
     pipe_through :api
 
-    get "/validate_token", TokensController, :validate_token
+    post "/sessions", SessionController, :create
+    resources "/users", UserController, except: [:new, :edit]
+    get "/confirm", ConfirmController, :index
+    post "/password_resets", PasswordResetController, :create
+    put "/password_resets/update", PasswordResetController, :update
   end
 end

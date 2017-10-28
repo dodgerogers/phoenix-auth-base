@@ -4,7 +4,7 @@ defmodule Teebox.Mixfile do
   def project do
     [app: :teebox,
      version: "0.0.3",
-     elixir: "~> 1.4",
+     elixir: "~> 1.5.2",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -21,12 +21,15 @@ defmodule Teebox.Mixfile do
     [
       mod: {Teebox, []},
       applications: [
+        :bamboo,
         :comeonin,
         :cowboy,
         :faker,
         :gettext,
         :guardian,
         :logger,
+        :not_qwerty123,
+        :pbkdf2_elixir,
         :phoenix,
         :phoenix_pubsub,
         :phoenix_html,
@@ -48,14 +51,18 @@ defmodule Teebox.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:comeonin, "~> 2.4"},
+      {:bamboo, "~> 1.0.0-rc.1"},
+      {:comeonin, "~> 4.0"},
       {:cowboy, "~> 1.0"},
       {:ex_machina, "~> 2.0", only: :test},
-      {:faker, "~> 0.8"},
-      {:gettext, "~> 0.11"},
+      {:faker, "~> 0.9"},
+      {:gettext, "~> 0.12"},
       {:guardian, "~> 0.14.5"},
       {:mix_docker, "~> 0.4.1"},
       {:mock, "~> 0.2.0", only: :test},
+      {:not_qwerty123, "~> 2.2"},
+      {:pbkdf2_elixir, "~> 0.12"},
+      {:phauxth, "~> 1.2"},
       {:phoenix, "~> 1.3.0-rc", override: true}, # Guardian does not support 1.3
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.0"},

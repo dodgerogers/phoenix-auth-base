@@ -1,6 +1,6 @@
 defmodule Teebox.Persistance.UsersRepository do
   alias Teebox.Repo
-  alias Teebox.User
+  alias Teebox.Accounts.User
   alias Ecto.Changeset
 
   # TODO: Return domain object
