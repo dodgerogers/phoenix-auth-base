@@ -15,13 +15,9 @@ defmodule Teebox.Web.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug Phauxth.Authenticate, method: :token
+    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    plug Guardian.Plug.LoadResource
   end
-
-  # pipeline :api_auth do
-  #   plug Guardian.Plug.VerifyHeader, realm: "Bearer"
-  #   plug Guardian.Plug.LoadResource
-  # end
 
   scope "/", Teebox.Web do
     pipe_through :browser
@@ -37,12 +33,6 @@ defmodule Teebox.Web.Router do
     get "/", AuthController, :show
   end
 
-  # scope "/api", Teebox.Web do
-  #   pipe_through :api
-  #
-  #   get "/validate_token", TokensController, :validate_token
-  # end
-
   scope "/api", Teebox.Web do
     pipe_through :api
 
@@ -51,5 +41,7 @@ defmodule Teebox.Web.Router do
     get "/confirm", ConfirmController, :index
     post "/password_resets", PasswordResetController, :create
     put "/password_resets/update", PasswordResetController, :update
+
+    get "/validate_token", TokensController, :validate_token
   end
 end

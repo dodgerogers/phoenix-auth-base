@@ -2,7 +2,6 @@ defmodule Teebox.Web.AuthCase do
   use Phoenix.ConnTest
 
   import Teebox.Factory
-  alias Teebox.Accounts
 
   def build_user(user \\ %{}) do
     build(:user, user) |> set_password()
@@ -23,13 +22,14 @@ defmodule Teebox.Web.AuthCase do
   end
 
   def add_token_conn(conn, user) do
-    user_token = Phauxth.Token.sign(Teebox.Web.Endpoint, user.id)
-    conn
+    {:ok, token, new_conn} = Teebox.Accounts.Token.sign_in(conn, user)
+    new_conn
     |> put_req_header("accept", "application/json")
-    |> put_req_header("authorization", user_token)
   end
 
-  def gen_key(email) do
-    Phauxth.Token.sign(Teebox.Web.Endpoint, %{"email" => email})
+  # TODO: Label this better, reset password key, confirmation key
+  def verifcation_token(user) do
+    {:ok, token} = Teebox.Accounts.Token.verification_token(user)
+    token
   end
 end

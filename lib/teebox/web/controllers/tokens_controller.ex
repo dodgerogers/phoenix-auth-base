@@ -3,9 +3,6 @@ defmodule Teebox.Web.TokensController do
 
   alias Teebox.Accounts.User
 
-  plug Guardian.Plug.VerifyHeader, realm: "Bearer"
-  plug Guardian.Plug.LoadResource
-
   def validate_token(conn, _params) do
     render_resource(conn, Guardian.Plug.current_resource(conn))
   end

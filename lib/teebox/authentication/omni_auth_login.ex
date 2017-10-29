@@ -17,7 +17,7 @@ defmodule Teebox.Authentication.OmniAuthLogin do
   defp update_or_create_user(existing_user, %{provider: service} = auth) when service in @services do
     update_or_create_user_from_auth(existing_user, auth)
   end
-  defp update_or_create_user(_, auth), do: {:error, "Unsupported provider #{auth.provider}"}
+  defp update_or_create_user(_, auth), do: {:error, "Unsupported authentication provider: #{auth.provider}"}
 
   defp update_or_create_user_from_auth(existing_user, auth) do
     generate_user_changeset_from_auth(existing_user, auth)
@@ -28,13 +28,14 @@ defmodule Teebox.Authentication.OmniAuthLogin do
   defp generate_user_changeset_from_auth(existing_user, auth) do
     user_struct = get_user_struct(existing_user)
 
+    # TODO: Confirmed at?
     User.create_changeset(user_struct, %{
       uid: auth.uid,
       name: name_from_auth(auth),
       email: auth.info.email,
       avatar: auth.info.image,
       provider: to_string(auth.provider),
-      password: Ecto.UUID.generate(),
+      password: Ecto.UUID.generate()
     })
   end
 

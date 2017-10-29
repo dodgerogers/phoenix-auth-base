@@ -4,6 +4,7 @@ defmodule Teebox.Web.UserControllerTest do
   import Teebox.Web.AuthCase
   alias Teebox.Accounts
 
+  # TODO: Test data is all over the place
   @create_attrs params_for(:user, email: "bill@example.com", password: "hard2guess")
   @update_attrs %{email: "william@example.com"}
   @invalid_attrs %{email: nil}
@@ -33,11 +34,13 @@ defmodule Teebox.Web.UserControllerTest do
   @tag login: "reg@example.com"
   test "show chosen user's page", %{conn: conn, user: user} do
     conn = get conn, user_path(conn, :show, user)
-    assert json_response(conn, 200)["data"] == %{"id" => user.id, "email" => "reg@example.com"}
+
+    assert json_response(conn, 200)["data"]["id"] == user.id
   end
 
   test "creates user when data is valid", %{conn: conn} do
     conn = post conn, user_path(conn, :create), user: @create_attrs
+
     assert json_response(conn, 201)["data"]["id"]
     assert Accounts.get_by(%{"email" => "bill@example.com"})
   end
@@ -50,6 +53,7 @@ defmodule Teebox.Web.UserControllerTest do
   @tag login: "reg@example.com"
   test "updates chosen user when data is valid", %{conn: conn, user: user} do
     conn = put conn, user_path(conn, :update, user), user: @update_attrs
+
     assert json_response(conn, 200)["data"]["id"] == user.id
     updated_user = Accounts.get(user.id)
     assert updated_user.email == "william@example.com"
@@ -64,6 +68,7 @@ defmodule Teebox.Web.UserControllerTest do
   @tag login: "reg@example.com"
   test "deletes chosen user", %{conn: conn, user: user} do
     conn = delete conn, user_path(conn, :delete, user)
+
     assert response(conn, 204)
     refute Accounts.get(user.id)
   end
@@ -71,6 +76,7 @@ defmodule Teebox.Web.UserControllerTest do
   @tag login: "reg@example.com"
   test "cannot delete other user", %{conn: conn, other: other} do
     conn = delete conn, user_path(conn, :delete, other)
+
     assert json_response(conn, 403)["errors"]["detail"] =~ "not authorized"
     assert Accounts.get(other.id)
   end

@@ -3,7 +3,6 @@ defmodule Teebox.Persistance.UsersRepository do
   alias Teebox.Accounts.User
   alias Ecto.Changeset
 
-  # TODO: Return domain object
   def find_by_id(id) do
     Repo.get_by(User, id: id)
   end

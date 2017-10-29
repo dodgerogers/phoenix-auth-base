@@ -64,7 +64,7 @@ defmodule Authentication.OmniAuthLoginTest do
 
     {:error, reason} = Teebox.Authentication.OmniAuthLogin.call(invalid_auth)
 
-    assert "Unsupported provider #{invalid_auth.provider}" == reason
+    assert "Unsupported authentication provider: #{invalid_auth.provider}" == reason
   end
 
   defp validate_user(user) do

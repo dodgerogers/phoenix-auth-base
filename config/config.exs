@@ -12,6 +12,7 @@ config :teebox,
 # Configures the endpoint
 config :teebox, Teebox.Web.Endpoint,
   url: [host: "localhost"],
+  # TODO: secrets
   secret_key_base: "tdBlSUk3KNY68in1w2uRCg8/zhYPfnfAlzS+DZu5YQKn12o1lFehHhL8vJZdklWc",
   render_errors: [
     view: Teebox.Web.ErrorView,
@@ -57,7 +58,7 @@ config :guardian, Guardian,
 
 # Phauxth authentication configuration
 config :phauxth,
-  token_salt: "8jrxjuja",
+  token_salt: "8jrxjuja", # TODO remove
   endpoint: Teebox.Web.Endpoint
 
 # Mailer configuration

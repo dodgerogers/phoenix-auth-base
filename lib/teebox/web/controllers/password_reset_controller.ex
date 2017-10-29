@@ -3,8 +3,9 @@ defmodule Teebox.Web.PasswordResetController do
   alias Teebox.Accounts
 
   def create(conn, %{"password_reset" => %{"email" => email}}) do
-    key = Accounts.create_password_reset(Teebox.Web.Endpoint, %{"email" => email})
-    Accounts.Message.reset_request(email, key)
+    # TODO: Put message sending into the create password reset
+    token = Accounts.create_password_reset(%{"email" => email})
+    Accounts.Message.reset_request(email, token)
     message = "Check your inbox for instructions on how to reset your password"
     conn
     |> put_status(:created)
@@ -23,6 +24,7 @@ defmodule Teebox.Web.PasswordResetController do
   end
 
   defp update_password({:ok, user}, conn, _params) do
+    # Do not do this messaging here
     Accounts.Message.reset_success(user.email)
     message = "Your password has been reset"
     render(conn, Teebox.Web.PasswordResetView, "info.json", %{info: message})

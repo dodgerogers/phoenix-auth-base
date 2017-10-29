@@ -6,15 +6,15 @@ defmodule Teebox.Web.SessionController do
 
   plug :guest_check when action in [:create]
 
-  # If you are using Argon2 or Pbkdf2, add crypto: Comeonin.Argon2
-  # or crypto: Comeonin.Pbkdf2 to Login.verify (after Accounts)
   def create(conn, %{"session" => params}) do
-    case Phauxth.Confirm.Login.verify(params, Accounts, crypto: Comeonin.Pbkdf2) do
-      {:ok, user} ->
-        token = Phauxth.Token.sign(conn, user.id)
-        render(conn, Teebox.Web.SessionView, "info.json", %{info: token})
-      {:error, message} ->
-        error(conn, :unauthorized, 401)
-    end
+    Phauxth.Confirm.Login.verify(params, Accounts, crypto: Comeonin.Pbkdf2)
+    |> handle_verify_credentials(conn)
+  end
+  defp handle_verify_credentials({:ok, user}, conn) do
+    {:ok, token, new_conn} = Teebox.Accounts.Token.sign_in(conn, user)
+    render(new_conn, Teebox.Web.SessionView, "info.json", %{info: token})
+  end
+  defp handle_verify_credentials({:error, _message}, conn) do
+    error(conn, :unauthorized, 401)
   end
 end

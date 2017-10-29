@@ -11,7 +11,7 @@ defmodule Teebox.Web.UserView do
   end
 
   def render("user.json", %{user: user}) do
-    %{id: user.id,
-      email: user.email}
+    Map.from_struct(user)
+    |> Map.take([:id, :name, :avatar, :uid, :confirmed_at])
   end
 end

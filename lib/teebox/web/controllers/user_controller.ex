@@ -7,21 +7,20 @@ defmodule Teebox.Web.UserController do
 
   action_fallback Teebox.Web.FallbackController
 
-  # the following plugs are defined in the controllers/authorize.ex file
   plug :user_check when action in [:index, :show]
   plug :id_check when action in [:update, :delete]
 
+  # TODO: Delete what is not neccessary 
   def index(conn, _) do
     users = Accounts.list_users()
     render(conn, "index.json", users: users)
   end
 
   def create(conn, %{"user" => %{"email" => email} = user_params}) do
-    key = Phauxth.Token.sign(conn, %{"email" => email})
-    # TODO: Move all of this into accounts
     with {:ok, user} <- Accounts.create_user(user_params) do
+      {:ok, token} = Teebox.Accounts.Token.verification_token(user)
       Log.info(%Log{user: user.id, message: "user created"})
-      Accounts.Message.confirm_request(email, key)
+      Accounts.Message.confirm_request(email, token)
       conn
       |> put_status(:created)
       |> put_resp_header("location", user_path(conn, :show, user))
@@ -29,19 +28,22 @@ defmodule Teebox.Web.UserController do
     end
   end
 
-  def show(%Plug.Conn{assigns: %{current_user: user}} = conn, %{"id" => id}) do
-    user = id == to_string(user.id) and user || Accounts.get(id)
+  def show(conn, %{"id" => id}) do
+    {:ok, current_user} = current_resource(conn)
+    user = id == to_string(current_user.id) and current_user || Accounts.get(id)
     render(conn, "show.json", user: user)
   end
 
-  def update(%Plug.Conn{assigns: %{current_user: user}} = conn, %{"user" => user_params}) do
-    with {:ok, user} <- Accounts.update_user(user, user_params) do
+  def update(conn, %{"user" => user_params}) do
+    {:ok, current_user} = current_resource(conn)
+    with {:ok, user} <- Accounts.update_user(current_user, user_params) do
       render(conn, "show.json", user: user)
     end
   end
 
-  def delete(%Plug.Conn{assigns: %{current_user: user}} = conn, _) do
-    {:ok, _user} = Accounts.delete_user(user)
+  def delete(conn, _) do
+    {:ok, current_user} = current_resource(conn)
+    {:ok, _user} = Accounts.delete_user(current_user)
     send_resp(conn, :no_content, "")
   end
 end
