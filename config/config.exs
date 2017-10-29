@@ -13,7 +13,7 @@ config :teebox,
 config :teebox, Teebox.Web.Endpoint,
   url: [host: "localhost"],
   # TODO: secrets
-  secret_key_base: "tdBlSUk3KNY68in1w2uRCg8/zhYPfnfAlzS+DZu5YQKn12o1lFehHhL8vJZdklWc",
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
   render_errors: [
     view: Teebox.Web.ErrorView,
     accepts: ~w(html json)
@@ -53,12 +53,12 @@ config :guardian, Guardian,
   ttl: { 1, :days },
   allowed_drift: 2000,
   verify_issuer: true, # optional
-  secret_key: "lHYk5/k7ur9asn4DXe3Zulu81LGiN3d7eTYE+TfO5xLVaN2hU/G8M43oifjQfljJ", # TODO: Secrets
-  serializer: Teebox.Authentication.TokenSerializer
+  secret_key: System.get_env("GUARDIAN_SECRET_KEY"),
+  serializer: Teebox.Accounts.TokenSerializer
 
 # Phauxth authentication configuration
 config :phauxth,
-  token_salt: "8jrxjuja", # TODO remove
+  token_salt: System.get_env("PHAUXTH_TOKEN_SALT"),
   endpoint: Teebox.Web.Endpoint
 
 # Mailer configuration
@@ -66,7 +66,7 @@ config :teebox, Teebox.Mailer,
   adapter: Bamboo.LocalAdapter
 
 config :teebox, :user_repo, Teebox.Persistance.UsersRepository
-config :teebox, :omni_auth_login, Teebox.Authentication.OmniAuthLogin
+config :teebox, :omni_auth_login, Teebox.Accounts.OmniAuthLogin
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

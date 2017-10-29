@@ -11,7 +11,7 @@ defmodule Teebox.Accounts.MessageTest do
 
   setup do
     user = build(:user, email: @email)
-    
+
     {:ok, %{key: verifcation_token(user)}}
   end
 
@@ -19,7 +19,7 @@ defmodule Teebox.Accounts.MessageTest do
     sent_email = Message.confirm_request(@email, key)
 
     assert sent_email.subject =~ "Confirm your account"
-    assert sent_email.text_body =~ "email here http://localhost:4000/api/confirm?key="
+    assert sent_email.text_body =~ key
     assert_delivered_email Message.confirm_request(@email, key)
   end
 
@@ -33,7 +33,7 @@ defmodule Teebox.Accounts.MessageTest do
     sent_email = Message.reset_request(@email, key)
 
     assert sent_email.subject =~ "Reset your password"
-    assert sent_email.text_body =~ "password at http://localhost:4000/api/password_resets/edit?key="
+    assert sent_email.text_body =~ key
     assert_delivered_email Message.reset_request(@email, key)
   end
 

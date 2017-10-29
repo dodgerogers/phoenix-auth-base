@@ -1,4 +1,4 @@
-defmodule Authentication.OmniAuthLoginTest do
+defmodule Accounts.OmniAuthLoginTest do
   use Teebox.ModelCase
   import Teebox.Factory
 
@@ -27,7 +27,7 @@ defmodule Authentication.OmniAuthLoginTest do
   test "#call creates a new user when one does not exist with given credentials", %{auth: auth} do
     before_users = user_count()
 
-    {:ok, user} = Teebox.Authentication.OmniAuthLogin.call(auth)
+    {:ok, user} = Teebox.Accounts.OmniAuthLogin.call(auth)
 
     assert user_count() == (before_users + 1)
 
@@ -46,7 +46,7 @@ defmodule Authentication.OmniAuthLoginTest do
 
     before_users = user_count()
 
-    {:ok, user} = Teebox.Authentication.OmniAuthLogin.call(auth)
+    {:ok, user} = Teebox.Accounts.OmniAuthLogin.call(auth)
 
     assert user_count() == before_users
     assert user_with_same_uid_and_email.id == user.id
@@ -54,7 +54,7 @@ defmodule Authentication.OmniAuthLoginTest do
   end
 
   test "#call returns an error tuple when omniauth hash is not a UeberAuth struct", %{auth: %{}} do
-    {:error, reason} = Teebox.Authentication.OmniAuthLogin.call(%{})
+    {:error, reason} = Teebox.Accounts.OmniAuthLogin.call(%{})
 
     assert "Invalid Omniauth hash provided" == reason
   end
@@ -62,7 +62,7 @@ defmodule Authentication.OmniAuthLoginTest do
   test "#call returns an error tuple when omniauth provider is not supported", %{auth: auth} do
     invalid_auth = Map.merge(auth, %{provider: :unsupported})
 
-    {:error, reason} = Teebox.Authentication.OmniAuthLogin.call(invalid_auth)
+    {:error, reason} = Teebox.Accounts.OmniAuthLogin.call(invalid_auth)
 
     assert "Unsupported authentication provider: #{invalid_auth.provider}" == reason
   end
@@ -72,5 +72,6 @@ defmodule Authentication.OmniAuthLoginTest do
     assert user.name == @name
     assert user.email == @email
     assert is_binary(user.password_hash)
+    assert user.confirmed_at
   end
 end

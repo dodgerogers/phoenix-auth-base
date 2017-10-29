@@ -5,9 +5,11 @@ defmodule Teebox.Web.UserControllerTest do
   alias Teebox.Accounts
 
   # TODO: Test data is all over the place
+  # TODO: Speed up
   @create_attrs params_for(:user, email: "bill@example.com", password: "hard2guess")
   @update_attrs %{email: "william@example.com"}
   @invalid_attrs %{email: nil}
+  @other_email "reg@example.com"
 
   setup %{conn: conn} = config do
     if email = config[:login] do
@@ -20,18 +22,7 @@ defmodule Teebox.Web.UserControllerTest do
     end
   end
 
-  @tag login: "reg@example.com"
-  test "lists all entries on index", %{conn: conn} do
-    conn = get conn, user_path(conn, :index)
-    assert json_response(conn, 200)
-  end
-
-  test "renders /users error for unauthorized user", %{conn: conn}  do
-    conn = get conn, user_path(conn, :index)
-    assert json_response(conn, 401)
-  end
-
-  @tag login: "reg@example.com"
+  @tag login: @other_email
   test "show chosen user's page", %{conn: conn, user: user} do
     conn = get conn, user_path(conn, :show, user)
 
@@ -50,7 +41,7 @@ defmodule Teebox.Web.UserControllerTest do
     assert json_response(conn, 422)["errors"] != %{}
   end
 
-  @tag login: "reg@example.com"
+  @tag login: @other_email
   test "updates chosen user when data is valid", %{conn: conn, user: user} do
     conn = put conn, user_path(conn, :update, user), user: @update_attrs
 
@@ -59,25 +50,9 @@ defmodule Teebox.Web.UserControllerTest do
     assert updated_user.email == "william@example.com"
   end
 
-  @tag login: "reg@example.com"
+  @tag login: @other_email
   test "does not update chosen user and renders errors when data is invalid", %{conn: conn, user: user} do
     conn = put conn, user_path(conn, :update, user), user: @invalid_attrs
     assert json_response(conn, 422)["errors"] != %{}
-  end
-
-  @tag login: "reg@example.com"
-  test "deletes chosen user", %{conn: conn, user: user} do
-    conn = delete conn, user_path(conn, :delete, user)
-
-    assert response(conn, 204)
-    refute Accounts.get(user.id)
-  end
-
-  @tag login: "reg@example.com"
-  test "cannot delete other user", %{conn: conn, other: other} do
-    conn = delete conn, user_path(conn, :delete, other)
-
-    assert json_response(conn, 403)["errors"]["detail"] =~ "not authorized"
-    assert Accounts.get(other.id)
   end
 end

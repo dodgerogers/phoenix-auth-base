@@ -38,6 +38,9 @@ services:
       - DB_ENV_POSTGRES_PASSWORD=postgres
       - DB_ENV_POSTGRES_HOST=test_db
       - DB_ENV_NAME=teebox_test
+      - SECRET_KEY_BASE=8T5LnoIUrhwSfTJhqViVjckIEYrnd2mEIfgIbfsT+sB+/hCMXJbN48v8zjhFx5/p
+      - GUARDIAN_SECRET_KEY=Y1Lq7haDTW1tbWg2W+lSUZwxauungR6IYG9jS11nf9U/fimBy+lOQCkVQPIZpz89
+      - PHAUXTH_TOKEN_SALT=a1b2c3d4
     depends_on:
       - test_db
 

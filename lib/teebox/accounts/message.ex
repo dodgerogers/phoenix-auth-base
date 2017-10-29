@@ -39,7 +39,7 @@ defmodule Teebox.Accounts.Message do
   def confirm_request(address, key) do
     prep_mail(address)
     |> subject("Confirm your account")
-    |> text_body("Confirm your email here http://localhost:4000/api/confirm?key=#{key}")
+    |> text_body("Here is your confirmation token: #{key}")
     |> Mailer.deliver_now
   end
 
@@ -55,7 +55,7 @@ defmodule Teebox.Accounts.Message do
   def reset_request(address, key) do
     prep_mail(address)
     |> subject("Reset your password")
-    |> text_body("Reset your password at http://localhost:4000/api/password_resets/edit?key=#{key}")
+    |> text_body("Password reset token: #{key}")
     |> Mailer.deliver_now
   end
 

@@ -7,14 +7,8 @@ defmodule Teebox.Web.UserController do
 
   action_fallback Teebox.Web.FallbackController
 
-  plug :user_check when action in [:index, :show]
-  plug :id_check when action in [:update, :delete]
-
-  # TODO: Delete what is not neccessary 
-  def index(conn, _) do
-    users = Accounts.list_users()
-    render(conn, "index.json", users: users)
-  end
+  plug :user_check when action in [:show]
+  plug :id_check when action in [:update]
 
   def create(conn, %{"user" => %{"email" => email} = user_params}) do
     with {:ok, user} <- Accounts.create_user(user_params) do
@@ -39,11 +33,5 @@ defmodule Teebox.Web.UserController do
     with {:ok, user} <- Accounts.update_user(current_user, user_params) do
       render(conn, "show.json", user: user)
     end
-  end
-
-  def delete(conn, _) do
-    {:ok, current_user} = current_resource(conn)
-    {:ok, _user} = Accounts.delete_user(current_user)
-    send_resp(conn, :no_content, "")
   end
 end

@@ -22,7 +22,7 @@ config :teebox, Teebox.Repo,
 config :pbkdf2_elixir, :log_rounds, 1
 
 config :teebox, :user_repo, Teebox.Persistance.UsersRepositoryMock
-config :teebox, :omni_auth_login, Teebox.Authentication.OmniAuthLoginMock
+config :teebox, :omni_auth_login, Teebox.Accounts.OmniAuthLoginMock
 
 # Mailer test configuration
 config :teebox, Teebox.Mailer,

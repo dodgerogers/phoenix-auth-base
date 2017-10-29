@@ -1,4 +1,4 @@
-defmodule Teebox.Authentication.OmniAuthLogin do
+defmodule Teebox.Accounts.OmniAuthLogin do
   alias Teebox.Accounts.User
   alias Ueberauth.Auth
 
@@ -28,14 +28,14 @@ defmodule Teebox.Authentication.OmniAuthLogin do
   defp generate_user_changeset_from_auth(existing_user, auth) do
     user_struct = get_user_struct(existing_user)
 
-    # TODO: Confirmed at?
     User.create_changeset(user_struct, %{
       uid: auth.uid,
       name: name_from_auth(auth),
       email: auth.info.email,
       avatar: auth.info.image,
       provider: to_string(auth.provider),
-      password: Ecto.UUID.generate()
+      password: Ecto.UUID.generate(),
+      confirmed_at: DateTime.utc_now()
     })
   end
 

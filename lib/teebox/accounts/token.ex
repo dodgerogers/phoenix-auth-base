@@ -1,12 +1,5 @@
 defmodule Teebox.Accounts.Token do
-  @moduledoc """
-  TODO: Refactor
-  The boundary for Tokens
-  """
-
-  alias Teebox.Accounts.User
-
-  @invalid_user 'Invalid user'
+  @invalid_user "Invalid user"
 
   def sign_in(conn, nil), do: {:error, @invalid_user , conn}
   def sign_in(conn, user) do

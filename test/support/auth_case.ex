@@ -22,7 +22,7 @@ defmodule Teebox.Web.AuthCase do
   end
 
   def add_token_conn(conn, user) do
-    {:ok, token, new_conn} = Teebox.Accounts.Token.sign_in(conn, user)
+    {:ok, _token, new_conn} = Teebox.Accounts.Token.sign_in(conn, user)
     new_conn
     |> put_req_header("accept", "application/json")
   end

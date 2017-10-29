@@ -1,4 +1,4 @@
-defmodule Authentication.TokenSerializerTest do
+defmodule Accounts.TokenSerializerTest do
   use Teebox.ModelCase
   import Teebox.Factory
 
@@ -13,13 +13,13 @@ defmodule Authentication.TokenSerializerTest do
   end
 
   test "for_token returns the user type and id", %{user: user} do
-    {:ok, user_token_representation} = Teebox.Authentication.TokenSerializer.for_token(user)
+    {:ok, user_token_representation} = Teebox.Accounts.TokenSerializer.for_token(user)
 
     assert user_token_representation == "data:#{user.id}"
   end
 
   test "for_token it returns an error when a user struct is not provided" do
-    {:error, reason} = Teebox.Authentication.TokenSerializer.for_token(%{})
+    {:error, reason} = Teebox.Accounts.TokenSerializer.for_token(%{})
 
     assert reason == @unknown_resource
   end
@@ -27,7 +27,7 @@ defmodule Authentication.TokenSerializerTest do
   test "from_token returns ok and user", %{user: user} do
     token = "data:#{user.id}"
 
-    {:ok, found_user} = Teebox.Authentication.TokenSerializer.from_token(token)
+    {:ok, found_user} = Teebox.Accounts.TokenSerializer.from_token(token)
 
     assert user == found_user
   end
@@ -35,13 +35,13 @@ defmodule Authentication.TokenSerializerTest do
   test "from_token returns ok and nil when user is not found" do
     token = "data:#{999_999_999}"
 
-    {:ok, user} = Teebox.Authentication.TokenSerializer.from_token(token)
+    {:ok, user} = Teebox.Accounts.TokenSerializer.from_token(token)
 
     refute user
   end
 
   test "from_token returns erorr when not given a user" do
-    {:error, reason} = Teebox.Authentication.TokenSerializer.from_token(%{})
+    {:error, reason} = Teebox.Accounts.TokenSerializer.from_token(%{})
 
     assert reason == @unknown_resource
   end

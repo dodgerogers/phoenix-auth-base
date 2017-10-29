@@ -1,4 +1,4 @@
-defmodule Teebox.Authentication.OmniAuthLoginMock do
+defmodule Teebox.Accounts.OmniAuthLoginMock do
   alias Ueberauth.Auth
   import Teebox.Factory
 

@@ -37,7 +37,7 @@ defmodule Teebox.Web.Router do
     pipe_through :api
 
     post "/sessions", SessionController, :create
-    resources "/users", UserController, except: [:new, :edit]
+    resources "/users", UserController, except: [:new, :edit, :index, :delete]
     get "/confirm", ConfirmController, :index
     post "/password_resets", PasswordResetController, :create
     put "/password_resets/update", PasswordResetController, :update

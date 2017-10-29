@@ -1,4 +1,4 @@
-defmodule Teebox.Authentication.TokenSerializer do
+defmodule Teebox.Accounts.TokenSerializer do
   @behaviour Guardian.Serializer
   @user_repo Application.get_env(:teebox, :user_repo)
 
