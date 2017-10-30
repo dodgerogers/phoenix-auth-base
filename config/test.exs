@@ -18,7 +18,12 @@ config :teebox, Teebox.Repo,
   database: System.get_env("DB_ENV_NAME"),
   pool: Ecto.Adapters.SQL.Sandbox
 
-config :comeonin, :pbkdf2_rounds, 1
+# Reduce number of rounds for hashing
+config :pbkdf2_elixir, :log_rounds, 1
 
 config :teebox, :user_repo, Teebox.Persistance.UsersRepositoryMock
-config :teebox, :omni_auth_login, Teebox.Authentication.OmniAuthLoginMock
+config :teebox, :omni_auth_login, Teebox.Accounts.OmniAuthLoginMock
+
+# Mailer test configuration
+config :teebox, Teebox.Mailer,
+  adapter: Bamboo.TestAdapter

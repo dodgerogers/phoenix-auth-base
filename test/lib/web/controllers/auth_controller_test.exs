@@ -17,26 +17,26 @@ defmodule Teebox.AuthControllerTest do
     }}
   end
 
-  test "GET /auth/identity/callback success", %{ueberauth_auth: auth} do
+  test "GET /auth/facebook/callback success", %{ueberauth_auth: auth} do
     conn = build_conn()
       |> assign(:ueberauth_auth, auth)
-      |> get("/auth/identity/callback")
+      |> get("/auth/facebook/callback")
 
     assert redirected_to(conn) =~ "/auth?auth_token="
   end
 
-  test "GET /auth/identity/callback Ueberauth failure", %{ueberauth_failure: auth} do
+  test "GET /auth/facebook/callback Ueberauth failure", %{ueberauth_failure: auth} do
     conn = build_conn()
       |> assign(:ueberauth_failure, auth)
-      |> get("/auth/identity/callback")
+      |> get("/auth/facebook/callback")
 
     assert redirected_to(conn) =~ "/auth?errors="
   end
 
-  test "GET /auth/identity/callback failure with invalid parameters" do
+  test "GET /auth/facebook/callback failure with invalid parameters" do
     conn = build_conn()
       |> assign(:ueberauth_auth, %{})
-      |> get("/auth/identity/callback")
+      |> get("/auth/facebook/callback")
 
     assert redirected_to(conn) =~ "/auth?errors="
   end

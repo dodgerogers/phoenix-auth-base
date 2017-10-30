@@ -27,7 +27,7 @@ defmodule Teebox.Persistance.UsersRepositoryMock do
     {:ok, user}
   end
 
-  defp find_by(_attributes) do
-    all() |> Enum.find(fn(user) -> match?(_attributes, user) end)
+  defp find_by(%{} = attributes) do
+    all() |> Enum.find(fn(user) -> match?(attributes, user) end)
   end
 end

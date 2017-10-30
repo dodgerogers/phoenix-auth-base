@@ -38,6 +38,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.5.0",
     "babel-runtime": "^6.6.1",
+    "compression-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.1",
     "enzyme": "^2.3.0",

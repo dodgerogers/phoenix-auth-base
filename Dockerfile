@@ -1,4 +1,4 @@
-FROM elixir:1.4.2
+FROM elixir:1.5.2
 
 MAINTAINER Andy Rogers
 

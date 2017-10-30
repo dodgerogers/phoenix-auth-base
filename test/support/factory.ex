@@ -2,14 +2,14 @@ defmodule Teebox.Factory do
   use ExMachina.Ecto, repo: Teebox.Repo
 
   def user_factory do
-    %Teebox.User{
+    %Teebox.Accounts.User{
       email: Faker.Internet.email,
+      avatar: "http://#{Faker.Lorem.characters(8..20)}.png",
       name: Faker.Name.name,
       provider: to_string(:identity),
       uid: Ecto.UUID.generate(),
-      token: Ecto.UUID.generate(),
-      refresh_token: Ecto.UUID.generate(),
-      expires_at: Guardian.Utils.timestamp + 500,
+      confirmed_at: DateTime.utc_now(),
+      reset_sent_at: nil,
       password_hash: Comeonin.Pbkdf2.hashpwsalt(Faker.Lorem.characters(8..20))
     }
   end

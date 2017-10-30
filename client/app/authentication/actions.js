@@ -7,7 +7,7 @@ import {
 import * as AuthenticationSources from '../sources/AuthenticationSources';
 
 
-function signIn(signUpParams) {
+function register(signUpParams) {
   return dispatch => {
     dispatch(authenticateStart());
 

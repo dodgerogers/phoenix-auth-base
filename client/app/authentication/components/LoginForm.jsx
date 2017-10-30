@@ -1,42 +1,35 @@
 import React from 'react'
-import OAuthSignInButton from '../containers/OAuthSignInButton';
-import { Form, Header, Divider, Button, Icon } from 'semantic-ui-react';
+import { Field } from 'redux-form/immutable';
+import { Form, Message, Button, Icon } from 'semantic-ui-react';
+import Input from '../../common/components/Input';
+import { isRequired, isEmail } from '../../lib/utils/validation';
 
 
-function LoginForm(props) {
+const LoginForm = (props) => {
+  const { handleSubmit, onSubmit, errorMessage, isSubmitting } = props;
+
   return (
     <div className="login-form">
-      <OAuthSignInButton
-        fluid={true}
-        color="facebook"
-        provider="facebook"
-      >
-        <Icon name='facebook' /> Facebook
-      </OAuthSignInButton>
-      <div style={{ height: '5px' }} />
-      <OAuthSignInButton
-        fluid={true}
-        color="google plus"
-        provider="google_oauth2"
-      >
-        <Icon name='google' /> Google
-      </OAuthSignInButton>
-      <Divider horizontal>Or</Divider>
-      <Form size='large'>
-        <Form.Input
+      <Form size='large' loading={isSubmitting}>
+        {errorMessage && <Message negative>{errorMessage}</Message>}
+        <Field
+          component={Input}
           fluid
-          icon='mail'
-          iconPosition='left'
-          placeholder='Email'
+          name="email"
+          icon="mail"
+          iconPosition="left"
+          placeholder="Email"
+          validate={[isRequired, isEmail]}
         />
-        <Form.Input
+        <Field
+          component={Input}
           fluid
-          icon='lock'
-          type='password'
-          iconPosition='left'
-          placeholder='Password'
+          name="password"
+          icon="lock"
+          iconPosition="left"
+          placeholder="Password"
+          validate={[isRequired]}
         />
-        <Button fluid size='large' color="teal">Login</Button>
       </Form>
     </div>
   );

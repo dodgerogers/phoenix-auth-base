@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Field } from 'redux-form/immutable';
 import { Form, Message, Button, Icon } from 'semantic-ui-react';
-import OAuthSignInButton from '../containers/OAuthSignInButton';
 import Input from '../../common/components/Input';
 import { isRequired, isEmail } from '../../lib/utils/validation';
 
@@ -43,7 +43,7 @@ function RegistrationForm(props) {
         <Field
           component={Input}
           fluid
-          name="passwordConfirmation"
+          name="password-confirmation"
           placeholder="Password Confirmation"
           validate={[isRequired]}
         />
@@ -53,10 +53,10 @@ function RegistrationForm(props) {
 }
 
 RegistrationForm.propTypes = {
-  handleSubmit: React.PropTypes.func,
-  onSubmit: React.PropTypes.func,
-  errorMessage: React.PropTypes.string,
-  isSubmitting: React.PropTypes.bool,
+  handleSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
+  errorMessage: PropTypes.string,
+  isSubmitting: PropTypes.bool,
 }
 
 RegistrationForm.defaultProps = {
