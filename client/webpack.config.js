@@ -8,6 +8,7 @@ var BUILD_DIR = path.resolve(__dirname, '../priv/static/js');
 var entry = APP_DIR + '/app/index.js';
 
 var config = {
+  devtool: 'source-map',
   entry: ['babel-polyfill', entry],
   output: {
     path: BUILD_DIR,
@@ -61,7 +62,7 @@ var config = {
       }
     }),
     new webpack.optimize.UglifyJsPlugin(),
-    new webpack.optimize.AggressiveMergingPlugin()
+    new webpack.optimize.AggressiveMergingPlugin(),
   ],
 };
 

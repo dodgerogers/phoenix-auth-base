@@ -2,7 +2,7 @@ import { fetch, parseResponse } from 'redux-auth';
 
 const AuthenticationSources = {
   register: (user) => {
-    return fetch('auth/register', {
+    return fetch('api/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

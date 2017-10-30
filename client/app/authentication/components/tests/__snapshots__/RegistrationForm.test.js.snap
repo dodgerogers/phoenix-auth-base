@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RegistrationForm matches component snapshot 1`] = `
+<div
+  className="sign-up-form"
+>
+  <Form
+    as="form"
+    loading={false}
+    size="large"
+  >
+    <Field
+      component={[Function]}
+      fluid={true}
+      icon="user"
+      iconPosition="left"
+      name="username"
+      placeholder="Display Name"
+      validate={
+        Array [
+          [Function],
+        ]
+      }
+    />
+    <Field
+      component={[Function]}
+      fluid={true}
+      icon="mail"
+      iconPosition="left"
+      name="email"
+      placeholder="Email"
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
+    />
+    <Field
+      component={[Function]}
+      fluid={true}
+      icon="lock"
+      iconPosition="left"
+      name="password"
+      placeholder="Password"
+      validate={
+        Array [
+          [Function],
+        ]
+      }
+    />
+    <Field
+      component={[Function]}
+      fluid={true}
+      name="password-confirmation"
+      placeholder="Password Confirmation"
+      validate={
+        Array [
+          [Function],
+        ]
+      }
+    />
+  </Form>
+</div>
+`;
