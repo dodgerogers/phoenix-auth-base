@@ -12,7 +12,6 @@ config :teebox,
 # Configures the endpoint
 config :teebox, Teebox.Web.Endpoint,
   url: [host: "localhost"],
-  # TODO: secrets
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
   render_errors: [
     view: Teebox.Web.ErrorView,
@@ -31,6 +30,83 @@ config :logger, :console,
  # TODO: Secrets
 config :mix_docker, image: "377092858912.dkr.ecr.us-east-1.amazonaws.com/teebox.io"
 
+config :authable,
+  ecto_repos: [Authable.Repo],
+  repo: Authable.Repo,
+  resource_owner: Authable.Model.User,
+  token_store: Authable.Model.Token,
+  client: Authable.Model.Client,
+  app: Authable.Model.App,
+  expires_in: %{
+    access_token: 3600,
+    refresh_token: 24 * 3600,
+    authorization_code: 300,
+  },
+  grant_types: %{
+    authorization_code: Authable.GrantType.AuthorizationCode,
+    client_credentials: Authable.GrantType.ClientCredentials,
+    password: Authable.GrantType.Password,
+    refresh_token: Authable.GrantType.RefreshToken
+  },
+  auth_strategies: %{
+    headers: %{
+      "authorization" => [
+        {~r/Bearer ([a-zA-Z\-_\+=]+)/, Authable.Authentication.Bearer},
+      ],
+      "x-api-token" => [
+        {~r/([a-zA-Z\-_\+=]+)/, Authable.Authentication.Bearer}
+      ]
+    },
+    query_params: %{
+      "access_token" => Authable.Authentication.Bearer
+    }
+  },
+  scopes: ~w(read write),
+  renderer: Authable.Renderer.RestApi
+
+config :shield, Shield.Endpoint,
+  url: [host: "localhost"],
+  root: Path.dirname(__DIR__),
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
+  render_errors: [
+    accepts: ~w(json),
+    format: "json"
+  ]
+
+config :shield,
+  confirmable: true,
+  otp_check: false,
+  hooks: Shield.Hook.Default,
+  views: %{
+    changeset: Shield.ChangesetView,
+    error: Shield.ErrorView,
+    app: Shield.AppView,
+    client: Shield.ClientView,
+    token: Shield.TokenView,
+    user: Shield.UserView
+  },
+  cors_origins: "http://localhost:4000, *",
+  front_end: %{
+    base: "http://localhost:4200",
+    confirmation_path: "/users/confirm?confirmation_token={{confirmation_token}}",
+    reset_password_path: "/users/reset-password?reset_token={{reset_token}}"
+  },
+  ecto_repos: []
+
+config :shield_notifier,
+  channels: %{
+    email: %{
+      from: %{
+        name: {:system, "Teebox", "Teebox"},
+        email: {:system, "Teebox", "no-reply@localhost"}
+      }
+    }
+  }
+
+config :shield_notifier, Shield.Notifier.Mailer,
+  adapter: Bamboo.LocalAdapter#,
+  # api_key: System.get_env("SENDGRID_API_KEY")
+
 config :ueberauth, Ueberauth,
   providers: [
     facebook: {
@@ -45,25 +121,6 @@ config :ueberauth, Ueberauth,
 config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
   client_id: System.get_env("FACEBOOK_CLIENT_ID"),
   client_secret: System.get_env("FACEBOOK_CLIENT_SECRET")
-
-config :guardian, Guardian,
-  allowed_algos: ["HS512"], # optional
-  verify_module: Guardian.JWT,  # optional
-  issuer: "teebox",
-  ttl: { 1, :days },
-  allowed_drift: 2000,
-  verify_issuer: true, # optional
-  secret_key: System.get_env("GUARDIAN_SECRET_KEY"),
-  serializer: Teebox.Accounts.TokenSerializer
-
-# Phauxth authentication configuration
-config :phauxth,
-  token_salt: System.get_env("PHAUXTH_TOKEN_SALT"),
-  endpoint: Teebox.Web.Endpoint
-
-# Mailer configuration
-config :teebox, Teebox.Mailer,
-  adapter: Bamboo.LocalAdapter
 
 config :teebox, :user_repo, Teebox.Persistance.UsersRepository
 config :teebox, :omni_auth_login, Teebox.Accounts.OmniAuthLogin

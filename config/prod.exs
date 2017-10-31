@@ -24,13 +24,16 @@ config :teebox, Teebox.Web.Endpoint,
   secret_key_base: "${SECRET_KEY_BASE}"
 
 # Configure your database
-config :teebox, Teebox.Repo,
+db_config = [
   adapter: Ecto.Adapters.Postgres,
-  hostname: "${DB_ENV_POSTGRES_HOST}",
-  database: "${DB_ENV_NAME}",
   username: "${DB_ENV_POSTGRES_USER}",
   password: "${DB_ENV_POSTGRES_PASSWORD}",
+  hostname: "${DB_ENV_POSTGRES_HOST}",
+  database: "${DB_ENV_NAME}",
   pool_size: 20
+]
+config :teebox, Teebox.Repo, db_config
+config :authable, Authable.Repo, db_config
 
 config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
   client_id: "${FACEBOOK_CLIENT_ID}",

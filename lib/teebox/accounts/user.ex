@@ -31,7 +31,6 @@ defmodule Teebox.Accounts.User do
     user
     |> cast(attrs, @required_fields ++ @optional_fields ++ [:password])
     |> validate_password(:password)
-    |> put_password_hash
     |> validate_required(@required_fields)
     |> unique_email
   end
@@ -45,11 +44,6 @@ defmodule Teebox.Accounts.User do
       end
     end)
   end
-
-  defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
-    change(changeset, Comeonin.Pbkdf2.add_hash(password))
-  end
-  defp put_password_hash(changeset), do: changeset
 
   defp unique_email(changeset) do
     validate_format(changeset, :email, ~r/@/)

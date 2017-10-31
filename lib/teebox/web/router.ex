@@ -2,7 +2,7 @@ defmodule Teebox.Web.Router do
   use Teebox.Web, :router
 
   if Mix.env == :dev do
-    forward "/sent_emails", Bamboo.SentEmailViewerPlug
+    forward "/sent_emails", Bamboo.EmailPreviewPlug
   end
 
   pipeline :browser do
@@ -15,8 +15,6 @@ defmodule Teebox.Web.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
-    plug Guardian.Plug.LoadResource
   end
 
   scope "/", Teebox.Web do
@@ -36,12 +34,25 @@ defmodule Teebox.Web.Router do
   scope "/api", Teebox.Web do
     pipe_through :api
 
-    post "/sessions", SessionController, :create
-    resources "/users", UserController, except: [:new, :edit, :index, :delete]
-    get "/confirm", ConfirmController, :index
-    post "/password_resets", PasswordResetController, :create
-    put "/password_resets/update", PasswordResetController, :update
+    get     "/apps", AppController, :index
+    get     "/apps/:id", AppController, :show
+    delete  "/apps/:id", AppController, :delete
+    post    "/apps/authorize", AppController, :authorize
 
-    get "/validate_token", TokensController, :validate_token
+    get     "/tokens/:id", TokenController, :show
+    post    "/tokens", TokenController, :create
+
+    post    "/users/register", UserController, :register
+    post    "/users/login", UserController, :login
+    delete  "/users/logout", UserController, :logout
+    get     "/users/me", UserController, :me
+    get     "/users/confirm", UserController, :confirm
+    post    "/users/recover_password", UserController, :recover_password
+    post    "/users/reset_password", UserController, :reset_password
+    post    "/users/change_password", UserController, :change_password
+
+    get     "/settings", SettingController, :index
+    put     "/settings/:id", SettingController, :update
+    patch   "/settings/:id", SettingController, :update
   end
 end

@@ -24,13 +24,17 @@ config :teebox, Teebox.Web.Endpoint,
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 
-config :teebox, Teebox.Repo,
+db_config = [
   adapter: Ecto.Adapters.Postgres,
   username: System.get_env("DB_ENV_POSTGRES_USER"),
   password: System.get_env("DB_ENV_POSTGRES_PASSWORD"),
   hostname: System.get_env("DB_ENV_POSTGRES_HOST"),
   database: System.get_env("DB_ENV_NAME"),
   pool_size: 10
+]
+
+config :teebox, Teebox.Repo, db_config
+config :authable, Authable.Repo, db_config
 
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.

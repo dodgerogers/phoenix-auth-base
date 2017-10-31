@@ -16,12 +16,12 @@ defmodule Teebox.Web.AuthController do
     redirect(conn, to: auth_path(conn, :show, %{errors: hd(failure.errors).message}))
   end
 
-  defp handle_callback({:ok, user}, conn) do
-    {:ok, token, new_conn} = Teebox.Accounts.Token.sign_in(conn, user)
-    {:ok, claims} = Teebox.Accounts.Token.claims(new_conn)
-    exp = Map.get(claims, "exp")
-
-    redirect(conn, to: auth_path(new_conn, :show, %{auth_token: token, expiry: exp, uid: user.uid}))
+  defp handle_callback({:ok, _user}, conn) do
+    # {:ok, token, new_conn} = Teebox.Accounts.Token.sign_in(conn, user)
+    # {:ok, claims} = Teebox.Accounts.Token.claims(new_conn)
+    # exp = Map.get(claims, "exp")
+    #
+    redirect(conn, to: auth_path(conn, :show, %{auth_token: "nope", expiry: 1500000, uid: ""}))
   end
   defp handle_callback({:error, reason}, conn) do
     redirect(conn, to: auth_path(conn, :show, %{errors: reason}))
