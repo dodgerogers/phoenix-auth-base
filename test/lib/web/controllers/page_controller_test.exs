@@ -1,5 +1,5 @@
 defmodule Teebox.PageControllerTest do
-  use Teebox.Web.ConnCase
+  use TeeboxWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"

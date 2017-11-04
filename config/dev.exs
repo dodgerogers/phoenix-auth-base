@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :teebox, Teebox.Web.Endpoint,
+config :teebox, TeeboxWeb.Endpoint,
   http: [port: {:system, "PORT"}],
   debug_errors: true,
   code_reloader: false,
@@ -34,7 +34,6 @@ db_config = [
 ]
 
 config :teebox, Teebox.Repo, db_config
-config :authable, Authable.Repo, db_config
 
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.

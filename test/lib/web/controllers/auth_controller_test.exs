@@ -1,5 +1,5 @@
 defmodule Teebox.AuthControllerTest do
-  use Teebox.Web.ConnCase
+  use TeeboxWeb.ConnCase
 
   @error_message "Something went wrong"
 

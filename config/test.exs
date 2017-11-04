@@ -20,7 +20,6 @@ db_config = [
 ]
 
 config :teebox, Teebox.Repo, db_config
-config :authable, Authable.Repo, db_config
 
 config :teebox, :user_repo, Teebox.Persistance.UsersRepositoryMock
 config :teebox, :omni_auth_login, Teebox.Accounts.OmniAuthLoginMock

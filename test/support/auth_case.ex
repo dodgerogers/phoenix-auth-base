@@ -1,4 +1,4 @@
-defmodule Teebox.Web.AuthCase do
+defmodule TeeboxWeb.AuthCase do
   use Phoenix.ConnTest
 
   import Teebox.Factory

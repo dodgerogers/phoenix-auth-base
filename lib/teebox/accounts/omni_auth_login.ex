@@ -28,7 +28,7 @@ defmodule Teebox.Accounts.OmniAuthLogin do
   defp generate_user_changeset_from_auth(existing_user, auth) do
     user_struct = get_user_struct(existing_user)
 
-    User.create_changeset(user_struct, %{
+    User.changeset(user_struct, %{
       uid: auth.uid,
       name: name_from_auth(auth),
       email: auth.info.email,

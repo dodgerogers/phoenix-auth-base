@@ -19,9 +19,10 @@ defmodule Teebox.Mixfile do
   def application(:test), do: application(:default) ++ [:ex_machina]
   def application do
     [
-      mod: {Teebox, []},
-      applications: [
+      mod: {Teebox.Application, []},
+      extra_applications: [
         :bamboo,
+        :coherence,
         :comeonin,
         :cowboy,
         :faker,
@@ -34,7 +35,6 @@ defmodule Teebox.Mixfile do
         :phoenix_html,
         :phoenix_ecto,
         :postgrex,
-        :shield,
         :ueberauth,
         :ueberauth_facebook,
         :ueberauth_identity,
@@ -53,6 +53,7 @@ defmodule Teebox.Mixfile do
     [
       {:bamboo, "~> 0.8"},
       {:cowboy, "~> 1.0"},
+      {:coherence, github: "klacointe/coherence", branch: "handle_json_format"},
       {:ex_machina, "~> 2.0", only: :test},
       {:faker, "~> 0.9"},
       {:gettext, "~> 0.12"},
@@ -60,13 +61,12 @@ defmodule Teebox.Mixfile do
       {:mock, "~> 0.2.0", only: :test},
       {:not_qwerty123, "~> 2.2"},
       {:pbkdf2_elixir, "~> 0.12"},
-      {:phoenix, "~> 1.3.0-rc", override: true}, # Guardian does not support 1.3
+      {:phoenix, "~> 1.3.0", override: true},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.6"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
-      {:shield, "~> 0.7.0"},
       {:ueberauth, "~> 0.4"},
       {:ueberauth_facebook, "~> 0.7"},
       {:ueberauth_identity, "~> 0.2"}
