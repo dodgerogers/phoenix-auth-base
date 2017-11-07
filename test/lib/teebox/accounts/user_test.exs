@@ -1,4 +1,4 @@
-defmodule Teebox.UserTest do
+defmodule Teebox.Accounts.UserTest do
   use Teebox.ModelCase
   import Teebox.Factory
 

@@ -1,4 +1,4 @@
-defmodule Accounts.OmniAuthLoginTest do
+defmodule Teebox.Accounts.OmniAuthLoginTest do
   use Teebox.ModelCase
   import Teebox.Factory
 

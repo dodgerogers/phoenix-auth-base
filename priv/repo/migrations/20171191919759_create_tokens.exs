@@ -3,14 +3,14 @@ defmodule Teebox.Repo.Migrations.CreateTokens do
 
   def up do
     create table(:tokens) do
-      add :name, :string, unique: true
+      add :value, :string, unique: true
       add :user_type, :string
       add :user_id, :string
 
       timestamps()
     end
 
-    create unique_index(:tokens, [:name])
+    create unique_index(:tokens, [:value])
     create index(:tokens, [:user_id])
   end
 

@@ -11,5 +11,5 @@ defimpl Coherence.DbStore, for: Teebox.Accounts.User do
   def delete_credentials(user, creds),
     do: TokenRepository.delete_credentials(user, creds)
 
-  def delete_user_logins(_), do: nil  
+  def delete_user_logins(_), do: nil
 end

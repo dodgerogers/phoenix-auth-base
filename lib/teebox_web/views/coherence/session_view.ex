@@ -1,13 +1,9 @@
 defmodule TeeboxWeb.Coherence.SessionView do
   use TeeboxWeb.Coherence, :view
 
-  def render("session.json", %{user: user}) do
+  def render("session.json", %{user: user, token: token}) do
     %{
-      user: %{
-        id: user.id,
-        name: user.name,
-        email: user.email
-      }
+      token: token
     }
   end
 

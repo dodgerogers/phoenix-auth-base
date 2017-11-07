@@ -16,18 +16,21 @@ defmodule TeeboxWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-     # TODO: Remove when issue Coherence#296 is resolved
+    # TODO: REMOVE when issue Coherence#296 is resolved
     plug :fetch_session
     plug :fetch_flash
-    # TODO: This blows up below
     # plug Coherence.Authentication.Token, source: :header,
     #                                      store: Teebox.Coherence.TokenDbStore,
     #                                      param: "x-auth-token",
+    #                                      protected: false,
     #                                      error: ~s'{"error":"authentication required"}'
   end
 
   pipeline :protected_api do
     plug :accepts, ["json"]
+    # TODO: REMOVE when issue Coherence#296 is resolved
+    plug :fetch_session
+    plug :fetch_flash
     plug Coherence.Authentication.Token, source: :header,
                                          store: Teebox.Coherence.TokenDbStore,
                                          param: "x-auth-token",
@@ -35,12 +38,12 @@ defmodule TeeboxWeb.Router do
                                          error: ~s'{"error":"authentication required"}'
   end
 
-  scope "/api" do
+  scope "/api", TeeboxWeb do
     pipe_through :api
     coherence_routes()
   end
 
-  scope "/api" do
+  scope "/api", TeeboxWeb do
     pipe_through :protected_api
     coherence_routes :protected
     get "/users/me", UserController, :me

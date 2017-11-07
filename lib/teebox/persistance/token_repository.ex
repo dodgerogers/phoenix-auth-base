@@ -22,16 +22,17 @@ defmodule Teebox.Persistance.TokenRepository do
   end
 
   def put_credentials(_repo, user, creds, id_key) do
-    id_str = "#{Map.get user, id_key}"
+    id_str = "#{Map.get(user, id_key)}"
     params = %{
-      token: creds,
+      value: creds,
       user_type: Atom.to_string(user.__struct__),
       user_id: id_str
     }
 
     # TODO: Why do we delete all other credentials for this user?
-    where(@token_model, [s], s.user_id == ^id_str)
-    |> @token_repo.delete_all
+    # TODO: Delete all expired tokens? Or just implement into redis
+    # where(@token_model, [s], s.user_id == ^id_str)
+    # |> @token_repo.delete_all
 
     @token_model.changeset(@token_model.__struct__, params)
     |> @token_repo.insert

@@ -1,3 +1,3 @@
-defmodule Teebox.LayoutViewTest do
+defmodule TeeboxWeb.PageViewTest do
   use TeeboxWeb.ConnCase, async: true
 end

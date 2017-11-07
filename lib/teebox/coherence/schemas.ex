@@ -31,6 +31,9 @@ defmodule Teebox.Coherence.Schemas do
     @repo.get_by @user_schema, email: email
   end
 
+  # TODO: Placeholder
+  def get_by_rememberable(_), do: nil
+
   def change_user(struct, params) do
     @user_schema.changeset struct, params
   end
@@ -161,5 +164,4 @@ defmodule Teebox.Coherence.Schemas do
   def delete!(schema) do
     @repo.delete! schema
   end
-
 end

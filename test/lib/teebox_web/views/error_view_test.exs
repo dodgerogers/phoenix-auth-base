@@ -1,4 +1,4 @@
-defmodule Teebox.ErrorViewTest do
+defmodule TeeboxWeb.ErrorViewTest do
   use TeeboxWeb.ConnCase, async: true
 
   # Bring render/3 and render_to_string/3 for testing custom views

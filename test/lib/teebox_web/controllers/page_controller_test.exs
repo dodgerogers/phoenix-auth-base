@@ -1,4 +1,4 @@
-defmodule Teebox.PageControllerTest do
+defmodule TeeboxWeb.PageControllerTest do
   use TeeboxWeb.ConnCase
 
   test "GET /", %{conn: conn} do
