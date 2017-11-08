@@ -51,6 +51,7 @@ config :teebox, :omni_auth_login, Teebox.Accounts.OmniAuthLogin
 # %% Coherence Configuration %%   Don't remove this line
 config :coherence,
   user_schema: Teebox.Accounts.User,
+  schema_key: :id,
   repo: Teebox.Repo,
   module: Teebox,
   web_module: TeeboxWeb,

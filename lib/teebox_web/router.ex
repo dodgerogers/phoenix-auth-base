@@ -46,7 +46,7 @@ defmodule TeeboxWeb.Router do
   scope "/api", TeeboxWeb do
     pipe_through :protected_api
     coherence_routes :protected
-    get "/users/me", UserController, :me
+    # get "/users/me", UserController, :me # TODO
   end
 
   scope "/", TeeboxWeb do

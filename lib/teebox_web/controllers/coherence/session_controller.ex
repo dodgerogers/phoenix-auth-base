@@ -80,7 +80,7 @@ defmodule TeeboxWeb.Coherence.SessionController do
     new_bindings = [{login_field, login}, remember: rememberable_enabled?()]
     remember = if Config.user_schema.rememberable?(), do: params["remember"], else: false
     user = Schemas.get_by_user [{login_field, login}]
-    
+
     if valid_user_login? user, params do
       if confirmed_access? user do
         do_lockable(conn, login_field, [user, user_schema, remember, lockable?, remember, params],

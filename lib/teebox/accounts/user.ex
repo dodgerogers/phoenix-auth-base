@@ -13,6 +13,7 @@ defmodule Teebox.Accounts.User do
     timestamps()
   end
 
+  # TODO: Create registration changeset
   def changeset(model, params \\ %{}) do
     model
     |> cast(params, [:name, :email, :avatar, :provider, :uid] ++ coherence_fields())

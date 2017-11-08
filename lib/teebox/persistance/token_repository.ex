@@ -7,7 +7,7 @@ defmodule Teebox.Persistance.TokenRepository do
 
   def get_user_data(repo, user, creds, id_key) do
     @token_model
-    |> where([s], s.token == ^creds)
+    |> where([s], s.value == ^creds)
     |> @token_repo.one
     |> case do
       nil -> nil
@@ -44,7 +44,7 @@ defmodule Teebox.Persistance.TokenRepository do
 
   def delete_credentials(_user, creds) do
     @token_model
-    |> where([s], s.token == ^creds)
+    |> where([s], s.value == ^creds)
     |> @token_repo.one
     |> case do
       nil ->
