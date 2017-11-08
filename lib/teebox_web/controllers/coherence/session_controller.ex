@@ -138,8 +138,9 @@ defmodule TeeboxWeb.Coherence.SessionController do
       conn
     end
 
+    # TODO: Error handling
     token = Coherence.Authentication.Token.generate_token
-    :ok = Coherence.CredentialStore.Session.put_credentials({token, user, :id})
+    :ok = Coherence.CredentialStore.Session.put_credentials({token, user, Config.schema_key})
 
     conn
     |> reset_failed_attempts(user, lockable?)
