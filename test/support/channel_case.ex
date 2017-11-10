@@ -1,4 +1,4 @@
-defmodule Teebox.Web.ChannelCase do
+defmodule TeeboxWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -27,7 +27,7 @@ defmodule Teebox.Web.ChannelCase do
 
 
       # The default endpoint for testing
-      @endpoint Teebox.Web.Endpoint
+      @endpoint TeeboxWeb.Endpoint
     end
   end
 

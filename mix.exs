@@ -19,14 +19,14 @@ defmodule Teebox.Mixfile do
   def application(:test), do: application(:default) ++ [:ex_machina]
   def application do
     [
-      mod: {Teebox, []},
-      applications: [
+      mod: {Teebox.Application, []},
+      extra_applications: [
         :bamboo,
+        :coherence,
         :comeonin,
         :cowboy,
         :faker,
         :gettext,
-        :guardian,
         :logger,
         :not_qwerty123,
         :pbkdf2_elixir,
@@ -51,19 +51,17 @@ defmodule Teebox.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:bamboo, "~> 1.0.0-rc.1"},
-      {:comeonin, "~> 4.0"},
+      {:bamboo, "~> 0.8"},
       {:cowboy, "~> 1.0"},
+      {:coherence, github: "klacointe/coherence", branch: "handle_json_format"},
       {:ex_machina, "~> 2.0", only: :test},
       {:faker, "~> 0.9"},
       {:gettext, "~> 0.12"},
-      {:guardian, "~> 0.14.5"},
       {:mix_docker, "~> 0.4.1"},
       {:mock, "~> 0.2.0", only: :test},
       {:not_qwerty123, "~> 2.2"},
       {:pbkdf2_elixir, "~> 0.12"},
-      {:phauxth, "~> 1.2"},
-      {:phoenix, "~> 1.3.0-rc", override: true}, # Guardian does not support 1.3
+      {:phoenix, "~> 1.3.0", override: true},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},

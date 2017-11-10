@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { Button, Header, Image, Modal, Icon, Message } from 'semantic-ui-react'
+import { Button, Divider, Header, Image, Modal, Icon, Message } from 'semantic-ui-react'
 import OAuthSignInButton from '../containers/OAuthSignInButton';
 import LoginForm from './LoginForm'
 

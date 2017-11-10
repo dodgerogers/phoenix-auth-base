@@ -10,12 +10,11 @@ config :teebox,
   ecto_repos: [Teebox.Repo]
 
 # Configures the endpoint
-config :teebox, Teebox.Web.Endpoint,
+config :teebox, TeeboxWeb.Endpoint,
   url: [host: "localhost"],
-  # TODO: secrets
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
   render_errors: [
-    view: Teebox.Web.ErrorView,
+    view: TeeboxWeb.ErrorView,
     accepts: ~w(html json)
   ],
   pubsub: [
@@ -46,27 +45,36 @@ config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
   client_id: System.get_env("FACEBOOK_CLIENT_ID"),
   client_secret: System.get_env("FACEBOOK_CLIENT_SECRET")
 
-config :guardian, Guardian,
-  allowed_algos: ["HS512"], # optional
-  verify_module: Guardian.JWT,  # optional
-  issuer: "teebox",
-  ttl: { 1, :days },
-  allowed_drift: 2000,
-  verify_issuer: true, # optional
-  secret_key: System.get_env("GUARDIAN_SECRET_KEY"),
-  serializer: Teebox.Accounts.TokenSerializer
-
-# Phauxth authentication configuration
-config :phauxth,
-  token_salt: System.get_env("PHAUXTH_TOKEN_SALT"),
-  endpoint: Teebox.Web.Endpoint
-
-# Mailer configuration
-config :teebox, Teebox.Mailer,
-  adapter: Bamboo.LocalAdapter
-
 config :teebox, :user_repo, Teebox.Persistance.UsersRepository
 config :teebox, :omni_auth_login, Teebox.Accounts.OmniAuthLogin
+
+# %% Coherence Configuration %%   Don't remove this line
+config :coherence,
+  user_schema: Teebox.Accounts.User,
+  schema_key: :id,
+  repo: Teebox.Repo,
+  module: Teebox,
+  web_module: TeeboxWeb,
+  router: TeeboxWeb.Router,
+  messages_backend: TeeboxWeb.Coherence.Messages,
+  layout: {TeeboxWeb.LayoutView, :app},
+  minimum_password_length: 8,
+  allow_unconfirmed_access_for: 0,
+  logged_out_url: "/",
+  email_from_name: "Your Name",
+  email_from_email: "yourname@example.com",
+  opts: [
+    :confirmable,
+    :authenticatable,
+    :recoverable,
+    :lockable,
+    :unlockable_with_token,
+    registerable: [:create, :update]]
+
+config :coherence, TeeboxWeb.Coherence.Mailer,
+  adapter: Swoosh.Adapters.Local,
+  api_key: "your api key here"
+  # %% End Coherence Configuration %%
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

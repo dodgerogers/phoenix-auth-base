@@ -1,59 +1,31 @@
 defmodule Teebox.Accounts.User do
-  use Ecto.Schema
-  import Ecto.Changeset
-  alias Teebox.Accounts.User
+  use TeeboxWeb, :model
+  use Coherence.Schema
 
   schema "users" do
-    field :name, :string, null: false
-    field :email, :string, null: false
+    field :name, :string
+    field :email, :string
     field :avatar, :string
-    field :password, :string, virtual: true
-    field :password_hash, :string
+    field :provider, :string
     field :uid, :string
-    field :provider, :string, default: to_string(:identity)
-    field :confirmed_at, :utc_datetime
-    field :reset_sent_at, :utc_datetime
+    coherence_schema()
 
     timestamps()
   end
 
-  @optional_fields ~w(avatar uid provider confirmed_at)a
-  @required_fields ~w(name email)a
-
-  def changeset(%User{} = user, attrs) do
-    user
-    |> cast(attrs, @required_fields ++ @optional_fields)
-    |> validate_required(@required_fields)
-    |> unique_email
-  end
-
-  def create_changeset(%User{} = user, attrs) do
-    user
-    |> cast(attrs, @required_fields ++ @optional_fields ++ [:password])
-    |> validate_password(:password)
-    |> put_password_hash
-    |> validate_required(@required_fields)
-    |> unique_email
-  end
-
-  defp validate_password(changeset, field, options \\ []) do
-    validate_change(changeset, field, fn _, password ->
-      with {:ok, _} <- NotQwerty123.PasswordStrength.strong_password?(password) do
-        []
-      else
-        {:error, msg} -> [{field, options[:message] || msg}]
-      end
-    end)
-  end
-
-  defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
-    change(changeset, Comeonin.Pbkdf2.add_hash(password))
-  end
-  defp put_password_hash(changeset), do: changeset
-
-  defp unique_email(changeset) do
-    validate_format(changeset, :email, ~r/@/)
-    |> validate_length(:email, max: 254)
+  # TODO: Create registration changeset
+  def changeset(model, params \\ %{}) do
+    model
+    |> cast(params, [:name, :email, :avatar, :provider, :uid] ++ coherence_fields())
+    |> validate_required([:name, :email])
+    |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
+    |> validate_coherence(params)
+  end
+
+  def changeset(model, params, :password) do
+    model
+    |> cast(params, ~w(password password_confirmation reset_password_token reset_password_sent_at))
+    |> validate_coherence_password_reset(params)
   end
 end

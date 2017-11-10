@@ -5,6 +5,7 @@
 /deps
 /*.ez
 .tags
+.DSstore
 teebox.tar.gz
 /rel/teebox/
 node_modules

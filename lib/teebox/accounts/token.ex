@@ -1,19 +1,20 @@
 defmodule Teebox.Accounts.Token do
-  @invalid_user "Invalid user"
+  use TeeboxWeb, :model
 
-  def sign_in(conn, nil), do: {:error, @invalid_user , conn}
-  def sign_in(conn, user) do
-    new_conn = Guardian.Plug.api_sign_in(conn, user)
-    access_token = Guardian.Plug.current_token(new_conn)
+  schema "tokens" do
+    field :value, :string
+    field :user_type, :string
+    field :user_id, :string
 
-    {:ok, access_token, new_conn}
+    timestamps()
   end
 
-  def verification_token(nil), do: {:error, @invalid_user}
-  def verification_token(user) do
-    token = Phauxth.Token.sign(Teebox.Web.Endpoint, %{email: user.email})
-    {:ok, token}
-  end
+  @fields ~w(value user_type user_id)a
 
-  def claims(conn), do: Guardian.Plug.claims(conn)
+  def changeset(model, params \\ %{}) do
+    model
+    |> cast(params, @fields)
+    |> validate_required(@fields)
+    |> unique_constraint(:value)
+  end
 end
