@@ -4,66 +4,45 @@ exports[`LoginForm matches component snapshot 1`] = `
 <div
   className="login-form"
 >
-  <Connect(OAuthSignInButton)
-    color="facebook"
-    fluid={true}
-    provider="facebook"
-  >
-    <Icon
-      as="i"
-      name="facebook"
-    />
-     Facebook
-  </Connect(OAuthSignInButton)>
-  <div
-    style={
-      Object {
-        "height": "5px",
-      }
-    }
-  />
-  <Connect(OAuthSignInButton)
-    color="google plus"
-    fluid={true}
-    provider="google_oauth2"
-  >
-    <Icon
-      as="i"
-      name="google"
-    />
-     Google
-  </Connect(OAuthSignInButton)>
-  <Divider
-    horizontal={true}
-  >
-    Or
-  </Divider>
   <Form
     as="form"
     size="large"
   >
-    <FormInput
-      as={[Function]}
-      control={[Function]}
+    <Field
+      autoFocus={true}
+      component={[Function]}
       fluid={true}
       icon="mail"
       iconPosition="left"
+      name="email"
       placeholder="Email"
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
     />
-    <FormInput
-      as={[Function]}
-      control={[Function]}
+    <Field
+      component={[Function]}
       fluid={true}
       icon="lock"
       iconPosition="left"
+      name="password"
       placeholder="Password"
       type="password"
+      validate={
+        Array [
+          [Function],
+        ]
+      }
     />
     <Button
       as="button"
       color="teal"
+      disabled={true}
       fluid={true}
-      size="large"
+      type="submit"
     >
       Login
     </Button>

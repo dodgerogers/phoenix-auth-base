@@ -41,7 +41,7 @@ defmodule TeeboxWeb do
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/teebox/web/templates",
+      use Phoenix.View, root: "lib/teebox_web/templates",
                         namespace: TeeboxWeb
 
       # Import convenience functions from controllers

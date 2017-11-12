@@ -13,11 +13,10 @@ describe('CurrentUser', () => {
   const TestComponent = (props) => (<p>test</p>);
   const WrappedComponent = CurrentUser(TestComponent);
   const initialState = {
-    auth: fromJS({
+    authentication: fromJS({
       user: {
-        attributes: {
-          id: 1
-        }
+        id: 1,
+        name: 'Bob',
       },
     }),
   };
@@ -31,7 +30,7 @@ describe('CurrentUser', () => {
     );
 
     const testComponentProps = wrapper.find(TestComponent).props();
-    const currentUser = initialState.auth.getIn(['user', 'attributes']);
+    const currentUser = initialState.authentication.get('user');
     expect(testComponentProps.currentUser).toEqual(currentUser);
   });
 });

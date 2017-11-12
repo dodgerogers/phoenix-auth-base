@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# npm --prefix client/ install;
+npm --prefix client/ install;
 mix deps.get;
 mix compile;
 # mix ecto.drop;

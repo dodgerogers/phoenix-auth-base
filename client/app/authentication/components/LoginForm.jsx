@@ -1,18 +1,25 @@
 import React from 'react'
 import { Field } from 'redux-form/immutable';
+import { reduxForm } from 'redux-form/immutable';
 import { Form, Message, Button, Icon } from 'semantic-ui-react';
 import Input from '../../common/components/Input';
 import { isRequired, isEmail } from '../../lib/utils/validation';
+import { formIDs } from '../constants';
 
 
 const LoginForm = (props) => {
-  const { handleSubmit, onSubmit, errorMessage, isSubmitting } = props;
+  const { handleSubmit, error, submitting, dirty } = props;
 
   return (
     <div className="login-form">
-      <Form size='large' loading={isSubmitting}>
-        {errorMessage && <Message negative>{errorMessage}</Message>}
+      <Form
+        size='large'
+        loading={submitting}
+        onSubmit={handleSubmit}
+      >
+        {error && <Message negative>{error}</Message>}
         <Field
+          autoFocus={true}
           component={Input}
           fluid
           name="email"
@@ -26,13 +33,23 @@ const LoginForm = (props) => {
           fluid
           name="password"
           icon="lock"
+          type="password"
           iconPosition="left"
           placeholder="Password"
           validate={[isRequired]}
         />
+        <Button
+          type="submit"
+          fluid={true}
+          color="teal"
+          disabled={!props.valid}
+        >
+          Login
+        </Button>
       </Form>
     </div>
   );
 }
 
-export default LoginForm;
+export { LoginForm as PureComponent };
+export default reduxForm({ form: formIDs.SESSION })(LoginForm);

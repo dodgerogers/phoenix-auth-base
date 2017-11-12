@@ -14,16 +14,11 @@ exports[`LoginModal matches snapshot 1`] = `
     Login
   </ModalHeader>
   <ModalContent>
-    <LoginForm
+    <Connect(ReduxForm)
       close={[Function]}
     />
   </ModalContent>
   <ModalActions>
-    <a
-      href="#"
-    >
-      Sign Up
-    </a>
     <Button
       as="button"
       onClick={[Function]}

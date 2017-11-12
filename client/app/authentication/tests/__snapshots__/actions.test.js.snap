@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`async AuthenticationActions when login fails 1`] = `
+Array [
+  Object {
+    "error": "Invalid credentials",
+    "type": "AUTHENTICATE_FAILURE",
+  },
+]
+`;
+
+exports[`async AuthenticationActions when login is successful 1`] = `
+Array [
+  Object {
+    "type": "AUTHENTICATE_SUCCESS",
+    "user": Object {
+      "id": 1,
+      "name": "name",
+    },
+  },
+  Object {
+    "data": Object {
+      "id": "loginModal",
+    },
+    "type": "HIDE_MODAL",
+  },
+]
+`;

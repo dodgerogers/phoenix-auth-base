@@ -138,7 +138,7 @@ defmodule TeeboxWeb.Coherence.SessionController do
       conn
     end
 
-    # TODO: Error handling
+    # TODO: Error handling, replace with Oauth2 token
     token = Coherence.Authentication.Token.generate_token
     :ok = Coherence.CredentialStore.Session.put_credentials({token, user, Config.schema_key})
 
@@ -148,7 +148,7 @@ defmodule TeeboxWeb.Coherence.SessionController do
     |> save_rememberable(user, remember)
     |> assign(:user, user) # Hack
     |> assign(:current_user, user) # Hack
-    |> assign(:token, token)
+    |> put_resp_header("Access-Token", token)
     |> respond_with(
       :session_create_success,
       %{
@@ -217,8 +217,7 @@ defmodule TeeboxWeb.Coherence.SessionController do
       end
 
     :session
-    |> Controller.changeset(user.__struct__, user,
-      Map.put(params, :failed_attempts, attempts))
+    |> Controller.changeset(user.__struct__, user, Map.put(params, :failed_attempts, attempts))
     |> Schemas.update
     |> log_lockable_update
 

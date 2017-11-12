@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "history": "^4.6.1",
     "immutable": "^3.8.1",
     "mirror-creator": "^1.1.0",
@@ -23,12 +24,12 @@
     "react-router": "^3.0.5",
     "redux": "^3.6.0",
     "redux-form": "^7.1.1",
-    "redux-oauth": "^2.0.3",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.11",
     "semantic-ui-react": "^0.71.2"
   },
   "devDependencies": {
+    "axios-mock-adapter": "^1.9.0",
     "babel-cli": "^6.6.5",
     "babel-core": "^6.24.1",
     "babel-jest": "^19.0.0",
@@ -40,7 +41,7 @@
     "babel-runtime": "^6.6.1",
     "compression-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^4.0.1",
-    "css-loader": "^0.28.1",
+    "css-loader": "^0.14.5",
     "enzyme": "^2.3.0",
     "enzyme-to-json": "^1.5.0",
     "extract-text-webpack-plugin": "^2.1.0",
@@ -54,7 +55,7 @@
     "sass-loader": "^6.0.3",
     "style-loader": "^0.17.0",
     "url-loader": "^0.5.8",
-    "webpack": "^2.5.1"
+    "webpack": "3.8.1"
   },
   "main": "app.js",
   "directories": {

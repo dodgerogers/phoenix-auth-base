@@ -9,9 +9,9 @@ const CurrentUser = (ComposedComponent, opts = {}) => {
     <ComposedComponent currentUser={props.currentUser} {...props} />
   );
 
-  function mapStateToProps({ auth }) {
+  function mapStateToProps({ authentication }) {
     return {
-      currentUser: auth.getIn(['user', 'attributes']),
+      currentUser: authentication.get('user'),
     };
   }
 
