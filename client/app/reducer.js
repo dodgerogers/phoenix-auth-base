@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
-import { authStateReducer as auth } from 'redux-oauth';
 import { reducer as form } from 'redux-form/immutable';
 import { Reducer as modals } from './common/modals';
+import authenticationReducer from './authentication/reducer';
+
 
 const rootReducer = combineReducers({
-  auth,
+  authentication: authenticationReducer,
   form,
   modals,
 });

@@ -9,15 +9,15 @@ use Mix.Config
 config :teebox, TeeboxWeb.Endpoint,
   http: [port: {:system, "PORT"}],
   debug_errors: true,
-  code_reloader: false,
+  code_reloader: true,
   check_origin: false,
   watchers: [npm: ["run", "watch", cd: Path.expand("../assets", __DIR__)]],
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{lib/teebox/web/views/.*(ex)$},
-      ~r{lib/teebox/web/templates/.*(eex)$}
+      ~r{lib/teebox/*/.*(eex|ex)$},
+      ~r{lib/teebox_web/*/.*(eex|ex)$}
     ]
   ]
 

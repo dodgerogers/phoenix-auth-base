@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import LoginModalContainer from '../../../authentication/containers/LoginModalContainer';
-import RegistrationFormModalContainer from '../../../authentication/containers/RegistrationFormModalContainer';
+import LoginModal from '../../../authentication/components/LoginModal';
+import RegistrationFormModal from '../../../authentication/components/RegistrationFormModal';
 import { hideModal } from '../actions';
 import { modalIds } from '../constants';
 
 
 const ModalsContainer = (props) => {
-  // TODO: Really should configure this outside
   const registeredModals = [
-    { component: LoginModalContainer, id: modalIds.loginModal },
-    { component: RegistrationFormModalContainer, id: modalIds.registrationModal },
+    { component: LoginModal, id: modalIds.loginModal },
+    { component: RegistrationFormModal, id: modalIds.registrationModal },
   ];
 
   function renderModals() {
@@ -19,6 +18,7 @@ const ModalsContainer = (props) => {
       const Component = modal.component;
       return (
         <Component
+          key={modal.id}
           show={props.modals.get(modal.id)}
           close={() => props.hideModal(modal.id)}
         />

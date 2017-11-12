@@ -1,13 +1,15 @@
-import { fetch, parseResponse } from 'redux-auth';
+import HTTP, { API_BASE } from '../lib/utils/HTTP';
 
-const AuthenticationSources = {
-  register: (user) => {
-    return fetch('api/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ user }),
-    }).then(parseResponse);
-  },
+export const login = ({ email, password }) => {
+  return HTTP.post(`${API_BASE}/api/sessions`, { session: { email, password } });
 };
+
+// export const register = (user) => {
+//   return fetch('api/registrations', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify({ registration: { user } }),
+//   }).then(parseResponse);
+// }

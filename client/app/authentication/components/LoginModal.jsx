@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { Button, Divider, Header, Image, Modal, Icon, Message } from 'semantic-ui-react'
-import OAuthSignInButton from '../containers/OAuthSignInButton';
-import LoginForm from './LoginForm'
+import { Button, Divider, Header, Image, Modal, Icon, Message } from 'semantic-ui-react';
+import LoginFormContainer from '../containers/LoginFormContainer';
 
 
 const LoginModal = (props) => {
@@ -18,26 +17,9 @@ const LoginModal = (props) => {
         Login
       </Modal.Header>
       <Modal.Content>
-        <OAuthSignInButton
-          fluid={true}
-          color="facebook"
-          provider="facebook"
-        >
-          <Icon name='facebook' /> Facebook
-        </OAuthSignInButton>
-        <div style={{ height: '5px' }} />
-        <OAuthSignInButton
-          fluid={true}
-          color="google plus"
-          provider="google_oauth2"
-        >
-          <Icon name='google' /> Google
-        </OAuthSignInButton>
-        <Divider horizontal>Or</Divider>
-        <LoginForm {...props} />
+        <LoginFormContainer {...props} />
       </Modal.Content>
       <Modal.Actions>
-        <a href='#'>Sign Up</a>
         <Button onClick={props.close}>
           Close
         </Button>

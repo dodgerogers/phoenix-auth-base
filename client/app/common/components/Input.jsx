@@ -4,12 +4,13 @@ import { Form, Label } from 'semantic-ui-react';
 
 const Input = (props) => {
   const hasError = props.meta && props.meta.error && props.meta.touched;
+  const { meta, ...inputProps } = props;
 
   return (
     <div className="input" style={{ margin: '0 0 1em' }}>
       <Form.Input
         error={hasError}
-        {...props}
+        {...inputProps}
       />
       {hasError && <Label style={{ marginTop: '-1em' }} basic color="red" pointing>{props.meta.error}</Label>}
     </div>
