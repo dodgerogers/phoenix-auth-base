@@ -6,26 +6,89 @@ defmodule Teebox.Accounts.User do
     field :name, :string
     field :email, :string
     field :avatar, :string
-    field :provider, :string
-    field :uid, :string
-    coherence_schema()
+
+    field :confirmation_token, :string
+    field :confirmed_at, :naive_datetime
+    field :confirmation_sent_at, :naive_datetime
+
+    field :password, :string, virtual: true
+    field :password_confirmation, :string, virtual: true
+    field :password_hash, :string
+
+    field :failed_attempts, :integer, default: 0
+    field :locked_at, :naive_datetime
+
+    field :unlock_token, :string
+
+    field :active, :boolean, default: true
+
+    field :reset_password_token, :string
+    field :reset_password_sent_at, :naive_datetime
 
     timestamps()
   end
 
-  # TODO: Create registration changeset
-  def changeset(model, params \\ %{}) do
-    model
-    |> cast(params, [:name, :email, :avatar, :provider, :uid] ++ coherence_fields())
-    |> validate_required([:name, :email])
+  @required_fields ~w(name email password password_confirmation)a
+  @optional_fields ~w(avatar)a
+
+  def changeset(:registration, user, params) do
+    user
+    |> cast(params, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
     |> validate_format(:email, ~r/@/)
-    |> unique_constraint(:email)
-    |> validate_coherence(params)
+    |> unique_email()
+    |> validate_passwords_match()
+    |> validate_password_strength()
+    |> put_password_hash()
+    |> add_confirmation()
   end
 
-  def changeset(model, params, :password) do
-    model
-    |> cast(params, ~w(password password_confirmation reset_password_token reset_password_sent_at))
-    |> validate_coherence_password_reset(params)
+  def changeset(:confirm, user, params) do
+    user
+    |> cast(params, [:confirmation_token, :confirmation_sent_at, :confirmed_at])
+    |> change(%{confirmation_token: nil, confirmation_sent_at: nil, confirmed_at: Ecto.DateTime.utc})
+    |> validate_required(:confirmed_at)
+  end
+
+  def add_confirmation(user) do
+    user
+    |> change(%{confirmation_sent_at: Ecto.DateTime.utc})
+    |> change(%{confirmation_token: random_string()})
+    |> unique_constraint(:confirmation_token)
+  end
+
+  defp unique_email(changeset) do
+     validate_format(changeset, :email, ~r/@/)
+     |> validate_length(:email, max: 254)
+     |> unique_constraint(:email)
+   end
+
+   defp validate_passwords_match(%Ecto.Changeset{changes: %{password: pw, password_confirmation: pw}} = changeset) do
+     changeset
+   end
+   defp validate_passwords_match(%Ecto.Changeset{changes: %{}} = changeset) do
+     add_error(changeset, :password_confirmation, "Passwords do not match")
+   end
+
+  defp validate_password_strength(changeset, options \\ []) do
+     validate_change(changeset, :password, fn _, password ->
+       with {:ok, _} <- NotQwerty123.PasswordStrength.strong_password?(password) do
+         []
+       else
+         {:error, msg} -> [{:password, options[:message] || msg}]
+       end
+     end)
+   end
+
+  defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{password: pw}} = changeset) do
+    changeset |> change(%{password_hash: Comeonin.Pbkdf2.hashpwsalt(pw)})
+  end
+  defp put_password_hash(changeset), do: changeset
+
+  def random_string(length \\ 30) do
+    length
+    |> :crypto.strong_rand_bytes
+    |> Base.url_encode64
+    |> binary_part(0, length)
   end
 end

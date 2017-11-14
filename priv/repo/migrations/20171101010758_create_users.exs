@@ -5,8 +5,6 @@ defmodule Teebox.Repo.Migrations.CreateUsers do
       add :name, :string, null: false
       add :email, :string, null: false
       add :avatar, :string
-      add :provider, :string
-      add :uid, :string
 
       # confirmable
       add :confirmation_token, :string
@@ -32,6 +30,5 @@ defmodule Teebox.Repo.Migrations.CreateUsers do
     end
 
     create unique_index(:users, [:email])
-    create index(:users, [:provider, :uid])
   end
 end

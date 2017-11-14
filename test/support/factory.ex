@@ -3,13 +3,18 @@ defmodule Teebox.Factory do
 
   def user_factory do
     %Teebox.Accounts.User{
+      name: Faker.Name.name,
       email: Faker.Internet.email,
       avatar: "http://#{Faker.Lorem.characters(8..20)}.png",
-      name: Faker.Name.name,
-      provider: to_string(:identity),
-      uid: Ecto.UUID.generate(),
+      active: true,
       confirmed_at: DateTime.utc_now(),
-      reset_sent_at: nil,
+      confirmation_token: nil,
+      confirmation_sent_at: nil,
+      failed_attempts: 0,
+      locked_at: nil,
+      unlock_token: nil,
+      reset_password_token: nil,
+      reset_password_sent_at: nil,
       password_hash: Comeonin.Pbkdf2.hashpwsalt(Faker.Lorem.characters(8..20))
     }
   end

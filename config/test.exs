@@ -22,7 +22,8 @@ db_config = [
 config :teebox, Teebox.Repo, db_config
 
 config :teebox, :user_repo, Teebox.Persistance.UsersRepositoryMock
-config :teebox, :omni_auth_login, Teebox.Accounts.OmniAuthLoginMock
+
+config :pbkdf2_elixir, :log_rounds, 1
 
 # Mailer test configuration
 config :teebox, Teebox.Mailer,

@@ -46,7 +46,6 @@ config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
   client_secret: System.get_env("FACEBOOK_CLIENT_SECRET")
 
 config :teebox, :user_repo, Teebox.Persistance.UsersRepository
-config :teebox, :omni_auth_login, Teebox.Accounts.OmniAuthLogin
 
 # %% Coherence Configuration %%   Don't remove this line
 config :coherence,
@@ -75,6 +74,9 @@ config :coherence, TeeboxWeb.Coherence.Mailer,
   adapter: Swoosh.Adapters.Local,
   api_key: "your api key here"
   # %% End Coherence Configuration %%
+
+config :teebox, Teebox.Mailer,
+  adapter: Bamboo.LocalAdapter
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

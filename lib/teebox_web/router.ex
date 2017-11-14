@@ -42,8 +42,8 @@ defmodule TeeboxWeb.Router do
   scope "/api" do
     pipe_through :api
 
-    resources "/sessions", TeeboxWeb.Coherence.SessionController, only: [:create]
-    resources "/registrations", Coherence.RegistrationController, only: [:create]
+    resources "/sessions", Coherence.SessionController, only: [:create]
+    resources "/registrations", TeeboxWeb.Api.RegistrationController, only: [:create]
     resources "/passwords", Coherence.PasswordController, only: [:create, :update, :edit]
     resources "/confirmations", Coherence.ConfirmationController, only: [:create]
     resources "/unlocks", Coherence.UnlockController, only: [:create]
@@ -51,9 +51,8 @@ defmodule TeeboxWeb.Router do
 
   scope "/api" do
     pipe_through :protected_api
-    # get "/users/me", UserController, :me # TODO
 
-    resources "/sessions", TeeboxWeb.Coherence.SessionController, only: [:destroy]
+    resources "/sessions", Coherence.SessionController, only: [:destroy]
     resources "/registrations", Coherence.RegistrationController, only: [:update]
   end
 

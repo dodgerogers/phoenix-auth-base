@@ -7,11 +7,7 @@ defmodule Teebox.Persistance.UsersRepository do
     Repo.get_by(User, id: id)
   end
 
-  def find_by_provider_and_uid(provider, uid) do
-    Repo.get_by(User, provider: to_string(provider), uid: uid)
-  end
-
-  def insert_or_update(%Changeset{} = changeset) do
-    changeset |> Repo.insert_or_update()
+  def create(%Changeset{} = changeset) do
+    Repo.insert(changeset)
   end
 end
