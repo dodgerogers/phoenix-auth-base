@@ -36,6 +36,15 @@ defmodule Teebox.Accounts.UserTest do
     assert changeset.errors[:email]
   end
 
+  test "registration changset with an email which is too long" do
+    invalid_email = User.random_string(254) <> @valid_attrs.email
+    invalid_email_attrs = @valid_attrs |> Map.merge(%{email: invalid_email})
+    changeset = User.changeset(:registration, %User{}, invalid_email_attrs)
+
+    refute changeset.valid?
+    assert changeset.errors[:email]
+  end
+
   test "registration changset with weak password" do
     pw = "password"
     invalid_pw_attrs = @valid_attrs |> Map.merge(%{password: pw, password_confirmation: pw})
