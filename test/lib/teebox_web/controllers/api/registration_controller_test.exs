@@ -11,7 +11,7 @@ defmodule TeeboxWeb.Api.RegistrationControllerTest do
 
   test "POST create with valid params returns message and user" do
     conn = build_conn()
-    |> post("/api/registrations", %{session: @valid_attrs})
+    |> post("/api/registrations", %{registration: @valid_attrs})
 
     response = json_response(conn, 200)
     user = response["user"]
@@ -24,10 +24,10 @@ defmodule TeeboxWeb.Api.RegistrationControllerTest do
     invalid_attrs = @valid_attrs |> Map.merge(%{email: ""})
 
     conn = build_conn()
-    |> post("/api/registrations", %{session: invalid_attrs})
+    |> post("/api/registrations", %{registration: invalid_attrs})
 
     response = json_response(conn, 400)
-    assert response["errors"] == %{
+    assert response["error"] == %{
       "email" => ["can't be blank"],
     }
   end

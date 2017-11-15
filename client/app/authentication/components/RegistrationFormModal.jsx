@@ -23,9 +23,6 @@ const RegistrationFormModal = (props) => {
         <Button onClick={props.close}>
           Close
         </Button>
-        <Button color="teal" onClick={props.onSubmit}>
-          Create account
-        </Button>
       </Modal.Actions>
     </Modal>
   );

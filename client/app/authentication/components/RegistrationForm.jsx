@@ -1,22 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form/immutable';
+import { reduxForm } from 'redux-form/immutable';
 import { Form, Message, Button, Icon } from 'semantic-ui-react';
 import Input from '../../common/components/Input';
 import { isRequired, isEmail } from '../../lib/utils/validation';
+import { formIDs } from '../constants';
 
 
 function RegistrationForm(props) {
-  const { handleSubmit, onSubmit, errorMessage, isSubmitting } = props;
+  const { handleSubmit, error, submitting } = props;
 
   return (
-    <div className="sign-up-form">
-      <Form size='large' loading={isSubmitting}>
-        {errorMessage && <Message negative>{errorMessage}</Message>}
+    <div className="registration-form">
+      <Form
+        size='large'
+        loading={submitting}
+        onSubmit={handleSubmit}
+      >
+        {error && <Message negative>{error}</Message>}
         <Field
           component={Input}
-          fluid
-          name="username"
+          fluid={true}
+          name="name"
           icon="user"
           iconPosition="left"
           placeholder="Display Name"
@@ -24,7 +30,7 @@ function RegistrationForm(props) {
         />
         <Field
           component={Input}
-          fluid
+          fluid={true}
           name="email"
           icon="mail"
           iconPosition="left"
@@ -33,7 +39,8 @@ function RegistrationForm(props) {
         />
         <Field
           component={Input}
-          fluid
+          fluid={true}
+          type="password"
           name="password"
           icon="lock"
           iconPosition="left"
@@ -42,11 +49,19 @@ function RegistrationForm(props) {
         />
         <Field
           component={Input}
-          fluid
-          name="password-confirmation"
+          fluid={true}
+          type="password"
+          name="password_confirmation"
           placeholder="Password Confirmation"
           validate={[isRequired]}
         />
+        <Button
+          fluid={true}
+          color="teal"
+          disabled={!props.valid}
+        >
+          Create account
+        </Button>
       </Form>
     </div>
   );
@@ -55,13 +70,9 @@ function RegistrationForm(props) {
 RegistrationForm.propTypes = {
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
-  errorMessage: PropTypes.string,
-  isSubmitting: PropTypes.bool,
+  error: PropTypes.string,
+  submitting: PropTypes.bool,
 }
 
-RegistrationForm.defaultProps = {
-  errorMessage: null,
-  isSubmitting: false,
-}
-
-export default RegistrationForm;
+export { RegistrationForm as PureComponent };
+export default reduxForm({ form: formIDs.REGISTRATION })(RegistrationForm);

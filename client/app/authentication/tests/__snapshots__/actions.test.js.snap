@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`async AuthenticationActions when login fails 1`] = `
+exports[`async AuthenticationActions login when login fails 1`] = `
 Array [
   Object {
     "error": "Invalid credentials",
@@ -9,7 +9,7 @@ Array [
 ]
 `;
 
-exports[`async AuthenticationActions when login is successful 1`] = `
+exports[`async AuthenticationActions login when login is successful 1`] = `
 Array [
   Object {
     "type": "AUTHENTICATE_SUCCESS",
@@ -23,6 +23,30 @@ Array [
       "id": "loginModal",
     },
     "type": "HIDE_MODAL",
+  },
+]
+`;
+
+exports[`async AuthenticationActions register when registration fails 1`] = `
+Array [
+  Object {
+    "error": Object {
+      "email": "Has already been taken",
+    },
+    "type": "REGISTER_FAILURE",
+  },
+]
+`;
+
+exports[`async AuthenticationActions register when registration is successful 1`] = `
+Array [
+  Object {
+    "type": "REGISTER_SUCCESS",
+    "user": Object {
+      "email": "email@email.com",
+      "id": 1,
+      "name": "Bob",
+    },
   },
 ]
 `;

@@ -1,7 +1,7 @@
 defmodule TeeboxWeb.Api.RegistrationController do
   use TeeboxWeb, :controller
 
-  def create(conn, %{"session" => params}) do
+  def create(conn, %{"registration" => params}) do
     with {:ok, user} <- Teebox.Accounts.Registration.call(params) do
       conn
       |> render("registration.json", %{user: user})

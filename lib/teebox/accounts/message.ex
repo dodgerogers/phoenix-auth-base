@@ -12,9 +12,6 @@ defmodule Teebox.Accounts.Message do
     |> Mailer.deliver_now
   end
 
-  @doc """
-  An email with a link to reset the password.
-  """
   # def reset_request(address, key) do
   #   prep_mail(address)
   #   |> subject("Reset your password")

@@ -12,11 +12,9 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('async AuthenticationActions', () => {
-  let mockAxios, email, password;
+  let mockAxios;
   beforeAll(() => {
     mockAxios = new MockAdapter(HTTP);
-    email = 'email@email.com';
-    password = 'password';
   });
 
   afterEach(() => {
@@ -27,36 +25,91 @@ describe('async AuthenticationActions', () => {
     mockAxios.restore();
   });
 
-  it('when login is successful', () => {
-    const mockResponse = {
-      id: 1,
-      name: 'name',
-    };
+  describe('register', () => {
+    let args;
+    beforeEach(() => {
+      const password = 'password';
+      args = {
+        name: 'Bob',
+        email: 'email@email.com',
+        password,
+        password_confirmation: password,
+      };
+    });
 
-    mockAxios.onPost('api/sessions', { session: { email, password }}).reply(200, mockResponse);
+    it('when registration is successful', () => {
+      const mockResponse = { id: 1, name: args.name, email: args.email };
+      mockAxios.onPost('api/registrations', { registration: args })
+        .reply(200, mockResponse);
 
-    const store = mockStore();
-    const params = fromJS({ email, password });
+      const store = mockStore();
+      const params = fromJS(args);
 
-    return store.dispatch(AuthenticationActions.login(params))
-      .then(() => {
-        expect(store.getActions()).toMatchSnapshot();
-      });
+      return store.dispatch(AuthenticationActions.register(params))
+        .then(() => {
+          expect(store.getActions()).toMatchSnapshot();
+        });
+    });
+
+    it('when registration fails', () => {
+      const mockResponse = {
+        error: {
+          email: 'Has already been taken',
+        }
+      };
+      mockAxios.onPost('api/registrations', { registration: args })
+        .reply(400, mockResponse);
+
+      const store = mockStore();
+      const params = fromJS(args);
+
+      return store.dispatch(AuthenticationActions.register(params))
+        .catch(() => {
+          expect(store.getActions()).toMatchSnapshot();
+        });
+    });
   });
 
-  it('when login fails', () => {
-    const mockResponse = {
-      error: 'Invalid credentials',
-    };
+  describe('login', () => {
+    let email, password;
+    beforeAll(() => {
+      email = 'email@email.com';
+      password = 'password';
+    });
 
-    mockAxios.onPost('api/sessions', { session: { email, password }}).reply(422, mockResponse);
+    it('when login is successful', () => {
+      const mockResponse = {
+        id: 1,
+        name: 'name',
+      };
 
-    const store = mockStore();
-    const params = fromJS({ email, password });
+      mockAxios.onPost('api/sessions', { session: { email, password }})
+        .reply(200, mockResponse);
 
-    return store.dispatch(AuthenticationActions.login(params))
-      .catch(() => {
-        expect(store.getActions()).toMatchSnapshot();
-      });
+      const store = mockStore();
+      const params = fromJS({ email, password });
+
+      return store.dispatch(AuthenticationActions.login(params))
+        .then(() => {
+          expect(store.getActions()).toMatchSnapshot();
+        });
+    });
+
+    it('when login fails', () => {
+      const mockResponse = {
+        error: 'Invalid credentials',
+      };
+
+      mockAxios.onPost('api/sessions', { session: { email, password }})
+        .reply(400, mockResponse);
+
+      const store = mockStore();
+      const params = fromJS({ email, password });
+
+      return store.dispatch(AuthenticationActions.login(params))
+        .catch(() => {
+          expect(store.getActions()).toMatchSnapshot();
+        });
+    });
   });
 });

@@ -26,3 +26,26 @@ export function login(loginParams) {
       });
   };
 }
+
+const registerSuccess = (user) => ({
+  type: actionTypes.REGISTER_SUCCESS,
+  user,
+});
+
+const registerFailure = (error) => ({
+  type: actionTypes.REGISTER_FAILURE,
+  error,
+});
+
+export function register(registerParams) {
+  return dispatch => {
+    return AuthenticationSources.register(registerParams.toJS())
+      .then(response => {
+        dispatch(registerSuccess(response.data))
+      })
+      .catch(err => {
+        dispatch(registerFailure(err.response.data.error))
+        throw new SubmissionError(err.response.data.error);
+      });
+  };
+}
