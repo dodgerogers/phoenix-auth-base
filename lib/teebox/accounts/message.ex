@@ -5,6 +5,7 @@ defmodule Teebox.Accounts.Message do
   @doc """
   An email with a confirmation link in it.
   """
+  # |> render_body("confirm.html", %{token: token})
   def confirm_request(user) do
     prep_mail(user.email)
     |> subject("Confirm your account")

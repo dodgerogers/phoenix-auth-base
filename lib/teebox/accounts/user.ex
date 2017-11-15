@@ -1,6 +1,5 @@
 defmodule Teebox.Accounts.User do
   use TeeboxWeb, :model
-  use Coherence.Schema
 
   schema "users" do
     field :name, :string

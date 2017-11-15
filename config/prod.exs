@@ -34,10 +34,6 @@ db_config = [
 ]
 config :teebox, Teebox.Repo, db_config
 
-config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
-  client_id: "${FACEBOOK_CLIENT_ID}",
-  client_secret: "${FACEBOOK_CLIENT_SECRET}"
-
 # Do not print debug messages in production
 config :logger, level: :info
 

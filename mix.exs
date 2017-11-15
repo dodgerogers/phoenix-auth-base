@@ -22,7 +22,6 @@ defmodule Teebox.Mixfile do
       mod: {Teebox.Application, []},
       extra_applications: [
         :bamboo,
-        :coherence,
         :comeonin,
         :cowboy,
         :faker,
@@ -35,9 +34,6 @@ defmodule Teebox.Mixfile do
         :phoenix_html,
         :phoenix_ecto,
         :postgrex,
-        :ueberauth,
-        :ueberauth_facebook,
-        :ueberauth_identity,
       ]
     ]
   end
@@ -52,13 +48,12 @@ defmodule Teebox.Mixfile do
   defp deps do
     [
       {:bamboo, "~> 0.8"},
+      {:comeonin, "~> 3.2.0"},
       {:cowboy, "~> 1.0"},
-      {:coherence, github: "klacointe/coherence", branch: "handle_json_format"},
       {:ex_machina, "~> 2.0", only: :test},
       {:faker, "~> 0.9"},
       {:gettext, "~> 0.12"},
       {:mix_docker, "~> 0.4.1"},
-      {:mock, "~> 0.2.0", only: :test},
       {:not_qwerty123, "~> 2.2"},
       {:pbkdf2_elixir, "~> 0.12"},
       {:phoenix, "~> 1.3.0", override: true},
@@ -67,9 +62,6 @@ defmodule Teebox.Mixfile do
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.6"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
-      {:ueberauth, "~> 0.4"},
-      {:ueberauth_facebook, "~> 0.7"},
-      {:ueberauth_identity, "~> 0.2"}
     ]
   end
 
