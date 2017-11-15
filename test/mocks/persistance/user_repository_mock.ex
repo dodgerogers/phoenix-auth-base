@@ -13,15 +13,8 @@ defmodule Teebox.Persistance.UsersRepositoryMock do
 
   def find_by_id(id), do: Map.get(users(), id)
 
-  def find_by_provider_and_uid(provider, uid) do
-    find_by(%{uid: uid, provider: to_string(provider)})
-  end
-
-  def insert_or_update(changeset) do
-    apply_changes(changeset) |> create()
-  end
-
-  def create(user) do
+  def create(%Ecto.Changeset{} = changeset) do
+    user = apply_changes(changeset)
     Map.put(users(), user.id, user) |> update()
 
     {:ok, user}

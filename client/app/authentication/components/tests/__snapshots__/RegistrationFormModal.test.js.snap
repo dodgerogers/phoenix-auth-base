@@ -15,7 +15,7 @@ exports[`RegistrationForm matches component snapshot 1`] = `
     Sign up
   </ModalHeader>
   <ModalContent>
-    <ReduxForm
+    <Connect(ReduxForm)
       close={[Function]}
       onSubmit={[Function]}
       show={true}
@@ -27,13 +27,6 @@ exports[`RegistrationForm matches component snapshot 1`] = `
       onClick={[Function]}
     >
       Close
-    </Button>
-    <Button
-      as="button"
-      color="teal"
-      onClick={[Function]}
-    >
-      Create account
     </Button>
   </ModalActions>
 </Modal>

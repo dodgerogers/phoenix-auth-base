@@ -2,11 +2,11 @@
 
 exports[`RegistrationForm matches component snapshot 1`] = `
 <div
-  className="sign-up-form"
+  className="registration-form"
 >
   <Form
     as="form"
-    loading={false}
+    onSubmit={[Function]}
     size="large"
   >
     <Field
@@ -14,7 +14,7 @@ exports[`RegistrationForm matches component snapshot 1`] = `
       fluid={true}
       icon="user"
       iconPosition="left"
-      name="username"
+      name="name"
       placeholder="Display Name"
       validate={
         Array [
@@ -43,6 +43,7 @@ exports[`RegistrationForm matches component snapshot 1`] = `
       iconPosition="left"
       name="password"
       placeholder="Password"
+      type="password"
       validate={
         Array [
           [Function],
@@ -52,14 +53,23 @@ exports[`RegistrationForm matches component snapshot 1`] = `
     <Field
       component={[Function]}
       fluid={true}
-      name="password-confirmation"
+      name="password_confirmation"
       placeholder="Password Confirmation"
+      type="password"
       validate={
         Array [
           [Function],
         ]
       }
     />
+    <Button
+      as="button"
+      color="teal"
+      disabled={true}
+      fluid={true}
+    >
+      Create account
+    </Button>
   </Form>
 </div>
 `;

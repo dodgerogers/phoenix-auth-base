@@ -8,4 +8,6 @@ export const formIDs = mirrorCreator([
 export const actionTypes = mirrorCreator([
   'AUTHENTICATE_SUCCESS',
   'AUTHENTICATE_FAILURE',
+  'REGISTER_SUCCESS',
+  'REGISTER_FAILURE',
 ]);
