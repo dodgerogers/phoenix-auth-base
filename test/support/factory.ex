@@ -15,7 +15,7 @@ defmodule Teebox.Factory do
       unlock_token: nil,
       reset_password_token: nil,
       reset_password_sent_at: nil,
-      password_hash: Comeonin.Pbkdf2.hashpwsalt(Faker.Lorem.characters(8..20))
+      password_hash: Faker.Lorem.characters(80)
     }
   end
 end

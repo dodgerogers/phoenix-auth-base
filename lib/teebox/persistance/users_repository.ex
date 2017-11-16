@@ -4,10 +4,18 @@ defmodule Teebox.Persistance.UsersRepository do
   alias Ecto.Changeset
 
   def find_by_id(id) do
-    Repo.get_by(User, id: id)
+    Repo.get_by(User, %{id: id})
   end
 
   def create(%Changeset{} = changeset) do
     Repo.insert(changeset)
+  end
+
+  def update(%Changeset{} = changeset) do
+    Repo.update(changeset)
+  end
+
+  def find_by_confirmation(email, confirmation_token) do
+    Repo.get_by(User, %{email: email, confirmation_token: confirmation_token})
   end
 end

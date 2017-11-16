@@ -13,7 +13,7 @@ defmodule Teebox.Accounts.Registration do
     end
   end
 
-  def create_user(%{} = params) do
+  defp create_user(%{} = params) do
     changeset = User.changeset(:registration, %User{}, params)
 
     with true <- changeset.valid? do
@@ -23,7 +23,7 @@ defmodule Teebox.Accounts.Registration do
     end
   end
 
-  def send_confirmation(%User{} = user) do
+  defp send_confirmation(%User{} = user) do
     Message.confirm_request(user)
   end
 end

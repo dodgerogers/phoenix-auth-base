@@ -7,22 +7,22 @@ defmodule Teebox.Accounts.User do
     field :avatar, :string
 
     field :confirmation_token, :string
-    field :confirmed_at, :naive_datetime
-    field :confirmation_sent_at, :naive_datetime
+    field :confirmed_at, Ecto.DateTime
+    field :confirmation_sent_at, Ecto.DateTime
 
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
     field :password_hash, :string
 
     field :failed_attempts, :integer, default: 0
-    field :locked_at, :naive_datetime
+    field :locked_at, Ecto.DateTime
 
     field :unlock_token, :string
 
     field :active, :boolean, default: true
 
     field :reset_password_token, :string
-    field :reset_password_sent_at, :naive_datetime
+    field :reset_password_sent_at, Ecto.DateTime
 
     timestamps()
   end
@@ -42,9 +42,9 @@ defmodule Teebox.Accounts.User do
     |> add_confirmation()
   end
 
-  def changeset(:confirm, user, params) do
+  def changeset(:confirm, user) do
     user
-    |> cast(params, [:confirmation_token, :confirmation_sent_at, :confirmed_at])
+    |> cast(%{}, [:confirmation_token, :confirmation_sent_at, :confirmed_at])
     |> change(%{confirmation_token: nil, confirmation_sent_at: nil, confirmed_at: Ecto.DateTime.utc})
     |> validate_required(:confirmed_at)
   end
@@ -54,6 +54,11 @@ defmodule Teebox.Accounts.User do
     |> change(%{confirmation_sent_at: Ecto.DateTime.utc})
     |> change(%{confirmation_token: random_string()})
     |> unique_constraint(:confirmation_token)
+  end
+
+  def confirm(user) do
+    user
+    |> change(%{confirmed_at: Ecto.DateTime.utc, confirmation_sent_at: nil, confirmation_token: nil})
   end
 
   defp unique_email(changeset) do
