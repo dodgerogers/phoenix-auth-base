@@ -31,6 +31,8 @@ config :logger, :console,
 config :mix_docker, image: "377092858912.dkr.ecr.us-east-1.amazonaws.com/teebox.io"
 
 config :teebox, :user_repo, Teebox.Persistance.UsersRepository
+config :teebox, :confirmation, Teebox.Accounts.Confirmation
+config :teebox, :registration, Teebox.Accounts.Registration
 
 config :teebox, Teebox.Mailer,
   adapter: Bamboo.LocalAdapter

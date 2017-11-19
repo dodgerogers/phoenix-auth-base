@@ -4,7 +4,7 @@ defmodule Teebox.Accounts.Confirmation do
   @user_repo Application.get_env(:teebox, :user_repo)
   @token_expiry_in_mins 10
 
-  def confirm!(%{email: email, confirmation_token: confirmation_token} = _params) do
+  def confirm!(%{"email" => email, "confirmation_token" => confirmation_token} = _params) do
     with {:ok, user} <- find_user_by_confirmation(email, confirmation_token),
          {:ok} <- user_is_not_confirmed?(user),
          {:ok} <- valid_confirmation_token?(user),
@@ -38,7 +38,7 @@ defmodule Teebox.Accounts.Confirmation do
   end
 
   defp valid_confirmation_token?(%User{} = user) do
-    token_expiry_time = Timex.shift(user.confirmation_sent_at, minutes: @token_expiry_in_mins)
+    token_expiry_time = Timex.shift(user.confirmation_sent_at, [minutes: @token_expiry_in_mins])
     if Timex.before?(Timex.now, token_expiry_time) do
       {:ok}
     else

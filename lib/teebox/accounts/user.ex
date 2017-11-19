@@ -45,20 +45,20 @@ defmodule Teebox.Accounts.User do
   def changeset(:confirm, user) do
     user
     |> cast(%{}, [:confirmation_token, :confirmation_sent_at, :confirmed_at])
-    |> change(%{confirmation_token: nil, confirmation_sent_at: nil, confirmed_at: Ecto.DateTime.utc})
+    |> change(%{confirmation_token: nil, confirmation_sent_at: nil, confirmed_at: Ecto.DateTime.utc()})
     |> validate_required(:confirmed_at)
   end
 
   def add_confirmation(user) do
     user
-    |> change(%{confirmation_sent_at: Ecto.DateTime.utc})
+    |> change(%{confirmation_sent_at: Ecto.DateTime.utc()})
     |> change(%{confirmation_token: random_string()})
     |> unique_constraint(:confirmation_token)
   end
 
   def confirm(user) do
     user
-    |> change(%{confirmed_at: Ecto.DateTime.utc, confirmation_sent_at: nil, confirmation_token: nil})
+    |> change(%{confirmed_at: Ecto.DateTime.utc(), confirmation_sent_at: nil, confirmation_token: nil})
   end
 
   defp unique_email(changeset) do

@@ -10,8 +10,8 @@ defmodule Teebox.Accounts.ConfirmationTest do
   @email "email@email.com"
   @confirmation_token Faker.Lorem.characters(30)
   @valid_attrs %{
-    email: @email,
-    confirmation_token: @confirmation_token,
+    "email" => @email,
+    "confirmation_token" => @confirmation_token
   }
 
   setup do
