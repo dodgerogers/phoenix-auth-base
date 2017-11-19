@@ -1,6 +1,10 @@
 defmodule TeeboxWeb.Router do
   use TeeboxWeb, :router
 
+  if Mix.env == :dev do
+    forward "/sent_emails", Bamboo.EmailPreviewPlug
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session

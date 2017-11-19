@@ -49,15 +49,15 @@ defmodule Teebox.Accounts.User do
     |> validate_required(:confirmed_at)
   end
 
-  def add_confirmation(user) do
-    user
+  def add_confirmation(changeset) do
+    changeset
     |> change(%{confirmation_sent_at: Ecto.DateTime.utc()})
     |> change(%{confirmation_token: random_string()})
     |> unique_constraint(:confirmation_token)
   end
 
-  def confirm(user) do
-    user
+  def confirm(changeset) do
+    changeset
     |> change(%{confirmed_at: Ecto.DateTime.utc(), confirmation_sent_at: nil, confirmation_token: nil})
   end
 
@@ -85,7 +85,8 @@ defmodule Teebox.Accounts.User do
    end
 
   defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{password: pw}} = changeset) do
-    changeset |> change(%{password_hash: Comeonin.Pbkdf2.hashpwsalt(pw)})
+    changeset
+    |> change(%{password_hash: Comeonin.Pbkdf2.hashpwsalt(pw)})
   end
   defp put_password_hash(changeset), do: changeset
 
