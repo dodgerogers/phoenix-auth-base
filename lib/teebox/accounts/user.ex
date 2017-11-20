@@ -49,6 +49,12 @@ defmodule Teebox.Accounts.User do
     |> validate_required(:confirmed_at)
   end
 
+  def changeset(:confirmation, user) do
+    user
+    |> cast(%{}, [:confirmation_token, :confirmation_sent_at])
+    |> add_confirmation()
+  end
+
   def add_confirmation(changeset) do
     changeset
     |> change(%{confirmation_sent_at: Ecto.DateTime.utc()})

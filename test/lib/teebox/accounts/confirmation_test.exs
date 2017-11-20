@@ -1,6 +1,7 @@
 defmodule Teebox.Accounts.ConfirmationTest do
   use Teebox.ModelCase
   use Timex
+  use Bamboo.Test
 
   import Teebox.Factory
 
@@ -54,6 +55,16 @@ defmodule Teebox.Accounts.ConfirmationTest do
     {:error, message} = Confirmation.confirm!(%{})
 
     assert message == "Invalid arguments"
+  end
+
+  test "resend_confirmation updates user confirmation token and resends email" do
+    {:ok, user} = create_confirmed_user()
+    previous_token = user.confirmation_token
+
+    {:ok, confirmed_user} = Confirmation.resend_confirmation(%{"email" => user.email})
+
+    refute previous_token == confirmed_user.confirmation_token
+    assert_delivered_email Teebox.Accounts.Message.confirm_request(confirmed_user)
   end
 
   defp create_unconfirmed_user do

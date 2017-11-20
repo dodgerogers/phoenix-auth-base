@@ -30,7 +30,7 @@ services:
     image: teebox_web
     volumes_from:
       - web
-    command: mix test
+    command: mix test test/lib/teebox/accounts/confirmation_test.exs
     environment:
       - MIX_ENV=test
       - PORT=4001

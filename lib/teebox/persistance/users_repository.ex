@@ -14,4 +14,8 @@ defmodule Teebox.Persistance.UsersRepository do
   def find_by_confirmation(email, confirmation_token) do
     Repo.get_by(User, %{email: email, confirmation_token: confirmation_token})
   end
+
+  def find_by_email(email) do
+    Repo.get_by(User, %{email: email})
+  end
 end

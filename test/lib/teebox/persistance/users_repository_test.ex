@@ -20,4 +20,18 @@ defmodule Teebox.Persistance.UserRepositoryTest do
 
     refute found_user
   end
+
+  test "find_by_email returns user when user exists with given params" do
+    user = insert(:user, email: @email)
+
+    found_user = UsersRepository.find_by_email(@email)
+
+    assert user == found_user
+  end
+
+  test "find_by_email returns nil when user does not exist" do
+    found_user = UsersRepository.find_by_email(@email)
+
+    refute found_user
+  end
 end

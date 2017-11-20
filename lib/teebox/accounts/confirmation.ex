@@ -4,8 +4,8 @@ defmodule Teebox.Accounts.Confirmation do
   @user_repo Application.get_env(:teebox, :user_repo)
   @token_expiry_in_mins 10
 
-  def confirm!(%{"email" => email, "confirmation_token" => confirmation_token} = _params) do
-    with {:ok, user} <- find_user_by_confirmation(email, confirmation_token),
+  def confirm!(%{"email" => _, "confirmation_token" => _} = params) do
+    with {:ok, user} <- find_user(params),
          {:ok} <- user_is_not_confirmed?(user),
          {:ok} <- valid_confirmation_token?(user),
          {:ok, confirmed_user} <- confirm_user(user)
@@ -17,13 +17,23 @@ defmodule Teebox.Accounts.Confirmation do
   end
   def confirm!(_), do: {:error, "Invalid arguments"}
 
-  defp find_user_by_confirmation(email, confirmation_token) do
-    with %User{} = user <- @user_repo.find_by_confirmation(email, confirmation_token) do
-      {:ok, user}
+  def resend_confirmation(%{"email" => _} = params) do
+    with {:ok, user} <- find_user(params),
+         {:ok, updated_user} <- reset_confirmation_token(user) do
+      {:ok, updated_user}
     else
-      nil -> {:error, "Could not find user"}
+      {:error, message} -> {:error, message}
     end
   end
+
+  defp find_user(%{"email" => email}) do
+    @user_repo.find_by_email(email) |> find_user_result()
+  end
+  defp find_user(%{"email" => email, "confirmation_token" => token}) do
+    @user_repo.find_by_confirmation(email, token) |> find_user_result()
+  end
+  defp find_user_result(%User{} = user), do: {:ok, user}
+  defp find_user_result(nil), do: {:ok, "Could not find user"}
 
   defp user_is_not_confirmed?(%User{} = user) do
     if !confirmed?(user) do
@@ -44,6 +54,10 @@ defmodule Teebox.Accounts.Confirmation do
     else
       {:error, "Confirmation token has expired"}
     end
+  end
+
+  defp reset_confirmation_token(%User{} = user) do
+    User.changeset(:confirmation, user) |> @user_repo.update()
   end
 
   defp confirm_user(%User{} = user) do

@@ -27,6 +27,8 @@ defmodule Teebox.Persistance.UsersRepositoryMock do
     find_by(%{email: email, confirmation_token: confirmation_token})
   end
 
+  def find_by_email(email), do: find_by(%{email: email})
+
   defp find_by(%{} = attributes) do
     all() |> Enum.find(fn(user) -> match?(attributes, user) end)
   end
