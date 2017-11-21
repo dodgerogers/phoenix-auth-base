@@ -1,22 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RegistrationForm matches component snapshot 1`] = `
+exports[`ConfirmationForm matches component snapshot 1`] = `
 <div
-  className="registration-form"
+  className="confirmation-form"
 >
   <Form
     as="form"
-    onSubmit={[Function]}
     size="large"
   >
     <Field
       autoFocus={true}
       component={[Function]}
       fluid={true}
-      icon="user"
-      iconPosition="left"
-      name="name"
-      placeholder="Display Name"
+      name="confirmation_token"
+      placeholder="Confirmation code"
       validate={
         Array [
           [Function],
@@ -51,25 +48,14 @@ exports[`RegistrationForm matches component snapshot 1`] = `
         ]
       }
     />
-    <Field
-      component={[Function]}
-      fluid={true}
-      name="password_confirmation"
-      placeholder="Password Confirmation"
-      type="password"
-      validate={
-        Array [
-          [Function],
-        ]
-      }
-    />
     <Button
       as="button"
       color="teal"
       disabled={true}
       fluid={true}
+      type="submit"
     >
-      Create account
+      Submit
     </Button>
   </Form>
 </div>

@@ -96,7 +96,7 @@ defmodule Teebox.Accounts.User do
   end
   defp put_password_hash(changeset), do: changeset
 
-  def random_string(length \\ 30) do
+  def random_string(length \\ 25) do
     length
     |> :crypto.strong_rand_bytes
     |> Base.url_encode64

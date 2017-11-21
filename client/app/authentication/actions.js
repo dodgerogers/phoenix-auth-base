@@ -18,7 +18,7 @@ export function login(loginParams) {
     return AuthenticationSources.login(loginParams.toJS())
       .then(response => {
         dispatch(authenticateSuccess(response.data));
-        dispatch(ModalActions.hideModal(ModalIds.loginModal));
+        dispatch(ModalActions.hideModal(ModalIds.LOGIN_MODAL));
       })
       .catch(err => {
         dispatch(authenticateFailure(err.response.data.error))
@@ -44,8 +44,29 @@ export function register(registerParams) {
         dispatch(registerSuccess(response.data))
       })
       .catch(err => {
-        dispatch(registerFailure(err.response.data.error))
+        dispatch(registerFailure(err.response.data.error));
         throw new SubmissionError(err.response.data.error);
       });
   };
+}
+
+const confirmationSuccess = (user) => ({
+  type: actionTypes.CONFIRMATION_SUCCESS,
+  user,
+});
+
+const confirmationFailure = (error) => ({
+  type: actionTypes.CONFIRMATION_FAILURE,
+  error,
+});
+
+export function confirm(confirmationParams) {
+  return dispatch => {
+    return AuthenticationSources.confirm(confirmationParams.toJS())
+      .then(response => dispatch(confirmationSuccess(response.data)))
+      .then(err => {
+        dispatch(confirmationFailure(err.response.data.err));
+        throw new SubmissionError(err.response.data.error);
+      });
+  }
 }

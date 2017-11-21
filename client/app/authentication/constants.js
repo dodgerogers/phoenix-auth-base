@@ -3,6 +3,7 @@ import mirrorCreator from 'mirror-creator';
 export const formIDs = mirrorCreator([
   'SESSION',
   'REGISTRATION',
+  'CONFIRMATION',
 ]);
 
 export const actionTypes = mirrorCreator([

@@ -20,7 +20,7 @@ Array [
   },
   Object {
     "data": Object {
-      "id": "loginModal",
+      "id": "LOGIN_MODAL",
     },
     "type": "HIDE_MODAL",
   },
