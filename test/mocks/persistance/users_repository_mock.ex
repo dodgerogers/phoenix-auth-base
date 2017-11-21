@@ -17,7 +17,6 @@ defmodule Teebox.Persistance.UsersRepositoryMock do
   def create(%Ecto.Changeset{} = changeset) do
     user = apply_changes(changeset)
     Map.put(users(), user.id, user) |> update_state()
-
     {:ok, user}
   end
 
@@ -27,7 +26,9 @@ defmodule Teebox.Persistance.UsersRepositoryMock do
     find_by(%{email: email, confirmation_token: confirmation_token})
   end
 
-  def find_by_email(email), do: find_by(%{email: email})
+  def find_by_email(email) do
+    find_by(%{email: email})
+  end
 
   defp find_by(%{} = attributes) do
     all() |> Enum.find(fn(user) -> match?(attributes, user) end)

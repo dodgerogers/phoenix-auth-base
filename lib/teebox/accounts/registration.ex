@@ -13,6 +13,7 @@ defmodule Teebox.Accounts.Registration do
     end
   end
 
+  # TODO: the repo checks for validity
   defp create_user(%{} = params) do
     changeset = User.changeset(:registration, %User{}, params)
 

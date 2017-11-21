@@ -6,7 +6,7 @@ defmodule Teebox.Accounts.Confirmation do
 
   def confirm!(%{"email" => _, "confirmation_token" => _} = params) do
     with {:ok, user} <- find_user(params),
-         {:ok} <- user_is_not_confirmed?(user),
+         {:ok} <- user_not_confirmed?(user),
          {:ok} <- valid_confirmation_token?(user),
          {:ok, confirmed_user} <- confirm_user(user)
     do
@@ -19,6 +19,7 @@ defmodule Teebox.Accounts.Confirmation do
 
   def resend_confirmation(%{"email" => _} = params) do
     with {:ok, user} <- find_user(params),
+         {:ok} <- user_not_confirmed?(user),
          {:ok, updated_user} <- reset_confirmation_token(user) do
       {:ok, updated_user}
     else
@@ -33,9 +34,15 @@ defmodule Teebox.Accounts.Confirmation do
     @user_repo.find_by_confirmation(email, token) |> find_user_result()
   end
   defp find_user_result(%User{} = user), do: {:ok, user}
-  defp find_user_result(nil), do: {:ok, "Could not find user"}
+  defp find_user_result(_), do: {:error, "Could not find user"}
 
-  defp user_is_not_confirmed?(%User{} = user) do
+  defp reset_confirmation_token(%User{} = user), do: update_user(:confirmation, user)
+  defp confirm_user(%User{} = user), do: update_user(:confirm, user)
+  defp update_user(changeset_type, user) do
+    User.changeset(changeset_type, user) |> @user_repo.update()
+  end
+
+  defp user_not_confirmed?(%User{} = user) do
     if !confirmed?(user) do
       {:ok}
     else
@@ -54,13 +61,5 @@ defmodule Teebox.Accounts.Confirmation do
     else
       {:error, "Confirmation token has expired"}
     end
-  end
-
-  defp reset_confirmation_token(%User{} = user) do
-    User.changeset(:confirmation, user) |> @user_repo.update()
-  end
-
-  defp confirm_user(%User{} = user) do
-    User.changeset(:confirm, user) |> @user_repo.update()
   end
 end

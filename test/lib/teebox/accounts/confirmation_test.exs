@@ -3,9 +3,9 @@ defmodule Teebox.Accounts.ConfirmationTest do
   use Timex
   use Bamboo.Test
 
-  import Teebox.Factory
+  import TeeboxWeb.AuthCase
 
-  alias Teebox.Accounts.{Confirmation, User}
+  alias Teebox.Accounts.Confirmation
   @user_repo Application.get_env(:teebox, :user_repo)
 
   @email "email@email.com"
@@ -20,7 +20,7 @@ defmodule Teebox.Accounts.ConfirmationTest do
   end
 
   test "call with valid params confirms user" do
-    create_unconfirmed_user()
+    create_unconfirmed_user(@email, @confirmation_token)
 
     {:ok, confirmed_user} = Confirmation.confirm!(@valid_attrs)
 
@@ -30,7 +30,7 @@ defmodule Teebox.Accounts.ConfirmationTest do
   end
 
   test "call with already confirmed user returns error tuple" do
-    create_confirmed_user()
+    create_confirmed_user(@email)
 
     {:error, message} = Confirmation.confirm!(@valid_attrs)
 
@@ -38,7 +38,7 @@ defmodule Teebox.Accounts.ConfirmationTest do
   end
 
   test "call with expired confirmation token returns error tuple" do
-    create_unconfirmed_user_with_expired_token()
+    create_unconfirmed_user_with_expired_token(@email, @confirmation_token)
 
     {:error, message} = Confirmation.confirm!(@valid_attrs)
 
@@ -58,37 +58,26 @@ defmodule Teebox.Accounts.ConfirmationTest do
   end
 
   test "resend_confirmation updates user confirmation token and resends email" do
-    {:ok, user} = create_confirmed_user()
+    {:ok, user} = create_unconfirmed_user(@email, @confirmation_token)
     previous_token = user.confirmation_token
 
-    {:ok, confirmed_user} = Confirmation.resend_confirmation(%{"email" => user.email})
+    {:ok, confirmed_user} = Confirmation.resend_confirmation(%{"email" => @email})
 
     refute previous_token == confirmed_user.confirmation_token
     assert_delivered_email Teebox.Accounts.Message.confirm_request(confirmed_user)
   end
 
-  defp create_unconfirmed_user do
-    unconfirmed_user = build(:user, email: @email, confirmed_at: nil, confirmation_token: @confirmation_token, confirmation_sent_at: DateTime.utc_now())
-    changeset = User.changeset(:registration, unconfirmed_user, %{})
+  test "resend_confirmation returns error tuple when user cannot be found" do
+    {:error, message} = Confirmation.resend_confirmation(%{"email" => @email <> "1"})
 
-    @user_repo.create(changeset)
+    assert message == "Could not find user"
   end
 
-  defp create_confirmed_user do
-    already_confirmed_user = build(:user, email: @email)
-    changeset = User.changeset(:registration, already_confirmed_user, %{})
+  test "resend_confirmation returns error tuple when user is already confirmed" do
+    create_confirmed_user(@email)
 
-    @user_repo.create(changeset)
-  end
+    {:error, message} = Confirmation.resend_confirmation(%{"email" => @email})
 
-  defp create_unconfirmed_user_with_expired_token do
-    expired_datetime = Timex.shift(Timex.now, minutes: -11)
-    unconfirmed_user = build(:user, email: @email)
-    attrs = %{confirmation_sent_at: expired_datetime, confirmed_at: nil, confirmation_token: @confirmation_token}
-
-    changeset = unconfirmed_user
-    |> Ecto.Changeset.cast(attrs, Map.keys(attrs))
-
-    @user_repo.create(changeset)
+    assert message == "User is already confirmed"
   end
 end
