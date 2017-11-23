@@ -63,7 +63,7 @@ defmodule Teebox.Accounts.UserTest do
   end
 
   test "confirm changeset with valid params" do
-    changeset = User.changeset(:confirm, %User{}, %{})
+    changeset = User.changeset(:confirm, %User{})
 
     assert changeset.valid?
     assert changeset.changes.confirmed_at

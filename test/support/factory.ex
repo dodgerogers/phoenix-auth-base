@@ -7,7 +7,7 @@ defmodule Teebox.Factory do
       email: Faker.Internet.email,
       avatar: "http://#{Faker.Lorem.characters(8..20)}.png",
       active: true,
-      confirmed_at: DateTime.utc_now(),
+      confirmed_at: Ecto.DateTime.utc(),
       confirmation_token: nil,
       confirmation_sent_at: nil,
       failed_attempts: 0,
@@ -15,7 +15,7 @@ defmodule Teebox.Factory do
       unlock_token: nil,
       reset_password_token: nil,
       reset_password_sent_at: nil,
-      password_hash: Comeonin.Pbkdf2.hashpwsalt(Faker.Lorem.characters(8..20))
+      password_hash: to_string(Faker.Lorem.characters(50))
     }
   end
 end

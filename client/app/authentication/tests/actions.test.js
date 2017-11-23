@@ -70,6 +70,50 @@ describe('async AuthenticationActions', () => {
     });
   });
 
+  describe('confirmation', () => {
+    let args;
+    beforeEach(() => {
+      const email = 'email@email.com';
+      const password = 'password';
+      const confirmationToken = 'token';
+      args = {
+        email,
+        password,
+        confirmation_token: confirmationToken
+      };
+    });
+
+    it('when confirmation is successful', () => {
+      const mockResponse = { id: 1, name: args.name, email: args.email };
+      mockAxios.onPut('api/confirmations', { confirmation: args })
+        .reply(200, mockResponse);
+
+      const store = mockStore();
+      const params = fromJS(args);
+
+      return store.dispatch(AuthenticationActions.confirm(params))
+        .then(() => {
+          expect(store.getActions()).toMatchSnapshot();
+        });
+    });
+
+    it('when confirmation fails', () => {
+      const mockResponse = {
+        error: "Invalid credentials",
+      };
+      mockAxios.onPut('api/confirmations', { confirmation: args })
+        .reply(400, mockResponse);
+
+      const store = mockStore();
+      const params = fromJS(args);
+
+      return store.dispatch(AuthenticationActions.confirm(params))
+        .catch(() => {
+          expect(store.getActions()).toMatchSnapshot();
+        });
+    });
+  });
+
   describe('login', () => {
     let email, password;
     beforeAll(() => {

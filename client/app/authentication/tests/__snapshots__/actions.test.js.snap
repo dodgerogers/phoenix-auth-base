@@ -1,5 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`async AuthenticationActions confirmation when confirmation fails 1`] = `
+Array [
+  Object {
+    "error": "Invalid credentials",
+    "type": "CONFIRMATION_FAILURE",
+  },
+]
+`;
+
+exports[`async AuthenticationActions confirmation when confirmation is successful 1`] = `
+Array [
+  Object {
+    "type": "CONFIRMATION_SUCCESS",
+    "user": Object {
+      "email": "email@email.com",
+      "id": 1,
+    },
+  },
+  Object {
+    "data": Object {
+      "id": "CONFIRMATION_MODAL",
+    },
+    "type": "HIDE_MODAL",
+  },
+]
+`;
+
 exports[`async AuthenticationActions login when login fails 1`] = `
 Array [
   Object {
@@ -20,7 +47,7 @@ Array [
   },
   Object {
     "data": Object {
-      "id": "loginModal",
+      "id": "LOGIN_MODAL",
     },
     "type": "HIDE_MODAL",
   },
@@ -47,6 +74,18 @@ Array [
       "id": 1,
       "name": "Bob",
     },
+  },
+  Object {
+    "data": Object {
+      "id": "REGISTRATION_MODAL",
+    },
+    "type": "HIDE_MODAL",
+  },
+  Object {
+    "data": Object {
+      "id": "CONFIRMATION_MODAL",
+    },
+    "type": "SHOW_MODAL",
   },
 ]
 `;

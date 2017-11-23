@@ -8,8 +8,9 @@ import { isRequired, isEmail } from '../../lib/utils/validation';
 import { formIDs } from '../constants';
 
 
+// How to validate whilst using autofocus
 function RegistrationForm(props) {
-  const { handleSubmit, error, submitting } = props;
+  const { handleSubmit, error, submitting, touched } = props;
 
   return (
     <div className="registration-form">
@@ -18,8 +19,9 @@ function RegistrationForm(props) {
         loading={submitting}
         onSubmit={handleSubmit}
       >
-        {error && <Message negative>{error}</Message>}
+        {error && touched && <Message negative>{error}</Message>}
         <Field
+          autoFocus={true}
           component={Input}
           fluid={true}
           name="name"
