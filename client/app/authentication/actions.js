@@ -41,7 +41,9 @@ export function register(registerParams) {
   return dispatch => {
     return AuthenticationSources.register(registerParams.toJS())
       .then(response => {
-        dispatch(registerSuccess(response.data))
+        dispatch(registerSuccess(response.data));
+        dispatch(ModalActions.hideModal(ModalIds.REGISTRATION_MODAL));
+        dispatch(ModalActions.showModal(ModalIds.CONFIRMATION_MODAL));
       })
       .catch(err => {
         dispatch(registerFailure(err.response.data.error));
@@ -63,9 +65,12 @@ const confirmationFailure = (error) => ({
 export function confirm(confirmationParams) {
   return dispatch => {
     return AuthenticationSources.confirm(confirmationParams.toJS())
-      .then(response => dispatch(confirmationSuccess(response.data)))
-      .then(err => {
-        dispatch(confirmationFailure(err.response.data.err));
+      .then(response => {
+        dispatch(confirmationSuccess(response.data));
+        dispatch(ModalActions.hideModal(ModalIds.CONFIRMATION_MODAL));
+      })
+      .catch(err => {
+        dispatch(confirmationFailure(err.response.data.error));
         throw new SubmissionError(err.response.data.error);
       });
   }
