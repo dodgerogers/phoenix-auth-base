@@ -14,4 +14,16 @@ defmodule TeeboxWeb.Api.ConfirmationsController do
         |> render(TeeboxWeb.ErrorView, "error.json", %{message: message})
     end
   end
+
+  def create(conn, %{"confirmation" => params}) do
+    with {:ok, _} <- @confirmation.resend_confirmation(params) do
+      conn
+      |> render("resend_confirmation.json", %{})
+    else
+      {:error, message} ->
+        conn
+        |> put_status(:bad_request)
+        |> render(TeeboxWeb.ErrorView, "error.json", %{message: message})
+    end
+  end
 end
