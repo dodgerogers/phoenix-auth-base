@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { Button, Divider, Header, Image, Modal, Icon, Message } from 'semantic-ui-react';
 import LoginFormContainer from '../containers/LoginFormContainer';
+import AuthenticationLinks from './AuthenticationLinks';
 
 
 const LoginModal = (props) => {
@@ -18,6 +19,7 @@ const LoginModal = (props) => {
       </Modal.Header>
       <Modal.Content>
         <LoginFormContainer {...props} />
+        <AuthenticationLinks />
       </Modal.Content>
       <Modal.Actions>
         <Button onClick={props.close}>

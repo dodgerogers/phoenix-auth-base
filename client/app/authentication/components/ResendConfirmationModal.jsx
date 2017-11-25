@@ -1,25 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { Button, Header, Image, Modal, Icon, Message } from 'semantic-ui-react'
-import RegistrationFormContainer from '../containers/RegistrationFormContainer'
-import AuthenticationLinks from './AuthenticationLinks';
+import { Button, Divider, Header, Image, Modal, Icon, Message } from 'semantic-ui-react';
+import ResendConfirmationFormContainer from '../containers/ResendConfirmationFormContainer';
 
 
-const RegistrationFormModal = (props) => {
+const ResendConfirmationModal = (props) => {
   return (
     <Modal
       size="mini"
       dimmer={false}
       open={props.show}
-      onClose={props.close}
       closeOnDocumentClick={true}
+      onClose={props.close}
       >
       <Modal.Header as="h2">
-        Sign up
+        Resend confirmation
       </Modal.Header>
       <Modal.Content>
-        <RegistrationFormContainer {...props} />
-        <AuthenticationLinks />
+        <ResendConfirmationFormContainer {...props} />
       </Modal.Content>
       <Modal.Actions>
         <Button onClick={props.close}>
@@ -30,10 +28,9 @@ const RegistrationFormModal = (props) => {
   );
 }
 
-RegistrationFormModal.propTypes = {
+ResendConfirmationModal.propTypes = {
   show: PropTypes.bool,
   close: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func,
 }
 
-export default RegistrationFormModal;
+export default ResendConfirmationModal;

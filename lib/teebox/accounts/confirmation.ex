@@ -17,6 +17,7 @@ defmodule Teebox.Accounts.Confirmation do
   end
   def confirm!(_), do: {:error, "Invalid arguments"}
 
+  # All messages should be, If a user exists we have sent a confirmation email
   def resend_confirmation(%{"email" => _} = params) do
     with {:ok, user} <- find_user(params),
          {:ok} <- user_not_confirmed?(user),

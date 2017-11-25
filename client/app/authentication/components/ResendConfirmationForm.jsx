@@ -7,11 +7,11 @@ import { isRequired, isEmail } from '../../lib/utils/validation';
 import { formIDs } from '../constants';
 
 
-const LoginForm = (props) => {
+const ResendConfirmationForm = (props) => {
   const { handleSubmit, error, submitting, dirty } = props;
 
   return (
-    <div className="login-form">
+    <div className="resend-confirmation-form">
       <Form
         size='large'
         loading={submitting}
@@ -27,28 +27,18 @@ const LoginForm = (props) => {
           placeholder="Email"
           validate={[isRequired, isEmail]}
         />
-        <Field
-          component={Input}
-          fluid
-          name="password"
-          icon="lock"
-          type="password"
-          iconPosition="left"
-          placeholder="Password"
-          validate={[isRequired]}
-        />
         <Button
           type="submit"
           fluid={true}
           color="teal"
           disabled={!props.valid}
         >
-          Login
+          Submit
         </Button>
       </Form>
     </div>
   );
 }
 
-export { LoginForm as PureComponent };
-export default reduxForm({ form: formIDs.SESSION })(LoginForm);
+export { ResendConfirmationForm as PureComponent };
+export default reduxForm({ form: formIDs.RESEND_CONFIRMATION })(ResendConfirmationForm);

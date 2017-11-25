@@ -75,3 +75,27 @@ export function confirm(confirmationParams) {
       });
   }
 }
+
+const resendConfirmationSuccess = (user) => ({
+  type: actionTypes.RESEND_CONFIRMATION_SUCCESS,
+  user,
+});
+
+const resendConfirmationFailure = (error) => ({
+  type: actionTypes.RESEND_CONFIRMATION_FAILURE,
+  error,
+});
+
+export function resendConfirmation(resendConfirmation) {
+  return dispatch => {
+    return AuthenticationSources.resendConfirmation(resendConfirmation.toJS())
+      .then(response => {
+        dispatch(resendConfirmationSuccess(response.data));
+        dispatch(ModalActions.hideModal(ModalIds.RESEND_CONFIRMATION_MODAL));
+      })
+      .catch(err => {
+        dispatch(resendConfirmationFailure(err.response.data.error));
+        throw new SubmissionError({ _error: err.response.data.error });
+      });
+  }
+}

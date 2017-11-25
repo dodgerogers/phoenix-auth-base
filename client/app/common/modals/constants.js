@@ -10,4 +10,5 @@ export const modalIds = mirrorCreator([
   'LOGIN_MODAL',
   'REGISTRATION_MODAL',
   'CONFIRMATION_MODAL',
+  'RESEND_CONFIRMATION_MODAL',
 ])

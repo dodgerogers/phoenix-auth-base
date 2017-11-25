@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import LoginModal from '../../../authentication/components/LoginModal';
 import RegistrationFormModal from '../../../authentication/components/RegistrationFormModal';
 import ConfirmationModal from '../../../authentication/components/ConfirmationModal';
+import ResendConfirmationModal from '../../../authentication/components/ResendConfirmationModal';
 import { hideModal } from '../actions';
 import { modalIds } from '../constants';
 
@@ -13,6 +14,7 @@ const ModalsContainer = (props) => {
     { component: LoginModal, id: modalIds.LOGIN_MODAL },
     { component: RegistrationFormModal, id: modalIds.REGISTRATION_MODAL },
     { component: ConfirmationModal, id: modalIds.CONFIRMATION_MODAL },
+    { component: ResendConfirmationModal, id: modalIds.RESEND_CONFIRMATION_MODAL },
   ];
 
   function renderModals() {
