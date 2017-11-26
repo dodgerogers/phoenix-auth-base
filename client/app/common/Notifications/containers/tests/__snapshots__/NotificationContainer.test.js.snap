@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotificationContainer connected component matches snapshot 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(NotificationList)
+    id="APPLICATION"
+  >
+    <NotificationList
+      dispatch={[Function]}
+      id="APPLICATION"
+      notifications={
+        Immutable.List [
+        ]
+      }
+    >
+      <noscript />
+    </NotificationList>
+  </Connect(NotificationList)>
+</Provider>
+`;

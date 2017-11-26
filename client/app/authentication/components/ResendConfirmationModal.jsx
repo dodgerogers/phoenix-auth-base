@@ -1,36 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { Button, Divider, Header, Image, Modal, Icon, Message } from 'semantic-ui-react';
+import AuthenticationModal from './AuthenticationModal';
 import ResendConfirmationFormContainer from '../containers/ResendConfirmationFormContainer';
+import AuthenticationLinks from './AuthenticationLinks';
 
 
 const ResendConfirmationModal = (props) => {
   return (
-    <Modal
-      size="mini"
-      dimmer={false}
-      open={props.show}
-      closeOnDocumentClick={true}
-      onClose={props.close}
-      >
-      <Modal.Header as="h2">
-        Resend confirmation
-      </Modal.Header>
-      <Modal.Content>
-        <ResendConfirmationFormContainer {...props} />
-      </Modal.Content>
-      <Modal.Actions>
-        <Button onClick={props.close}>
-          Close
-        </Button>
-      </Modal.Actions>
-    </Modal>
+    <AuthenticationModal title="Resend confirmation email" {...props}>
+      <ResendConfirmationFormContainer {...props} />
+      <AuthenticationLinks />
+    </AuthenticationModal>
   );
-}
-
-ResendConfirmationModal.propTypes = {
-  show: PropTypes.bool,
-  close: PropTypes.func.isRequired,
 }
 
 export default ResendConfirmationModal;

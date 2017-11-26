@@ -1,7 +1,10 @@
 defmodule Teebox.Accounts.ConfirmationMock do
-  def confirm!(%{"email" => _, "confirmation_token" => _}), do: {:ok, "Success"}
-  def confirm!(_), do: {:error, "Failure"}
+  @success_msg "Success"
+  @error_msg "Failure"
 
-  def resend_confirmation(%{"email" => _}), do: {:ok, "Success"}
-  def resend_confirmation(_), do: {:error, "Failure"}
+  def confirm!(%{"email" => _, "confirmation_token" => _}), do: {:ok, @success_msg}
+  def confirm!(_), do: {:error, @error_msg}
+
+  def resend_confirmation(%{"email" => _}), do: {:ok, @success_msg}
+  def resend_confirmation(_), do: {:error, @error_msg}
 end

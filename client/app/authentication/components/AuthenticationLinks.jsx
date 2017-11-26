@@ -22,7 +22,7 @@ const AuthenticationLinks = (props) => {
       <AuthLink>
         <ModalTrigger
           key="resend-confirmation"
-          text="Didn't receive confirm instructions?"
+          text="Resend confirmation instructions"
           id={ModalIds.RESEND_CONFIRMATION_MODAL}
           wrapper={Wrapper}
         />

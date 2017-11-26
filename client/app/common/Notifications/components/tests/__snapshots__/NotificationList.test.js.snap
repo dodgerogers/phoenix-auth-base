@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotificationList PureComponent matches snapshot when no notifications present 1`] = `
+<NotificationList
+  id="areaID"
+  notifications={
+    Immutable.List [
+    ]
+  }
+>
+  <noscript />
+</NotificationList>
+`;
+
+exports[`NotificationList PureComponent matches snapshot with at least one notification 1`] = `
+<NotificationList
+  id="areaID"
+  notifications={
+    Immutable.List [
+      Immutable.Map {
+        message: "Information",
+      },
+    ]
+  }
+>
+  <styled.div>
+    <div
+      className="sc-bdVaJa jWKkjw"
+    >
+      <Notification
+        notification={
+          Immutable.Map {
+            message: "Information",
+          }
+        }
+      >
+        <Message>
+          <div
+            className="ui message"
+          >
+            Information
+          </div>
+        </Message>
+      </Notification>
+    </div>
+  </styled.div>
+</NotificationList>
+`;

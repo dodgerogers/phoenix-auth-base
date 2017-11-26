@@ -13,7 +13,7 @@ defmodule TeeboxWeb.Api.ConfirmationsControllerTest do
     |> put("/api/confirmations", %{"confirmation" => @valid_attrs})
 
     response = json_response(conn, 200)
-    assert response["message"] == "Your account has been confirmed"
+    assert response["message"] == "Success"
   end
 
   test "PUT update with invalid params returns 400 and failure message" do
@@ -29,7 +29,7 @@ defmodule TeeboxWeb.Api.ConfirmationsControllerTest do
     |> post("/api/confirmations", %{"confirmation" => @valid_attrs})
 
     response = json_response(conn, 200)
-    assert response["message"] == "A confirmation email has been sent"
+    assert response["message"] == "Success"
   end
 
   test "POST create with valid params returns 200 failure message" do

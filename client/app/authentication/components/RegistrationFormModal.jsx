@@ -1,39 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { Button, Header, Image, Modal, Icon, Message } from 'semantic-ui-react'
+import AuthenticationModal from './AuthenticationModal';
 import RegistrationFormContainer from '../containers/RegistrationFormContainer'
 import AuthenticationLinks from './AuthenticationLinks';
 
 
 const RegistrationFormModal = (props) => {
   return (
-    <Modal
-      size="mini"
-      dimmer={false}
-      open={props.show}
-      onClose={props.close}
-      closeOnDocumentClick={true}
-      >
-      <Modal.Header as="h2">
-        Sign up
-      </Modal.Header>
-      <Modal.Content>
-        <RegistrationFormContainer {...props} />
-        <AuthenticationLinks />
-      </Modal.Content>
-      <Modal.Actions>
-        <Button onClick={props.close}>
-          Close
-        </Button>
-      </Modal.Actions>
-    </Modal>
+    <AuthenticationModal title="Create an account" {...props}>
+      <RegistrationFormContainer {...props} />
+      <AuthenticationLinks />
+    </AuthenticationModal>
   );
-}
-
-RegistrationFormModal.propTypes = {
-  show: PropTypes.bool,
-  close: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func,
 }
 
 export default RegistrationFormModal;

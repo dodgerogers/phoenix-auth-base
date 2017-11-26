@@ -1,33 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RegistrationForm matches component snapshot 1`] = `
-<Modal
-  closeOnDimmerClick={true}
-  closeOnDocumentClick={true}
-  dimmer={false}
-  onClose={[Function]}
-  open={true}
-  size="mini"
+<AuthenticationModal
+  close={[Function]}
+  onSubmit={[Function]}
+  show={true}
+  title="Create an account"
 >
-  <ModalHeader
-    as="h2"
-  >
-    Sign up
-  </ModalHeader>
-  <ModalContent>
-    <Connect(ReduxForm)
-      close={[Function]}
-      onSubmit={[Function]}
-      show={true}
-    />
-  </ModalContent>
-  <ModalActions>
-    <Button
-      as="button"
-      onClick={[Function]}
-    >
-      Close
-    </Button>
-  </ModalActions>
-</Modal>
+  <Connect(ReduxForm)
+    close={[Function]}
+    onSubmit={[Function]}
+    show={true}
+  />
+  <AuthenticationLinks />
+</AuthenticationModal>
 `;

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Notification PureComponent matches snapshot with no level given 1`] = `
+<Message>
+  Information
+</Message>
+`;
+
+exports[`Notification PureComponent matches snapshot with success level given 1`] = `
+<Message
+  success={true}
+>
+  Information
+</Message>
+`;

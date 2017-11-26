@@ -2,6 +2,7 @@ import { stopAsyncValidation, SubmissionError } from 'redux-form/immutable';
 import * as AuthenticationSources from './sources';
 import { ModalActions, ModalIds } from '../common/modals';
 import { actionTypes, formIDs } from './constants';
+import { NotificationActions, areaIDs } from '../common/Notifications';
 
 const authenticateSuccess = (user) => ({
   type: actionTypes.AUTHENTICATE_SUCCESS,
@@ -90,8 +91,9 @@ export function resendConfirmation(resendConfirmation) {
   return dispatch => {
     return AuthenticationSources.resendConfirmation(resendConfirmation.toJS())
       .then(response => {
-        dispatch(resendConfirmationSuccess(response.data));
+        dispatch(NotificationActions.notifySuccess(areaIDs.AUTHENTICATION, response.data.message))
         dispatch(ModalActions.hideModal(ModalIds.RESEND_CONFIRMATION_MODAL));
+        dispatch(ModalActions.showModal(ModalIds.CONFIRMATION_MODAL));
       })
       .catch(err => {
         dispatch(resendConfirmationFailure(err.response.data.error));

@@ -20,7 +20,7 @@ const ResendConfirmationForm = (props) => {
         {error && dirty && <Message negative>{error}</Message>}
         <Field
           component={Input}
-          fluid
+          fluid={true}
           name="email"
           icon="mail"
           iconPosition="left"

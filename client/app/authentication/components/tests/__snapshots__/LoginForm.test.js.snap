@@ -9,7 +9,6 @@ exports[`LoginForm matches component snapshot 1`] = `
     size="large"
   >
     <Field
-      autoFocus={true}
       component={[Function]}
       fluid={true}
       icon="mail"
