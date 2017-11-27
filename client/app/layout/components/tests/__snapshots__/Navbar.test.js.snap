@@ -24,11 +24,6 @@ exports[`Navbar matches pure component snapshot 1`] = `
           text="Sign up"
           wrapper={[Function]}
         />
-        <Connect(ModalTrigger)
-          id="CONFIRMATION_MODAL"
-          text="Confirm account"
-          wrapper={[Function]}
-        />
       </MenuMenu>
     </Container>
   </Menu>

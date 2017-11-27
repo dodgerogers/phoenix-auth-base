@@ -156,4 +156,44 @@ describe('async AuthenticationActions', () => {
         });
     });
   });
+
+  describe('resendConfirmation', () => {
+    let args;
+    beforeEach(() => {
+      const email = 'email@email.com';
+      args = {
+        email,
+      };
+    });
+
+    it('when resendConfirmation is successful', () => {
+      const mockResponse = { message: "Success" };
+      mockAxios.onPost('api/confirmations', { confirmation: args })
+        .reply(200, mockResponse);
+
+      const store = mockStore();
+      const params = fromJS(args);
+
+      return store.dispatch(AuthenticationActions.resendConfirmation(params))
+        .then(() => {
+          expect(store.getActions()).toMatchSnapshot();
+        });
+    });
+
+    it('when confirmation fails', () => {
+      const mockResponse = {
+        error: "Invalid credentials",
+      };
+      mockAxios.onPost('api/confirmations', { confirmation: args })
+        .reply(400, mockResponse);
+
+      const store = mockStore();
+      const params = fromJS(args);
+
+      return store.dispatch(AuthenticationActions.resendConfirmation(params))
+        .catch(() => {
+          expect(store.getActions()).toMatchSnapshot();
+        });
+    });
+  });
 });

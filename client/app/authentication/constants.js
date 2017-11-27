@@ -4,6 +4,7 @@ export const formIDs = mirrorCreator([
   'SESSION',
   'REGISTRATION',
   'CONFIRMATION',
+  'RESEND_CONFIRMATION',
 ]);
 
 export const actionTypes = mirrorCreator([
@@ -13,4 +14,6 @@ export const actionTypes = mirrorCreator([
   'REGISTER_FAILURE',
   'CONFIRMATION_SUCCESS',
   'CONFIRMATION_FAILURE',
+  'RESEND_CONFIRMATION_SUCCESS',
+  'RESEND_CONFIRMATION_FAILURE',
 ]);

@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthenticationLinks matches snapshot 1`] = `
+<div
+  className="authentication-links"
+>
+  <styled.div>
+    <Connect(ModalTrigger)
+      id="CONFIRMATION_MODAL"
+      text="I have a confirmation code"
+      wrapper={[Function]}
+    />
+  </styled.div>
+  <styled.div>
+    <Connect(ModalTrigger)
+      id="RESEND_CONFIRMATION_MODAL"
+      text="Resend confirmation instructions"
+      wrapper={[Function]}
+    />
+  </styled.div>
+</div>
+`;

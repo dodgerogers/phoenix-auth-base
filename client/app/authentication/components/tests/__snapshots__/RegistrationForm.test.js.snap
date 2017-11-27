@@ -10,7 +10,6 @@ exports[`RegistrationForm matches component snapshot 1`] = `
     size="large"
   >
     <Field
-      autoFocus={true}
       component={[Function]}
       fluid={true}
       icon="user"

@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotificationList PureComponent matches snapshot when no notifications present 1`] = `<noscript />`;
+
+exports[`NotificationList PureComponent matches snapshot with at least one notification 1`] = `
+<styled.div>
+  <Connect(Notification)
+    notification={
+      Immutable.Map {
+        message: "Information",
+      }
+    }
+    onDestroy={[Function]}
+  />
+</styled.div>
+`;

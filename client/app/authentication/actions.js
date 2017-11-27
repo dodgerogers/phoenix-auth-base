@@ -2,6 +2,7 @@ import { stopAsyncValidation, SubmissionError } from 'redux-form/immutable';
 import * as AuthenticationSources from './sources';
 import { ModalActions, ModalIds } from '../common/modals';
 import { actionTypes, formIDs } from './constants';
+import { NotificationActions, areaIDs } from '../common/Notifications';
 
 const authenticateSuccess = (user) => ({
   type: actionTypes.AUTHENTICATE_SUCCESS,
@@ -42,6 +43,7 @@ export function register(registerParams) {
     return AuthenticationSources.register(registerParams.toJS())
       .then(response => {
         dispatch(registerSuccess(response.data));
+        dispatch(NotificationActions.notifySuccess(areaIDs.AUTHENTICATION, response.data.message))
         dispatch(ModalActions.hideModal(ModalIds.REGISTRATION_MODAL));
         dispatch(ModalActions.showModal(ModalIds.CONFIRMATION_MODAL));
       })
@@ -72,6 +74,31 @@ export function confirm(confirmationParams) {
       .catch(err => {
         dispatch(confirmationFailure(err.response.data.error));
         throw new SubmissionError(err.response.data.error);
+      });
+  }
+}
+
+const resendConfirmationSuccess = (user) => ({
+  type: actionTypes.RESEND_CONFIRMATION_SUCCESS,
+  user,
+});
+
+const resendConfirmationFailure = (error) => ({
+  type: actionTypes.RESEND_CONFIRMATION_FAILURE,
+  error,
+});
+
+export function resendConfirmation(resendConfirmation) {
+  return dispatch => {
+    return AuthenticationSources.resendConfirmation(resendConfirmation.toJS())
+      .then(response => {
+        dispatch(NotificationActions.notifySuccess(areaIDs.AUTHENTICATION, response.data.message))
+        dispatch(ModalActions.hideModal(ModalIds.RESEND_CONFIRMATION_MODAL));
+        dispatch(ModalActions.showModal(ModalIds.CONFIRMATION_MODAL));
+      })
+      .catch(err => {
+        dispatch(resendConfirmationFailure(err.response.data.error));
+        throw new SubmissionError({ _error: err.response.data.error });
       });
   }
 }

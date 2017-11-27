@@ -8,7 +8,7 @@ import { formIDs } from '../constants';
 
 
 const ConfirmationForm = (props) => {
-  const { handleSubmit, error, submitting, touched } = props;
+  const { handleSubmit, error, submitting, dirty } = props;
 
   return (
     <div className="confirmation-form">
@@ -17,9 +17,8 @@ const ConfirmationForm = (props) => {
         loading={submitting}
         onSubmit={handleSubmit}
       >
-        {error && touched && <Message negative>{error}</Message>}
+        {error && dirty && <Message negative>{error}</Message>}
         <Field
-          autoFocus={true}
           component={Input}
           fluid
           name="confirmation_token"

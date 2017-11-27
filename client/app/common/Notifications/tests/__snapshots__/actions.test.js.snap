@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthenticationActions notifySuccess dispatches with expected actions 1`] = `
+Object {
+  "id": "mockAreaID",
+  "notification": Object {
+    "level": "success",
+    "message": "message",
+  },
+  "type": "NOTIFY_SUCCESS",
+}
+`;

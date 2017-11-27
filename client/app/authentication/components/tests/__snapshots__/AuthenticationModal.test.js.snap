@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthenticationModal matches snapshot 1`] = `
+<Modal
+  closeOnDimmerClick={true}
+  closeOnDocumentClick={true}
+  dimmer={false}
+  onClose={[Function]}
+  size="mini"
+>
+  <ModalHeader
+    as="h2"
+  >
+    Auth modal
+  </ModalHeader>
+  <ModalContent>
+    <Connect(NotificationList)
+      id="AUTHENTICATION"
+    />
+  </ModalContent>
+  <ModalActions>
+    <Button
+      as="button"
+      onClick={[Function]}
+    >
+      Close
+    </Button>
+  </ModalActions>
+</Modal>
+`;
