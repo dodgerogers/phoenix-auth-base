@@ -19,12 +19,18 @@ defmodule Teebox.Accounts.ConfirmationTest do
     @user_repo.clear()
   end
 
+  def find_user_by_email(email), do: @user_repo.find_by_email(email)
+
   test "call with valid params confirms user" do
     create_unconfirmed_user(@email, @confirmation_token)
 
     {:ok, message} = Confirmation.confirm!(@valid_attrs)
 
     assert message == "Your account has been confirmed!"
+    confirmed_user = find_user_by_email(@email)
+    assert confirmed_user.confirmed_at
+    refute confirmed_user.confirmation_token
+    refute confirmed_user.confirmation_sent_at
   end
 
   test "call with already confirmed user returns error tuple" do
@@ -56,11 +62,15 @@ defmodule Teebox.Accounts.ConfirmationTest do
   end
 
   test "resend_confirmation updates user confirmation token and resends email" do
-    create_unconfirmed_user(@email, @confirmation_token)
+    {:ok, user} = create_unconfirmed_user(@email, @confirmation_token)
+    previous_token = user.confirmation_token
 
     {:ok, message} = Confirmation.resend_confirmation(%{"email" => @email})
 
+    unconfirmed_user = find_user_by_email(@email)
+    refute previous_token == unconfirmed_user.confirmation_token
     assert message == "If an account exists we have sent a confirmation code"
+    assert_delivered_email Teebox.Accounts.Message.confirm_request(unconfirmed_user)
   end
 
   test "resend_confirmation returns ok when user cannot be found" do
