@@ -27,7 +27,7 @@ Notification.propTypes = {
 };
 
 const opts = {
-  componentDidMount: (props) => setTimeout(props.onDestroy, 5000),
+  componentDidMount: props => setTimeout(props.onDestroy, 5000),
 };
 
 export { Notification as PureComponent };

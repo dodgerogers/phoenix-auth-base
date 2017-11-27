@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { fromJS } from 'immutable';
 import toJson from 'enzyme-to-json';
 import NotificationList from '../NotificationList';
@@ -9,6 +9,7 @@ describe('NotificationList', () => {
   describe('PureComponent', () => {
     const fullProps = () => ({
       id: 'areaID',
+      destroy: jest.fn(),
       notifications: fromJS([
         fromJS({
           message: 'Information',
@@ -16,7 +17,7 @@ describe('NotificationList', () => {
       ]),
     });
 
-    const pureComponent = (props) => mount(
+    const pureComponent = (props) => shallow(
       <NotificationList {...props} />
     );
 

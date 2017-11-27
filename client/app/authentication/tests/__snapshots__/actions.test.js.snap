@@ -76,6 +76,14 @@ Array [
     },
   },
   Object {
+    "id": "AUTHENTICATION",
+    "notification": Object {
+      "level": "success",
+      "message": undefined,
+    },
+    "type": "NOTIFY_SUCCESS",
+  },
+  Object {
     "data": Object {
       "id": "REGISTRATION_MODAL",
     },

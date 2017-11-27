@@ -14,7 +14,7 @@ defmodule Teebox.Accounts.Confirmation do
     do
       {:ok, "Your account has been confirmed!"}
     else
-      {:error, err} -> {:error, err}
+      {_, err} -> {:error, err}
     end
   end
   def confirm!(_), do: {:error, "Invalid arguments"}
@@ -31,7 +31,7 @@ defmodule Teebox.Accounts.Confirmation do
     if !confirmed?(user) do
       {:ok}
     else
-      {:error, "Account is already confirmed"}
+      {:already_confirmed, "Account is already confirmed"}
     end
   end
 
@@ -60,7 +60,8 @@ defmodule Teebox.Accounts.Confirmation do
     do
       {:ok, @confirmation_sent}
     else
-      {:not_found, message} -> {:ok, message}
+      {:already_confirmed, _} -> {:ok, @confirmation_sent}
+      {:not_found, _} -> {:ok, @confirmation_sent}
       {:error, message} -> {:error, message}
     end
   end
@@ -69,7 +70,7 @@ defmodule Teebox.Accounts.Confirmation do
     with %User{} = user <- @user_repo.find_by_email(email) do
       {:ok, user}
     else
-      _ -> {:not_found, @confirmation_sent}
+      _ -> {:not_found, @account_not_found}
     end
   end
 

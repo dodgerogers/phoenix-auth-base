@@ -8,5 +8,6 @@ exports[`ConfirmationModal matches snapshot 1`] = `
   <Connect(ReduxForm)
     close={[Function]}
   />
+  <AuthenticationLinks />
 </AuthenticationModal>
 `;

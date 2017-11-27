@@ -43,6 +43,7 @@ export function register(registerParams) {
     return AuthenticationSources.register(registerParams.toJS())
       .then(response => {
         dispatch(registerSuccess(response.data));
+        dispatch(NotificationActions.notifySuccess(areaIDs.AUTHENTICATION, response.data.message))
         dispatch(ModalActions.hideModal(ModalIds.REGISTRATION_MODAL));
         dispatch(ModalActions.showModal(ModalIds.CONFIRMATION_MODAL));
       })

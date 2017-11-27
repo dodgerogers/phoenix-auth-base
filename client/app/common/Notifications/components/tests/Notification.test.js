@@ -2,13 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { fromJS } from 'immutable';
 import toJson from 'enzyme-to-json';
-// import { Button, Menu } from 'semantic-ui-react';
-import Notification from '../Notification';
+import Notification, { FunctionalComponent, PureComponent } from '../Notification';
 
 
 describe('Notification', () => {
   describe('PureComponent', () => {
     const fullProps = () => ({
+      onDestroy: jest.fn(),
       notification: fromJS({
         message: 'Information',
         level: null,
@@ -16,7 +16,7 @@ describe('Notification', () => {
     });
 
     const pureComponent = (props) => shallow(
-      <Notification {...props} />
+      <PureComponent {...props} />
     );
 
     it('matches snapshot with no level given', () => {

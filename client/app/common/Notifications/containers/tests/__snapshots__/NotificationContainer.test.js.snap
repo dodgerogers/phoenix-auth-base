@@ -17,12 +17,13 @@ exports[`NotificationContainer connected component matches snapshot 1`] = `
     id="APPLICATION"
   >
     <NotificationList
-      dispatch={[Function]}
+      destroy={[Function]}
       id="APPLICATION"
       notifications={
         Immutable.List [
         ]
       }
+      notifySuccess={[Function]}
     >
       <noscript />
     </NotificationList>

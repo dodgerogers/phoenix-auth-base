@@ -14,7 +14,7 @@ exports[`AuthenticationLinks matches snapshot 1`] = `
   <styled.div>
     <Connect(ModalTrigger)
       id="RESEND_CONFIRMATION_MODAL"
-      text="Didn't receive confirm instructions?"
+      text="Resend confirmation instructions"
       wrapper={[Function]}
     />
   </styled.div>
