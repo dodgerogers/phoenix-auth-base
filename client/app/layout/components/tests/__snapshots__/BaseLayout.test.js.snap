@@ -9,6 +9,7 @@ exports[`BaseLayout PureComponent matches snapshot 1`] = `
       content
     </div>
   </Connect(Connect(Wrapper))>
+  <GlobalNotifications />
   <div
     className="main"
   >

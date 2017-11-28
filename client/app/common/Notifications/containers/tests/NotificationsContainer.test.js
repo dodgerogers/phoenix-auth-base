@@ -7,11 +7,11 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { initialState } from '../../reducer';
 import { areaIDs } from '../../constants';
-import NotificationContainer from '../NotificationContainer';
+import NotificationsContainer from '../NotificationsContainer';
 
 const mockStore = configureStore([thunk]);
 
-describe('NotificationContainer', () => {
+describe('NotificationsContainer', () => {
   const fullProps = () => ({
     id: areaIDs.APPLICATION,
   });
@@ -19,7 +19,7 @@ describe('NotificationContainer', () => {
   describe('connected component', () => {
     const connectedComponent = (store, props) => mount(
       <Provider store={store}>
-        <NotificationContainer {...props} />
+        <NotificationsContainer {...props} />
       </Provider>
     );
 

@@ -1,8 +1,8 @@
 import { actionTypes } from './constants';
 
 
-export const notifySuccess = (id, message) => ({
-  type: actionTypes.NOTIFY_SUCCESS,
+export const notify = (message, id) => ({
+  type: actionTypes.NOTIFY,
   id,
   notification: {
     message,
@@ -10,8 +10,8 @@ export const notifySuccess = (id, message) => ({
   },
 });
 
-export const destroy = (id, index) => ({
+export const destroy = (notification, id) => ({
   type: actionTypes.DESTROY,
   id,
-  index,
+  notification,
 });

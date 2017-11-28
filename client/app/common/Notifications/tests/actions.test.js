@@ -8,15 +8,27 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('AuthenticationActions', () => {
-  describe('notifySuccess', () => {
-    let message, mockAreaID;
+  const mockAreaID = 'mockAreaID';
+  describe('notify', () => {
+    let message;
     beforeEach(() => {
-      mockAreaID = 'mockAreaID';
       message = 'message';
     });
 
     it('dispatches with expected actions', () => {
-      expect(NotificationActions.notifySuccess(mockAreaID, message)).toMatchSnapshot();
+      expect(NotificationActions.notify(mockAreaID, message)).toMatchSnapshot();
+    });
+  });
+
+  describe('destroy', () => {
+    let message, mockNotification;
+    beforeEach(() => {
+      message = 'message';
+      mockNotification = fromJS({ message });
+    });
+
+    it('dispatches with expected actions', () => {
+      expect(NotificationActions.destroy(mockAreaID, mockNotification)).toMatchSnapshot();
     });
   });
 });

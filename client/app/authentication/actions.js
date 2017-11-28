@@ -43,8 +43,7 @@ export function register(registerParams) {
     return AuthenticationSources.register(registerParams.toJS())
       .then(response => {
         dispatch(registerSuccess(response.data));
-        dispatch(NotificationActions.notifySuccess(areaIDs.AUTHENTICATION, response.data.message))
-        dispatch(ModalActions.hideModal(ModalIds.REGISTRATION_MODAL));
+        dispatch(NotificationActions.notify(response.data.message, areaIDs.AUTHENTICATION))
         dispatch(ModalActions.showModal(ModalIds.CONFIRMATION_MODAL));
       })
       .catch(err => {
@@ -69,11 +68,12 @@ export function confirm(confirmationParams) {
     return AuthenticationSources.confirm(confirmationParams.toJS())
       .then(response => {
         dispatch(confirmationSuccess(response.data));
+        dispatch(NotificationActions.notify(response.data.message))
         dispatch(ModalActions.hideModal(ModalIds.CONFIRMATION_MODAL));
       })
       .catch(err => {
         dispatch(confirmationFailure(err.response.data.error));
-        throw new SubmissionError(err.response.data.error);
+        throw new SubmissionError({ _error: err.response.data.error });
       });
   }
 }
@@ -92,8 +92,7 @@ export function resendConfirmation(resendConfirmation) {
   return dispatch => {
     return AuthenticationSources.resendConfirmation(resendConfirmation.toJS())
       .then(response => {
-        dispatch(NotificationActions.notifySuccess(areaIDs.AUTHENTICATION, response.data.message))
-        dispatch(ModalActions.hideModal(ModalIds.RESEND_CONFIRMATION_MODAL));
+        dispatch(NotificationActions.notify(response.data.message, areaIDs.AUTHENTICATION))
         dispatch(ModalActions.showModal(ModalIds.CONFIRMATION_MODAL));
       })
       .catch(err => {

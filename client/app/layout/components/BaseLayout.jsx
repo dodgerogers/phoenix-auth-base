@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import functional from 'react-functional';
 import NavbarContainer from '../containers/NavbarContainer';
 import ModalsContainer from '../../common/modals/containers/ModalsContainer';
+import { GlobalNotifications } from '../../common/Notifications';
 import Footer from './Footer';
 
 
 const BaseLayout = (props) => (
   <div className="BaseLayout">
     <NavbarContainer {...props} />
+    <GlobalNotifications />
     <div className="main">
       {props.children}
     </div>
