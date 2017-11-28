@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import { Button, Divider, Modal, Message } from 'semantic-ui-react';
-import { NotificationContainer, areaIDs } from '../../common/Notifications';
+import { NotificationsContainer, areaIDs } from '../../common/Notifications';
 
 
 const AuthenticationModal = (props) => {
@@ -17,7 +17,7 @@ const AuthenticationModal = (props) => {
         {props.title}
       </Modal.Header>
       <Modal.Content>
-        <NotificationContainer id={areaIDs.AUTHENTICATION} />
+        <NotificationsContainer id={areaIDs.AUTHENTICATION} />
         {props.children}
       </Modal.Content>
       <Modal.Actions>

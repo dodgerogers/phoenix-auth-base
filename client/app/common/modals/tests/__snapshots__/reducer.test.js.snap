@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`modalsReducer HIDE_MODAL toggles modal with ID 1 to false 1`] = `
+Immutable.Map {
+  modals: Immutable.Map {
+  },
+  1: false,
+}
+`;
+
+exports[`modalsReducer SHOW_MODAL toggles modal with ID 1 to true 1`] = `
+Immutable.Map {
+  modals: Immutable.Map {
+  },
+  1: true,
+}
+`;

@@ -1,13 +1,15 @@
 import { actionTypes, areaIDs } from './constants';
 import * as NotificationActions from './actions';
 import Reducer from './reducer';
-import NotificationContainer from './containers/NotificationContainer';
+import NotificationsContainer from './containers/NotificationsContainer';
+import GlobalNotifications from './components/GlobalNotifications';
 
 
 export {
   actionTypes,
   areaIDs,
   NotificationActions,
-  NotificationContainer,
+  NotificationsContainer,
+  GlobalNotifications,
   Reducer,
 };

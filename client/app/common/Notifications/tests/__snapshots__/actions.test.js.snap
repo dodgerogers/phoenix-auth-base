@@ -1,12 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AuthenticationActions notifySuccess dispatches with expected actions 1`] = `
+exports[`AuthenticationActions destroy dispatches with expected actions 1`] = `
 Object {
-  "id": "mockAreaID",
+  "id": Immutable.Map {
+    message: "message",
+},
+  "notification": "mockAreaID",
+  "type": "DESTROY",
+}
+`;
+
+exports[`AuthenticationActions notify dispatches with expected actions 1`] = `
+Object {
+  "id": "message",
   "notification": Object {
     "level": "success",
-    "message": "message",
+    "message": "mockAreaID",
   },
-  "type": "NOTIFY_SUCCESS",
+  "type": "NOTIFY",
 }
 `;

@@ -6,15 +6,34 @@ import Notification, { FunctionalComponent, PureComponent } from '../Notificatio
 
 
 describe('Notification', () => {
-  describe('PureComponent', () => {
-    const fullProps = () => ({
-      onDestroy: jest.fn(),
-      notification: fromJS({
-        message: 'Information',
-        level: null,
-      }),
+  const fullProps = () => ({
+    onDestroy: jest.fn(),
+    notification: fromJS({
+      message: 'Information',
+      level: null,
+    }),
+  });
+
+  describe('FunctionalComponent', () => {
+    beforeEach(() => {
+      jest.useFakeTimers()
     });
 
+    const functionalComponent = (props) => shallow(
+      <FunctionalComponent {...props} />, { lifecycleExperimental: true }
+    );
+
+    it('calls props.onDestroy on componentDidMount', () => {
+      const props = fullProps();
+      const component = functionalComponent(props);
+
+      jest.runAllTimers();
+
+      expect(props.onDestroy).toHaveBeenCalled();
+    });
+  });
+
+  describe('PureComponent', () => {
     const pureComponent = (props) => shallow(
       <PureComponent {...props} />
     );

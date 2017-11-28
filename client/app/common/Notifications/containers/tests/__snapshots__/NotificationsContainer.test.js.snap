@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NotificationContainer connected component matches snapshot 1`] = `
+exports[`NotificationsContainer connected component matches snapshot 1`] = `
 <Provider
   store={
     Object {
@@ -23,7 +23,7 @@ exports[`NotificationContainer connected component matches snapshot 1`] = `
         Immutable.List [
         ]
       }
-      notifySuccess={[Function]}
+      notify={[Function]}
     >
       <noscript />
     </NotificationList>

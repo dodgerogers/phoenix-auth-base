@@ -19,6 +19,14 @@ Array [
     },
   },
   Object {
+    "id": undefined,
+    "notification": Object {
+      "level": "success",
+      "message": undefined,
+    },
+    "type": "NOTIFY",
+  },
+  Object {
     "data": Object {
       "id": "CONFIRMATION_MODAL",
     },
@@ -81,13 +89,7 @@ Array [
       "level": "success",
       "message": undefined,
     },
-    "type": "NOTIFY_SUCCESS",
-  },
-  Object {
-    "data": Object {
-      "id": "REGISTRATION_MODAL",
-    },
-    "type": "HIDE_MODAL",
+    "type": "NOTIFY",
   },
   Object {
     "data": Object {
@@ -115,13 +117,7 @@ Array [
       "level": "success",
       "message": "Success",
     },
-    "type": "NOTIFY_SUCCESS",
-  },
-  Object {
-    "data": Object {
-      "id": "RESEND_CONFIRMATION_MODAL",
-    },
-    "type": "HIDE_MODAL",
+    "type": "NOTIFY",
   },
   Object {
     "data": Object {

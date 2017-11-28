@@ -16,7 +16,7 @@ const NotificationList = (props) => {
       <Notification
         key={index}
         notification={notification}
-        onDestroy={() => props.destroy(props.id, index)}
+        onDestroy={() => props.destroy(notification, props.id)}
       />
     );
   };
