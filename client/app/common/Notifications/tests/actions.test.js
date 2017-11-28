@@ -7,6 +7,10 @@ import { formIDs, actionTypes } from '../constants';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
+jest.mock('../../../lib/utils/UidGenerator', () => {
+  return jest.fn(() => 1);
+});
+
 describe('AuthenticationActions', () => {
   const mockAreaID = 'mockAreaID';
   describe('notify', () => {

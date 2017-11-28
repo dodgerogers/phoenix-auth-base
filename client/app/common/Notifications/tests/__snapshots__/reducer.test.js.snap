@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`notificationReducer NOTIFY adds notification to given ID 1`] = `
+Immutable.Map {
+  APPLICATION: Immutable.List [
+  ],
+  AUTHENTICATION: Immutable.List [
+    Immutable.Map {
+      message: "message",
+      level: "level",
+      id: 0,
+    },
+  ],
+}
+`;
+
+exports[`notificationReducer NOTIFY adds notification to global id when ID not present 1`] = `
+Immutable.Map {
+  APPLICATION: Immutable.List [
+    Immutable.Map {
+      message: "message",
+      level: "level",
+      id: 0,
+    },
+  ],
+  AUTHENTICATION: Immutable.List [
+  ],
+}
+`;
+
+exports[`notificationReducer destroy removes given notification from the given collection 1`] = `
+Immutable.Map {
+  APPLICATION: Immutable.List [
+  ],
+  AUTHENTICATION: Immutable.List [
+    Immutable.Map {
+      message: "message",
+      level: "level",
+      id: 0,
+    },
+  ],
+}
+`;
+
+exports[`notificationReducer destroy removes given notification from the given collection 2`] = `
+Immutable.Map {
+  APPLICATION: Immutable.List [
+  ],
+  AUTHENTICATION: Immutable.List [
+  ],
+}
+`;
