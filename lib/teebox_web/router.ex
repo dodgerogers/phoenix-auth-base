@@ -1,5 +1,6 @@
 defmodule TeeboxWeb.Router do
   use TeeboxWeb, :router
+  # use PhoenixOauth2Provider.Router
 
   if Mix.env == :dev do
     forward "/sent_emails", Bamboo.EmailPreviewPlug
@@ -20,16 +21,20 @@ defmodule TeeboxWeb.Router do
   scope "/api" do
     pipe_through :api
 
+    post "/oauth/token", TeeboxWeb.Api.TokenController, :create
+
     # resources "/sessions", TeeboxWeb.Api.SessionController, only: [:create]
     resources "/registrations", TeeboxWeb.Api.RegistrationController, only: [:create]
     # resources "/passwords", TeeboxWeb.Api..PasswordController, only: [:create, :update, :edit]
     put "/confirmations", TeeboxWeb.Api.ConfirmationsController, :update
     post "/confirmations", TeeboxWeb.Api.ConfirmationsController, :create
-    # resources "/unlocks", TeeboxWeb.Api.UnlockController, only: [:create]
   end
 
   scope "/", TeeboxWeb do
     pipe_through :browser
+
+    # oauth_routes :public
+    # oauth_routes :protected
 
     get "/", PageController, :index
   end

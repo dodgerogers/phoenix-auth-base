@@ -29,7 +29,7 @@ defmodule Teebox.Accounts.UserTest do
   end
 
   test "registration changset with invalid email" do
-    invalid_email_attrs = @valid_attrs |> Map.merge(%{email: "invalid.email"})
+    invalid_email_attrs = Map.merge(@valid_attrs, %{email: "invalid.email"})
     changeset = User.changeset(:registration, %User{}, invalid_email_attrs)
 
     refute changeset.valid?
@@ -37,8 +37,8 @@ defmodule Teebox.Accounts.UserTest do
   end
 
   test "registration changset with an email which is too long" do
-    invalid_email = User.random_string(254) <> @valid_attrs.email
-    invalid_email_attrs = @valid_attrs |> Map.merge(%{email: invalid_email})
+    invalid_email = Faker.Lorem.characters(254) <> @valid_attrs.email
+    invalid_email_attrs = Map.merge(@valid_attrs, %{email: invalid_email})
     changeset = User.changeset(:registration, %User{}, invalid_email_attrs)
 
     refute changeset.valid?
@@ -47,7 +47,7 @@ defmodule Teebox.Accounts.UserTest do
 
   test "registration changset with weak password" do
     pw = "password"
-    invalid_pw_attrs = @valid_attrs |> Map.merge(%{password: pw, password_confirmation: pw})
+    invalid_pw_attrs = Map.merge(@valid_attrs, %{password: pw, password_confirmation: pw})
     changeset = User.changeset(:registration, %User{}, invalid_pw_attrs)
 
     refute changeset.valid?
@@ -55,7 +55,7 @@ defmodule Teebox.Accounts.UserTest do
   end
 
   test "registration changset when password and password_confirmation do not match" do
-    invalid_pw_attrs = @valid_attrs |> Map.merge(%{password: @password, password_confirmation: @password <> "1"})
+    invalid_pw_attrs = Map.merge(@valid_attrs, %{password: @password, password_confirmation: @password <> "1"})
     changeset = User.changeset(:registration, %User{}, invalid_pw_attrs)
 
     refute changeset.valid?

@@ -5,12 +5,7 @@
 # It is also run when you use the command `mix ecto.setup`
 #
 
-users = [
-  %{email: "jane.doe@example.com", password: "password"},
-  %{email: "john.smith@example.org", password: "password"}
-]
+# Create the default application user and the UI application
+alias Teebox.Accounts.Applications
 
-for user <- users do
-  {:ok, user} = Teebox.Accounts.create_user(user)
-  Teebox.Accounts.confirm_user(user)
-end
+Applications.find_or_create_default_application()

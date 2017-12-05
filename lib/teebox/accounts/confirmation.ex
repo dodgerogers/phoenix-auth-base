@@ -35,8 +35,8 @@ defmodule Teebox.Accounts.Confirmation do
     end
   end
 
-  defp confirmed?(%User{} = user) do
-    user.confirmed_at && !!user.confirmation_token && !!user.confirmation_sent_at
+  def confirmed?(%User{} = user) do
+    user.confirmed_at && !user.confirmation_token && !user.confirmation_sent_at
   end
 
   defp valid_confirmation_token?(%User{} = user) do

@@ -33,9 +33,20 @@ config :mix_docker, image: "377092858912.dkr.ecr.us-east-1.amazonaws.com/teebox.
 config :teebox, :user_repo, Teebox.Persistance.UsersRepository
 config :teebox, :confirmation, Teebox.Accounts.Confirmation
 config :teebox, :registration, Teebox.Accounts.Registration
+config :teebox, :applications, Teebox.Accounts.Applications
+config :teebox, :token, ExOauth2Provider.Token
 
 config :teebox, Teebox.Mailer,
   adapter: Bamboo.LocalAdapter
+
+config :ex_oauth2_provider, ExOauth2Provider,
+  repo: Teebox.Repo,
+  resource_owner: Teebox.Accounts.User,
+  application_owner: Teebox.Accounts.OauthApplicationUser,
+  use_refresh_token: false,
+  grant_flows: ~w(password),
+  access_token_expires_in: 900,
+  password_auth: {Teebox.Accounts.Authenticate, :validate_user_credentials}
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
