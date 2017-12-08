@@ -1,15 +1,17 @@
 defmodule Teebox.Persistance.OauthApplicationUserRepositoryTest do
-  use Teebox.ModelCase
+  use Teebox.ModelCase, async: true
 
   import Teebox.Factory
   alias Teebox.Persistance.OauthApplicationUserRepository
+  alias Teebox.Accounts.OauthApplicationUser
 
   @name "name"
 
   test "create with valid params returns a OauthApplicationUser struct" do
     attrs = params_for(:oauth_application_user)
 
-    {:ok, oauth_application_user} = OauthApplicationUserRepository.create(attrs)
+    {:ok, oauth_application_user} = OauthApplicationUser.changeset(%OauthApplicationUser{}, attrs)
+    |> OauthApplicationUserRepository.create()
 
     assert oauth_application_user.name == attrs.name
   end
@@ -17,7 +19,8 @@ defmodule Teebox.Persistance.OauthApplicationUserRepositoryTest do
   test "create with valid params returns an invalid changeset" do
     attrs = params_for(:oauth_application_user, name: "")
 
-    {:error, changeset} = OauthApplicationUserRepository.create(attrs)
+    {:error, changeset} = OauthApplicationUser.changeset(%OauthApplicationUser{}, attrs)
+    |> OauthApplicationUserRepository.create()
 
     refute changeset.valid?
   end

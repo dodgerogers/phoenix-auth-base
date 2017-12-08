@@ -1,5 +1,5 @@
 defmodule Teebox.Persistance.OauthApplicationRepositoryTest do
-  use Teebox.ModelCase
+  use Teebox.ModelCase, async: true
 
   import Teebox.Factory
   alias Teebox.Persistance.OauthApplicationRepository

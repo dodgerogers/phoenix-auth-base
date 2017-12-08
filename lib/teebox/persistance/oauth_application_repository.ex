@@ -1,5 +1,5 @@
 defmodule Teebox.Persistance.OauthApplicationRepository do
-  alias Teebox.Repo
+  use Teebox.Persistance.BaseRepository
   alias ExOauth2Provider.OauthApplications
   alias ExOauth2Provider.OauthApplications.OauthApplication
 
@@ -8,6 +8,6 @@ defmodule Teebox.Persistance.OauthApplicationRepository do
   end
 
   def find_by_owner_and_name(owner_id, name) do
-    Repo.get_by(OauthApplication, %{owner_id: owner_id, name: name})
+    Teebox.Repo.get_by(OauthApplication, %{owner_id: owner_id, name: name})
   end
 end

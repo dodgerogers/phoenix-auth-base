@@ -1,51 +1,80 @@
-defmodule Teebox.Accounts.RegistrationTest do
-  use Teebox.ModelCase
+defmodule Teebox.Accounts.AuthenticateTest do
+  use Teebox.ModelCase, async: true
 
   import TeeboxWeb.AuthCase
 
-  alias Teebox.Accounts.{Authenticate, User}
-
-  @user_repo Application.get_env(:teebox, :user_repo)
+  alias Teebox.Accounts.Authenticate
 
   @email "email@email.com"
   @password "Pword12345678!$%"
 
-  setup do
-    @user_repo.clear()
+  describe "call" do
+    test "with valid params returns an access token" do
+      create_confirmed_user(%{email: @email, password: @password})
+
+      {:ok, code} = Authenticate.call(%{"grant_type" => "password", "username" => @email, "password" => @password})
+
+      assert code.access_token
+      refute code.refresh_token
+      assert "bearer" == code.token_type
+      assert 900 == code.expires_in
+    end
+
+    test "with invalid username returns an error tuple" do
+      create_confirmed_user(%{email: @email, password: @password})
+
+      {:error, message, status} = Authenticate.call(%{"grant_type" => "password", "username" => @email <> "1", "password" => @password})
+
+      assert :unauthorized == message
+      assert :unauthorized == status
+    end
+
+    test "with invalid password returns an error tuple" do
+      create_confirmed_user(%{email: @email, password: @password})
+
+      {:error, message, status} = Authenticate.call(%{"grant_type" => "password", "username" => @email, "password" => @password <> "1"})
+
+      assert :unauthorized == message
+      assert :unauthorized == status
+    end
+
+    test "with unconfirmed account returns an error tuple" do
+      create_unconfirmed_user(%{email: @email, password: @password})
+
+      {:error, message, status} = Authenticate.call(%{"grant_type" => "password", "username" => @email, "password" => @password})
+
+      assert :unauthorized == message
+      assert :unauthorized == status
+    end
   end
 
-  # TODO: Clean up factories
-  test "call with valid params returns user" do
-    user = build_user_with_password(%{email: @email, password: @password})
+  describe "validate_user_credentials" do
+    test "with valid params returns user" do
+      confirmed_user = create_confirmed_user(%{email: @email, password: @password})
 
-    {:ok, confirmed_user} = User.changeset(:registration, user, %{})
-    |> @user_repo.create()
+      {:ok, valid_user} = Authenticate.validate_user_credentials(@email, @password)
 
-    {:ok, valid_user} = Authenticate.call(@email, @password)
+      assert valid_user.id == confirmed_user.id
+    end
 
-    assert valid_user == confirmed_user
-  end
+    test "when user is not confirmed returns error tuple" do
+      create_unconfirmed_user(%{email: @email, password: @password})
 
-  test 'call when user is not confirmed returns error tuple' do
-    user = build_user_with_password(%{email: @email, password: @password, confirmed_at: nil, confirmation_token: "token", confirmation_sent_at: DateTime.utc_now()})
+      {:error, message} = Authenticate.validate_user_credentials(@email, @password)
 
-    {:ok, confirmed_user} = User.changeset(:registration, user, %{})
-    |> @user_repo.create()
+      assert message == "Account is not confirmed"
+    end
 
-    {:error, message} = Authenticate.call(@email <> "1", @password)
+    test "when user cannot be found returns error tuple" do
+      {:error, message} = Authenticate.validate_user_credentials(@email <> "1", @password)
 
-    assert message == "Account is not confirmed"
-  end
+      assert message == "Invalid email or password"
+    end
 
-  test "call when user cannot be found returns error tuple" do
-    {:error, message} = Authenticate.call(@email <> "1", @password)
+    test "when password is not correct returns error tuple" do
+      {:error, message} = Authenticate.validate_user_credentials(@email, @password <> "1")
 
-    assert message == "Invalid credentials"
-  end
-
-  test "call when password is not correct returns error tuple" do
-    {:error, message} = Authenticate.call(@email, @password <> "1")
-
-    assert message == "Invalid credentials"
+      assert message == "Invalid email or password"
+    end
   end
 end

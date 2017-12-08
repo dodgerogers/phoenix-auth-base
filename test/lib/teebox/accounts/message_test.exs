@@ -1,5 +1,5 @@
 defmodule Teebox.Accounts.MessageTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   use Bamboo.Test
 
   import Teebox.Factory

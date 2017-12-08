@@ -1,5 +1,5 @@
 defmodule Teebox.Accounts.OauthApplicationUserTest do
-  use Teebox.ModelCase
+  use Teebox.ModelCase, async: true
 
   alias Teebox.Accounts.OauthApplicationUser
 

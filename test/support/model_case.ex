@@ -22,6 +22,7 @@ defmodule Teebox.ModelCase do
       import Ecto.Changeset
       import Ecto.Query
       import Teebox.ModelCase
+      import Teebox.Factory
     end
   end
 

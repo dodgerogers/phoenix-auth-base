@@ -6,6 +6,3 @@
 #
 
 # Create the default application user and the UI application
-alias Teebox.Accounts.Applications
-
-Applications.find_or_create_default_application()

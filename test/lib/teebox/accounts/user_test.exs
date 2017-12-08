@@ -1,5 +1,5 @@
 defmodule Teebox.Accounts.UserTest do
-  use Teebox.ModelCase
+  use Teebox.ModelCase, async: true
 
   alias Teebox.Accounts.User
 
@@ -37,7 +37,7 @@ defmodule Teebox.Accounts.UserTest do
   end
 
   test "registration changset with an email which is too long" do
-    invalid_email = Faker.Lorem.characters(254) <> @valid_attrs.email
+    invalid_email = to_string(Faker.Lorem.characters(254)) <> @valid_attrs.email
     invalid_email_attrs = Map.merge(@valid_attrs, %{email: invalid_email})
     changeset = User.changeset(:registration, %User{}, invalid_email_attrs)
 

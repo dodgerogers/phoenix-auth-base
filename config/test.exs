@@ -25,8 +25,7 @@ config :teebox, Teebox.Repo, db_config
 config :teebox, :user_repo, Teebox.Persistance.UsersRepositoryMock
 config :teebox, :confirmation, Teebox.Accounts.ConfirmationMock
 config :teebox, :registration, Teebox.Accounts.RegistrationMock
-# config :teebox, :applications, Teebox.Accounts.ApplicationsMock
-config :teebox, :token, Teebox.Accounts.TokenMock
+config :teebox, :authenticate, Teebox.Accounts.AuthenticateMock
 
 config :pbkdf2_elixir, :log_rounds, 1
 

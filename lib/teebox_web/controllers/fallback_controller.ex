@@ -17,4 +17,10 @@ defmodule TeeboxWeb.FallbackController do
     |> put_status(:not_found)
     |> render(TeeboxWeb.ErrorView, :"404")
   end
+
+  def call(conn, {:error, _}) do
+    conn
+    |> put_status(:internal_server_error)
+    |> render(TeeboxWeb.ErrorView, :"500")
+  end
 end

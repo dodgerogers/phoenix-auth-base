@@ -1,5 +1,5 @@
 defmodule TeeboxWeb.Api.ConfirmationsControllerTest do
-  use TeeboxWeb.ConnCase
+  use TeeboxWeb.ConnCase, async: true
 
   @email "email@email.com"
   @confirmation_token to_string(Faker.Lorem.characters(30))
