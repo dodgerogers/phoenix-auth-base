@@ -18,7 +18,8 @@ export function login(loginParams) {
   return dispatch => {
     return AuthenticationSources.login(loginParams.toJS())
       .then(response => {
-        dispatch(authenticateSuccess(response.data));
+        dispatch(authenticateSuccess(response.data.access_token));
+        dispatch(NotificationActions.notify(response.data.message))
         dispatch(ModalActions.hideModal(ModalIds.LOGIN_MODAL));
       })
       .catch(err => {

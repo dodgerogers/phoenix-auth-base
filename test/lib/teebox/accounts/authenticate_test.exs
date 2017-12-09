@@ -8,6 +8,8 @@ defmodule Teebox.Accounts.AuthenticateTest do
   @email "email@email.com"
   @password "Pword12345678!$%"
 
+  @invalid_credentials_msg "Invalid email or password"
+
   describe "call" do
     test "with valid params returns an access token" do
       create_confirmed_user(%{email: @email, password: @password})
@@ -25,7 +27,7 @@ defmodule Teebox.Accounts.AuthenticateTest do
 
       {:error, message, status} = Authenticate.call(%{"grant_type" => "password", "username" => @email <> "1", "password" => @password})
 
-      assert :unauthorized == message
+      assert @invalid_credentials_msg == message
       assert :unauthorized == status
     end
 
@@ -34,7 +36,7 @@ defmodule Teebox.Accounts.AuthenticateTest do
 
       {:error, message, status} = Authenticate.call(%{"grant_type" => "password", "username" => @email, "password" => @password <> "1"})
 
-      assert :unauthorized == message
+      assert @invalid_credentials_msg == message
       assert :unauthorized == status
     end
 
@@ -43,7 +45,7 @@ defmodule Teebox.Accounts.AuthenticateTest do
 
       {:error, message, status} = Authenticate.call(%{"grant_type" => "password", "username" => @email, "password" => @password})
 
-      assert :unauthorized == message
+      assert @invalid_credentials_msg == message
       assert :unauthorized == status
     end
   end
@@ -54,7 +56,7 @@ defmodule Teebox.Accounts.AuthenticateTest do
 
       {:ok, valid_user} = Authenticate.validate_user_credentials(@email, @password)
 
-      assert valid_user.id == confirmed_user.id
+      assert confirmed_user.id == valid_user.id
     end
 
     test "when user is not confirmed returns error tuple" do
@@ -62,19 +64,19 @@ defmodule Teebox.Accounts.AuthenticateTest do
 
       {:error, message} = Authenticate.validate_user_credentials(@email, @password)
 
-      assert message == "Account is not confirmed"
+      assert "Account is not confirmed" == message
     end
 
     test "when user cannot be found returns error tuple" do
       {:error, message} = Authenticate.validate_user_credentials(@email <> "1", @password)
 
-      assert message == "Invalid email or password"
+      assert @invalid_credentials_msg == message
     end
 
     test "when password is not correct returns error tuple" do
       {:error, message} = Authenticate.validate_user_credentials(@email, @password <> "1")
 
-      assert message == "Invalid email or password"
+      assert @invalid_credentials_msg == message
     end
   end
 end

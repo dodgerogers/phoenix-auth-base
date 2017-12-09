@@ -12,7 +12,8 @@ defmodule TeeboxWeb.Api.TokenControllerTest do
     |> post("/api/oauth/token", @valid_params)
 
     response = json_response(conn, 200)
-    assert response["code"]
+    assert response["access_token"]
+    assert response["message"] == "Logged in successfully!"
   end
 
   test "POST create with invalid password grant 400 and error" do
