@@ -1,5 +1,5 @@
 defmodule Teebox.Accounts.RegistrationTest do
-  use Teebox.ModelCase
+  use Teebox.ModelCase, async: true
   use Bamboo.Test
 
   alias Teebox.Accounts.{Registration}

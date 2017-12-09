@@ -52,6 +52,7 @@ defmodule Teebox.Mixfile do
       {:comeonin, "~> 3.2.0"},
       {:cowboy, "~> 1.0"},
       {:ex_machina, "~> 2.0", only: :test},
+      {:ex_oauth2_provider, "~> 0.2.0"},
       {:faker, "~> 0.9"},
       {:gettext, "~> 0.12"},
       {:mix_docker, "~> 0.4.1"},
@@ -74,8 +75,11 @@ defmodule Teebox.Mixfile do
   #
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
-    ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"],
-     "test": ["ecto.drop --quiet", "ecto.create --quiet", "ecto.migrate", "test"]]
+    [
+      "ecto.seed": ["run priv/repo/seeds.exs"],
+      "ecto.setup": ["ecto.create", "ecto.migrate", "ecto.seed"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      "test": ["ecto.drop --quiet", "ecto.create --quiet", "ecto.migrate", "test"]
+    ]
   end
 end

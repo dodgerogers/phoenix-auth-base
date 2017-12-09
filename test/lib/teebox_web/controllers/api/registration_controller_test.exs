@@ -1,5 +1,5 @@
 defmodule TeeboxWeb.Api.RegistrationControllerTest do
-  use TeeboxWeb.ConnCase
+  use TeeboxWeb.ConnCase, async: true
 
   @password "Pword12345678!$%"
   @valid_attrs %{

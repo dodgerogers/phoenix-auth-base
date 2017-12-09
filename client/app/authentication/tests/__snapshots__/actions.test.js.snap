@@ -49,9 +49,16 @@ Array [
   Object {
     "type": "AUTHENTICATE_SUCCESS",
     "user": Object {
-      "id": 1,
-      "name": "name",
+      "code": "code",
     },
+  },
+  Object {
+    "id": undefined,
+    "notification": Object {
+      "level": "success",
+      "message": "Login successful",
+    },
+    "type": "NOTIFY",
   },
   Object {
     "data": Object {

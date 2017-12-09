@@ -123,11 +123,13 @@ describe('async AuthenticationActions', () => {
 
     it('when login is successful', () => {
       const mockResponse = {
-        id: 1,
-        name: 'name',
+        message: "Login successful",
+        access_token: {
+          code: "code",
+        }
       };
 
-      mockAxios.onPost('api/sessions', { session: { email, password }})
+      mockAxios.onPost('api/oauth/token', { grant_type: 'password', username: email, password })
         .reply(200, mockResponse);
 
       const store = mockStore();
@@ -144,8 +146,8 @@ describe('async AuthenticationActions', () => {
         error: 'Invalid credentials',
       };
 
-      mockAxios.onPost('api/sessions', { session: { email, password }})
-        .reply(400, mockResponse);
+      mockAxios.onPost('api/oauth/token', { grant_type: 'password', username: email, password })
+        .reply(401, mockResponse);
 
       const store = mockStore();
       const params = fromJS({ email, password });
