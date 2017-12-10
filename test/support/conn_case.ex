@@ -24,8 +24,8 @@ defmodule TeeboxWeb.ConnCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-
       import TeeboxWeb.Router.Helpers
+      import Teebox.Factory
 
       # The default endpoint for testing
       @endpoint TeeboxWeb.Endpoint
