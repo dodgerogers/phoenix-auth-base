@@ -1,8 +1,6 @@
 defmodule TeeboxWeb.Api.RegistrationViewTest do
   use TeeboxWeb.ConnCase, async: true
 
-  import Teebox.Factory
-
   test "renders registration.json" do
     user = build(:user, id: 1)
 

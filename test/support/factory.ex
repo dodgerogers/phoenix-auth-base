@@ -15,7 +15,7 @@ defmodule Teebox.Factory do
       unlock_token: nil,
       reset_password_token: nil,
       reset_password_sent_at: nil,
-      password_hash: to_string(Faker.Lorem.characters(50))
+      password_hash: Faker.String.base64()
     }
   end
 
@@ -32,6 +32,19 @@ defmodule Teebox.Factory do
       uid: Faker.String.base64(),
       secret: Faker.String.base64(),
       redirect_uri: "https://" <> Faker.Internet.domain_name()
+    }
+  end
+
+  def oauth_access_token_factory do
+    %ExOauth2Provider.OauthAccessTokens.OauthAccessToken{
+      resource_owner: build(:user),
+      application: build(:oauth_application),
+      token: Faker.String.base64(),
+      refresh_token: nil,
+      expires_in: 900,
+      revoked_at: nil,
+      scopes: nil,
+      previous_refresh_token: nil
     }
   end
 end

@@ -23,4 +23,10 @@ defmodule TeeboxWeb.FallbackController do
     |> put_status(:internal_server_error)
     |> render(TeeboxWeb.ErrorView, :"500")
   end
+
+  def unauthenticated(conn, _params) do
+    conn
+    |> put_status(:unauthorized)
+    |> render(TeeboxWeb.ErrorView, "401.json")
+  end
 end

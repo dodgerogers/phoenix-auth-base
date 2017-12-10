@@ -1,6 +1,10 @@
 defmodule TeeboxWeb.ErrorView do
   use TeeboxWeb, :view
 
+  def render("401.json", _assigns) do
+    %{error: "Unauthorized"}
+  end
+
   def render("404.json", _assigns) do
     %{error: "Page not found"}
   end
