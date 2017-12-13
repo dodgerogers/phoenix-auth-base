@@ -6,7 +6,7 @@ Object {
     message: "message",
 },
   "notification": "mockAreaID",
-  "type": "DESTROY",
+  "type": "DESTROY_NOTIFICATION",
 }
 `;
 
@@ -17,6 +17,6 @@ Object {
     "level": "success",
     "message": "mockAreaID",
   },
-  "type": "NOTIFY",
+  "type": "CREATE_NOTIFICATION",
 }
 `;

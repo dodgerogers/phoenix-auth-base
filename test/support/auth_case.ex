@@ -3,8 +3,6 @@ defmodule TeeboxWeb.AuthCase do
 
   import Teebox.Factory
 
-  @user_repo Application.get_env(:teebox, :user_repo)
-
   def build_user_with_password(%{} = attrs \\ %{}) do
     build(:user, attrs) |> set_password()
   end

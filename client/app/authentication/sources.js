@@ -15,3 +15,7 @@ export const confirm = ({ confirmation_token, email, password }) => {
 export const resendConfirmation = ({ email }) => {
   return HTTP.post(`${API_BASE}/api/confirmations`, { confirmation: { email } });
 };
+
+export const currentUser = () => {
+  return HTTP.get(`${API_BASE}/api/users/me`);
+};

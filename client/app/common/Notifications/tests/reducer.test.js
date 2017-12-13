@@ -10,7 +10,7 @@ describe('notificationReducer', () => {
   };
 
   const notifyAction = () => ({
-    type: actionTypes.NOTIFY,
+    type: actionTypes.CREATE_NOTIFICATION,
     id: areaIDs.AUTHENTICATION,
     notification: mockNotification,
   });
@@ -33,7 +33,7 @@ describe('notificationReducer', () => {
       const state = notificationReducer(state, notifyAction());
       const firstNotification = state.getIn([areaIDs.AUTHENTICATION, 0]);
       const destroyAction = {
-        type: actionTypes.DESTROY,
+        type: actionTypes.DESTROY_NOTIFICATION,
         id: areaIDs.AUTHENTICATION,
         notification: firstNotification,
       };

@@ -19,9 +19,9 @@ export default function notificationReducer(state = initialState, action) {
   const { type } = action;
 
   switch (type) {
-    case actionTypes.NOTIFY:
+    case actionTypes.CREATE_NOTIFICATION:
       return state.update(getAreaID(action), array => array.push(incrementID(action.notification, array)));
-    case actionTypes.DESTROY:
+    case actionTypes.DESTROY_NOTIFICATION:
       return state.update(getAreaID(action), list => filterById(list, action.notification));
     default:
       return state;
