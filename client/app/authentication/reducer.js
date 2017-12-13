@@ -2,7 +2,8 @@ import { fromJS } from 'immutable';
 import { actionTypes } from './constants';
 
 export const initialState = fromJS({
-  user: null,
+  currentUser: null,
+  accessToken: null,
 });
 
 export default function authenticationReducer(state = initialState, action) {
@@ -10,9 +11,13 @@ export default function authenticationReducer(state = initialState, action) {
 
   switch (type) {
     case actionTypes.AUTHENTICATE_SUCCESS:
-      return state.set('user', fromJS(action.user));
+      return state.set('accessToken', fromJS(action.accessToken));
     case actionTypes.AUTHENTICATE_FAILURE:
-      return state.set('user', null);
+      return state.set('accessToken', null);
+    case actionTypes.GET_CURRENT_RESOURCE_SUCCESS:
+      return state.set('currentUser', fromJS(action.user));
+    case actionTypes.GET_CURRENT_RESOURCE_FAILURE:
+      return state.set('currentUser', null);
     default:
       return state;
   };

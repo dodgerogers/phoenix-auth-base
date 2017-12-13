@@ -122,15 +122,23 @@ describe('async AuthenticationActions', () => {
     });
 
     it('when login is successful', () => {
-      const mockResponse = {
+      const mockTokenResponse = {
         message: "Login successful",
         access_token: {
-          code: "code",
+          access_token: "code",
         }
       };
 
       mockAxios.onPost('api/oauth/token', { grant_type: 'password', username: email, password })
-        .reply(200, mockResponse);
+        .reply(200, mockTokenResponse);
+
+      const mockUserResponse = {
+        id: 1,
+        name: 'name',
+      }
+
+      mockAxios.onGet('api/users/me')
+        .reply(200, mockUserResponse);
 
       const store = mockStore();
       const params = fromJS({ email, password });

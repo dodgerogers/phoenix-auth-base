@@ -24,7 +24,7 @@ Array [
       "level": "success",
       "message": undefined,
     },
-    "type": "NOTIFY",
+    "type": "CREATE_NOTIFICATION",
   },
   Object {
     "data": Object {
@@ -47,10 +47,10 @@ Array [
 exports[`async AuthenticationActions login when login is successful 1`] = `
 Array [
   Object {
-    "type": "AUTHENTICATE_SUCCESS",
-    "user": Object {
-      "code": "code",
+    "accessToken": Object {
+      "access_token": "code",
     },
+    "type": "AUTHENTICATE_SUCCESS",
   },
   Object {
     "id": undefined,
@@ -58,7 +58,7 @@ Array [
       "level": "success",
       "message": "Login successful",
     },
-    "type": "NOTIFY",
+    "type": "CREATE_NOTIFICATION",
   },
   Object {
     "data": Object {
@@ -96,7 +96,7 @@ Array [
       "level": "success",
       "message": undefined,
     },
-    "type": "NOTIFY",
+    "type": "CREATE_NOTIFICATION",
   },
   Object {
     "data": Object {
@@ -124,7 +124,7 @@ Array [
       "level": "success",
       "message": "Success",
     },
-    "type": "NOTIFY",
+    "type": "CREATE_NOTIFICATION",
   },
   Object {
     "data": Object {

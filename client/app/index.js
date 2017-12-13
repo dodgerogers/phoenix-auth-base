@@ -9,7 +9,7 @@ import 'semantic-ui-css/semantic.min.css';
 import '../assets/app.scss'
 
 render(
-  <Provider store={store()}>
+  <Provider store={store}>
     <Routes />
   </Provider>,
   document.getElementById("app")

@@ -4,9 +4,11 @@ import { ModalActions, ModalIds } from '../common/modals';
 import { actionTypes, formIDs } from './constants';
 import { NotificationActions, areaIDs } from '../common/Notifications';
 
-const authenticateSuccess = (user) => ({
+import store from '../store';
+
+const authenticateSuccess = (accessToken) => ({
   type: actionTypes.AUTHENTICATE_SUCCESS,
-  user,
+  accessToken,
 });
 
 const authenticateFailure = (error) => ({
@@ -18,9 +20,9 @@ export function login(loginParams) {
   return dispatch => {
     return AuthenticationSources.login(loginParams.toJS())
       .then(response => {
-        dispatch(authenticateSuccess(response.data.access_token));
+        dispatch(authenticateSuccess(response.data.access_token))
         dispatch(NotificationActions.notify(response.data.message))
-        dispatch(ModalActions.hideModal(ModalIds.LOGIN_MODAL));
+        dispatch(ModalActions.hideModal(ModalIds.LOGIN_MODAL))
       })
       .catch(err => {
         dispatch(authenticateFailure(err.response.data.error))

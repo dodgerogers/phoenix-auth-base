@@ -11,7 +11,7 @@ const CurrentUser = (ComposedComponent, opts = {}) => {
 
   function mapStateToProps({ authentication }) {
     return {
-      currentUser: authentication.get('user'),
+      currentUser: authentication.get('currentUser'),
     };
   }
 
