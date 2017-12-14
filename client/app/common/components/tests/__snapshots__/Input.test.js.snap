@@ -1,0 +1,161 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input matches snapshot 1`] = `
+<Input
+  input={
+    Object {
+      "name": "input-name",
+    }
+  }
+  meta={
+    Object {
+      "error": null,
+      "touched": false,
+    }
+  }
+>
+  <div
+    className="input"
+    style={
+      Object {
+        "margin": "0 0 1em",
+      }
+    }
+  >
+    <FormInput
+      as={[Function]}
+      control={[Function]}
+      error={null}
+      input={
+        Object {
+          "name": "input-name",
+        }
+      }
+    >
+      <FormField
+        control={[Function]}
+        error={null}
+        input={
+          Object {
+            "name": "input-name",
+          }
+        }
+      >
+        <div
+          className="field"
+        >
+          <Input
+            input={
+              Object {
+                "name": "input-name",
+              }
+            }
+            type="text"
+          >
+            <div
+              className="ui input"
+            >
+              <input
+                name="input-name"
+                onChange={[Function]}
+                type="text"
+              />
+            </div>
+          </Input>
+        </div>
+      </FormField>
+    </FormInput>
+  </div>
+</Input>
+`;
+
+exports[`Input matches snapshot when errors are present 1`] = `
+<Input
+  input={
+    Object {
+      "name": "input-name",
+    }
+  }
+  meta={
+    Object {
+      "error": "Something went wrong",
+      "touched": true,
+    }
+  }
+>
+  <div
+    className="input"
+    style={
+      Object {
+        "margin": "0 0 1em",
+      }
+    }
+  >
+    <FormInput
+      as={[Function]}
+      control={[Function]}
+      error={true}
+      input={
+        Object {
+          "name": "input-name",
+        }
+      }
+    >
+      <FormField
+        control={[Function]}
+        error={true}
+        input={
+          Object {
+            "name": "input-name",
+          }
+        }
+      >
+        <div
+          className="error field"
+        >
+          <Input
+            input={
+              Object {
+                "name": "input-name",
+              }
+            }
+            type="text"
+          >
+            <div
+              className="ui input"
+            >
+              <input
+                name="input-name"
+                onChange={[Function]}
+                type="text"
+              />
+            </div>
+          </Input>
+        </div>
+      </FormField>
+    </FormInput>
+    <Label
+      basic={true}
+      color="red"
+      pointing={true}
+      style={
+        Object {
+          "marginTop": "-1em",
+        }
+      }
+    >
+      <div
+        className="ui red pointing basic label"
+        onClick={[Function]}
+        style={
+          Object {
+            "marginTop": "-1em",
+          }
+        }
+      >
+        Something went wrong
+      </div>
+    </Label>
+  </div>
+</Input>
+`;
