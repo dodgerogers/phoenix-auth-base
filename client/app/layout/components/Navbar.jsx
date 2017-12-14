@@ -3,16 +3,12 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Menu, Button, Header, Container, Dropdown, Image } from 'semantic-ui-react';
 import { ModalIds, ModalTrigger } from '../../common/modals';
+import UserAvatar from '../../common/components/UserAvatar';
 
 
 const Navbar = (props) => {
   const loggedInLinks = () => {
-    const trigger = (
-      <span>
-        <Image avatar src={props.currentUser.get('avatar')} />
-        <span>{props.currentUser.get('name')}</span>
-      </span>
-    );
+    const trigger = (<UserAvatar user={props.currentUser} />)
 
     return (
       <Dropdown item trigger={trigger}>
