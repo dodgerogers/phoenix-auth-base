@@ -1,6 +1,7 @@
 import { call, put, takeEvery, takeLatest, select } from 'redux-saga/effects'
 import * as AuthenticationSources from '../sources';
 import { actionTypes } from '../constants';
+import * as TokenStorage from '../lib/TokenStorage';
 
 
 const getCurrentUserSuccess = user => ({
@@ -8,23 +9,23 @@ const getCurrentUserSuccess = user => ({
   user,
 });
 
-const getCurrentUserFailure = error => ({
+const getCurrentUserFailure = () => ({
   type: actionTypes.GET_CURRENT_RESOURCE_FAILURE,
-  error,
 });
 
-export function* fetchCurrentUser(action) {
+export function* fetchUserAndStoreToken(action) {
   try {
     const response = yield call(AuthenticationSources.currentUser);
+    const tokenCookie = yield call(TokenStorage.store, action.accessToken);
 
     yield put(getCurrentUserSuccess(response.data.user));
-  } catch (err) {
-    yield put(getCurrentUserFailure(err.response.data.error));
+  } catch (_err) {
+    yield put(getCurrentUserFailure());
   }
 }
 
-export function* getCurrentResource() {
-  yield takeLatest(actionTypes.AUTHENTICATE_SUCCESS, fetchCurrentUser);
+export function* loginSaga() {
+  yield takeLatest(actionTypes.AUTHENTICATE_SUCCESS, fetchUserAndStoreToken);
 }
 
-export default getCurrentResource;
+export default loginSaga;

@@ -1,8 +1,8 @@
 import { all } from 'redux-saga/effects';
-import getCurrentResourceSaga from '../authentication/sagas/getCurrentResourceSaga';
+import LoginSaga from '../authentication/sagas/LoginSaga';
 
 export default function* rootSaga() {
   yield all([
-    getCurrentResourceSaga(),
+    LoginSaga(),
   ]);
 }

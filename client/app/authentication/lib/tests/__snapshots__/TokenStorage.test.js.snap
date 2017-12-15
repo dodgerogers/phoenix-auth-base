@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Token COOKIE_KEY matches snapshot 1`] = `"token"`;
+
+exports[`Token generateExpiry constructs date from the created_at and expires_in properties 1`] = `2000-12-12T05:16:01.000Z`;
+
+exports[`Token store should resolve falsy when not able to set cookie 1`] = `
+Array [
+  Array [
+    "token",
+    "eyJhY2Nlc3NfdG9rZW4iOiJhMWIyYzNkNGU1ZjYiLCJleHBpcmVzX2luIjo5MDAsImNyZWF0ZWRfYXQiOiIyMDAwLTEyLTEyVDAwOjAxOjAxIn0=",
+    Object {
+      "expires": 2000-12-12T05:16:01.000Z,
+    },
+  ],
+]
+`;
+
+exports[`Token store should resolve truthy when able to set cookie 1`] = `
+Array [
+  Array [
+    "token",
+    "eyJhY2Nlc3NfdG9rZW4iOiJhMWIyYzNkNGU1ZjYiLCJleHBpcmVzX2luIjo5MDAsImNyZWF0ZWRfYXQiOiIyMDAwLTEyLTEyVDAwOjAxOjAxIn0=",
+    Object {
+      "expires": 2000-12-12T05:16:01.000Z,
+    },
+  ],
+]
+`;
