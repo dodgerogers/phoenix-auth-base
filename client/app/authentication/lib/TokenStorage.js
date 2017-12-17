@@ -3,7 +3,7 @@ import moment from 'moment';
 
 
 export const COOKIE_KEY = 'token';
-export const generateExpiry = token => moment(token.created_at).add(token.expires_in, 'seconds').toDate();
+export const generateExpiry = token => moment(token.createdAt).add(token.expiresIn, 'seconds').toDate();
 export const encode = token => btoa(JSON.stringify(token));
 export const decode = token => {
   try {

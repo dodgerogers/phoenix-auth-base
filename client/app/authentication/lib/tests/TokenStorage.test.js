@@ -3,12 +3,12 @@ import * as TokenStorage from '../TokenStorage';
 
 describe('Token', () => {
   const token = () => ({
-    access_token: 'a1b2c3d4e5f6',
-    expires_in: 900,
-    created_at: '2000-12-12T00:01:01',
+    accessToken: 'a1b2c3d4e5f6',
+    expiresIn: 900,
+    createdAt: '2000-12-12T00:01:01',
   });
 
-  const encodedToken = 'eyJhY2Nlc3NfdG9rZW4iOiJhMWIyYzNkNGU1ZjYiLCJleHBpcmVzX2luIjo5MDAsImNyZWF0ZWRfYXQiOiIyMDAwLTEyLTEyVDAwOjAxOjAxIn0=';
+  const encodedToken = 'eyJhY2Nlc3NUb2tlbiI6ImExYjJjM2Q0ZTVmNiIsImV4cGlyZXNJbiI6OTAwLCJjcmVhdGVkQXQiOiIyMDAwLTEyLTEyVDAwOjAxOjAxIn0=';
 
   describe('COOKIE_KEY', () => {
     it('matches snapshot', () => {

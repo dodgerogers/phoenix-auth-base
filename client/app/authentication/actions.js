@@ -3,11 +3,18 @@ import * as AuthenticationSources from './sources';
 import { ModalActions, ModalIds } from '../common/modals';
 import { actionTypes, formIDs } from './constants';
 import { NotificationActions, areaIDs } from '../common/Notifications';
+import * as TokenStorage from './lib/TokenStorage';
 
-import store from '../store';
+export const authenticate = () => {
+  return dispatch => {
+    return TokenStorage.fetch()
+      .then(accessToken => dispatch(verifyToken(accessToken)))
+      .catch(err => dispatch(authenticateFailure(err)));
+  }
+}
 
-const authenticateSuccess = (accessToken) => ({
-  type: actionTypes.AUTHENTICATE_SUCCESS,
+const verifyToken = (accessToken) => ({
+  type: actionTypes.VERIFY_TOKEN,
   accessToken,
 });
 
@@ -20,7 +27,7 @@ export function login(loginParams) {
   return dispatch => {
     return AuthenticationSources.login(loginParams.toJS())
       .then(response => {
-        dispatch(authenticateSuccess(response.data.access_token))
+        dispatch(verifyToken(response.data.accessToken))
         dispatch(NotificationActions.notify(response.data.message))
         dispatch(ModalActions.hideModal(ModalIds.LOGIN_MODAL))
       })

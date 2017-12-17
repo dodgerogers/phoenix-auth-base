@@ -3,10 +3,11 @@ import thunk from 'redux-thunk';
 import HTTP from '../../lib/utils/HTTP';
 import MockAdapter from 'axios-mock-adapter';
 import { fromJS } from 'immutable';
+import normalize from 'normalize-object';
 import * as AuthenticationActions from '../actions';
 import * as AuthenticationSources from '../sources';
-import { formIDs, actionTypes } from '../constants';
-import { actionTypes as modalActionTypes, ModalIds } from '../../common/modals';
+import * as TokenStorage from '../lib/TokenStorage';
+
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -25,6 +26,35 @@ describe('async AuthenticationActions', () => {
     mockAxios.restore();
   });
 
+  describe('authenticate', () => {
+    afterEach(() => {
+      TokenStorage.fetch.mockReset();
+    });
+
+    it('when TokenStore.fetch is successful', () => {
+      const mockToken = { accessToken: "token" };
+      TokenStorage.fetch = jest.fn(() => Promise.resolve(mockToken));
+
+      const store = mockStore();
+
+      return store.dispatch(AuthenticationActions.authenticate())
+        .then(() => {
+          expect(store.getActions()).toMatchSnapshot();
+        });
+    });
+
+    it('when TokenStore.fetch fails', () => {
+      TokenStorage.fetch = jest.fn(() => Promise.reject("Error"));
+
+      const store = mockStore();
+
+      return store.dispatch(AuthenticationActions.authenticate())
+        .then((err) => {
+          expect(store.getActions()).toMatchSnapshot();
+        });
+    });
+  });
+
   describe('register', () => {
     let args;
     beforeEach(() => {
@@ -33,13 +63,13 @@ describe('async AuthenticationActions', () => {
         name: 'Bob',
         email: 'email@email.com',
         password,
-        password_confirmation: password,
+        passwordConfirmation: password,
       };
     });
 
     it('when registration is successful', () => {
       const mockResponse = { id: 1, name: args.name, email: args.email };
-      mockAxios.onPost('api/registrations', { registration: args })
+      mockAxios.onPost('api/registrations', { registration: normalize(args, 'snake') })
         .reply(200, mockResponse);
 
       const store = mockStore();
@@ -57,7 +87,7 @@ describe('async AuthenticationActions', () => {
           email: 'Has already been taken',
         }
       };
-      mockAxios.onPost('api/registrations', { registration: args })
+      mockAxios.onPost('api/registrations', { registration: normalize(args, 'snake') })
         .reply(400, mockResponse);
 
       const store = mockStore();
@@ -79,13 +109,13 @@ describe('async AuthenticationActions', () => {
       args = {
         email,
         password,
-        confirmation_token: confirmationToken
+        confirmationToken: confirmationToken
       };
     });
 
     it('when confirmation is successful', () => {
       const mockResponse = { id: 1, name: args.name, email: args.email };
-      mockAxios.onPut('api/confirmations', { confirmation: args })
+      mockAxios.onPut('api/confirmations', { confirmation: normalize(args, 'snake') })
         .reply(200, mockResponse);
 
       const store = mockStore();
@@ -101,7 +131,7 @@ describe('async AuthenticationActions', () => {
       const mockResponse = {
         error: "Invalid credentials",
       };
-      mockAxios.onPut('api/confirmations', { confirmation: args })
+      mockAxios.onPut('api/confirmations', { confirmation: normalize(args, 'snake') })
         .reply(400, mockResponse);
 
       const store = mockStore();
@@ -124,8 +154,8 @@ describe('async AuthenticationActions', () => {
     it('when login is successful', () => {
       const mockTokenResponse = {
         message: "Login successful",
-        access_token: {
-          access_token: "code",
+        accessToken: {
+          accessToken: "code",
         }
       };
 
@@ -136,9 +166,6 @@ describe('async AuthenticationActions', () => {
         id: 1,
         name: 'name',
       }
-
-      mockAxios.onGet('api/users/me')
-        .reply(200, mockUserResponse);
 
       const store = mockStore();
       const params = fromJS({ email, password });

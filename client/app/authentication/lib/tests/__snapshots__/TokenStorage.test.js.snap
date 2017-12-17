@@ -8,7 +8,7 @@ exports[`Token store should resolve falsy when not able to set cookie 1`] = `
 Array [
   Array [
     "token",
-    "eyJhY2Nlc3NfdG9rZW4iOiJhMWIyYzNkNGU1ZjYiLCJleHBpcmVzX2luIjo5MDAsImNyZWF0ZWRfYXQiOiIyMDAwLTEyLTEyVDAwOjAxOjAxIn0=",
+    "eyJhY2Nlc3NUb2tlbiI6ImExYjJjM2Q0ZTVmNiIsImV4cGlyZXNJbiI6OTAwLCJjcmVhdGVkQXQiOiIyMDAwLTEyLTEyVDAwOjAxOjAxIn0=",
     Object {
       "expires": 2000-12-12T05:16:01.000Z,
     },
@@ -20,7 +20,7 @@ exports[`Token store should resolve truthy when able to set cookie 1`] = `
 Array [
   Array [
     "token",
-    "eyJhY2Nlc3NfdG9rZW4iOiJhMWIyYzNkNGU1ZjYiLCJleHBpcmVzX2luIjo5MDAsImNyZWF0ZWRfYXQiOiIyMDAwLTEyLTEyVDAwOjAxOjAxIn0=",
+    "eyJhY2Nlc3NUb2tlbiI6ImExYjJjM2Q0ZTVmNiIsImV4cGlyZXNJbiI6OTAwLCJjcmVhdGVkQXQiOiIyMDAwLTEyLTEyVDAwOjAxOjAxIn0=",
     Object {
       "expires": 2000-12-12T05:16:01.000Z,
     },

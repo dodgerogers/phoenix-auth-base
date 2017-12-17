@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`authReducer AUTHENTICATE_FAILURE nulls currentUser and accessToken properties 1`] = `
+Immutable.Map {
+  currentUser: null,
+  accessToken: null,
+}
+`;
+
+exports[`authReducer VERIFY_TOKEN sets accessToken property 1`] = `
+Immutable.Map {
+  currentUser: null,
+  accessToken: Immutable.Map {
+    accessToken: "token",
+  },
+}
+`;
+
+exports[`authReducer VERIFY_TOKEN_FAILURE nulls currentUser and accessToken properties 1`] = `
+Immutable.Map {
+  currentUser: null,
+  accessToken: null,
+}
+`;
+
+exports[`authReducer VERIFY_TOKEN_SUCCESS sets currentUser property 1`] = `
+Immutable.Map {
+  currentUser: Immutable.Map {
+    id: 1,
+  },
+  accessToken: null,
+}
+`;

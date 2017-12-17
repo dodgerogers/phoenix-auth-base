@@ -6,11 +6,11 @@ import { fromJS } from 'immutable';
 import HTTP from '../../../lib/utils/HTTP';
 import * as AuthenticationSources from '../../sources';
 import * as TokenStorage from '../../lib/TokenStorage';
-import * as sagas from '../LoginSaga';
+import * as sagas from '../AuthenticateSaga';
 
-describe('LoginSaga', () => {
+describe('AuthenticateSaga', () => {
   let mockAxios;
-  const mockToken = { access_token: 'token' };
+  const mockToken = { accessToken: 'token' };
 
   beforeAll(() => {
     mockAxios = new MockAdapter(HTTP);
@@ -32,14 +32,14 @@ describe('LoginSaga', () => {
     const mockCookie = 'cookie';
     TokenStorage.store = jest.fn(() => Promise.resolve(mockCookie));
 
-    return expectSaga(sagas.loginSaga)
+    return expectSaga(sagas.authenticateSaga)
       .provide([call(AuthenticationSources.currentUser), mockResponse])
       .provide([call(TokenStorage.store, mockToken)])
       .put({
-        type: 'GET_CURRENT_RESOURCE_SUCCESS',
+        type: 'VERIFY_TOKEN_SUCCESS',
         user: mockUser,
       })
-      .dispatch({ type: 'AUTHENTICATE_SUCCESS', accessToken: mockToken })
+      .dispatch({ type: 'VERIFY_TOKEN', accessToken: mockToken })
       .run({ silenceTimeout: true });
   });
 
@@ -52,13 +52,13 @@ describe('LoginSaga', () => {
       throw 'error';
     });
 
-    return expectSaga(sagas.loginSaga)
+    return expectSaga(sagas.authenticateSaga)
       .provide([call(AuthenticationSources.currentUser)])
       .provide([call(TokenStorage.store, mockToken)])
       .put({
-        type: 'GET_CURRENT_RESOURCE_FAILURE',
+        type: 'VERIFY_TOKEN_FAILURE',
       })
-      .dispatch({ type: 'AUTHENTICATE_SUCCESS', accessToken: mockToken })
+      .dispatch({ type: 'VERIFY_TOKEN', accessToken: mockToken })
       .run({ silenceTimeout: true });
   });
 
@@ -66,12 +66,12 @@ describe('LoginSaga', () => {
     const mockResponse = { error: 'Something went wrong' };
     mockAxios.onGet('api/users/me').reply(400, mockResponse);
 
-    return expectSaga(sagas.loginSaga)
+    return expectSaga(sagas.authenticateSaga)
       .provide([call(AuthenticationSources.currentUser), mockResponse])
       .put({
-        type: 'GET_CURRENT_RESOURCE_FAILURE',
+        type: 'VERIFY_TOKEN_FAILURE',
       })
-      .dispatch({ type: 'AUTHENTICATE_SUCCESS', accessToken: mockToken })
+      .dispatch({ type: 'VERIFY_TOKEN', accessToken: mockToken })
       .run({ silenceTimeout: true });
   });
 });
