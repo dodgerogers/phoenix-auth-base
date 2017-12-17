@@ -10,14 +10,13 @@ export default function authenticationReducer(state = initialState, action) {
   const { type } = action;
 
   switch (type) {
-    case actionTypes.AUTHENTICATE_SUCCESS:
+    case actionTypes.VERIFY_TOKEN:
       return state.set('accessToken', fromJS(action.accessToken));
-    case actionTypes.AUTHENTICATE_FAILURE:
-      return state.set('accessToken', null);
-    case actionTypes.GET_CURRENT_RESOURCE_SUCCESS:
+    case actionTypes.VERIFY_TOKEN_SUCCESS:
       return state.set('currentUser', fromJS(action.user));
-    case actionTypes.GET_CURRENT_RESOURCE_FAILURE:
-      return state.set('currentUser', null);
+    case actionTypes.AUTHENTICATE_FAILURE:
+    case actionTypes.VERIFY_TOKEN_FAILURE:
+      return state.set('accessToken', null).set('currentUser', null);
     default:
       return state;
   };

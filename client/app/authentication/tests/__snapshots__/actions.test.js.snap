@@ -1,5 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`async AuthenticationActions authenticate when TokenStore.fetch fails 1`] = `
+Array [
+  Object {
+    "error": "Error",
+    "type": "AUTHENTICATE_FAILURE",
+  },
+]
+`;
+
+exports[`async AuthenticationActions authenticate when TokenStore.fetch is successful 1`] = `
+Array [
+  Object {
+    "accessToken": Object {
+      "accessToken": "token",
+    },
+    "type": "VERIFY_TOKEN",
+  },
+]
+`;
+
 exports[`async AuthenticationActions confirmation when confirmation fails 1`] = `
 Array [
   Object {
@@ -48,9 +68,9 @@ exports[`async AuthenticationActions login when login is successful 1`] = `
 Array [
   Object {
     "accessToken": Object {
-      "access_token": "code",
+      "accessToken": "code",
     },
-    "type": "AUTHENTICATE_SUCCESS",
+    "type": "VERIFY_TOKEN",
   },
   Object {
     "id": undefined,
