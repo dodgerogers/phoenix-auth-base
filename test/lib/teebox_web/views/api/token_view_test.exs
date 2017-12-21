@@ -10,4 +10,11 @@ defmodule TeeboxWeb.Api.TokenViewTest do
       access_token: mock_token
     }
   end
+
+  test "renders revoke.json" do
+    rendered_view = TeeboxWeb.Api.TokenView.render("revoke.json", %{})
+    assert rendered_view == %{
+      message: "Logged out successfully!",
+    }
+  end
 end

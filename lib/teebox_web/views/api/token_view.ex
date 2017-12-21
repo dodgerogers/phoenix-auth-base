@@ -7,4 +7,10 @@ defmodule TeeboxWeb.Api.TokenView do
       access_token: code
     }
   end
+
+  def render("revoke.json", _) do
+    %{
+      message: "Logged out successfully!",
+    }
+  end
 end
