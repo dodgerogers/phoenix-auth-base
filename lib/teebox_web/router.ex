@@ -27,6 +27,7 @@ defmodule TeeboxWeb.Router do
     pipe_through :api
 
     post "/oauth/token", TeeboxWeb.Api.TokenController, :create
+    delete "/oauth/token", TeeboxWeb.Api.TokenController, :revoke
 
     resources "/registrations", TeeboxWeb.Api.RegistrationController, only: [:create]
     # resources "/passwords", TeeboxWeb.Api.PasswordController, only: [:create, :update, :edit]

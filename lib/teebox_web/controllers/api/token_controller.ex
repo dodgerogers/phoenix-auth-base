@@ -2,6 +2,7 @@ defmodule TeeboxWeb.Api.TokenController do
   use TeeboxWeb, :controller
 
   @authenticate Application.get_env(:teebox, :authenticate)
+  @revoke_token Application.get_env(:teebox, :revoke_token)
 
   def create(conn, params) do
     with {:ok, access_token} <- @authenticate.call(params) do
@@ -12,6 +13,19 @@ defmodule TeeboxWeb.Api.TokenController do
         conn
         |> put_status(status)
         |> render(TeeboxWeb.ErrorView, "error.json", %{message: error})
+      {:error, error} ->
+        conn
+        |> put_status(400)
+        |> render(TeeboxWeb.ErrorView, "error.json", %{message: error})
+    end
+  end
+
+  def revoke(conn, params) do
+    with {:ok, _} <- @revoke_token.call(params) do
+      conn
+      |> put_status(204)
+      |> json(%{})
+    else
       {:error, error} ->
         conn
         |> put_status(400)

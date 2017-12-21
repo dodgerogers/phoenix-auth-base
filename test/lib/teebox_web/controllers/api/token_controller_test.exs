@@ -32,4 +32,18 @@ defmodule TeeboxWeb.Api.TokenControllerTest do
     response = json_response(conn, 401)
     assert response["error"] == "Failure"
   end
+
+  test "DELETE revoke with valid params returns 204" do
+    conn = build_conn()
+    |> delete("/api/oauth/token", %{"token" => "token"})
+
+    assert 204 == conn.status
+  end
+
+  test "DELETE revoke with invalid params returns 400" do
+    conn = build_conn()
+    |> delete("/api/oauth/token", %{})
+
+    assert 400 == conn.status
+  end
 end
