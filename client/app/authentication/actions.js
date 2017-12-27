@@ -1,4 +1,4 @@
-import { stopAsyncValidation, SubmissionError } from 'redux-form/immutable';
+import { stopAsyncValidation, SubmissionError, initialize } from 'redux-form/immutable';
 import * as AuthenticationSources from './sources';
 import { ModalActions, ModalIds } from '../common/modals';
 import { actionTypes, formIDs } from './constants';
@@ -76,7 +76,8 @@ export function register(registerParams) {
         dispatch(registerSuccess(response.data));
         dispatch(NotificationActions.notify(response.data.message, areaIDs.AUTHENTICATION))
         dispatch(ModalActions.hideModal(ModalIds.REGISTRATION_MODAL))
-        dispatch(ModalActions.showModal(ModalIds.CONFIRMATION_MODAL));
+        dispatch(ModalActions.showModal(ModalIds.CONFIRMATION_MODAL))
+        dispatch(initialize(formIDs.CONFIRMATION, registerParams));
       })
       .catch(err => {
         dispatch(registerFailure(err.response.data.error));

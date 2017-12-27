@@ -130,6 +130,19 @@ Array [
     },
     "type": "SHOW_MODAL",
   },
+  Object {
+    "meta": Object {
+      "form": "CONFIRMATION",
+      "keepDirty": undefined,
+    },
+    "payload": Immutable.Map {
+      name: "Bob",
+      email: "email@email.com",
+      password: "password",
+      passwordConfirmation: "password",
+},
+    "type": "@@redux-form/INITIALIZE",
+  },
 ]
 `;
 
