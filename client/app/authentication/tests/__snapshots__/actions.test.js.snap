@@ -154,3 +154,27 @@ Array [
   },
 ]
 `;
+
+exports[`async AuthenticationActions signOut when AuthenticationSources.signOut fails 1`] = `
+Array [
+  Object {
+    "id": undefined,
+    "notification": Object {
+      "level": "negative",
+      "message": "Something went wrong",
+    },
+    "type": "CREATE_NOTIFICATION",
+  },
+  Object {
+    "type": "SIGN_OUT_FAILURE",
+  },
+]
+`;
+
+exports[`async AuthenticationActions signOut when AuthenticationSources.signOut is successful 1`] = `
+Array [
+  Object {
+    "type": "SIGN_OUT_SUCCESS",
+  },
+]
+`;

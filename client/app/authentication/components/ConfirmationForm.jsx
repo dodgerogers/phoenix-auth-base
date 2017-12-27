@@ -21,7 +21,7 @@ const ConfirmationForm = (props) => {
         <Field
           component={Input}
           fluid
-          name="confirmation_token"
+          name="confirmationToken"
           placeholder="Confirmation code"
           validate={[isRequired]}
         />

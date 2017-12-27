@@ -51,7 +51,7 @@ function RegistrationForm(props) {
           component={Input}
           fluid={true}
           type="password"
-          name="password_confirmation"
+          name="passwordConfirmation"
           placeholder="Password Confirmation"
           validate={[isRequired]}
         />

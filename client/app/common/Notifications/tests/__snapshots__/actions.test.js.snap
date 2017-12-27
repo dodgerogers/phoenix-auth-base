@@ -1,8 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AuthenticationActions destroy dispatches with expected actions 1`] = `
+exports[`NotificationActions destroy dispatches with expected actions 1`] = `
 Object {
   "id": Immutable.Map {
+    id: 1,
     message: "message",
 },
   "notification": "mockAreaID",
@@ -10,12 +11,23 @@ Object {
 }
 `;
 
-exports[`AuthenticationActions notify dispatches with expected actions 1`] = `
+exports[`NotificationActions notify dispatches with expected actions 1`] = `
 Object {
-  "id": "message",
+  "id": "mockAreaID",
   "notification": Object {
     "level": "success",
-    "message": "mockAreaID",
+    "message": "message",
+  },
+  "type": "CREATE_NOTIFICATION",
+}
+`;
+
+exports[`NotificationActions notifyError dispatches with expected actions 1`] = `
+Object {
+  "id": "mockAreaID",
+  "notification": Object {
+    "level": "negative",
+    "message": "message",
   },
   "type": "CREATE_NOTIFICATION",
 }

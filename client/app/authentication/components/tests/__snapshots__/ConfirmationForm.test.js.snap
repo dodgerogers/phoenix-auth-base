@@ -11,7 +11,7 @@ exports[`ConfirmationForm matches component snapshot 1`] = `
     <Field
       component={[Function]}
       fluid={true}
-      name="confirmation_token"
+      name="confirmationToken"
       placeholder="Confirmation code"
       validate={
         Array [

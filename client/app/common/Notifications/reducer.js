@@ -28,16 +28,15 @@ export default function notificationReducer(state = initialState, action) {
   };
 }
 
-const getAreaID = (action) => {
+const getAreaID = action => {
   return action.id || areaIDs.APPLICATION;
 }
 
 const incrementID = (notification, array) => {
   const lastNotification = array.get(-1);
   const id = lastNotification ? lastNotification.get('id') + 1 : 0;
-  notification.id = id;
 
-  return fromJS(notification);
+  return fromJS({...{ id }, ...notification });
 }
 
 const filterById = (list, notification) => {

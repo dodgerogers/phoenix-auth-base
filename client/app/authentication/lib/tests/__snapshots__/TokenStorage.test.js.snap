@@ -4,7 +4,23 @@ exports[`Token COOKIE_KEY matches snapshot 1`] = `"token"`;
 
 exports[`Token generateExpiry constructs date from the created_at and expires_in properties 1`] = `2000-12-12T05:16:01.000Z`;
 
-exports[`Token store should resolve falsy when not able to set cookie 1`] = `
+exports[`Token remove should reject promise with null when Cookies.remove fails 1`] = `
+Array [
+  Array [
+    "token",
+  ],
+]
+`;
+
+exports[`Token remove should resolve promise with null when Cookies.remove is successful 1`] = `
+Array [
+  Array [
+    "token",
+  ],
+]
+`;
+
+exports[`Token store should resolve falsey when not able to set cookie 1`] = `
 Array [
   Array [
     "token",

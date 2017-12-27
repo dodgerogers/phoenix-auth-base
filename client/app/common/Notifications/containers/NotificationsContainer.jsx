@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import NotificationList from '../components/NotificationList';
-import * as NotificationActions from '../actions';
+import { destroy } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -10,4 +10,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, NotificationActions)(NotificationList);
+export default connect(mapStateToProps, { destroy })(NotificationList);

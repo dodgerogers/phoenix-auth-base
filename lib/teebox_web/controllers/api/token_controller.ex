@@ -17,7 +17,7 @@ defmodule TeeboxWeb.Api.TokenController do
   end
 
   def revoke(conn, _) do
-    with %OauthAccessToken{} = token <- ExOauth2Provider.Plug.current_access_token(conn),
+    with %OauthAccessToken{token: token} = _ <- ExOauth2Provider.Plug.current_access_token(conn),
          {:ok, _} <- @revoke_token.call(%{"token" => token})
     do
       conn

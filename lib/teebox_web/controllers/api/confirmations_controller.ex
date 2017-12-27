@@ -3,6 +3,7 @@ defmodule TeeboxWeb.Api.ConfirmationsController do
 
   @confirmation Application.get_env(:teebox, :confirmation)
 
+  # TODO: Return access token
   def update(conn, %{"confirmation" => params}) do
     with {:ok, message} <- @confirmation.confirm!(params) do
       conn

@@ -26,6 +26,12 @@ describe('notificationReducer', () => {
 
       expect(notificationReducer(initialState, actionWithNoId)).toMatchSnapshot();
     });
+
+    it('increments notification ID property', () => {
+      const state = notificationReducer(state, notifyAction());
+
+      expect(notificationReducer(state, notifyAction())).toMatchSnapshot();
+    });
   });
 
   describe('destroy', () => {
