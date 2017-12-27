@@ -75,6 +75,7 @@ export function register(registerParams) {
       .then(response => {
         dispatch(registerSuccess(response.data));
         dispatch(NotificationActions.notify(response.data.message, areaIDs.AUTHENTICATION))
+        dispatch(ModalActions.hideModal(ModalIds.REGISTRATION_MODAL))
         dispatch(ModalActions.showModal(ModalIds.CONFIRMATION_MODAL));
       })
       .catch(err => {
