@@ -50,7 +50,7 @@ describe('Token', () => {
         });
     });
 
-    it('should resolve falsy when not able to set cookie', () => {
+    it('should resolve falsey when not able to set cookie', () => {
       Cookies.set = jest.fn(() => null);
 
       return TokenStorage.store(token())
@@ -77,6 +77,31 @@ describe('Token', () => {
       return TokenStorage.fetch()
         .catch(result => {
           expect(result).toEqual(null);
+        });
+    });
+  });
+
+  describe('remove', () => {
+    it('should resolve promise with null when Cookies.remove is successful', () => {
+      Cookies.remove = jest.fn(() => null);
+
+      return TokenStorage.remove()
+        .then(result => {
+          expect(Cookies.remove.mock.calls).toMatchSnapshot();
+          expect(result).toEqual(null);
+        });
+    });
+
+    it('should reject promise with null when Cookies.remove fails', () => {
+      const error = 'Something went wrong';
+      Cookies.remove = jest.fn(() => {
+        throw(error);
+      });
+
+      return TokenStorage.remove()
+        .catch(result => {
+          expect(Cookies.remove.mock.calls).toMatchSnapshot();
+          expect(result).toEqual(error);
         });
     });
   });

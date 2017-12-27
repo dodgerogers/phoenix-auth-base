@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import currentUser from '../../hocs/CurrentUser';
 import Navbar from '../components/Navbar';
-import { signOut } from 'redux-oauth';
+import { signOut } from '../../authentication/actions';
 
 
 const NavbarContainer = (props) => {

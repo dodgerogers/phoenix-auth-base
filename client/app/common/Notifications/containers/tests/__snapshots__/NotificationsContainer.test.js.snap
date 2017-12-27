@@ -23,7 +23,6 @@ exports[`NotificationsContainer connected component matches snapshot 1`] = `
         Immutable.List [
         ]
       }
-      notify={[Function]}
     >
       <noscript />
     </NotificationList>

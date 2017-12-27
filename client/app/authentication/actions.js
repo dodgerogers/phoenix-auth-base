@@ -5,13 +5,6 @@ import { actionTypes, formIDs } from './constants';
 import { NotificationActions, areaIDs } from '../common/Notifications';
 import * as TokenStorage from './lib/TokenStorage';
 
-export const authenticate = () => {
-  return dispatch => {
-    return TokenStorage.fetch()
-      .then(accessToken => dispatch(verifyToken(accessToken)))
-      .catch(err => dispatch(authenticateFailure(err)));
-  }
-}
 
 const verifyToken = (accessToken) => ({
   type: actionTypes.VERIFY_TOKEN,
@@ -23,6 +16,34 @@ const authenticateFailure = (error) => ({
   error,
 });
 
+export const authenticate = () => {
+  return dispatch => {
+    return TokenStorage.fetch()
+      .then(accessToken => dispatch(verifyToken(accessToken)))
+      .catch(err => dispatch(authenticateFailure(err)));
+  }
+}
+
+const signOutSuccess = () => ({
+  type: actionTypes.SIGN_OUT_SUCCESS,
+});
+
+const signOutFailure = () => ({
+  type: actionTypes.SIGN_OUT_FAILURE,
+});
+
+export const signOut = () => {
+  return dispatch => {
+    return AuthenticationSources.signOut()
+      .then(() => dispatch(signOutSuccess()))
+      .catch(err => {
+        dispatch(NotificationActions.notifyError(err.response.data.error))
+        dispatch(signOutFailure());
+      });
+  };
+}
+
+// TODO: Move modal and notification actions into saga
 export function login(loginParams) {
   return dispatch => {
     return AuthenticationSources.login(loginParams.toJS())
@@ -54,6 +75,7 @@ export function register(registerParams) {
       .then(response => {
         dispatch(registerSuccess(response.data));
         dispatch(NotificationActions.notify(response.data.message, areaIDs.AUTHENTICATION))
+        dispatch(ModalActions.hideModal(ModalIds.REGISTRATION_MODAL))
         dispatch(ModalActions.showModal(ModalIds.CONFIRMATION_MODAL));
       })
       .catch(err => {

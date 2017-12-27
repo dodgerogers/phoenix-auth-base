@@ -3,6 +3,8 @@ defmodule TeeboxWeb.AuthCase do
 
   import Teebox.Factory
 
+  alias Teebox.Accounts.Applications
+
   def build_user_with_password(%{} = attrs \\ %{}) do
     build(:user, attrs) |> set_password()
   end
@@ -36,5 +38,14 @@ defmodule TeeboxWeb.AuthCase do
 
   defp set_confirmation_token(%{} = attrs) do
     Map.get(attrs, :confirmation_token, to_string(Faker.Lorem.characters(30)))
+  end
+
+  def create_oauth_application_user() do
+    insert(:oauth_application_user, %{name: Applications.default_application_user_name()})
+  end
+
+  def create_default_oauth_application() do
+    user = create_oauth_application_user()
+    insert(:oauth_application, %{owner: user, name: Applications.default_application_name()})
   end
 end

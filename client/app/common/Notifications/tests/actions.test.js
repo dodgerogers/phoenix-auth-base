@@ -7,28 +7,27 @@ import { formIDs, actionTypes } from '../constants';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-jest.mock('../../../lib/utils/UidGenerator', () => {
-  return jest.fn(() => 1);
-});
 
-describe('AuthenticationActions', () => {
+describe('NotificationActions', () => {
   const mockAreaID = 'mockAreaID';
-  describe('notify', () => {
-    let message;
-    beforeEach(() => {
-      message = 'message';
-    });
+  const message = 'message';
 
+  describe('notify', () => {
     it('dispatches with expected actions', () => {
-      expect(NotificationActions.notify(mockAreaID, message)).toMatchSnapshot();
+      expect(NotificationActions.notify(message, mockAreaID)).toMatchSnapshot();
+    });
+  });
+
+  describe('notifyError', () => {
+    it('dispatches with expected actions', () => {
+      expect(NotificationActions.notifyError(message, mockAreaID)).toMatchSnapshot();
     });
   });
 
   describe('destroy', () => {
-    let message, mockNotification;
+    let mockNotification;
     beforeEach(() => {
-      message = 'message';
-      mockNotification = fromJS({ message });
+      mockNotification = fromJS({ id: 1, message });
     });
 
     it('dispatches with expected actions', () => {

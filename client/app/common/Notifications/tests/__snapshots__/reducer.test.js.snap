@@ -6,9 +6,9 @@ Immutable.Map {
   ],
   AUTHENTICATION: Immutable.List [
     Immutable.Map {
+      id: 0,
       message: "message",
       level: "level",
-      id: 0,
     },
   ],
 }
@@ -18,12 +18,31 @@ exports[`notificationReducer NOTIFY adds notification to global id when ID not p
 Immutable.Map {
   APPLICATION: Immutable.List [
     Immutable.Map {
+      id: 0,
       message: "message",
       level: "level",
-      id: 0,
     },
   ],
   AUTHENTICATION: Immutable.List [
+  ],
+}
+`;
+
+exports[`notificationReducer NOTIFY increments notification ID property 1`] = `
+Immutable.Map {
+  APPLICATION: Immutable.List [
+  ],
+  AUTHENTICATION: Immutable.List [
+    Immutable.Map {
+      id: 0,
+      message: "message",
+      level: "level",
+    },
+    Immutable.Map {
+      id: 1,
+      message: "message",
+      level: "level",
+    },
   ],
 }
 `;
@@ -34,9 +53,9 @@ Immutable.Map {
   ],
   AUTHENTICATION: Immutable.List [
     Immutable.Map {
+      id: 0,
       message: "message",
       level: "level",
-      id: 0,
     },
   ],
 }

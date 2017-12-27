@@ -27,23 +27,21 @@ defmodule TeeboxWeb.Router do
     pipe_through :api
 
     post "/oauth/token", TeeboxWeb.Api.TokenController, :create
-
     resources "/registrations", TeeboxWeb.Api.RegistrationController, only: [:create]
-    # resources "/passwords", TeeboxWeb.Api.PasswordController, only: [:create, :update, :edit]
     put "/confirmations", TeeboxWeb.Api.ConfirmationsController, :update
     post "/confirmations", TeeboxWeb.Api.ConfirmationsController, :create
+    # resources "/passwords", TeeboxWeb.Api.PasswordController, only: [:create, :update, :edit]
   end
 
   scope "/api" do
     pipe_through :authenticated_api
 
     get "/users/me", TeeboxWeb.Api.UsersController, :me
+    delete "/oauth/token", TeeboxWeb.Api.TokenController, :revoke
   end
 
   scope "/", TeeboxWeb do
     pipe_through :browser
-    # oauth_routes :public
-    # oauth_routes :protected
 
     get "/", PageController, :index
   end

@@ -38,3 +38,14 @@ export const fetch = () => {
     reject(null);
   });
 };
+
+export const remove = () => {
+  return new Promise((resolve, reject) => {
+    try {
+      const result = Cookies.remove(COOKIE_KEY);
+      resolve(result);
+    } catch (err) {
+      reject(err);
+    }
+  });
+};

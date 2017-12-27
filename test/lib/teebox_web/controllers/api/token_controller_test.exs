@@ -32,4 +32,22 @@ defmodule TeeboxWeb.Api.TokenControllerTest do
     response = json_response(conn, 401)
     assert response["error"] == "Failure"
   end
+
+  test "DELETE revoke with valid params returns 204" do
+    oauth_access_token = insert(:oauth_access_token)
+
+    conn = build_conn()
+    |> put_req_header("authorization", "Bearer " <> oauth_access_token.token)
+    |> delete("/api/oauth/token")
+
+    response = json_response(conn, 204)
+    assert response["message"] == "Logged out successfully!"
+  end
+
+  test "DELETE revoke with no authentication token returns 401" do
+    conn = build_conn()
+    |> delete("/api/oauth/token")
+
+    assert 401 == conn.status
+  end
 end
