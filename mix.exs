@@ -19,7 +19,7 @@ defmodule Teebox.Mixfile do
   def application(:test), do: application(:default) ++ [:ex_machina]
   def application do
     [
-      mod: {Teebox.Application, []},
+      mod: {Teebox, []},
       extra_applications: [
         :bamboo,
         :comeonin,

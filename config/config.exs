@@ -10,11 +10,11 @@ config :teebox,
   ecto_repos: [Teebox.Repo]
 
 # Configures the endpoint
-config :teebox, TeeboxWeb.Endpoint,
+config :teebox, Teebox.Web.Endpoint,
   url: [host: "localhost"],
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
   render_errors: [
-    view: TeeboxWeb.ErrorView,
+    view: Teebox.Web.ErrorView,
     accepts: ~w(html json)
   ],
   pubsub: [

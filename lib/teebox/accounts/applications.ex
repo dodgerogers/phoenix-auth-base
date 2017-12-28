@@ -33,6 +33,6 @@ defmodule Teebox.Accounts.Applications do
   end
 
   defp default_redirect_uri() do
-    "https://" <> Application.get_env(:teebox, TeeboxWeb.Endpoint)[:url][:host]
+    "https://" <> Application.get_env(:teebox, Teebox.Web.Endpoint)[:url][:host]
   end
 end

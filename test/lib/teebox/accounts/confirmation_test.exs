@@ -3,7 +3,7 @@ defmodule Teebox.Accounts.ConfirmationTest do
   use Timex
   use Bamboo.Test
 
-  import TeeboxWeb.AuthCase
+  import Teebox.Web.AuthCase
 
   alias Teebox.Accounts.Confirmation
   alias Teebox.Persistance.UsersRepository
