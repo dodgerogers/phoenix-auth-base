@@ -1,4 +1,4 @@
-defmodule TeeboxWeb.ConnCase do
+defmodule Teebox.Web.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -24,11 +24,11 @@ defmodule TeeboxWeb.ConnCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import TeeboxWeb.Router.Helpers
+      import Teebox.Web.Router.Helpers
       import Teebox.Factory
 
       # The default endpoint for testing
-      @endpoint TeeboxWeb.Endpoint
+      @endpoint Teebox.Web.Endpoint
     end
   end
 

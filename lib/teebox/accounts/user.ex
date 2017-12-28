@@ -1,5 +1,5 @@
 defmodule Teebox.Accounts.User do
-  use TeeboxWeb, :model
+  use Teebox.Web, :model
 
   alias ExOauth2Provider.OauthAccessTokens.OauthAccessToken
 

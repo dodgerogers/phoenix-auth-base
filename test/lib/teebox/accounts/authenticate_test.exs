@@ -1,7 +1,7 @@
 defmodule Teebox.Accounts.AuthenticateTest do
   use Teebox.ModelCase, async: true
 
-  import TeeboxWeb.AuthCase
+  import Teebox.Web.AuthCase
 
   alias Teebox.Accounts.Authenticate
 
