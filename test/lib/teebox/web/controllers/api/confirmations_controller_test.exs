@@ -2,9 +2,11 @@ defmodule Teebox.Web.Api.ConfirmationsControllerTest do
   use Teebox.Web.ConnCase, async: true
 
   @email "email@email.com"
+  @password to_string(Faker.Lorem.characters(8))
   @confirmation_token to_string(Faker.Lorem.characters(30))
   @valid_attrs %{
     "email" => @email,
+    "password" => @password,
     "confirmation_token" => @confirmation_token
   }
 
@@ -13,7 +15,7 @@ defmodule Teebox.Web.Api.ConfirmationsControllerTest do
     |> put("/api/confirmations", %{"confirmation" => @valid_attrs})
 
     response = json_response(conn, 200)
-    assert response["message"] == "Success"
+    assert response["message"] == "Account successfully confirmed! You are now logged in"
   end
 
   test "PUT update with invalid params returns 400 and failure message" do
