@@ -12,15 +12,6 @@ defmodule Teebox.Accounts.ConfirmAndSignInUser do
   end
   def call(_), do: {:error, "Invalid arguments"}
 
-  defp format_result(result) do
-    with {:ok, %{grant_access_token: token}} <- result do
-      {:ok, token}
-    else
-      {:error, _process_name, message, _results} -> {:error, message}
-      _ -> {:error, "Something went wrong"}
-    end
-  end
-
   defp confirm_user(%{"email" => _, "confirmation_token" => _} = params) do
     with {:ok, _} <- Confirmation.confirm!(params) do
       {:ok, nil}
@@ -40,5 +31,14 @@ defmodule Teebox.Accounts.ConfirmAndSignInUser do
 
   defp auth_params(%{} = params) do
     %{"grant_type" => "password", "username"=> params["email"], "password" => params["password"]}
+  end
+
+  defp format_result(result) do
+    with {:ok, %{grant_access_token: token}} <- result do
+      {:ok, token}
+    else
+      {:error, _process_name, message, _results} -> {:error, message}
+      _ -> {:error, "Something went wrong"}
+    end
   end
 end

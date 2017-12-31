@@ -25,7 +25,7 @@ defmodule Teebox.Accounts.Authenticate do
   def validate_user_credentials(email, password) do
     with %User{} = user <- UsersRepository.find_by_email(email),
          true <- checkpw(password, user.password_hash),
-         {:ok} <- is_confirmed?(user) # TODO: Don't do this here
+         {:ok} <- is_confirmed?(user)
     do
       {:ok, user}
     else
