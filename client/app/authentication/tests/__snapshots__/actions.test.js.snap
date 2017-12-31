@@ -32,11 +32,13 @@ Array [
 exports[`async AuthenticationActions confirmation when confirmation is successful 1`] = `
 Array [
   Object {
-    "type": "CONFIRMATION_SUCCESS",
-    "user": Object {
-      "email": "email@email.com",
-      "id": 1,
+    "accessToken": Object {
+      "accessToken": "token",
     },
+    "type": "VERIFY_TOKEN",
+  },
+  Object {
+    "type": "CONFIRMATION_SUCCESS",
   },
   Object {
     "id": undefined,
