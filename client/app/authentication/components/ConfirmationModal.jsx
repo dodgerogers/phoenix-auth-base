@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import AuthenticationModal from './AuthenticationModal';
 import ConfirmationFormContainer from '../containers/ConfirmationFormContainer';
-import AuthenticationLinks from './AuthenticationLinks';
+import AuthenticationLinks, { links } from './AuthenticationLinks';
 
 
 const ConfirmationModal = (props) => {
   return (
     <AuthenticationModal title="Confirm your account" {...props}>
       <ConfirmationFormContainer {...props} />
-      <AuthenticationLinks />
+      <AuthenticationLinks exclude={[links.CONFIRMATION]} />
     </AuthenticationModal>
   );
 }

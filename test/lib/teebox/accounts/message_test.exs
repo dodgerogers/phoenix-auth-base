@@ -14,9 +14,18 @@ defmodule Teebox.Accounts.MessageTest do
 
   test "sends confirmation request email", %{user: user} do
     sent_email = Message.confirm_request(user)
+    |> Teebox.Mailer.deliver_now
 
     assert sent_email.subject =~ "Confirm your account"
     assert sent_email.text_body =~ user.confirmation_token
+    assert_delivered_email sent_email
+  end
+
+  test "sends already_confirmed email", %{user: user} do
+    sent_email = Message.already_confirmed(user)
+    |> Teebox.Mailer.deliver_now
+
+    assert sent_email.subject =~ "Your account is already confirmed"
     assert_delivered_email sent_email
   end
 

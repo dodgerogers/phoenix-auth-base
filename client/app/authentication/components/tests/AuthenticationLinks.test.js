@@ -1,20 +1,28 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import AuthenticationLinks from '../AuthenticationLinks';
+import AuthenticationLinks, { links } from '../AuthenticationLinks';
 
 
 describe('AuthenticationLinks', () => {
-  const fullProps = {
-    close: jest.fn(),
-  };
-
-  const pureComponent = (props) => shallow(
-    <AuthenticationLinks />
+  const pureComponent = props => shallow(
+    <AuthenticationLinks {...props} />
   );
 
   it('matches snapshot', () => {
-    const wrapper = pureComponent(fullProps);
+    const wrapper = pureComponent({});
+
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+
+  it('matches snapshot with everything excluded', () => {
+    const wrapper = pureComponent({ exclude: Object.keys(links) });
+
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+
+  it('matches snapshot with one link excluded', () => {
+    const wrapper = pureComponent({ exclude: [links.LOGIN] });
 
     expect(toJson(wrapper)).toMatchSnapshot();
   });

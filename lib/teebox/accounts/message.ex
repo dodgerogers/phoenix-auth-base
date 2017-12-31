@@ -1,6 +1,5 @@
 defmodule Teebox.Accounts.Message do
   import Bamboo.Email
-  alias Teebox.Mailer
 
   @doc """
   An email with a confirmation link in it.
@@ -10,7 +9,12 @@ defmodule Teebox.Accounts.Message do
     prep_mail(user.email)
     |> subject("Confirm your account")
     |> text_body("Here is your confirmation token: #{user.confirmation_token}")
-    |> Mailer.deliver_now
+  end
+
+  def already_confirmed(user) do
+    prep_mail(user.email)
+    |> subject("Your account is already confirmed")
+    |> text_body("You have already confirmed your account. Please login.")
   end
 
   # def reset_request(address, key) do

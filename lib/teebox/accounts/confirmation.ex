@@ -28,9 +28,9 @@ defmodule Teebox.Accounts.Confirmation do
 
   defp user_not_confirmed?(%User{} = user) do
     if !confirmed?(user) do
-      {:ok}
+      {:ok, user}
     else
-      {:already_confirmed, "Account is already confirmed"}
+      {:already_confirmed, user}
     end
   end
 
@@ -54,16 +54,28 @@ defmodule Teebox.Accounts.Confirmation do
 
   def resend_confirmation(%{"email" => _} = params) do
     with {:ok, user} <- find_user_by_email(params),
-         {:ok} <- user_not_confirmed?(user),
+         {:ok, _} <- user_not_confirmed?(user),
          {:ok, updated_user} <- reset_confirmation_token(user),
-         _ <- Teebox.Accounts.Message.confirm_request(updated_user)
+         _ <- send_confirmation_email(updated_user)
     do
       {:ok, @confirmation_sent}
     else
-      {:already_confirmed, _} -> {:ok, @confirmation_sent}
+      {:already_confirmed, confirmed_user} ->
+        send_already_confirmed_email(confirmed_user)
+        {:ok, @confirmation_sent}
       {:not_found, _} -> {:ok, @confirmation_sent}
       {:error, message} -> {:error, message}
     end
+  end
+
+  defp send_confirmation_email(unconfirmed_user) do
+    Teebox.Accounts.Message.confirm_request(unconfirmed_user)
+    |> Teebox.Mailer.deliver_now
+  end
+
+  defp send_already_confirmed_email(confirmed_user) do
+    Teebox.Accounts.Message.already_confirmed(confirmed_user)
+    |> Teebox.Mailer.deliver_now
   end
 
   defp find_user_by_email(%{"email" => email}) do
