@@ -29,7 +29,7 @@ config :teebox, :registration, Teebox.Accounts.RegistrationMock
 config :teebox, :authenticate, Teebox.Accounts.AuthenticateMock
 config :teebox, :revoke_token, Teebox.Accounts.RevokeTokenMock
 
-config :pbkdf2_elixir, :log_rounds, 1
+config :pbkdf2_elixir, :rounds, 1
 
 # Mailer test configuration
 config :teebox, Teebox.Mailer,

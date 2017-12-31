@@ -18,7 +18,7 @@ defmodule Teebox.Web.AuthCase do
   end
 
   def set_password(%{} = attrs \\ %{}) do
-    password = Map.get(attrs, :password, Faker.Lorem.words(8..20))
+    password = Map.get(attrs, :password, to_string(Faker.Lorem.words(8..20)))
     Map.merge(attrs, %{password_hash: Comeonin.Pbkdf2.hashpwsalt(password)})
   end
 
