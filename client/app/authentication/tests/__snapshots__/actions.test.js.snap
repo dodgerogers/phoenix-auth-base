@@ -148,7 +148,7 @@ Array [
 ]
 `;
 
-exports[`async AuthenticationActions resendConfirmation when confirmation fails 1`] = `
+exports[`async AuthenticationActions resendConfirmation when resendConfirmation fails 1`] = `
 Array [
   Object {
     "error": "Invalid credentials",
@@ -172,6 +172,16 @@ Array [
       "id": "CONFIRMATION_MODAL",
     },
     "type": "SHOW_MODAL",
+  },
+  Object {
+    "meta": Object {
+      "form": "CONFIRMATION",
+      "keepDirty": undefined,
+    },
+    "payload": Immutable.Map {
+      email: "email@email.com",
+},
+    "type": "@@redux-form/INITIALIZE",
   },
 ]
 `;

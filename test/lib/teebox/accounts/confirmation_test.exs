@@ -68,11 +68,12 @@ defmodule Teebox.Accounts.ConfirmationTest do
       assert message == "If an account exists we have sent a confirmation code"
     end
 
-    test "returns ok when user is already confirmed" do
-      create_confirmed_user(%{email: @email})
+    test "returns ok when user is already confirmed and sends email" do
+      user = create_confirmed_user(%{email: @email})
 
       {:ok, message} = Confirmation.resend_confirmation(%{"email" => @email})
 
+      assert_delivered_email Teebox.Accounts.Message.already_confirmed(user)
       assert message == "If an account exists we have sent a confirmation code"
     end
   end

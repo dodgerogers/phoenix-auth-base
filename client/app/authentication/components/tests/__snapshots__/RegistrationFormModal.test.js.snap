@@ -12,6 +12,12 @@ exports[`RegistrationForm matches component snapshot 1`] = `
     onSubmit={[Function]}
     show={true}
   />
-  <AuthenticationLinks />
+  <AuthenticationLinks
+    exclude={
+      Array [
+        "REGISTRATION",
+      ]
+    }
+  />
 </AuthenticationModal>
 `;

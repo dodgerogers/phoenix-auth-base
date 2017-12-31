@@ -127,6 +127,7 @@ export function resendConfirmation(resendConfirmation) {
       .then(response => {
         dispatch(NotificationActions.notify(response.data.message, areaIDs.AUTHENTICATION))
         dispatch(ModalActions.showModal(ModalIds.CONFIRMATION_MODAL));
+        dispatch(initialize(formIDs.CONFIRMATION, resendConfirmation));
       })
       .catch(err => {
         dispatch(resendConfirmationFailure(err.response.data.error));

@@ -26,5 +26,6 @@ defmodule Teebox.Accounts.Registration do
 
   defp send_confirmation(%User{} = user) do
     Message.confirm_request(user)
+    |> Teebox.Mailer.deliver_now
   end
 end

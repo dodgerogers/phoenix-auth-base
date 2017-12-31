@@ -8,6 +8,12 @@ exports[`LoginModal matches snapshot 1`] = `
   <Connect(ReduxForm)
     close={[Function]}
   />
-  <AuthenticationLinks />
+  <AuthenticationLinks
+    exclude={
+      Array [
+        "LOGIN",
+      ]
+    }
+  />
 </AuthenticationModal>
 `;
