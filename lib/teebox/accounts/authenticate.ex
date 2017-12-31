@@ -5,16 +5,17 @@ defmodule Teebox.Accounts.Authenticate do
 
   @error_message "Invalid email or password"
 
-  def call(%{} = params) do
+  def call(%{"grant_type" => "password", "username" => _, "password" => _} = params) do
     with {:ok, app} <- Applications.default_application(),
-         {:ok, code} <- grant_access_token(app, params)
+         {:ok, access_token} <- grant_access_token(app, params)
     do
-      {:ok, code}
+      {:ok, access_token}
     else
       {:error, _, status} -> {:error, @error_message, status}
       {:error, _} -> {:error, @error_message}
     end
   end
+  def call(_), do: {:error, "Invalid arguments"}
 
   defp grant_access_token(app, %{} = params) do
     Map.merge(params, %{"client_id" => app.uid, "client_secret" => app.secret})

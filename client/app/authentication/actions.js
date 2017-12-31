@@ -86,9 +86,8 @@ export function register(registerParams) {
   };
 }
 
-const confirmationSuccess = (user) => ({
+const confirmationSuccess = () => ({
   type: actionTypes.CONFIRMATION_SUCCESS,
-  user,
 });
 
 const confirmationFailure = (error) => ({
@@ -100,7 +99,8 @@ export function confirm(confirmationParams) {
   return dispatch => {
     return AuthenticationSources.confirm(confirmationParams.toJS())
       .then(response => {
-        dispatch(confirmationSuccess(response.data));
+        dispatch(verifyToken(response.data.accessToken));
+        dispatch(confirmationSuccess());
         dispatch(NotificationActions.notify(response.data.message))
         dispatch(ModalActions.hideModal(ModalIds.CONFIRMATION_MODAL));
       })

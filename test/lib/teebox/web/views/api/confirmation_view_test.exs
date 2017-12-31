@@ -2,11 +2,13 @@ defmodule Teebox.Web.Api.ConfirmationsViewTest do
   use Teebox.Web.ConnCase, async: true
 
   @message "Confirmation message"
+  @token "token"
 
   test "renders confirmation.json" do
-    rendered_view = Teebox.Web.Api.ConfirmationsView.render("confirmation.json", %{message: @message})
+    rendered_view = Teebox.Web.Api.ConfirmationsView.render("confirmation.json", %{access_token: @token})
     assert rendered_view == %{
-      message: @message
+      message: "Account successfully confirmed! You are now logged in",
+      access_token: @token
     }
   end
 

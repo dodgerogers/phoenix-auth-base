@@ -136,12 +136,12 @@ describe('async AuthenticationActions', () => {
       args = {
         email,
         password,
-        confirmationToken: confirmationToken
+        confirmationToken: confirmationToken,
       };
     });
 
     it('when confirmation is successful', () => {
-      const mockResponse = { id: 1, name: args.name, email: args.email };
+      const mockResponse = { access_token: { access_token: "token" } };
       mockAxios.onPut('api/confirmations', { confirmation: normalize(args, 'snake') })
         .reply(200, mockResponse);
 
@@ -155,9 +155,7 @@ describe('async AuthenticationActions', () => {
     });
 
     it('when confirmation fails', () => {
-      const mockResponse = {
-        error: "Invalid credentials",
-      };
+      const mockResponse = { error: "Invalid credentials" };
       mockAxios.onPut('api/confirmations', { confirmation: normalize(args, 'snake') })
         .reply(400, mockResponse);
 
@@ -244,7 +242,7 @@ describe('async AuthenticationActions', () => {
         });
     });
 
-    it('when confirmation fails', () => {
+    it('when resendConfirmation fails', () => {
       const mockResponse = {
         error: "Invalid credentials",
       };

@@ -1,13 +1,13 @@
 defmodule Teebox.Web.Api.ConfirmationsController do
   use Teebox.Web, :controller
 
+  @confirm_and_sign_in_user Application.get_env(:teebox, :confirm_and_sign_in_user)
   @confirmation Application.get_env(:teebox, :confirmation)
 
-  # TODO: Return access token
   def update(conn, %{"confirmation" => params}) do
-    with {:ok, message} <- @confirmation.confirm!(params) do
+    with {:ok, access_token} <- @confirm_and_sign_in_user.call(params) do
       conn
-      |> render("confirmation.json", %{message: message})
+      |> render("confirmation.json", %{access_token: access_token})
     else
       {:error, message} -> render_error(conn, message)
     end
