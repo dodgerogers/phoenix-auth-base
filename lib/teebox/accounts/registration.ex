@@ -1,8 +1,7 @@
 defmodule Teebox.Accounts.Registration do
   alias Teebox.Accounts.User
+  alias Teebox.Persistance.UsersRepository
   alias Teebox.Accounts.Message
-
-  @user_repo Application.get_env(:teebox, :user_repo)
 
   def call(%{} = params) do
     with {:ok, user} <- create_user(params) do
@@ -13,15 +12,9 @@ defmodule Teebox.Accounts.Registration do
     end
   end
 
-  # TODO: the repo checks for validity
   defp create_user(%{} = params) do
-    changeset = User.changeset(:registration, %User{}, params)
-
-    with true <- changeset.valid? do
-      @user_repo.create(changeset)
-    else
-      _ -> {:error, changeset}
-    end
+    User.changeset(:registration, %User{}, params)
+    |> UsersRepository.create()
   end
 
   defp send_confirmation(%User{} = user) do

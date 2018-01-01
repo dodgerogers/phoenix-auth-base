@@ -79,14 +79,14 @@ defmodule Teebox.Accounts.User do
    end
 
   defp validate_password_strength(changeset, options \\ []) do
-     validate_change(changeset, :password, fn _, password ->
-       with {:ok, _} <- NotQwerty123.PasswordStrength.strong_password?(password) do
-         []
-       else
-         {:error, msg} -> [{:password, options[:message] || msg}]
-       end
-     end)
-   end
+    validate_change(changeset, :password, fn _, password ->
+      with {:ok, _} <- NotQwerty123.PasswordStrength.strong_password?(password) do
+        []
+      else
+        {:error, msg} -> [{:password, options[:message] || msg}]
+      end
+    end)
+  end
 
   defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{password: pw}} = changeset) do
     changeset

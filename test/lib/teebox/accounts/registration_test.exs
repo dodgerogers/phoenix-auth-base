@@ -12,11 +12,7 @@ defmodule Teebox.Accounts.RegistrationTest do
     password_confirmation: @password
   }
 
-  setup do
-    Teebox.Persistance.UsersRepositoryMock.clear()
-  end
-
-  defp user_count, do: length(Teebox.Persistance.UsersRepositoryMock.all())
+  defp user_count, do: length(Teebox.Repo.all(Teebox.Accounts.User))
 
   test "call with valid params create user when valid and sends confirmation email" do
     before_users = user_count()
