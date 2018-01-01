@@ -1,32 +1,28 @@
 defmodule Teebox.Accounts.Message do
   import Bamboo.Email
 
+  use Bamboo.Phoenix, view: Teebox.Web.EmailView
+
   @doc """
   An email with a confirmation link in it.
   """
-  # |> render_body("confirm.html", %{token: token})
   def confirm_request(user) do
-    prep_mail(user.email)
+    prep_mail(user)
     |> subject("Confirm your account")
-    |> text_body("Here is your confirmation token: #{user.confirmation_token}")
+    |> render("confirm_request.html")
   end
 
   def already_confirmed(user) do
-    prep_mail(user.email)
+    prep_mail(user)
     |> subject("Your account is already confirmed")
-    |> text_body("You have already confirmed your account. Please login.")
+    |> render("already_confirmed.html")
   end
 
-  # def reset_request(address, key) do
-  #   prep_mail(address)
-  #   |> subject("Reset your password")
-  #   |> text_body("Password reset token: #{key}")
-  #   |> Mailer.deliver_now
-  # end
-
-  defp prep_mail(address) do
+  defp prep_mail(user) do
     new_email()
-    |> to(address)
+    |> to(user.email)
+    |> assign(:user, user)
     |> from("admin@example.com") # TODO: config
+    |> put_html_layout({Teebox.Web.LayoutView, "email.html"})
   end
 end

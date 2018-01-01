@@ -17,7 +17,7 @@ defmodule Teebox.Accounts.MessageTest do
     |> Teebox.Mailer.deliver_now
 
     assert sent_email.subject =~ "Confirm your account"
-    assert sent_email.text_body =~ user.confirmation_token
+    assert sent_email.html_body =~ user.confirmation_token
     assert_delivered_email sent_email
   end
 
@@ -41,13 +41,6 @@ defmodule Teebox.Accounts.MessageTest do
   #   assert sent_email.subject =~ "Reset your password"
   #   assert sent_email.text_body =~ key
   #   assert_delivered_email Message.reset_request(@email, key)
-  # end
-  #
-  # test "sends receipt confirmation email" do
-  #   sent_email = Message.confirm_success(@email)
-  #
-  #   assert sent_email.text_body =~ "account has been confirmed"
-  #   assert_delivered_email Message.confirm_success(@email)
   # end
   #
   # test "sends password reset email" do
