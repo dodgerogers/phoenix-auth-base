@@ -1,4 +1,4 @@
-defmodule Teebox.Accounts.OauthApplicationUser do
+defmodule Teebox.Accounts.Schemas.OauthApplicationUser do
   use Teebox.Web, :model
 
   alias ExOauth2Provider.OauthApplications.OauthApplication

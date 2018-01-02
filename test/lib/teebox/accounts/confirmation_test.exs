@@ -6,7 +6,7 @@ defmodule Teebox.Accounts.ConfirmationTest do
   import Teebox.Web.AuthCase
 
   alias Teebox.Accounts.Confirmation
-  alias Teebox.Persistance.UsersRepository
+  alias Teebox.Accounts.Repositories.UsersRepository
 
   @email "email@email.com"
   @confirmation_token to_string(Faker.Lorem.characters(30))

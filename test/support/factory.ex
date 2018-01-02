@@ -2,7 +2,7 @@ defmodule Teebox.Factory do
   use ExMachina.Ecto, repo: Teebox.Repo
 
   def user_factory do
-    %Teebox.Accounts.User{
+    %Teebox.Accounts.Schemas.User{
       name: Faker.Name.name,
       email: Faker.Internet.email,
       avatar: "http://#{Faker.Lorem.characters(8..20)}.png",
@@ -20,7 +20,7 @@ defmodule Teebox.Factory do
   end
 
   def oauth_application_user_factory do
-    %Teebox.Accounts.OauthApplicationUser{
+    %Teebox.Accounts.Schemas.OauthApplicationUser{
       name: Faker.Name.name
     }
   end

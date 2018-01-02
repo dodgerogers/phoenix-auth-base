@@ -2,7 +2,8 @@ defmodule Teebox.Accounts.RegistrationTest do
   use Teebox.ModelCase, async: true
   use Bamboo.Test
 
-  alias Teebox.Accounts.{Registration}
+  alias Teebox.Accounts.Registration
+  alias Teebox.Accounts.Schemas.User
 
   @password "Pword12345678!$%"
   @valid_attrs %{
@@ -12,7 +13,7 @@ defmodule Teebox.Accounts.RegistrationTest do
     password_confirmation: @password
   }
 
-  defp user_count, do: length(Teebox.Repo.all(Teebox.Accounts.User))
+  defp user_count, do: length(Teebox.Repo.all(User))
 
   test "call with valid params create user when valid and sends confirmation email" do
     before_users = user_count()

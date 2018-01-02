@@ -1,6 +1,6 @@
-defmodule Teebox.Persistance.UsersRepository do
-  use Teebox.Persistance.BaseRepository
-  alias Teebox.Accounts.User
+defmodule Teebox.Accounts.Repositories.UsersRepository do
+  use Teebox.Repositories.BaseRepository
+  alias Teebox.Accounts.Schemas.User
 
   def find_by_confirmation(email, confirmation_token) do
     Teebox.Repo.get_by(User, %{email: email, confirmation_token: confirmation_token})

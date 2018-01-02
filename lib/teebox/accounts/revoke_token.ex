@@ -1,6 +1,5 @@
 defmodule Teebox.Accounts.RevokeToken do
-
-  alias Teebox.Accounts.Applications
+  alias Teebox.Accounts.Services.Applications
 
   def call(%{"token" => _} = params) do
     with {:ok, app} <- Applications.default_application(),

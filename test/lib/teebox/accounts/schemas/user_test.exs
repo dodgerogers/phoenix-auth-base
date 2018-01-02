@@ -1,7 +1,7 @@
-defmodule Teebox.Accounts.UserTest do
+defmodule Teebox.Accounts.Schemas.UserTest do
   use Teebox.ModelCase, async: true
 
-  alias Teebox.Accounts.User
+  alias Teebox.Accounts.Schemas.User
 
   @password "strongpw123!"
   @valid_attrs %{
