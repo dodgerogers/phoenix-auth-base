@@ -1,8 +1,8 @@
-defmodule Teebox.Persistance.OauthApplicationRepositoryTest do
+defmodule Teebox.Accounts.Repositories.OauthApplicationRepositoryTest do
   use Teebox.ModelCase, async: true
 
   import Teebox.Factory
-  alias Teebox.Persistance.OauthApplicationRepository
+  alias Teebox.Accounts.Repositories.OauthApplicationRepository
 
   @app_name "name"
 

@@ -3,7 +3,7 @@ defmodule Teebox.Web.AuthCase do
 
   import Teebox.Factory
 
-  alias Teebox.Accounts.Applications
+  alias Teebox.Accounts.Services.Applications
 
   def build_user_with_password(%{} = attrs \\ %{}) do
     build(:user, attrs) |> set_password()
@@ -14,7 +14,7 @@ defmodule Teebox.Web.AuthCase do
   end
 
   def reload_user(user) do
-    Teebox.Repo.get(Teebox.Accounts.User, user.id)
+    Teebox.Repo.get(Teebox.Accounts.Schemas.User, user.id)
   end
 
   def set_password(%{} = attrs \\ %{}) do

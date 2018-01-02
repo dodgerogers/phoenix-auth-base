@@ -1,9 +1,9 @@
-defmodule Teebox.Persistance.OauthApplicationUserRepositoryTest do
+defmodule Teebox.Accounts.Repositories.OauthApplicationUserRepositoryTest do
   use Teebox.ModelCase, async: true
 
   import Teebox.Factory
-  alias Teebox.Persistance.OauthApplicationUserRepository
-  alias Teebox.Accounts.OauthApplicationUser
+  alias Teebox.Accounts.Repositories.OauthApplicationUserRepository
+  alias Teebox.Accounts.Schemas.OauthApplicationUser
 
   @name "name"
 

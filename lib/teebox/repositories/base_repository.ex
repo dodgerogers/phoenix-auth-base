@@ -1,4 +1,4 @@
-defmodule Teebox.Persistance.BaseRepository do
+defmodule Teebox.Repositories.BaseRepository do
   defmacro __using__(_) do
     quote do
       alias Ecto.Changeset

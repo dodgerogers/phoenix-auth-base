@@ -1,7 +1,6 @@
-defmodule Teebox.Accounts.Applications do
-  alias Teebox.Persistance.OauthApplicationUserRepository
-  alias Teebox.Accounts.OauthApplicationUser
-  alias Teebox.Persistance.OauthApplicationRepository
+defmodule Teebox.Accounts.Services.Applications do
+  alias Teebox.Accounts.Repositories.{OauthApplicationUserRepository, OauthApplicationRepository}
+  alias Teebox.Accounts.Schemas.OauthApplicationUser
   alias ExOauth2Provider.OauthApplications.OauthApplication
 
   @application_user "teebox"

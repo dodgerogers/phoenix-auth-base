@@ -1,4 +1,4 @@
-defmodule Teebox.Accounts.User do
+defmodule Teebox.Accounts.Schemas.User do
   use Teebox.Web, :model
 
   alias ExOauth2Provider.OauthAccessTokens.OauthAccessToken
@@ -25,6 +25,7 @@ defmodule Teebox.Accounts.User do
     timestamps()
   end
 
+  # TODO: Move changesets into boundaries
   @required_fields ~w(name email password password_confirmation)a
   @optional_fields ~w(avatar)a
 

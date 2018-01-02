@@ -1,5 +1,5 @@
-defmodule Teebox.Persistance.OauthApplicationRepository do
-  use Teebox.Persistance.BaseRepository
+defmodule Teebox.Accounts.Repositories.OauthApplicationRepository do
+  use Teebox.Repositories.BaseRepository
   alias ExOauth2Provider.OauthApplications
   alias ExOauth2Provider.OauthApplications.OauthApplication
 

@@ -1,10 +1,10 @@
 defmodule Teebox.Accounts.Registration do
-  alias Teebox.Accounts.User
-  alias Teebox.Persistance.UsersRepository
   alias Teebox.Accounts.Message
+  alias Teebox.Accounts.Schemas.User
+  alias Teebox.Accounts.Repositories.UsersRepository
 
   def call(%{} = params) do
-    with {:ok, user} <- create_user(params) do
+    with {:ok, user} <- register_user(params) do
       send_confirmation(user)
       {:ok, user}
     else
@@ -12,7 +12,7 @@ defmodule Teebox.Accounts.Registration do
     end
   end
 
-  defp create_user(%{} = params) do
+  defp register_user(%{} = params) do
     User.changeset(:registration, %User{}, params)
     |> UsersRepository.create()
   end

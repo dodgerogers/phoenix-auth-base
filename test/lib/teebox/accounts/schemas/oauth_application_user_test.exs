@@ -1,7 +1,7 @@
-defmodule Teebox.Accounts.OauthApplicationUserTest do
+defmodule Teebox.Accounts.Schemas.OauthApplicationUserTest do
   use Teebox.ModelCase, async: true
 
-  alias Teebox.Accounts.OauthApplicationUser
+  alias Teebox.Accounts.Schemas.OauthApplicationUser
 
   import Teebox.Factory
 

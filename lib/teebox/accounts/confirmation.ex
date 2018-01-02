@@ -1,6 +1,6 @@
 defmodule Teebox.Accounts.Confirmation do
-  alias Teebox.Accounts.User
-  alias Teebox.Persistance.UsersRepository
+  alias Teebox.Accounts.Schemas.User
+  alias Teebox.Accounts.Repositories.UsersRepository
 
   @token_expiry_in_mins 10
   @account_not_found "Could not find account"

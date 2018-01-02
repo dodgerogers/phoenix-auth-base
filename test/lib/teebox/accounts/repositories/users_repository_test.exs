@@ -1,8 +1,8 @@
-defmodule Teebox.Persistance.UserRepositoryTest do
+defmodule Teebox.Repositories.UserRepositoryTest do
   use Teebox.ModelCase, async: true
 
   import Teebox.Factory
-  alias Teebox.Persistance.UsersRepository
+  alias Teebox.Accounts.Repositories.UsersRepository
 
   @email "email@email.com"
   @confirmation_token "token"

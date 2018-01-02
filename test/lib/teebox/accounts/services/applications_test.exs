@@ -1,7 +1,7 @@
-defmodule Teebox.Accounts.ApplicationsTest do
+defmodule Teebox.Accounts.Services.ApplicationsTest do
   use Teebox.ModelCase, async: true
 
-  alias Teebox.Accounts.Applications
+  alias Teebox.Accounts.Services.Applications
 
   def create_app_user, do: insert(:oauth_application_user, %{name: Applications.default_application_user_name()})
 

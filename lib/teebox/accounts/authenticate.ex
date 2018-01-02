@@ -1,6 +1,8 @@
 defmodule Teebox.Accounts.Authenticate do
-  alias Teebox.Accounts.{Applications, Confirmation, User}
-  alias Teebox.Persistance.UsersRepository
+  alias Teebox.Accounts.Confirmation
+  alias Teebox.Accounts.Services.Applications
+  alias Teebox.Accounts.Schemas.User
+  alias Teebox.Accounts.Repositories.UsersRepository
   alias ExOauth2Provider.Token
 
   @error_message "Invalid email or password"
