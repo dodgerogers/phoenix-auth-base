@@ -36,6 +36,7 @@ defmodule Teebox.Web do
 
       import Teebox.Web.Router.Helpers
       import Teebox.Web.Gettext
+      import Teebox.Web.Controller.Helper
     end
   end
 

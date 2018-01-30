@@ -27,10 +27,4 @@ defmodule Teebox.Web.Api.TokenController do
       {:error, error} -> render_error(conn, error, 400)
     end
   end
-
-  defp render_error(conn, message, status) do
-    conn
-    |> put_status(status)
-    |> render(Teebox.Web.ErrorView, "error.json", %{message: message})
-  end
 end

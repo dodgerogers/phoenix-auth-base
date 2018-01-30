@@ -21,10 +21,4 @@ defmodule Teebox.Web.Api.ConfirmationsController do
       {:error, message} -> render_error(conn, message)
     end
   end
-
-  defp render_error(conn, message) do
-    conn
-    |> put_status(:bad_request)
-    |> render(Teebox.Web.ErrorView, "error.json", %{message: message})
-  end
 end

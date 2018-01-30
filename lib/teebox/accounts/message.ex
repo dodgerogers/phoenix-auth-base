@@ -18,6 +18,12 @@ defmodule Teebox.Accounts.Message do
     |> render("already_confirmed.html")
   end
 
+  def reset_password(user) do
+    prep_mail(user)
+    |> subject("Reset your password")
+    |> render("reset_password.html")
+  end
+
   defp prep_mail(user) do
     new_email()
     |> to(user.email)

@@ -27,6 +27,7 @@ config :teebox, :confirmation, Teebox.Accounts.ConfirmationMock
 config :teebox, :registration, Teebox.Accounts.RegistrationMock
 config :teebox, :authenticate, Teebox.Accounts.AuthenticateMock
 config :teebox, :revoke_token, Teebox.Accounts.RevokeTokenMock
+config :teebox, :generate_password_reset, Teebox.Accounts.GeneratePasswordResetMock
 
 config :pbkdf2_elixir, :rounds, 1
 

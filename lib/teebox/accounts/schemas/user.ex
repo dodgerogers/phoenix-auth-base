@@ -2,6 +2,7 @@ defmodule Teebox.Accounts.Schemas.User do
   use Teebox.Web, :model
 
   alias ExOauth2Provider.OauthAccessTokens.OauthAccessToken
+  alias Teebox.Services.StringUtil
 
   schema "users" do
     field :name, :string
@@ -57,7 +58,7 @@ defmodule Teebox.Accounts.Schemas.User do
   def add_confirmation(changeset) do
     changeset
     |> change(%{confirmation_sent_at: NaiveDateTime.utc_now()})
-    |> change(%{confirmation_token: random_string()})
+    |> change(%{confirmation_token: StringUtil.random_string()})
     |> unique_constraint(:confirmation_token)
   end
 
@@ -72,6 +73,7 @@ defmodule Teebox.Accounts.Schemas.User do
      |> unique_constraint(:email)
    end
 
+   # TODO: Move to passwords
    defp validate_passwords_match(%Ecto.Changeset{changes: %{password: pw, password_confirmation: pw}} = changeset) do
      changeset
    end
@@ -94,11 +96,4 @@ defmodule Teebox.Accounts.Schemas.User do
     |> change(%{password_hash: Comeonin.Pbkdf2.hashpwsalt(pw)})
   end
   defp put_password_hash(changeset), do: changeset
-
-  def random_string(length \\ 25) do
-    length
-    |> :crypto.strong_rand_bytes
-    |> Base.url_encode64
-    |> binary_part(0, length)
-  end
 end
