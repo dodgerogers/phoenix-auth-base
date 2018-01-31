@@ -1,4 +1,4 @@
-defmodule Teebox.Accounts.GeneratePasswordResetMock do
+defmodule Teebox.Accounts.ForgotPasswordMock do
   @success_msg "Success"
   @error_msg "Failure"
 

@@ -35,7 +35,7 @@ config :teebox, :confirmation, Teebox.Accounts.Confirmation
 config :teebox, :registration, Teebox.Accounts.Registration
 config :teebox, :authenticate, Teebox.Accounts.Authenticate
 config :teebox, :revoke_token, Teebox.Accounts.RevokeToken
-config :teebox, :generate_password_reset, Teebox.Accounts.GeneratePasswordReset
+config :teebox, :forgot_password, Teebox.Accounts.ForgotPassword
 
 config :teebox, Teebox.Mailer,
   adapter: Bamboo.LocalAdapter

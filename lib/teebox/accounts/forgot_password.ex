@@ -1,4 +1,4 @@
-defmodule Teebox.Accounts.GeneratePasswordReset do
+defmodule Teebox.Accounts.ForgotPassword do
   use Teebox.Web, :model
 
   alias Teebox.Accounts.Schemas.User

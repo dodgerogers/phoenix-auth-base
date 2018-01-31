@@ -1,10 +1,10 @@
 defmodule Teebox.Web.Api.PasswordsController do
   use Teebox.Web, :controller
 
-  @generate_password_reset Application.get_env(:teebox, :generate_password_reset)
+  @forgot_password Application.get_env(:teebox, :forgot_password)
 
   def create(conn, params) do
-    with {:ok, message} <- @generate_password_reset.call(params) do
+    with {:ok, message} <- @forgot_password.call(params) do
       conn
       |> render("create.json", %{message: message})
     else

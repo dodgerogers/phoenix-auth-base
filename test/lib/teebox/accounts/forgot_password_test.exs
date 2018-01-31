@@ -1,4 +1,4 @@
-defmodule Teebox.Accounts.GenerateGeneratePasswordResetTest do
+defmodule Teebox.Accounts.ForgotPasswordTest do
   use Teebox.ModelCase, async: true
   use Timex
   use Bamboo.Test
@@ -6,7 +6,7 @@ defmodule Teebox.Accounts.GenerateGeneratePasswordResetTest do
   import Teebox.Web.AuthCase
 
   alias Teebox.Accounts.Schemas.User
-  alias Teebox.Accounts.GeneratePasswordReset
+  alias Teebox.Accounts.ForgotPassword
   alias Teebox.Accounts.Repositories.UsersRepository
 
   @email "email@email.com"
@@ -18,7 +18,7 @@ defmodule Teebox.Accounts.GenerateGeneratePasswordResetTest do
     test "with valid params sets reset_password_token and reset_password_sent_at and sends email" do
       create_confirmed_user(%{email: @email})
 
-      {:ok, message} = GeneratePasswordReset.call(@valid_attrs)
+      {:ok, message} = ForgotPassword.call(@valid_attrs)
 
       assert message == "A password reset email has been sent"
       updated_user = UsersRepository.find_by_email(@email)
@@ -28,7 +28,7 @@ defmodule Teebox.Accounts.GenerateGeneratePasswordResetTest do
     end
 
     test "with non existant email returns message" do
-      {:ok, message} = GeneratePasswordReset.call(%{"email" => @email <> "1"})
+      {:ok, message} = ForgotPassword.call(%{"email" => @email <> "1"})
 
       assert message == "A password reset email has been sent"
     end
@@ -36,7 +36,7 @@ defmodule Teebox.Accounts.GenerateGeneratePasswordResetTest do
 
   describe "changeset" do
     test 'returns valid changeset' do
-      changeset = GeneratePasswordReset.changeset(%User{})
+      changeset = ForgotPassword.changeset(%User{})
 
       assert changeset.valid?
       changes = changeset.changes
