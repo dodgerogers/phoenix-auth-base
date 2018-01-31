@@ -1,4 +1,4 @@
-defmodule Teebox.Accounts.ConfirmAndSignInUserMock do
+defmodule Teebox.Accounts.ConfirmAndAuthenticateMock do
   @error_msg "Failure"
 
   def call(%{"email" => _, "password" => _, "confirmation_token" => _}), do: {:ok, %{access_token: "token"}}

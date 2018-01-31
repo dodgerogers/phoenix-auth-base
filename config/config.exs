@@ -30,7 +30,7 @@ config :logger, :console,
  # TODO: Secrets
 config :mix_docker, image: "377092858912.dkr.ecr.us-east-1.amazonaws.com/teebox.io"
 
-config :teebox, :confirm_and_sign_in_user, Teebox.Accounts.ConfirmAndSignInUser
+config :teebox, :confirm_and_authenticate, Teebox.Accounts.ConfirmAndAuthenticate
 config :teebox, :confirmation, Teebox.Accounts.Confirmation
 config :teebox, :registration, Teebox.Accounts.Registration
 config :teebox, :authenticate, Teebox.Accounts.Authenticate

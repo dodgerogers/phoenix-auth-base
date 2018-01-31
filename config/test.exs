@@ -22,7 +22,7 @@ db_config = [
 config :teebox, Teebox.Repo, db_config
 
 # TODO: Should there be a convention for this?
-config :teebox, :confirm_and_sign_in_user, Teebox.Accounts.ConfirmAndSignInUserMock
+config :teebox, :confirm_and_authenticate, Teebox.Accounts.ConfirmAndAuthenticateMock
 config :teebox, :confirmation, Teebox.Accounts.ConfirmationMock
 config :teebox, :registration, Teebox.Accounts.RegistrationMock
 config :teebox, :authenticate, Teebox.Accounts.AuthenticateMock

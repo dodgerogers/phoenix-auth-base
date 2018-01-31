@@ -1,4 +1,4 @@
-defmodule Teebox.Accounts.ConfirmAndSignInUser do
+defmodule Teebox.Accounts.ConfirmAndAuthenticate do
   alias Teebox.Accounts.Confirmation
   alias Teebox.Accounts.Authenticate
 
