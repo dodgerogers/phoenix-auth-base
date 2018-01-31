@@ -1,9 +1,10 @@
 import { stopAsyncValidation, SubmissionError, initialize } from 'redux-form/immutable';
 import * as AuthenticationSources from './sources';
 import { ModalActions, ModalIds } from '../common/modals';
-import { actionTypes, formIDs } from './constants';
+import { actionTypes } from './constants';
 import { NotificationActions, areaIDs } from '../common/Notifications';
 import * as TokenStorage from './lib/TokenStorage';
+import { formIDs } from '../constants/form';
 
 
 const verifyToken = (accessToken) => ({
@@ -43,7 +44,7 @@ export const signOut = () => {
   };
 }
 
-// TODO: Move modal and notification actions into saga
+// TODO: saga
 export function login(loginParams) {
   return dispatch => {
     return AuthenticationSources.login(loginParams.toJS())
@@ -69,6 +70,7 @@ const registerFailure = (error) => ({
   error,
 });
 
+// TODO: saga
 export function register(registerParams) {
   return dispatch => {
     return AuthenticationSources.register(registerParams.toJS())
@@ -95,6 +97,7 @@ const confirmationFailure = (error) => ({
   error,
 });
 
+// TODO: saga
 export function confirm(confirmationParams) {
   return dispatch => {
     return AuthenticationSources.confirm(confirmationParams.toJS())
@@ -121,6 +124,7 @@ const resendConfirmationFailure = (error) => ({
   error,
 });
 
+// TODO: saga
 export function resendConfirmation(resendConfirmation) {
   return dispatch => {
     return AuthenticationSources.resendConfirmation(resendConfirmation.toJS())
@@ -134,4 +138,9 @@ export function resendConfirmation(resendConfirmation) {
         throw new SubmissionError({ _error: err.response.data.error });
       });
   }
-}
+};
+
+export const passwordResetRequestSuccess = data => ({
+  type: actionTypes.PASSWORD_RESET_REQUEST_SUCCESS,
+  data,
+});

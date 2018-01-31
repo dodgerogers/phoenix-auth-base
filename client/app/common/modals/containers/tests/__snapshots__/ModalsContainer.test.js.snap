@@ -16,5 +16,11 @@ exports[`ModalsContainer PureComponent matches snapshot 1`] = `
   <ResendConfirmationModal
     close={[Function]}
   />
+  <ForgotPasswordModal
+    close={[Function]}
+  />
+  <ResetPasswordModal
+    close={[Function]}
+  />
 </div>
 `;

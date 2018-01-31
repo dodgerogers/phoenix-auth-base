@@ -91,6 +91,15 @@ Array [
 ]
 `;
 
+exports[`async AuthenticationActions passwordResetRequestSuccess matches snapshot 1`] = `
+Object {
+  "data": Object {
+    "message": "message",
+  },
+  "type": "PASSWORD_RESET_REQUEST_SUCCESS",
+}
+`;
+
 exports[`async AuthenticationActions register when registration fails 1`] = `
 Array [
   Object {

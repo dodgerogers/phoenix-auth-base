@@ -1,17 +1,18 @@
 import React from 'react'
 import { Field } from 'redux-form/immutable';
-import { reduxForm } from 'redux-form/immutable';
 import { Form, Message, Button, Icon } from 'semantic-ui-react';
 import Input from '../../common/components/Input';
-import { isRequired, isEmail } from '../../lib/utils/validation';
-import { formIDs } from '../../constants/form';
+import { isRequired, minLength, matchField } from '../../lib/utils/validation';
+
+const minPasswordLength = minLength(8);
+const passwordsMustMatch = matchField('password');
 
 
-const ConfirmationForm = (props) => {
+const ResetPasswordForm = (props) => {
   const { handleSubmit, error, submitting, dirty } = props;
 
   return (
-    <div className="confirmation-form">
+    <div className="reset-password-form">
       <Form
         size='large'
         loading={submitting}
@@ -20,29 +21,28 @@ const ConfirmationForm = (props) => {
         {error && dirty && <Message negative>{error}</Message>}
         <Field
           component={Input}
-          fluid
-          name="confirmationToken"
-          placeholder="Confirmation code"
+          fluid={true}
+          name="resetPasswordToken"
+          placeholder="Reset Password Token"
           validate={[isRequired]}
         />
         <Field
           component={Input}
-          fluid
-          name="email"
-          icon="mail"
-          iconPosition="left"
-          placeholder="Email"
-          validate={[isRequired, isEmail]}
-        />
-        <Field
-          component={Input}
-          fluid
+          fluid={true}
           name="password"
           icon="lock"
-          type="password"
           iconPosition="left"
-          placeholder="Password"
-          validate={[isRequired]}
+          placeholder="New Password"
+          validate={[isRequired, minPasswordLength]}
+        />
+        <Field
+          component={Input}
+          fluid={true}
+          name="passwordConfirmation"
+          icon="lock"
+          iconPosition="left"
+          placeholder="Password Confirmation"
+          validate={[isRequired, passwordsMustMatch]}
         />
         <Button
           type="submit"
@@ -57,5 +57,4 @@ const ConfirmationForm = (props) => {
   );
 }
 
-export { ConfirmationForm as PureComponent };
-export default reduxForm({ form: formIDs.CONFIRMATION })(ConfirmationForm);
+export default ResetPasswordForm;

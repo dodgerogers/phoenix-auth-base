@@ -13,11 +13,7 @@ exports[`RegistrationForm matches component snapshot 1`] = `
     show={true}
   />
   <AuthenticationLinks
-    exclude={
-      Array [
-        "REGISTRATION",
-      ]
-    }
+    exclude={Array []}
   />
 </AuthenticationModal>
 `;

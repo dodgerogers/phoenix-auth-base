@@ -1,9 +1,10 @@
+import { fromJS } from 'immutable';
 import * as Validation from '../validation';
 
 
 describe('validation', () => {
-  const fieldName = 'field-name';
-  const expectedFieldName = (name) => name.replace('-', ' ');
+  const fieldName = 'fieldName';
+  const expectedFieldName = 'Field Name';
 
   describe('isRequired', () => {
     it('returns error string when value is a invalid value', () => {
@@ -12,7 +13,7 @@ describe('validation', () => {
       invalidInputs.map(invalidInput => {
         const err = Validation.isRequired(null, null, {}, fieldName);
 
-        expect(err).toEqual(`${expectedFieldName(fieldName)} is required`);
+        expect(err).toEqual(`${expectedFieldName} is required`);
       });
     });
 
@@ -31,7 +32,7 @@ describe('validation', () => {
       const invalidString = createStrWithLength(strLength - 1);
       const err = Validation.minLength(strLength)(invalidString, null, {}, fieldName);
 
-      expect(err).toEqual(`${expectedFieldName(fieldName)} is too short. ${strLength} minimum`);
+      expect(err).toEqual(`${expectedFieldName} is too short. ${strLength} minimum`);
     });
 
     it('returns undefined when value is a valid value', () => {
@@ -47,7 +48,7 @@ describe('validation', () => {
       const invalidEmail = 'something.somewhere@anywhere';
       const err = Validation.isEmail(invalidEmail, null, {}, fieldName);
 
-      expect(err).toEqual(`${expectedFieldName(fieldName)} is not valid`);
+      expect(err).toEqual(`${expectedFieldName} is not valid`);
     });
 
     it('returns undefined when value is a valid email', () => {
@@ -55,6 +56,23 @@ describe('validation', () => {
       const err = Validation.isEmail(validEmail, null, {}, fieldName);
 
       expect(err).toEqual(undefined);
+    });
+  });
+
+  describe('matchField', () => {
+    it('returns error string when value does not match specified field', () => {
+      const string = 'password';
+      const nonMatchingString = string + '1';
+      const err = Validation.matchField('password')(nonMatchingString, fromJS({ password: string }), {});
+
+      expect(err).toEqual('Does not match "Password"');
+    });
+
+    it('returns null when value is a valid email', () => {
+      const string = 'password';
+      const err = Validation.matchField('password')(string, fromJS({ password: string }), {});
+
+      expect(err).toEqual(null);
     });
   });
 });

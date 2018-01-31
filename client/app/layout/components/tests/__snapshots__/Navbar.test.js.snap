@@ -4,6 +4,11 @@ exports[`Navbar matches pure component snapshot 1`] = `
 <navbar>
   <Menu
     fixed="top"
+    style={
+      Object {
+        "boxShadow": "none",
+      }
+    }
   >
     <Container>
       <MenuItem>
@@ -34,6 +39,11 @@ exports[`Navbar matches pure component when currentUser is present snapshot 1`] 
 <navbar>
   <Menu
     fixed="top"
+    style={
+      Object {
+        "boxShadow": "none",
+      }
+    }
   >
     <Container>
       <MenuItem>

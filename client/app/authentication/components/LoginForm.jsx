@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form/immutable';
 import { Form, Message, Button, Icon } from 'semantic-ui-react';
 import Input from '../../common/components/Input';
 import { isRequired, isEmail } from '../../lib/utils/validation';
-import { formIDs } from '../constants';
+import { formIDs } from '../../constants/form';
 
 
 const LoginForm = (props) => {

@@ -1,17 +1,15 @@
 import React from 'react'
 import { Field } from 'redux-form/immutable';
-import { reduxForm } from 'redux-form/immutable';
 import { Form, Message, Button, Icon } from 'semantic-ui-react';
 import Input from '../../common/components/Input';
 import { isRequired, isEmail } from '../../lib/utils/validation';
-import { formIDs } from '../../constants/form';
 
 
-const ConfirmationForm = (props) => {
+const ForgotPasswordForm = (props) => {
   const { handleSubmit, error, submitting, dirty } = props;
 
   return (
-    <div className="confirmation-form">
+    <div className="forgot-password-form">
       <Form
         size='large'
         loading={submitting}
@@ -20,29 +18,12 @@ const ConfirmationForm = (props) => {
         {error && dirty && <Message negative>{error}</Message>}
         <Field
           component={Input}
-          fluid
-          name="confirmationToken"
-          placeholder="Confirmation code"
-          validate={[isRequired]}
-        />
-        <Field
-          component={Input}
-          fluid
+          fluid={true}
           name="email"
           icon="mail"
           iconPosition="left"
           placeholder="Email"
           validate={[isRequired, isEmail]}
-        />
-        <Field
-          component={Input}
-          fluid
-          name="password"
-          icon="lock"
-          type="password"
-          iconPosition="left"
-          placeholder="Password"
-          validate={[isRequired]}
         />
         <Button
           type="submit"
@@ -57,5 +38,4 @@ const ConfirmationForm = (props) => {
   );
 }
 
-export { ConfirmationForm as PureComponent };
-export default reduxForm({ form: formIDs.CONFIRMATION })(ConfirmationForm);
+export default ForgotPasswordForm;

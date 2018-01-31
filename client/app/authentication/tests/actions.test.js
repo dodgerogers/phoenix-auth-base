@@ -258,4 +258,10 @@ describe('async AuthenticationActions', () => {
         });
     });
   });
+
+  describe('passwordResetRequestSuccess', () => {
+    it('matches snapshot', () => {
+      expect(AuthenticationActions.passwordResetRequestSuccess({ message: 'message'})).toMatchSnapshot();
+    });
+  });
 });
