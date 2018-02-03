@@ -1,10 +1,11 @@
 defmodule Teebox.Accounts.Confirmation do
   alias Teebox.Accounts.Schemas.User
   alias Teebox.Accounts.Repositories.UsersRepository
+  alias Teebox.Services.TimeUtil
 
-  @token_expiry_in_mins 10
   @account_not_found "Could not find account"
   @confirmation_sent "If an account exists we have sent a confirmation code"
+  @token_expiry_in_secs Application.get_env(:teebox, :confirmation_token_expiry)
 
   def confirm!(%{"email" => _, "confirmation_token" => _} = params) do
     with {:ok, user} <- find_user_by_token(params),
@@ -39,8 +40,8 @@ defmodule Teebox.Accounts.Confirmation do
   end
 
   defp valid_confirmation_token?(%User{} = user) do
-    token_expiry_time = Timex.shift(user.confirmation_sent_at, [minutes: @token_expiry_in_mins])
-    if Timex.before?(Timex.now, token_expiry_time) do
+    expiry_in_mins = round(@token_expiry_in_secs / 60)
+    if TimeUtil.expired?(user.confirmation_sent_at, expiry_in_mins) do
       {:ok}
     else
       {:error, "Confirmation token has expired"}

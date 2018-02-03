@@ -5,6 +5,8 @@ import LoginModal from '../../../authentication/components/LoginModal';
 import RegistrationFormModal from '../../../authentication/components/RegistrationFormModal';
 import ConfirmationModal from '../../../authentication/components/ConfirmationModal';
 import ResendConfirmationModal from '../../../authentication/components/ResendConfirmationModal';
+import ForgotPasswordModal from '../../../authentication/components/ForgotPasswordModal';
+import ResetPasswordModal from '../../../authentication/components/ResetPasswordModal';
 import { hideModal } from '../actions';
 import { modalIds } from '../constants';
 
@@ -15,6 +17,8 @@ const ModalsContainer = (props) => {
     { component: RegistrationFormModal, id: modalIds.REGISTRATION_MODAL },
     { component: ConfirmationModal, id: modalIds.CONFIRMATION_MODAL },
     { component: ResendConfirmationModal, id: modalIds.RESEND_CONFIRMATION_MODAL },
+    { component: ForgotPasswordModal, id: modalIds.FORGOT_PASSWORD_MODAL },
+    { component: ResetPasswordModal, id: modalIds.RESET_PASSWORD_MODAL },
   ];
 
   function renderModals() {
@@ -33,10 +37,8 @@ const ModalsContainer = (props) => {
   return (<div className="modals">{renderModals()}</div>);
 }
 
-function mapStateToProps(state) {
-  return {
-    modals: state.modals,
-  };
+function mapStateToProps({ modals }) {
+  return { modals };
 }
 
 ModalsContainer.propTypes = {

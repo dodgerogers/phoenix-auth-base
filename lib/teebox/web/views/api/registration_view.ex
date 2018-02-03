@@ -3,7 +3,6 @@ defmodule Teebox.Web.Api.RegistrationView do
 
   def render("registration.json", %{user: user}) do
     %{
-      message: "An email confirmation has been sent",
       user: %{
         id: user.id,
         name: user.name,

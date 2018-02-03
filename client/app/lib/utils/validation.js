@@ -1,4 +1,4 @@
-const normalizeName = (name) => name.replace('-', ' ');
+const normalizeName = name => name.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
 
 export const isRequired = (value, allValues, props, name) => {
   if (!value) {
@@ -19,4 +19,10 @@ export const isEmail = (value, allValues, props, name) => {
   if (!re.test(value)) {
     return `${normalizeName(name)} is not valid`;
   }
+}
+
+export const matchField = (fieldName) => {
+  return (value, allValues, props) => {
+    return value !== allValues.get(fieldName) ? `Does not match "${normalizeName(fieldName)}"` : null;
+  };
 }

@@ -20,6 +20,14 @@ export const resendConfirmation = ({ email }) => {
   return HTTP.post(`${API_BASE}/api/confirmations`, { confirmation: { email } });
 };
 
+export const passwordResetRequest = ({ email }) => {
+  return HTTP.post(`${API_BASE}/api/passwords`, { email });
+};
+
+export const resetPassword = ({ email, resetPasswordToken, password, passwordConfirmation }) => {
+  return HTTP.put(`${API_BASE}/api/passwords`, { email, resetPasswordToken, password, passwordConfirmation });
+};
+
 export const currentUser = () => {
   return HTTP.get(`${API_BASE}/api/users/me`);
 };

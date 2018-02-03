@@ -1,4 +1,4 @@
-defmodule Teebox.Accounts.ConfirmAndSignInUser do
+defmodule Teebox.Accounts.ConfirmAndAuthenticate do
   alias Teebox.Accounts.Confirmation
   alias Teebox.Accounts.Authenticate
 
@@ -29,7 +29,11 @@ defmodule Teebox.Accounts.ConfirmAndSignInUser do
   end
 
   defp auth_params(%{} = params) do
-    %{"grant_type" => "password", "username"=> params["email"], "password" => params["password"]}
+    %{
+      "grant_type" => "password",
+      "username"=> params["email"],
+      "password" => params["password"]
+    }
   end
 
   defp format_result(result) do

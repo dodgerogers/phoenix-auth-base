@@ -53,6 +53,8 @@ exports[`RegistrationForm matches component snapshot 1`] = `
     <Field
       component={[Function]}
       fluid={true}
+      icon="lock"
+      iconPosition="left"
       name="passwordConfirmation"
       placeholder="Password Confirmation"
       type="password"

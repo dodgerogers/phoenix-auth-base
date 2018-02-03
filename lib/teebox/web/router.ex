@@ -30,7 +30,8 @@ defmodule Teebox.Web.Router do
     resources "/registrations", Teebox.Web.Api.RegistrationController, only: [:create]
     put "/confirmations", Teebox.Web.Api.ConfirmationsController, :update
     post "/confirmations", Teebox.Web.Api.ConfirmationsController, :create
-    # resources "/passwords", Teebox.Web.Api.PasswordController, only: [:create, :update, :edit]
+    post "/passwords", Teebox.Web.Api.PasswordsController, :create
+    put "/passwords", Teebox.Web.Api.PasswordsController, :update
   end
 
   scope "/api" do

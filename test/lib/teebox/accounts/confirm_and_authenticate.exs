@@ -1,9 +1,9 @@
-defmodule Teebox.Accounts.ConfirmAndSignInUserTest do
+defmodule Teebox.Accounts.ConfirmAndAuthenticateTest do
   use Teebox.ModelCase, async: true
 
   import Teebox.Web.AuthCase
 
-  alias Teebox.Accounts.ConfirmAndSignInUser
+  alias Teebox.Accounts.ConfirmAndAuthenticate
   alias ExOauth2Provider.OauthAccessTokens.OauthAccessToken
 
   @email "user@email.com"
@@ -20,7 +20,7 @@ defmodule Teebox.Accounts.ConfirmAndSignInUserTest do
   test "call with valid params confirms user and returns an access token" do
     user = create_unconfirmed_user(%{email: @email, password: @password, confirmation_token: @token})
 
-    {:ok, _access_token} = ConfirmAndSignInUser.call(@params)
+    {:ok, _access_token} = ConfirmAndAuthenticate.call(@params)
 
     confirmed_user = reload_user(user)
     assert confirmed_user.confirmed_at
@@ -31,7 +31,7 @@ defmodule Teebox.Accounts.ConfirmAndSignInUserTest do
     user = create_unconfirmed_user(%{email: @email, password: @password, confirmation_token: @token})
     invalid_params = Map.merge(@params, %{"password" => @password <> "1"})
 
-    {:error, _message} = ConfirmAndSignInUser.call(invalid_params)
+    {:error, _message} = ConfirmAndAuthenticate.call(invalid_params)
 
     refute user.confirmed_at
     assert 0 == access_token_count()
@@ -40,7 +40,7 @@ defmodule Teebox.Accounts.ConfirmAndSignInUserTest do
   test "call with confirmed user returns error and does not grant access token" do
     user = create_confirmed_user(%{email: @email, password: @password})
 
-    {:error, _message} = ConfirmAndSignInUser.call(@params)
+    {:error, _message} = ConfirmAndAuthenticate.call(@params)
 
     confirmed_user = reload_user(user)
     assert confirmed_user.confirmed_at

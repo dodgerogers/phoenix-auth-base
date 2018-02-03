@@ -9,29 +9,15 @@ const AuthLink = styled.div`
 `;
 
 export const links = mirrorCreator([
-  'LOGIN',
-  'REGISTRATION',
   'CONFIRMATION',
   'RESEND_CONFIRMATION',
+  'FORGOT_PASSWORD',
+  'RESET_PASSWORD',
 ]);
 
-const AuthenticationLinks = (props) => {
+const AuthenticationLinks = props => {
   const Wrapper = props => (<a href="#" {...props} />);
   const authLinksMap = {
-    [links.LOGIN]: () => (
-      <ModalTrigger
-        text="Already registered? Login in"
-        id={ModalIds.LOGIN_MODAL}
-        wrapper={Wrapper}
-      />
-    ),
-    [links.REGISTRATION]: () => (
-      <ModalTrigger
-        text="Create an account"
-        id={ModalIds.REGISTRATION_MODAL}
-        wrapper={Wrapper}
-      />
-    ),
     [links.CONFIRMATION]: () => (
       <ModalTrigger
         text="I have a confirmation code"
@@ -43,6 +29,20 @@ const AuthenticationLinks = (props) => {
       <ModalTrigger
         text="Didn't receive confirmation instructions?"
         id={ModalIds.RESEND_CONFIRMATION_MODAL}
+        wrapper={Wrapper}
+      />
+    ),
+    [links.FORGOT_PASSWORD]: () => (
+      <ModalTrigger
+        text="Forgot your password?"
+        id={ModalIds.FORGOT_PASSWORD_MODAL}
+        wrapper={Wrapper}
+      />
+    ),
+    [links.RESET_PASSWORD]: () => (
+      <ModalTrigger
+        text="I have a password reset code"
+        id={ModalIds.RESET_PASSWORD_MODAL}
         wrapper={Wrapper}
       />
     ),

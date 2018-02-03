@@ -52,6 +52,8 @@ function RegistrationForm(props) {
           fluid={true}
           type="password"
           name="passwordConfirmation"
+          icon="lock"
+          iconPosition="left"
           placeholder="Password Confirmation"
           validate={[isRequired]}
         />

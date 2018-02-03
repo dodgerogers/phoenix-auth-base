@@ -7,7 +7,7 @@ defmodule Teebox.Accounts.MessageTest do
   alias Teebox.Accounts.Message
 
   setup do
-    user = build(:user, confirmation_token: "token")
+    user = build(:user, confirmation_token: "token", reset_password_token: "reset")
 
     {:ok, %{user: user}}
   end
@@ -35,13 +35,14 @@ defmodule Teebox.Accounts.MessageTest do
   #   assert sent_email.text_body =~ "but no user is associated with the email you provided"
   # end
   #
-  # test "sends reset password request email", %{key: key} do
-  #   sent_email = Message.reset_request(@email, key)
-  #
-  #   assert sent_email.subject =~ "Reset your password"
-  #   assert sent_email.text_body =~ key
-  #   assert_delivered_email Message.reset_request(@email, key)
-  # end
+  test "sends reset password request email", %{user: user} do
+    sent_email = Message.reset_password(user)
+    |> Teebox.Mailer.deliver_now
+
+    assert sent_email.subject =~ "Reset your password"
+    assert sent_email.html_body =~ user.reset_password_token
+    assert_delivered_email sent_email
+  end
   #
   # test "sends password reset email" do
   #   sent_email = Message.reset_success(@email)

@@ -13,8 +13,7 @@ HTTP.interceptors.request.use(config => {
 
   if (accessToken) {
     config.headers.common['Authorization'] = `Bearer ${accessToken}`;
-  }
-  else {
+  } else {
     const { Authorization, ...headers } = config.headers.common;
     config.headers.common = headers;
   }

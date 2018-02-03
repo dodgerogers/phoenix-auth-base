@@ -8,10 +8,7 @@ defmodule Teebox.Web.Api.RegistrationController do
       conn
       |> render("registration.json", %{user: user})
     else
-      {:error, changeset} ->
-        conn
-        |> put_status(:bad_request)
-        |> render(Teebox.Web.ChangesetView, "error.json", %{changeset: changeset})
+      {:error, error} -> render_error(conn, error, :bad_request)
     end
   end
 end

@@ -16,7 +16,7 @@ services:
       - .:/app
       - /var/run/docker.sock:/tmp/sock
       - /var/run/docker.sock:/var/run/docker.sock
-      - /usr/bin/docker:/usr/bin/docker
+      - /usr/local/bin/docker:/usr/local/bin/docker
     ports:
       - "4000:4000"
     privileged: true
@@ -39,8 +39,6 @@ services:
       - DB_ENV_POSTGRES_HOST=test_db
       - DB_ENV_NAME=teebox_test
       - SECRET_KEY_BASE=8T5LnoIUrhwSfTJhqViVjckIEYrnd2mEIfgIbfsT+sB+/hCMXJbN48v8zjhFx5/p
-      - GUARDIAN_SECRET_KEY=Y1Lq7haDTW1tbWg2W+lSUZwxauungR6IYG9jS11nf9U/fimBy+lOQCkVQPIZpz89
-      - PHAUXTH_TOKEN_SALT=a1b2c3d4
     depends_on:
       - test_db
 

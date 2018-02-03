@@ -15,7 +15,6 @@ defmodule Teebox.Web.Api.RegistrationControllerTest do
 
     response = json_response(conn, 200)
     assert response["user"]
-    assert response["message"] == "An email confirmation has been sent"
   end
 
   test "POST create with invalid params returns errors" do

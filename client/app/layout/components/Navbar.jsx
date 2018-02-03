@@ -30,7 +30,12 @@ const Navbar = (props) => {
 
   return (
     <navbar>
-      <Menu fixed="top">
+      <Menu
+        fixed="top"
+        style={{
+          boxShadow: 'none'
+         }}
+      >
         <Container>
           <Menu.Item>
             <Header>

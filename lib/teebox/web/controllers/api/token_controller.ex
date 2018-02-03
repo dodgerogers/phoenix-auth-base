@@ -21,16 +21,9 @@ defmodule Teebox.Web.Api.TokenController do
          {:ok, _} <- @revoke_token.call(%{"token" => token})
     do
       conn
-      |> put_status(204)
-      |> render("revoke.json", %{})
+      |> render_no_content(204)
     else
       {:error, error} -> render_error(conn, error, 400)
     end
-  end
-
-  defp render_error(conn, message, status) do
-    conn
-    |> put_status(status)
-    |> render(Teebox.Web.ErrorView, "error.json", %{message: message})
   end
 end

@@ -1,10 +1,14 @@
 import { stopAsyncValidation, SubmissionError, initialize } from 'redux-form/immutable';
 import * as AuthenticationSources from './sources';
 import { ModalActions, ModalIds } from '../common/modals';
-import { actionTypes, formIDs } from './constants';
+import { actionTypes } from './constants';
 import { NotificationActions, areaIDs } from '../common/Notifications';
 import * as TokenStorage from './lib/TokenStorage';
+import { formIDs } from './constants';
 
+// TODO's
+// * Move notifications to a separate file
+// * Move all thunks to sagas
 
 const verifyToken = (accessToken) => ({
   type: actionTypes.VERIFY_TOKEN,
@@ -43,13 +47,12 @@ export const signOut = () => {
   };
 }
 
-// TODO: Move modal and notification actions into saga
 export function login(loginParams) {
   return dispatch => {
     return AuthenticationSources.login(loginParams.toJS())
       .then(response => {
         dispatch(verifyToken(response.data.accessToken))
-        dispatch(NotificationActions.notify(response.data.message))
+        dispatch(NotificationActions.notify('Logged in successfully'))
         dispatch(ModalActions.hideModal(ModalIds.LOGIN_MODAL))
       })
       .catch(err => {
@@ -74,7 +77,7 @@ export function register(registerParams) {
     return AuthenticationSources.register(registerParams.toJS())
       .then(response => {
         dispatch(registerSuccess(response.data));
-        dispatch(NotificationActions.notify(response.data.message, areaIDs.AUTHENTICATION))
+        dispatch(NotificationActions.notify('An email confirmation has been sent', areaIDs.AUTHENTICATION))
         dispatch(ModalActions.hideModal(ModalIds.REGISTRATION_MODAL))
         dispatch(ModalActions.showModal(ModalIds.CONFIRMATION_MODAL))
         dispatch(initialize(formIDs.CONFIRMATION, registerParams));
@@ -101,7 +104,7 @@ export function confirm(confirmationParams) {
       .then(response => {
         dispatch(verifyToken(response.data.accessToken));
         dispatch(confirmationSuccess());
-        dispatch(NotificationActions.notify(response.data.message))
+        dispatch(NotificationActions.notify('Account successfully confirmed! You are now logged in'));
         dispatch(ModalActions.hideModal(ModalIds.CONFIRMATION_MODAL));
       })
       .catch(err => {
@@ -125,7 +128,7 @@ export function resendConfirmation(resendConfirmation) {
   return dispatch => {
     return AuthenticationSources.resendConfirmation(resendConfirmation.toJS())
       .then(response => {
-        dispatch(NotificationActions.notify(response.data.message, areaIDs.AUTHENTICATION))
+        dispatch(NotificationActions.notify('If an account exists we have sent a confirmation code', areaIDs.AUTHENTICATION))
         dispatch(ModalActions.showModal(ModalIds.CONFIRMATION_MODAL));
         dispatch(initialize(formIDs.CONFIRMATION, resendConfirmation));
       })
@@ -134,4 +137,14 @@ export function resendConfirmation(resendConfirmation) {
         throw new SubmissionError({ _error: err.response.data.error });
       });
   }
-}
+};
+
+export const passwordResetRequestSuccess = (result, dispatch, { values }) => ({
+  type: actionTypes.PASSWORD_RESET_REQUEST_SUCCESS,
+  data: { formValues: values },
+});
+
+export const resetPasswordSuccess = (result, dispatch, { values }) => ({
+  type: actionTypes.RESET_PASSWORD_SUCCESS,
+  data: { formValues: values },
+});

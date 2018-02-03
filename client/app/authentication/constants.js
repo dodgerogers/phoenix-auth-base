@@ -1,10 +1,13 @@
 import mirrorCreator from 'mirror-creator';
 
+
 export const formIDs = mirrorCreator([
   'SESSION',
   'REGISTRATION',
   'CONFIRMATION',
   'RESEND_CONFIRMATION',
+  'FORGOT_PASSWORD',
+  'PASSWORD_RESET',
 ]);
 
 export const actionTypes = mirrorCreator([
@@ -23,4 +26,8 @@ export const actionTypes = mirrorCreator([
   'CONFIRMATION_FAILURE',
   'RESEND_CONFIRMATION_SUCCESS',
   'RESEND_CONFIRMATION_FAILURE',
+  'PASSWORD_RESET_REQUEST_SUCCESS',
+  'PASSWORD_RESET_REQUEST_FAILURE',
+  'RESET_PASSWORD_SUCCESS',
+  'RESET_PASSWORD_FAILURE',
 ]);

@@ -178,7 +178,6 @@ describe('async AuthenticationActions', () => {
 
     it('when login is successful', () => {
       const mockTokenResponse = {
-        message: "Login successful",
         accessToken: {
           accessToken: "code",
         }
@@ -229,9 +228,8 @@ describe('async AuthenticationActions', () => {
     });
 
     it('when resendConfirmation is successful', () => {
-      const mockResponse = { message: "Success" };
       mockAxios.onPost('api/confirmations', { confirmation: args })
-        .reply(200, mockResponse);
+        .reply(200, {});
 
       const store = mockStore();
       const params = fromJS(args);
@@ -256,6 +254,18 @@ describe('async AuthenticationActions', () => {
         .catch(() => {
           expect(store.getActions()).toMatchSnapshot();
         });
+    });
+  });
+
+  describe('passwordResetRequestSuccess', () => {
+    it('matches snapshot', () => {
+      expect(AuthenticationActions.passwordResetRequestSuccess(null, null, { values: {}})).toMatchSnapshot();
+    });
+  });
+
+  describe('resetPasswordSuccess', () => {
+    it('matches snapshot', () => {
+      expect(AuthenticationActions.resetPasswordSuccess(null, null, { values: {}})).toMatchSnapshot();
     });
   });
 });

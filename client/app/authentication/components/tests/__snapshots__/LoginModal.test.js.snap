@@ -9,11 +9,7 @@ exports[`LoginModal matches snapshot 1`] = `
     close={[Function]}
   />
   <AuthenticationLinks
-    exclude={
-      Array [
-        "LOGIN",
-      ]
-    }
+    exclude={Array []}
   />
 </AuthenticationModal>
 `;

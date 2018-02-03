@@ -45,23 +45,6 @@ defmodule Teebox.Accounts.Schemas.UserTest do
     assert changeset.errors[:email]
   end
 
-  test "registration changset with weak password" do
-    pw = "password"
-    invalid_pw_attrs = Map.merge(@valid_attrs, %{password: pw, password_confirmation: pw})
-    changeset = User.changeset(:registration, %User{}, invalid_pw_attrs)
-
-    refute changeset.valid?
-    assert changeset.errors[:password]
-  end
-
-  test "registration changset when password and password_confirmation do not match" do
-    invalid_pw_attrs = Map.merge(@valid_attrs, %{password: @password, password_confirmation: @password <> "1"})
-    changeset = User.changeset(:registration, %User{}, invalid_pw_attrs)
-
-    refute changeset.valid?
-    assert changeset.errors[:password_confirmation]
-  end
-
   test "confirm changeset with valid params" do
     changeset = User.changeset(:confirm, %User{})
 
