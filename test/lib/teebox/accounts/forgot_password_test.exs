@@ -1,6 +1,5 @@
 defmodule Teebox.Accounts.ForgotPasswordTest do
   use Teebox.ModelCase, async: true
-  use Timex
   use Bamboo.Test
 
   import Teebox.Web.AuthCase
@@ -18,19 +17,18 @@ defmodule Teebox.Accounts.ForgotPasswordTest do
     test "with valid params sets reset_password_token and reset_password_sent_at and sends email" do
       create_confirmed_user(%{email: @email})
 
-      {:ok, message} = ForgotPassword.call(@valid_attrs)
+      {:ok} = ForgotPassword.call(@valid_attrs)
 
-      assert message == "A password reset email has been sent"
       updated_user = UsersRepository.find_by_email(@email)
       assert updated_user.reset_password_token
       assert updated_user.reset_password_sent_at
       assert_delivered_email Teebox.Accounts.Message.reset_password(updated_user)
     end
 
-    test "with non existant email returns message" do
-      {:ok, message} = ForgotPassword.call(%{"email" => @email <> "1"})
+    test "with non existant email returns success" do
+      result = ForgotPassword.call(%{"email" => @email <> "1"})
 
-      assert message == "A password reset email has been sent"
+      assert result == {:ok}
     end
   end
 

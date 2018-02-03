@@ -28,6 +28,8 @@ config :teebox, :registration, Teebox.Accounts.RegistrationMock
 config :teebox, :authenticate, Teebox.Accounts.AuthenticateMock
 config :teebox, :revoke_token, Teebox.Accounts.RevokeTokenMock
 config :teebox, :forgot_password, Teebox.Accounts.ForgotPasswordMock
+config :teebox, :reset_password, Teebox.Accounts.ResetPasswordMock
+config :teebox, :password_encryption, Teebox.Accounts.Services.PasswordEncryptionMock
 
 config :pbkdf2_elixir, :rounds, 1
 

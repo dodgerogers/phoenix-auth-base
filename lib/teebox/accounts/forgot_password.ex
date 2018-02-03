@@ -5,16 +5,14 @@ defmodule Teebox.Accounts.ForgotPassword do
   alias Teebox.Accounts.Repositories.UsersRepository
   alias Teebox.Services.StringUtil
 
-  @success_message "A password reset email has been sent"
-
   def call(%{"email" => email}) do
     with %User{} = user <- UsersRepository.find_by_email(email),
          {:ok, reset_user} <- set_password_reset(user),
          _ <- send_password_reset_token_email(reset_user)
      do
-      render_result()
+      {:ok}
     else
-      _ -> render_result()
+      _ -> {:ok}
     end
   end
   def call(_), do: {:error, "Invalid arguments"}
@@ -26,7 +24,7 @@ defmodule Teebox.Accounts.ForgotPassword do
 
   def changeset(%User{} = user) do
     user
-    |> cast(%{}, [:reset_password_token, :reset_password_token])
+    |> cast(%{}, [:reset_password_token, :reset_password_sent_at])
     |> change(%{reset_password_sent_at: NaiveDateTime.utc_now()})
     |> change(%{reset_password_token: StringUtil.random_string()})
     |> unique_constraint(:reset_password_token)
@@ -36,6 +34,4 @@ defmodule Teebox.Accounts.ForgotPassword do
     Teebox.Accounts.Message.reset_password(user)
     |> Teebox.Mailer.deliver_now
   end
-
-  defp render_result(), do: {:ok, @success_message}
 end

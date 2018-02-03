@@ -6,7 +6,6 @@ defmodule Teebox.Web.Api.RegistrationViewTest do
 
     rendered_view = Teebox.Web.Api.RegistrationView.render("registration.json", %{user: user})
     assert rendered_view == %{
-      message: "An email confirmation has been sent",
       user: %{
         id: user.id,
         name: user.name,

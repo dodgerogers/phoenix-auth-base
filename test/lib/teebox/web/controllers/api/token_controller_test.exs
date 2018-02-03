@@ -13,7 +13,6 @@ defmodule Teebox.Web.Api.TokenControllerTest do
 
     response = json_response(conn, 200)
     assert response["access_token"]
-    assert response["message"] == "Logged in successfully!"
   end
 
   test "POST create with invalid password grant 400 and error" do
@@ -40,8 +39,7 @@ defmodule Teebox.Web.Api.TokenControllerTest do
     |> put_req_header("authorization", "Bearer " <> oauth_access_token.token)
     |> delete("/api/oauth/token")
 
-    response = json_response(conn, 204)
-    assert response["message"] == "Logged out successfully!"
+    assert conn.status == 204
   end
 
   test "DELETE revoke with no authentication token returns 401" do

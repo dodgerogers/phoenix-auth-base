@@ -36,6 +36,11 @@ config :teebox, :registration, Teebox.Accounts.Registration
 config :teebox, :authenticate, Teebox.Accounts.Authenticate
 config :teebox, :revoke_token, Teebox.Accounts.RevokeToken
 config :teebox, :forgot_password, Teebox.Accounts.ForgotPassword
+config :teebox, :reset_password, Teebox.Accounts.ResetPassword
+config :teebox, :password_encryption, Teebox.Accounts.Services.PasswordEncryption
+
+config :teebox, :reset_password_token_expiry, 600
+config :teebox, :confirmation_token_expiry, 600
 
 config :teebox, Teebox.Mailer,
   adapter: Bamboo.LocalAdapter

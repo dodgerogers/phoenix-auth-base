@@ -31,6 +31,7 @@ const ResetPasswordForm = (props) => {
           fluid={true}
           name="password"
           icon="lock"
+          type="password"
           iconPosition="left"
           placeholder="New Password"
           validate={[isRequired, minPasswordLength]}
@@ -39,6 +40,7 @@ const ResetPasswordForm = (props) => {
           component={Input}
           fluid={true}
           name="passwordConfirmation"
+          type="password"
           icon="lock"
           iconPosition="left"
           placeholder="Password Confirmation"

@@ -31,6 +31,7 @@ defmodule Teebox.Web.Router do
     put "/confirmations", Teebox.Web.Api.ConfirmationsController, :update
     post "/confirmations", Teebox.Web.Api.ConfirmationsController, :create
     post "/passwords", Teebox.Web.Api.PasswordsController, :create
+    put "/passwords", Teebox.Web.Api.PasswordsController, :update
   end
 
   scope "/api" do

@@ -50,7 +50,7 @@ export function login(loginParams) {
     return AuthenticationSources.login(loginParams.toJS())
       .then(response => {
         dispatch(verifyToken(response.data.accessToken))
-        dispatch(NotificationActions.notify(response.data.message))
+        dispatch(NotificationActions.notify('Logged in successfully'))
         dispatch(ModalActions.hideModal(ModalIds.LOGIN_MODAL))
       })
       .catch(err => {
@@ -76,7 +76,7 @@ export function register(registerParams) {
     return AuthenticationSources.register(registerParams.toJS())
       .then(response => {
         dispatch(registerSuccess(response.data));
-        dispatch(NotificationActions.notify(response.data.message, areaIDs.AUTHENTICATION))
+        dispatch(NotificationActions.notify('An email confirmation has been sent', areaIDs.AUTHENTICATION))
         dispatch(ModalActions.hideModal(ModalIds.REGISTRATION_MODAL))
         dispatch(ModalActions.showModal(ModalIds.CONFIRMATION_MODAL))
         dispatch(initialize(formIDs.CONFIRMATION, registerParams));
@@ -104,7 +104,7 @@ export function confirm(confirmationParams) {
       .then(response => {
         dispatch(verifyToken(response.data.accessToken));
         dispatch(confirmationSuccess());
-        dispatch(NotificationActions.notify(response.data.message))
+        dispatch(NotificationActions.notify('Account successfully confirmed! You are now logged in'));
         dispatch(ModalActions.hideModal(ModalIds.CONFIRMATION_MODAL));
       })
       .catch(err => {
@@ -129,7 +129,7 @@ export function resendConfirmation(resendConfirmation) {
   return dispatch => {
     return AuthenticationSources.resendConfirmation(resendConfirmation.toJS())
       .then(response => {
-        dispatch(NotificationActions.notify(response.data.message, areaIDs.AUTHENTICATION))
+        dispatch(NotificationActions.notify('If an account exists we have sent a confirmation code', areaIDs.AUTHENTICATION))
         dispatch(ModalActions.showModal(ModalIds.CONFIRMATION_MODAL));
         dispatch(initialize(formIDs.CONFIRMATION, resendConfirmation));
       })
