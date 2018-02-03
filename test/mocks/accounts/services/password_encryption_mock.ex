@@ -9,4 +9,8 @@ defmodule Teebox.Accounts.Services.PasswordEncryptionMock do
     |> Enum.map(fn chr -> chr + 1 end)
     |> List.to_string()
   end
+
+  def strong_password?(password) do
+    NotQwerty123.PasswordStrength.strong_password?(password)
+  end
 end

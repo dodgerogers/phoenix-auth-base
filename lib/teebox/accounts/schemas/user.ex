@@ -3,6 +3,7 @@ defmodule Teebox.Accounts.Schemas.User do
 
   alias ExOauth2Provider.OauthAccessTokens.OauthAccessToken
   alias Teebox.Services.StringUtil
+  alias Teebox.Accounts.Services.Password
 
   schema "users" do
     field :name, :string
@@ -36,9 +37,7 @@ defmodule Teebox.Accounts.Schemas.User do
     |> validate_required(@required_fields)
     |> validate_format(:email, ~r/@/)
     |> unique_email()
-    |> validate_passwords_match()
-    |> validate_password_strength()
-    |> put_password_hash()
+    |> Password.set_password()
     |> add_confirmation()
   end
 
@@ -68,32 +67,8 @@ defmodule Teebox.Accounts.Schemas.User do
   end
 
   defp unique_email(changeset) do
-     validate_format(changeset, :email, ~r/@/)
-     |> validate_length(:email, max: 254)
-     |> unique_constraint(:email)
-   end
-
-   # TODO: Move to passwords
-   defp validate_passwords_match(%Ecto.Changeset{changes: %{password: pw, password_confirmation: pw}} = changeset) do
-     changeset
-   end
-   defp validate_passwords_match(%Ecto.Changeset{changes: %{}} = changeset) do
-     add_error(changeset, :password_confirmation, "Passwords do not match")
-   end
-
-  defp validate_password_strength(changeset, options \\ []) do
-    validate_change(changeset, :password, fn _, password ->
-      with {:ok, _} <- NotQwerty123.PasswordStrength.strong_password?(password) do
-        []
-      else
-        {:error, msg} -> [{:password, options[:message] || msg}]
-      end
-    end)
+    validate_format(changeset, :email, ~r/@/)
+    |> validate_length(:email, max: 254)
+    |> unique_constraint(:email)
   end
-
-  defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{password: pw}} = changeset) do
-    changeset
-    |> change(%{password_hash: Comeonin.Pbkdf2.hashpwsalt(pw)})
-  end
-  defp put_password_hash(changeset), do: changeset
 end

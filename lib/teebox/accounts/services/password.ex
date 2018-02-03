@@ -9,6 +9,11 @@ defmodule Teebox.Accounts.Services.Password do
   def changeset(%User{} = user, %{} = params) do
     user
     |> cast(params, @password_fields)
+    |> set_password()
+  end
+
+  def set_password(changeset) do
+    changeset
     |> validate_required(@password_fields)
     |> validate_passwords_match()
     |> validate_password_strength()
@@ -35,16 +40,12 @@ defmodule Teebox.Accounts.Services.Password do
 
   defp validate_password_strength(changeset, options \\ []) do
     validate_change(changeset, :password, fn _, password ->
-      with {:ok, _} <- strong_password?(password) do
+      with {:ok, _} <- @password_encryption.strong_password?(password) do
         []
       else
         {:error, msg} -> [{:password, options[:message] || msg}]
       end
     end)
-  end
-
-  defp strong_password?(password) do
-    NotQwerty123.PasswordStrength.strong_password?(password)
   end
 
   defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{password: pw}} = changeset) do
