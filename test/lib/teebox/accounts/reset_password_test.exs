@@ -46,7 +46,7 @@ defmodule Teebox.Accounts.ResetPasswordTest do
       assert user.reset_password_sent_at
     end
 
-    test "with no non existant email token" do
+    test "when user does not exist with given email and token" do
       create_user_with_expired_reset_token(%{email: @email <> "1", reset_password_token: @token})
 
       {:error, message} = ResetPassword.call(@valid_attrs)

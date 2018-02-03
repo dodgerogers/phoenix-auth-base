@@ -7,7 +7,7 @@ defmodule Teebox.Web.Api.PasswordsController do
   def create(conn, params) do
     with {:ok} <- @forgot_password.call(params) do
       conn
-      |> render_empty_body()
+      |> render_no_content()
     else
       {:error, message} -> render_error(conn, message)
     end
@@ -16,7 +16,7 @@ defmodule Teebox.Web.Api.PasswordsController do
   def update(conn, params) do
     with {:ok} <- @reset_password.call(params) do
       conn
-      |> render_empty_body()
+      |> render_no_content()
     else
       {:error, error} -> render_error(conn, error)
     end

@@ -2,7 +2,7 @@ defmodule Teebox.Web.Controller.Helper do
   import Plug.Conn
   import Phoenix.Controller
 
-  def render_empty_body(conn, status \\ 204) do
+  def render_no_content(conn, status \\ 204) do
     conn
     |> put_status(status)
     |> put_resp_header("content-type", "application/json")

@@ -16,7 +16,7 @@ defmodule Teebox.Web.Api.ConfirmationsController do
   def create(conn, %{"confirmation" => params}) do
     with {:ok, _} <- @confirmation.resend_confirmation(params) do
       conn
-      |> render_empty_body()
+      |> render_no_content()
     else
       {:error, message} -> render_error(conn, message)
     end

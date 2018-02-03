@@ -21,7 +21,7 @@ defmodule Teebox.Web.Api.TokenController do
          {:ok, _} <- @revoke_token.call(%{"token" => token})
     do
       conn
-      |> render_empty_body(204)
+      |> render_no_content(204)
     else
       {:error, error} -> render_error(conn, error, 400)
     end
