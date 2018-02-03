@@ -1,14 +1,29 @@
 import { call, put, takeEvery, takeLatest, select } from 'redux-saga/effects'
+import { initialize } from 'redux-form/immutable';
 import { NotificationActions, areaIDs } from '../../common/Notifications';
 import { ModalActions, ModalIds } from '../../common/modals';
-import { actionTypes } from '../constants';
+import { actionTypes, formIDs } from '../constants';
+import { take } from '../../lib/utils/MapHelper';
 
+
+function showPasswordResetModal() {
+  return ModalActions.showModal(ModalIds.RESET_PASSWORD_MODAL)
+}
+
+function populatePasswordResetForm(formValues) {
+  const fields = take(formValues, ['email']);
+  return initialize(formIDs.PASSWORD_RESET, fields);
+}
+
+function notifyUserResetHasBeenSent() {
+  return NotificationActions.notify('A password reset code has been sent', areaIDs.AUTHENTICATION)
+}
 
 export function* handleForgotPasswordRequest(action) {
   try {
-    yield put(ModalActions.hideModal(ModalIds.FORGOT_PASSWORD_MODAL))
-    yield put(ModalActions.showModal(ModalIds.RESET_PASSWORD_MODAL))
-    yield put(NotificationActions.notify('A password reset code has been sent', areaIDs.AUTHENTICATION));
+    yield put(showPasswordResetModal());
+    yield put(populatePasswordResetForm(action.data.formValues));
+    yield put(notifyUserResetHasBeenSent());
   } catch (err) {
     yield put(NotificationActions.notifyError(err));
   }

@@ -5,13 +5,13 @@ import { reduxForm } from 'redux-form/immutable';
 import * as AuthenticationSources from '../sources';
 import ForgotPasswordForm from '../components/ForgotPasswordForm';
 import { passwordResetRequestSuccess } from '../actions';
-import { formIDs } from '../../constants/form';
+import { formIDs } from '../constants';
 
 
 function onSubmit(formData, callback) {
   return AuthenticationSources.passwordResetRequest(formData.toJS())
     .catch(err => {
-      throw new SubmissionError({ _err: err.message });
+      throw new SubmissionError({ _error: err.response.data.error });
     });
 }
 

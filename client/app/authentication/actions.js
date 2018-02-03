@@ -4,8 +4,11 @@ import { ModalActions, ModalIds } from '../common/modals';
 import { actionTypes } from './constants';
 import { NotificationActions, areaIDs } from '../common/Notifications';
 import * as TokenStorage from './lib/TokenStorage';
-import { formIDs } from '../constants/form';
+import { formIDs } from './constants';
 
+// TODO's
+// * Move notifications to a separate file
+// * Move all thunks to sagas
 
 const verifyToken = (accessToken) => ({
   type: actionTypes.VERIFY_TOKEN,
@@ -44,7 +47,6 @@ export const signOut = () => {
   };
 }
 
-// TODO: saga
 export function login(loginParams) {
   return dispatch => {
     return AuthenticationSources.login(loginParams.toJS())
@@ -70,7 +72,6 @@ const registerFailure = (error) => ({
   error,
 });
 
-// TODO: saga
 export function register(registerParams) {
   return dispatch => {
     return AuthenticationSources.register(registerParams.toJS())
@@ -97,7 +98,6 @@ const confirmationFailure = (error) => ({
   error,
 });
 
-// TODO: saga
 export function confirm(confirmationParams) {
   return dispatch => {
     return AuthenticationSources.confirm(confirmationParams.toJS())
@@ -124,7 +124,6 @@ const resendConfirmationFailure = (error) => ({
   error,
 });
 
-// TODO: saga
 export function resendConfirmation(resendConfirmation) {
   return dispatch => {
     return AuthenticationSources.resendConfirmation(resendConfirmation.toJS())
@@ -140,7 +139,12 @@ export function resendConfirmation(resendConfirmation) {
   }
 };
 
-export const passwordResetRequestSuccess = data => ({
+export const passwordResetRequestSuccess = (result, dispatch, { values }) => ({
   type: actionTypes.PASSWORD_RESET_REQUEST_SUCCESS,
-  data,
+  data: { formValues: values },
+});
+
+export const resetPasswordSuccess = (result, dispatch, { values }) => ({
+  type: actionTypes.RESET_PASSWORD_SUCCESS,
+  data: { formValues: values },
 });

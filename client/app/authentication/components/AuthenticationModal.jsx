@@ -7,11 +7,10 @@ import { NotificationsContainer, areaIDs } from '../../common/Notifications';
 const AuthenticationModal = (props) => {
   return (
     <Modal
-      size="mini"
-      dimmer={false}
+      dimmer={true}
       open={props.show}
-      closeOnDocumentClick={true}
       onClose={props.close}
+      size="mini"
       >
       <Modal.Header as="h2">
         {props.title}

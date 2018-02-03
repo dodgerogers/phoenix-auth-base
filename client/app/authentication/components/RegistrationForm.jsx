@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form/immutable';
 import { Form, Message, Button, Icon } from 'semantic-ui-react';
 import Input from '../../common/components/Input';
 import { isRequired, isEmail } from '../../lib/utils/validation';
-import { formIDs } from '../../constants/form';
+import { formIDs } from '../constants';
 
 
 function RegistrationForm(props) {
@@ -52,6 +52,8 @@ function RegistrationForm(props) {
           fluid={true}
           type="password"
           name="passwordConfirmation"
+          icon="lock"
+          iconPosition="left"
           placeholder="Password Confirmation"
           validate={[isRequired]}
         />

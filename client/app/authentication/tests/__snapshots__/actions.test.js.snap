@@ -94,7 +94,7 @@ Array [
 exports[`async AuthenticationActions passwordResetRequestSuccess matches snapshot 1`] = `
 Object {
   "data": Object {
-    "message": "message",
+    "formValues": Object {},
   },
   "type": "PASSWORD_RESET_REQUEST_SUCCESS",
 }
@@ -193,6 +193,15 @@ Array [
     "type": "@@redux-form/INITIALIZE",
   },
 ]
+`;
+
+exports[`async AuthenticationActions resetPasswordSuccess matches snapshot 1`] = `
+Object {
+  "data": Object {
+    "formValues": Object {},
+  },
+  "type": "RESET_PASSWORD_SUCCESS",
+}
 `;
 
 exports[`async AuthenticationActions signOut when AuthenticationSources.signOut fails 1`] = `

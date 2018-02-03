@@ -259,7 +259,13 @@ describe('async AuthenticationActions', () => {
 
   describe('passwordResetRequestSuccess', () => {
     it('matches snapshot', () => {
-      expect(AuthenticationActions.passwordResetRequestSuccess({ message: 'message'})).toMatchSnapshot();
+      expect(AuthenticationActions.passwordResetRequestSuccess(null, null, { values: {}})).toMatchSnapshot();
+    });
+  });
+
+  describe('resetPasswordSuccess', () => {
+    it('matches snapshot', () => {
+      expect(AuthenticationActions.resetPasswordSuccess(null, null, { values: {}})).toMatchSnapshot();
     });
   });
 });

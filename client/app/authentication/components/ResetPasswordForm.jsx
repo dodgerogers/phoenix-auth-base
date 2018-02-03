@@ -2,7 +2,7 @@ import React from 'react'
 import { Field } from 'redux-form/immutable';
 import { Form, Message, Button, Icon } from 'semantic-ui-react';
 import Input from '../../common/components/Input';
-import { isRequired, minLength, matchField } from '../../lib/utils/validation';
+import { isEmail, isRequired, minLength, matchField } from '../../lib/utils/validation';
 
 const minPasswordLength = minLength(8);
 const passwordsMustMatch = matchField('password');
@@ -19,6 +19,15 @@ const ResetPasswordForm = (props) => {
         onSubmit={handleSubmit}
       >
         {error && dirty && <Message negative>{error}</Message>}
+        <Field
+          component={Input}
+          fluid={true}
+          name="email"
+          icon="mail"
+          iconPosition="left"
+          placeholder="Email"
+          validate={[isRequired, isEmail]}
+        />
         <Field
           component={Input}
           fluid={true}

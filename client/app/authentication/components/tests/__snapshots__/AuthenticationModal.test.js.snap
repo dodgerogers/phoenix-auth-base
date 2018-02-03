@@ -3,8 +3,8 @@
 exports[`AuthenticationModal matches snapshot 1`] = `
 <Modal
   closeOnDimmerClick={true}
-  closeOnDocumentClick={true}
-  dimmer={false}
+  closeOnDocumentClick={false}
+  dimmer={true}
   onClose={[Function]}
   size="mini"
 >
