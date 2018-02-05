@@ -2,15 +2,15 @@ var webpack = require('webpack');
 var path = require('path');
 
 var APP_DIR = path.resolve(__dirname);
-var BUILD_DIR = path.resolve(__dirname, '../priv/static/js');
+var BUILD_DIR = path.resolve(__dirname, '../priv/static/js/');
 var entry = APP_DIR + '/app/index.js';
-const devBuild = process.env.NODE_ENV !== 'production';
 
 var config = {
   entry: ['babel-polyfill', entry],
   output: {
     path: BUILD_DIR,
     filename: '[name].js',
+    publicPath: '/js/',
   },
 
   watchOptions: {
@@ -58,6 +58,8 @@ var config = {
   },
   plugins: [],
 };
+
+const devBuild = process.env.NODE_ENV !== 'production';
 
 if (devBuild) {
   console.log('Webpack dev build'); // eslint-disable-line no-console
