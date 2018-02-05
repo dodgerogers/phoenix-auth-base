@@ -1,7 +1,5 @@
 var webpack = require('webpack');
 var path = require('path');
-// var CopyWebpackPlugin = require('copy-webpack-plugin');
-// var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var APP_DIR = path.resolve(__dirname);
 var BUILD_DIR = path.resolve(__dirname, '../priv/static/js');
@@ -12,7 +10,7 @@ var config = {
   entry: ['babel-polyfill', entry],
   output: {
     path: BUILD_DIR,
-    filename: 'app.js',
+    filename: '[name].js',
   },
 
   watchOptions: {
@@ -38,7 +36,7 @@ var config = {
         loader: 'babel-loader',
         query: {
           presets: ['es2015', 'react']
-        }
+        },
       },
       {
         test: /\.css$/,
