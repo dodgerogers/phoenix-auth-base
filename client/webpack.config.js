@@ -1,5 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
+const devBuild = process.env.NODE_ENV !== 'production';
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 var APP_DIR = path.resolve(__dirname);
 var BUILD_DIR = path.resolve(__dirname, '../priv/static/js/');
@@ -59,13 +61,17 @@ var config = {
   plugins: [],
 };
 
-const devBuild = process.env.NODE_ENV !== 'production';
-
 if (devBuild) {
   console.log('Webpack dev build'); // eslint-disable-line no-console
-  module.exports.devtool = 'eval';
+  config.devtool = 'eval';
+  config.plugins.push(
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'server',
+      analyzerHost: '0.0.0.0'
+    })
+  )
 } else {
-  module.exports.devtool = 'cheap-module-eval-source-map';
+  config.devtool = 'cheap-module-eval-source-map';
   config.plugins.push(
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),

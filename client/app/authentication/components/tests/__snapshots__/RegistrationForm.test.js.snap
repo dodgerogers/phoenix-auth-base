@@ -47,6 +47,7 @@ exports[`RegistrationForm matches component snapshot 1`] = `
       validate={
         Array [
           [Function],
+          [Function],
         ]
       }
     />
@@ -60,6 +61,7 @@ exports[`RegistrationForm matches component snapshot 1`] = `
       type="password"
       validate={
         Array [
+          [Function],
           [Function],
         ]
       }

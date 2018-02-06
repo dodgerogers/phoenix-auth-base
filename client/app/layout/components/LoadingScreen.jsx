@@ -4,12 +4,14 @@ import { Loader, Segment } from 'semantic-ui-react';
 import 'semantic-ui-css/components/loader.css';
 import 'semantic-ui-css/components/segment.css';
 
+
 const errorScreen = text => (
   <div
     style={{
-      maxWidth: '500px',
+      maxWidth: '300px',
       margin: '10% auto',
       textAlign: 'center',
+      fontFamily: 'Lato',
     }}
   >
     <Segment color="red">

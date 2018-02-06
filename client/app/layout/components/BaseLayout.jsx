@@ -7,9 +7,6 @@ import ModalsContainer from '../../common/modals/containers/ModalsContainer';
 import { GlobalNotifications } from '../../common/Notifications';
 import Footer from './Footer';
 
-import 'semantic-ui-css/semantic.min.css';
-import '../../../assets/app.scss';
-
 
 const BaseLayout = (props) => (
   <div className="BaseLayout">

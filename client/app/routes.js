@@ -4,12 +4,16 @@ import { Provider } from 'react-redux'
 import store from './store'
 import BaseLayout from './layout/components/BaseLayout';
 
+import 'semantic-ui-css/semantic.min.css';
+import '../assets/app.scss';
+
+const scrollToTopOfPage = () => window.scrollTo(0, 0);
 
 export default () => (
   <Provider store={store}>
     <Router
       history={browserHistory}
-      onUpdate={() => window.scrollTo(0, 0)}
+      onUpdate={scrollToTopOfPage}
     >
       <Route path="/" component={BaseLayout}>
         <Route exact path='/' component={() => (<p>welcome...</p>)} />
