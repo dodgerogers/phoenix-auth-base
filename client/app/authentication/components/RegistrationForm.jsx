@@ -4,9 +4,11 @@ import { Field } from 'redux-form/immutable';
 import { reduxForm } from 'redux-form/immutable';
 import { Form, Message, Button, Icon } from 'semantic-ui-react';
 import Input from '../../common/components/Input';
-import { isRequired, isEmail } from '../../lib/utils/validation';
+import { isRequired, isEmail, matchField, minLength } from '../../lib/utils/validation';
 import { formIDs } from '../constants';
 
+const passwordsMatch = matchField('password');
+const minPasswordLength = minLength(8);
 
 function RegistrationForm(props) {
   const { handleSubmit, error, submitting, dirty } = props;
@@ -45,7 +47,7 @@ function RegistrationForm(props) {
           icon="lock"
           iconPosition="left"
           placeholder="Password"
-          validate={[isRequired]}
+          validate={[isRequired, minPasswordLength]}
         />
         <Field
           component={Input}
@@ -55,7 +57,7 @@ function RegistrationForm(props) {
           icon="lock"
           iconPosition="left"
           placeholder="Password Confirmation"
-          validate={[isRequired]}
+          validate={[isRequired, passwordsMatch]}
         />
         <Button
           fluid={true}

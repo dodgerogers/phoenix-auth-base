@@ -10,6 +10,6 @@
   </head>
   <body>
     <div id="app" />
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <script src="<%= static_path(@conn, "/js/main.js") %>"></script>
   </body>
 </html>

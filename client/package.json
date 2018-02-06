@@ -23,6 +23,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-immutable-proptypes": "^2.1.0",
+    "react-loadable": "^5.3.1",
     "react-redux": "^5.0.4",
     "react-router": "^3.0.5",
     "redux": "^3.6.0",
@@ -61,7 +62,8 @@
     "sass-loader": "^6.0.3",
     "style-loader": "^0.17.0",
     "url-loader": "^0.5.8",
-    "webpack": "3.8.1"
+    "webpack": "3.8.1",
+    "webpack-bundle-analyzer": "^2.10.0"
   },
   "main": "app.js",
   "directories": {
