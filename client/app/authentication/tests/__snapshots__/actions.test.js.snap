@@ -131,12 +131,6 @@ Array [
   },
   Object {
     "data": Object {
-      "id": "REGISTRATION_MODAL",
-    },
-    "type": "HIDE_MODAL",
-  },
-  Object {
-    "data": Object {
       "id": "CONFIRMATION_MODAL",
     },
     "type": "SHOW_MODAL",
@@ -204,26 +198,20 @@ Object {
 }
 `;
 
-exports[`async AuthenticationActions signOut when AuthenticationSources.signOut fails 1`] = `
-Array [
-  Object {
-    "id": undefined,
-    "notification": Object {
-      "level": "negative",
-      "message": "Something went wrong",
-    },
-    "type": "CREATE_NOTIFICATION",
-  },
-  Object {
-    "type": "SIGN_OUT_FAILURE",
-  },
-]
+exports[`async AuthenticationActions signOut signOutFailure matches snapshot 1`] = `
+Object {
+  "type": "SIGN_OUT_FAILURE",
+}
 `;
 
-exports[`async AuthenticationActions signOut when AuthenticationSources.signOut is successful 1`] = `
-Array [
-  Object {
-    "type": "SIGN_OUT_SUCCESS",
-  },
-]
+exports[`async AuthenticationActions signOut signOutRequest matches snapshot 1`] = `
+Object {
+  "type": "SIGN_OUT_REQUEST",
+}
+`;
+
+exports[`async AuthenticationActions signOut signOutSuccess matches snapshot 1`] = `
+Object {
+  "type": "SIGN_OUT_SUCCESS",
+}
 `;

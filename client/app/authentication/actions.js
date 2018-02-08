@@ -28,24 +28,17 @@ export const authenticate = () => {
   }
 }
 
-const signOutSuccess = () => ({
+export const signOutRequest = () => ({
+  type: actionTypes.SIGN_OUT_REQUEST,
+});
+
+export const signOutSuccess = () => ({
   type: actionTypes.SIGN_OUT_SUCCESS,
 });
 
-const signOutFailure = () => ({
+export const signOutFailure = () => ({
   type: actionTypes.SIGN_OUT_FAILURE,
 });
-
-export const signOut = () => {
-  return dispatch => {
-    return AuthenticationSources.signOut()
-      .then(() => dispatch(signOutSuccess()))
-      .catch(err => {
-        dispatch(NotificationActions.notifyError(err.response.data.error))
-        dispatch(signOutFailure());
-      });
-  };
-}
 
 export function login(loginParams) {
   return dispatch => {
@@ -78,7 +71,6 @@ export function register(registerParams) {
       .then(response => {
         dispatch(registerSuccess(response.data));
         dispatch(NotificationActions.notify('An email confirmation has been sent', areaIDs.AUTHENTICATION))
-        dispatch(ModalActions.hideModal(ModalIds.REGISTRATION_MODAL))
         dispatch(ModalActions.showModal(ModalIds.CONFIRMATION_MODAL))
         dispatch(initialize(formIDs.CONFIRMATION, registerParams));
       })

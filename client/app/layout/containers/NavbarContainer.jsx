@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import currentUser from '../../hocs/CurrentUser';
 import Navbar from '../components/Navbar';
-import { signOut } from '../../authentication/actions';
+import { signOutRequest } from '../../authentication/actions';
 
 
 const NavbarContainer = (props) => {
@@ -17,4 +17,4 @@ NavbarContainer.propTypes = {
 };
 
 export { NavbarContainer as PureComponent };
-export default connect(null, { signOut })(currentUser(NavbarContainer));
+export default connect(null, { signOut: signOutRequest })(currentUser(NavbarContainer));

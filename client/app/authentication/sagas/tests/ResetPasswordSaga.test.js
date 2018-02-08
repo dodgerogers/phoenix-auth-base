@@ -18,7 +18,6 @@ describe('ResetPasswordSaga', () => {
         },
         payload: fromJS({
           email: 'email',
-          password: 'password',
         }),
       })
       .put({

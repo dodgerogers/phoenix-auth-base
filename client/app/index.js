@@ -3,13 +3,14 @@ import { render } from 'react-dom'
 import Loadable from 'react-loadable';
 import LoadingScreen from './layout/components/LoadingScreen';
 
+import 'semantic-ui-css/semantic.min.css';
 
-const LoadableRoutes = Loadable({
+const Routes = Loadable({
   loader: () => import('./routes'),
   loading: LoadingScreen,
 });
 
 render(
-  <LoadableRoutes />,
+  <Routes />,
   document.getElementById("app")
 )
