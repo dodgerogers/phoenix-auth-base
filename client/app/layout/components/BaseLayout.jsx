@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import functional from 'react-functional';
+import styled from 'styled-components';
 import { authenticate } from '../../authentication/actions';
 import NavbarContainer from '../containers/NavbarContainer';
 import ModalsContainer from '../../common/modals/containers/ModalsContainer';
@@ -8,16 +9,30 @@ import { GlobalNotifications } from '../../common/Notifications';
 import Footer from './Footer';
 
 
+const StyledBaseLayout = styled.div`
+  &&&&& {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+`;
+
+const StyledMainSection = styled.div`
+  &&&&& {
+    flex: 1
+  }
+`
+
 const BaseLayout = (props) => (
-  <div className="BaseLayout">
+  <StyledBaseLayout>
     <NavbarContainer {...props} />
     <GlobalNotifications />
-    <div className="main">
+    <StyledMainSection>
       {props.children}
-    </div>
+    </StyledMainSection>
     <Footer {...props} />
     <ModalsContainer />
-  </div>
+  </StyledBaseLayout>
 );
 
 const opts = {

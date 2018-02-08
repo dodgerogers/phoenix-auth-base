@@ -56,29 +56,16 @@ describe('async AuthenticationActions', () => {
   });
 
   describe('signOut', () => {
-    it('when AuthenticationSources.signOut is successful', () => {
-      mockAxios.onDelete('api/oauth/token')
-        .reply(204, {});
-
-      const store = mockStore();
-
-      return store.dispatch(AuthenticationActions.signOut())
-        .then(() => {
-          expect(store.getActions()).toMatchSnapshot();
-        });
+    it('signOutRequest matches snapshot', () => {
+      expect(AuthenticationActions.signOutRequest()).toMatchSnapshot();
     });
 
-    it('when AuthenticationSources.signOut fails', () => {
-      const error = 'Something went wrong';
-      mockAxios.onDelete('api/oauth/token')
-        .reply(400, { error });
+    it('signOutSuccess matches snapshot', () => {
+      expect(AuthenticationActions.signOutSuccess()).toMatchSnapshot();
+    });
 
-      const store = mockStore();
-
-      return store.dispatch(AuthenticationActions.signOut())
-        .then(() => {
-          expect(store.getActions()).toMatchSnapshot();
-        });
+    it('signOutFailure matches snapshot', () => {
+      expect(AuthenticationActions.signOutFailure()).toMatchSnapshot();
     });
   });
 

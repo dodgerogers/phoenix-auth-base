@@ -10,7 +10,7 @@ function showLoginModal() {
 }
 
 function populateLoginForm(formValues) {
-  const fields = take(formValues, ['email', 'password']);
+  const fields = take(formValues, ['email']);
   return initialize(formIDs.SESSION, fields);
 }
 

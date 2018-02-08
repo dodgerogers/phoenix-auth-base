@@ -4,9 +4,6 @@ import { Provider } from 'react-redux'
 import store from './store'
 import BaseLayout from './layout/components/BaseLayout';
 
-import 'semantic-ui-css/semantic.min.css';
-import '../assets/app.scss';
-
 const scrollToTopOfPage = () => window.scrollTo(0, 0);
 
 export default () => (

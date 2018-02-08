@@ -16,7 +16,7 @@ export default function authenticationReducer(state = initialState, action) {
       return state.set('currentUser', fromJS(action.user));
     case actionTypes.AUTHENTICATE_FAILURE:
     case actionTypes.VERIFY_TOKEN_FAILURE:
-    case actionTypes.PURGE_TOKEN_SUCCESS:
+    case actionTypes.SIGN_OUT_SUCCESS:
       return state.set('accessToken', null).set('currentUser', null);
     default:
       return state;
