@@ -2,7 +2,7 @@ import axios from 'axios';
 import normalize from 'normalize-object';
 import store from '../../store';
 
-export const API_BASE = 'http://localhost:4000'; // TODO window.location.origin
+export const API_BASE = window.location.origin; //'http://localhost:4000'; // TODO window.location.origin
 
 const HTTP = axios.create({
   baseURL: API_BASE,
@@ -26,6 +26,7 @@ HTTP.interceptors.request.use(config => {
 });
 
 HTTP.interceptors.response.use(response => {
+  // TODO: Handle 401
   response.data = normalize(response.data);
   return response;
 }, function(error) {

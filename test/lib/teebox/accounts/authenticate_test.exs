@@ -17,7 +17,7 @@ defmodule Teebox.Accounts.AuthenticateTest do
       {:ok, code} = Authenticate.call(%{"grant_type" => "password", "username" => @email, "password" => @password})
 
       assert code.access_token
-      refute code.refresh_token
+      assert code.refresh_token
       assert "bearer" == code.token_type
       assert 900 == code.expires_in
     end

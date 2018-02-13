@@ -3,6 +3,8 @@ import * as AuthenticationSources from '../sources';
 import { actionTypes } from '../constants';
 import * as TokenStorage from '../lib/TokenStorage';
 
+import moment from 'moment';
+
 
 const verifyTokenSuccess = user => ({
   type: actionTypes.VERIFY_TOKEN_SUCCESS,

@@ -3,6 +3,7 @@ import AuthenticateSaga from '../authentication/sagas/AuthenticateSaga';
 import SignOutSaga from '../authentication/sagas/SignOutSaga';
 import ForgotPasswordSaga from '../authentication/sagas/ForgotPasswordSaga';
 import ResetPasswordSaga from '../authentication/sagas/ResetPasswordSaga';
+import RefreshTokenSaga from '../authentication/sagas/RefreshTokenSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -10,5 +11,6 @@ export default function* rootSaga() {
     SignOutSaga(),
     ForgotPasswordSaga(),
     ResetPasswordSaga(),
+    RefreshTokenSaga(),
   ]);
 }

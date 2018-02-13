@@ -24,6 +24,7 @@ export const authenticate = () => {
   return dispatch => {
     return TokenStorage.fetch()
       .then(accessToken => dispatch(verifyToken(accessToken)))
+      // TODO: purge token
       .catch(err => dispatch(authenticateFailure(err)));
   }
 }

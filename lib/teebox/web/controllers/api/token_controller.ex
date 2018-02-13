@@ -3,6 +3,7 @@ defmodule Teebox.Web.Api.TokenController do
 
   @authenticate Application.get_env(:teebox, :authenticate)
   @revoke_token Application.get_env(:teebox, :revoke_token)
+  @refresh_token Application.get_env(:teebox, :refresh_token)
 
   alias ExOauth2Provider.OauthAccessTokens.OauthAccessToken
 
@@ -20,8 +21,18 @@ defmodule Teebox.Web.Api.TokenController do
     with %OauthAccessToken{token: token} = _ <- ExOauth2Provider.Plug.current_access_token(conn),
          {:ok, _} <- @revoke_token.call(%{"token" => token})
     do
+      render_no_content(conn, 204)
+    else
+      {:error, error} -> render_error(conn, error, 400)
+    end
+  end
+
+  def refresh(conn, _) do
+    with %OauthAccessToken{} = token <- ExOauth2Provider.Plug.current_access_token(conn),
+         {:ok, access_token} <- @refresh_token.call(token)
+    do
       conn
-      |> render_no_content(204)
+      |> render("token.json", %{access_token: access_token})
     else
       {:error, error} -> render_error(conn, error, 400)
     end
