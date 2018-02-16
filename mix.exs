@@ -52,8 +52,7 @@ defmodule Teebox.Mixfile do
       {:comeonin, "~> 3.2.0"},
       {:cowboy, "~> 1.0"},
       {:ex_machina, "~> 2.0", only: :test},
-      # TODO: 0.2.2
-      {:ex_oauth2_provider, "~> 0.2.0", github: "danschultzer/ex_oauth2_provider", branch: "bug-fix-error-handling"},
+      {:ex_oauth2_provider, "~> 0.2.2"},
       {:faker, "~> 0.9"},
       {:gettext, "~> 0.13.1"},
       {:mix_docker, "~> 0.4.1"},

@@ -28,8 +28,8 @@ export function* revokeAndPurgeToken(action) {
   }
 }
 
-export function* SignOutSaga() {
+export function* SignOut() {
   yield takeLatest(actionTypes.SIGN_OUT_REQUEST, revokeAndPurgeToken);
 }
 
-export default SignOutSaga;
+export default SignOut;

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import functional from 'react-functional';
 import styled from 'styled-components';
-import { authenticate } from '../../authentication/actions';
+import { authenticateWithStoredToken } from '../../authentication/actions';
 import NavbarContainer from '../containers/NavbarContainer';
 import ModalsContainer from '../../common/modals/containers/ModalsContainer';
 import { GlobalNotifications } from '../../common/Notifications';
@@ -36,9 +36,9 @@ const BaseLayout = (props) => (
 );
 
 const opts = {
-  componentWillMount: props => props.authenticate(),
+  componentWillMount: props => props.authenticateWithStoredToken(),
 };
 
 export { BaseLayout as PureComponent };
 export const FunctionalComponent = functional(BaseLayout, opts);
-export default connect(null, { authenticate })(FunctionalComponent);
+export default connect(null, { authenticateWithStoredToken })(FunctionalComponent);

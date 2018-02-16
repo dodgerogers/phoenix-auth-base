@@ -3,14 +3,14 @@ import { call, put, take } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import * as TokenStorage from '../../lib/TokenStorage';
 import * as AuthenticationSources from '../../sources';
-import * as sagas from '../SignOutSaga';
+import * as sagas from '../SignOut';
 
-describe('SignOutSaga', () => {
+describe('SignOut', () => {
   it('dispatches SIGN_OUT_SUCCESS when services is successful', () => {
     TokenStorage.remove = jest.fn(() => Promise.resolve(null));
     AuthenticationSources.signOut = jest.fn(() => Promise.resolve({}));
 
-    return expectSaga(sagas.SignOutSaga)
+    return expectSaga(sagas.SignOut)
       .provide([call(TokenStorage.remove)])
       .put({ type: 'SIGN_OUT_SUCCESS' })
       .put({
@@ -30,7 +30,7 @@ describe('SignOutSaga', () => {
     const mockResponse = { response: { data: { error: "Error" }}};
     AuthenticationSources.signOut = jest.fn(() => Promise.reject(mockResponse));
 
-    return expectSaga(sagas.SignOutSaga)
+    return expectSaga(sagas.SignOut)
       .provide([call(TokenStorage.remove)])
       .provide([call(AuthenticationSources.signOut)])
       .put({ type: 'SIGN_OUT_FAILURE' })
@@ -49,7 +49,7 @@ describe('SignOutSaga', () => {
   it('dispatches SIGN_OUT_FAILURE when TokenStorage.remove fails', () => {
     TokenStorage.remove = jest.fn(() => Promise.reject("Error"));
 
-    return expectSaga(sagas.SignOutSaga)
+    return expectSaga(sagas.SignOut)
       .provide([call(TokenStorage.remove)])
       .put({ type: 'SIGN_OUT_FAILURE' })
       .put({

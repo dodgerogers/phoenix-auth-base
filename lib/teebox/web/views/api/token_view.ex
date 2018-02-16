@@ -1,9 +1,15 @@
 defmodule Teebox.Web.Api.TokenView do
   use Teebox.Web, :view
 
-  def render("token.json", %{access_token: code}) do
+  def render("token.json", %{access_token: token}) do
     %{
-      access_token: code
+      access_token: %{
+        created_at: token.created_at,
+        expires_in: token.expires_in,
+        scope: token.scope,
+        token_type: token.token_type,
+        access_token: token.access_token
+      }
     }
   end
 end

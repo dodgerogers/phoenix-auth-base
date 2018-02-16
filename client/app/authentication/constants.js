@@ -11,6 +11,7 @@ export const formIDs = mirrorCreator([
 ]);
 
 export const actionTypes = mirrorCreator([
+  'AUTHENTICATE_WITH_STORED_TOKEN_REQUEST',
   'AUTHENTICATE_SUCCESS',
   'AUTHENTICATE_FAILURE',
   'SIGN_OUT_REQUEST',
@@ -32,4 +33,5 @@ export const actionTypes = mirrorCreator([
   'REFRESH_TOKEN_REQUEST',
   'REFRESH_TOKEN_SUCCESS',
   'REFRESH_TOKEN_FAILURE',
+  'SET_TOKEN',
 ]);

@@ -28,8 +28,8 @@ export function* promptUserLogin(action) {
   }
 }
 
-export function* ResetPasswordSaga() {
+export function* ResetPassword() {
   yield takeLatest(actionTypes.RESET_PASSWORD_SUCCESS, promptUserLogin);
 }
 
-export default ResetPasswordSaga;
+export default ResetPassword;

@@ -2,18 +2,18 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { fromJS } from 'immutable';
 import { call, put, take } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
-import * as sagas from '../ResetPasswordSaga';
+import * as sagas from '../ForgotPassword';
 import { actionTypes } from '../../constants';
 
 
-describe('ResetPasswordSaga', () => {
+describe('ForgotPassword', () => {
   it('dispatches show modals and notification', () => {
-    return expectSaga(sagas.ResetPasswordSaga)
-      .put({ type: 'SHOW_MODAL', data: { id: 'LOGIN_MODAL' }})
+    return expectSaga(sagas.ForgotPassword)
+      .put({ type: 'SHOW_MODAL', data: { id: 'RESET_PASSWORD_MODAL' }})
       .put({
         type: '@@redux-form/INITIALIZE',
         meta: {
-          form: 'SESSION',
+          form: 'PASSWORD_RESET',
           keepDirty: undefined,
         },
         payload: fromJS({
@@ -25,18 +25,16 @@ describe('ResetPasswordSaga', () => {
         type: 'CREATE_NOTIFICATION',
         notification: {
           level: 'success',
-          message: 'Your password has been reset',
+          message: 'A password reset code has been sent',
         },
       })
       .dispatch({
-        type: actionTypes.RESET_PASSWORD_SUCCESS,
+        type: actionTypes.PASSWORD_RESET_REQUEST_SUCCESS,
         data: {
           formValues: fromJS({
             email: 'email',
-            password: 'password',
-            passwordConfirmation: 'passwordConfirmation',
           }),
-        },
+        }
       })
       .run({ silenceTimeout: true });
   });

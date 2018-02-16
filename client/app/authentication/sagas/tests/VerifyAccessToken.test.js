@@ -6,9 +6,9 @@ import { fromJS } from 'immutable';
 import HTTP from '../../../lib/utils/HTTP';
 import * as AuthenticationSources from '../../sources';
 import * as TokenStorage from '../../lib/TokenStorage';
-import * as sagas from '../AuthenticateSaga';
+import * as sagas from '../VerifyAccessToken';
 
-describe('AuthenticateSaga', () => {
+describe('VerifyAccessToken', () => {
   let mockAxios;
   const mockToken = { accessToken: 'token' };
 
@@ -24,7 +24,7 @@ describe('AuthenticateSaga', () => {
     mockAxios.restore();
   });
 
-  it('dispatches GET_CURRENT_RESOURCE_SUCCESS when AuthenticationSources.currentUser is successful', () => {
+  it('dispatches VERIFY_TOKEN_SUCCESS when AuthenticationSources.currentUser is successful', () => {
     const mockUser = { id: 42, name: 'Tucker' };
     const mockResponse = { user: mockUser };
     mockAxios.onGet('api/users/me').reply(200, mockResponse);
@@ -32,7 +32,7 @@ describe('AuthenticateSaga', () => {
     const mockCookie = 'cookie';
     TokenStorage.store = jest.fn(() => Promise.resolve(mockCookie));
 
-    return expectSaga(sagas.authenticateSaga)
+    return expectSaga(sagas.VerifyAccessToken)
       .provide([call(AuthenticationSources.currentUser), mockResponse])
       .provide([call(TokenStorage.store, mockToken)])
       .put({
@@ -43,7 +43,7 @@ describe('AuthenticateSaga', () => {
       .run({ silenceTimeout: true });
   });
 
-  it('dispatches GET_CURRENT_RESOURCE_FAILURE when TokenStorage.store fails', () => {
+  it('dispatches VERIFY_TOKEN_FAILURE when TokenStorage.store fails', () => {
     const mockUser = { id: 42, name: 'Tucker' };
     const mockResponse = { user: mockUser };
     mockAxios.onGet('api/users/me').reply(200, mockResponse);
@@ -52,7 +52,7 @@ describe('AuthenticateSaga', () => {
       throw 'error';
     });
 
-    return expectSaga(sagas.authenticateSaga)
+    return expectSaga(sagas.VerifyAccessToken)
       .provide([call(AuthenticationSources.currentUser)])
       .provide([call(TokenStorage.store, mockToken)])
       .put({
@@ -62,11 +62,11 @@ describe('AuthenticateSaga', () => {
       .run({ silenceTimeout: true });
   });
 
-  it('dispatches GET_CURRENT_RESOURCE_FAILURE when AuthenticationSources.currentUser fails', () => {
+  it('dispatches VERIFY_TOKEN_FAILURE when AuthenticationSources.currentUser fails', () => {
     const mockResponse = { error: 'Something went wrong' };
     mockAxios.onGet('api/users/me').reply(400, mockResponse);
 
-    return expectSaga(sagas.authenticateSaga)
+    return expectSaga(sagas.VerifyAccessToken)
       .provide([call(AuthenticationSources.currentUser), mockResponse])
       .put({
         type: 'VERIFY_TOKEN_FAILURE',

@@ -10,24 +10,40 @@ import { formIDs } from './constants';
 // * Move notifications to a separate file
 // * Move all thunks to sagas
 
-const verifyToken = (accessToken) => ({
+export const verifyToken = accessToken => ({
   type: actionTypes.VERIFY_TOKEN,
   accessToken,
 });
 
-const authenticateFailure = (error) => ({
+export const verifyTokenSuccess = user => ({
+  type: actionTypes.VERIFY_TOKEN_SUCCESS,
+  user,
+});
+
+export const verifyTokenFailure = () => ({
+  type: actionTypes.VERIFY_TOKEN_FAILURE,
+});
+
+export const refreshTokenRequest = () => ({
+  type: actionTypes.REFRESH_TOKEN_REQUEST,
+});
+
+export const refreshTokenSuccess = () => ({
+  type: actionTypes.REFRESH_TOKEN_SUCCESS,
+});
+
+export const refreshTokenFailure = () => ({
+  type: actionTypes.REFRESH_TOKEN_FAILURE,
+});
+
+export const authenticateWithStoredToken = () => ({
+  type: actionTypes.AUTHENTICATE_WITH_STORED_TOKEN_REQUEST,
+});
+
+export const authenticateFailure = error => ({
   type: actionTypes.AUTHENTICATE_FAILURE,
   error,
 });
-
-export const authenticate = () => {
-  return dispatch => {
-    return TokenStorage.fetch()
-      .then(accessToken => dispatch(verifyToken(accessToken)))
-      // TODO: purge token
-      .catch(err => dispatch(authenticateFailure(err)));
-  }
-}
 
 export const signOutRequest = () => ({
   type: actionTypes.SIGN_OUT_REQUEST,
