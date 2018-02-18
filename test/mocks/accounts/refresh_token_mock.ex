@@ -1,9 +1,11 @@
-defmodule Teebox.Accounts.AuthenticateMock do
+defmodule Teebox.Accounts.RefreshTokenMock do
   import Teebox.Factory
+
+  alias ExOauth2Provider.OauthAccessTokens.OauthAccessToken
 
   @error_msg "Failure"
 
-  def call(%{"grant_type" => "password", "username" => _, "password" => _}) do
+  def call(%OauthAccessToken{} = _token) do
     mock_token = build(:oauth_access_token)
     {:ok, %{
         access_token: mock_token.token,
@@ -13,8 +15,5 @@ defmodule Teebox.Accounts.AuthenticateMock do
       }
     }
   end
-  def call(%{"grant_type" => _, "username" => _, "password" => _}) do
-    {:error, @error_msg}
-  end
-  def call(_), do: {:error, @error_msg, 401}
+  def call(_), do: {:error, @error_msg}
 end

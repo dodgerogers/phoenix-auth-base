@@ -35,11 +35,11 @@ services:
     environment:
       - MIX_ENV=test
       - PORT=4001
+      - DB_ENV_NAME=teebox_test
       - DB_ENV_POSTGRES_USER=postgres
       - DB_ENV_POSTGRES_PASSWORD=postgres
       - DB_ENV_POSTGRES_HOST=test_db
-      - DB_ENV_NAME=teebox_test
-      - SECRET_KEY_BASE=8T5LnoIUrhwSfTJhqViVjckIEYrnd2mEIfgIbfsT+sB+/hCMXJbN48v8zjhFx5/p
+      - SECRET_KEY_BASE=SECRET_KEY_BASE
     depends_on:
       - test_db
 
@@ -54,11 +54,11 @@ services:
     environment:
       - PORT=5001
       - MIX_ENV=prod
-      - SECRET_KEY_BASE=secret_key_base
+      - DB_ENV_NAME=teebox_release
       - DB_ENV_POSTGRES_USER=postgres
       - DB_ENV_POSTGRES_PASSWORD=postgres
       - DB_ENV_POSTGRES_HOST=release_db
-      - DB_ENV_NAME=teebox_release
+      - SECRET_KEY_BASE=SECRET_KEY_BASE
     ports:
       - "5001:5001"
     depends_on:

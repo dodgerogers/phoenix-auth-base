@@ -69,7 +69,7 @@ exports[`Input matches snapshot 1`] = `
 </Input>
 `;
 
-exports[`Input matches snapshot when errors are present 1`] = `
+exports[`error-snapshot 1`] = `
 <Input
   input={
     Object {
@@ -140,7 +140,7 @@ exports[`Input matches snapshot when errors are present 1`] = `
       pointing={true}
       style={
         Object {
-          "marginTop": "-1em",
+          "marginTop": "0em",
         }
       }
     >
@@ -149,7 +149,193 @@ exports[`Input matches snapshot when errors are present 1`] = `
         onClick={[Function]}
         style={
           Object {
-            "marginTop": "-1em",
+            "marginTop": "0em",
+          }
+        }
+      >
+        Something went wrong
+      </div>
+    </Label>
+  </div>
+</Input>
+`;
+
+exports[`error-snapshot 2`] = `
+<Input
+  input={
+    Object {
+      "name": "input-name",
+    }
+  }
+  meta={
+    Object {
+      "error": Array [
+        "Something went wrong",
+      ],
+      "touched": true,
+    }
+  }
+>
+  <div
+    className="input"
+    style={
+      Object {
+        "margin": "0 0 1em",
+      }
+    }
+  >
+    <FormInput
+      as={[Function]}
+      control={[Function]}
+      error={true}
+      input={
+        Object {
+          "name": "input-name",
+        }
+      }
+    >
+      <FormField
+        control={[Function]}
+        error={true}
+        input={
+          Object {
+            "name": "input-name",
+          }
+        }
+      >
+        <div
+          className="error field"
+        >
+          <Input
+            input={
+              Object {
+                "name": "input-name",
+              }
+            }
+            type="text"
+          >
+            <div
+              className="ui input"
+            >
+              <input
+                name="input-name"
+                onChange={[Function]}
+                type="text"
+              />
+            </div>
+          </Input>
+        </div>
+      </FormField>
+    </FormInput>
+    <Label
+      basic={true}
+      color="red"
+      pointing={true}
+      style={
+        Object {
+          "marginTop": "0em",
+        }
+      }
+    >
+      <div
+        className="ui red pointing basic label"
+        onClick={[Function]}
+        style={
+          Object {
+            "marginTop": "0em",
+          }
+        }
+      >
+        Something went wrong
+      </div>
+    </Label>
+  </div>
+</Input>
+`;
+
+exports[`error-snapshot 3`] = `
+<Input
+  input={
+    Object {
+      "name": "input-name",
+    }
+  }
+  meta={
+    Object {
+      "error": Immutable.List [
+        "Something went wrong",
+    ],
+      "touched": true,
+    }
+  }
+>
+  <div
+    className="input"
+    style={
+      Object {
+        "margin": "0 0 1em",
+      }
+    }
+  >
+    <FormInput
+      as={[Function]}
+      control={[Function]}
+      error={true}
+      input={
+        Object {
+          "name": "input-name",
+        }
+      }
+    >
+      <FormField
+        control={[Function]}
+        error={true}
+        input={
+          Object {
+            "name": "input-name",
+          }
+        }
+      >
+        <div
+          className="error field"
+        >
+          <Input
+            input={
+              Object {
+                "name": "input-name",
+              }
+            }
+            type="text"
+          >
+            <div
+              className="ui input"
+            >
+              <input
+                name="input-name"
+                onChange={[Function]}
+                type="text"
+              />
+            </div>
+          </Input>
+        </div>
+      </FormField>
+    </FormInput>
+    <Label
+      basic={true}
+      color="red"
+      pointing={true}
+      style={
+        Object {
+          "marginTop": "0em",
+        }
+      }
+    >
+      <div
+        className="ui red pointing basic label"
+        onClick={[Function]}
+        style={
+          Object {
+            "marginTop": "0em",
           }
         }
       >

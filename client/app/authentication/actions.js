@@ -3,30 +3,51 @@ import * as AuthenticationSources from './sources';
 import { ModalActions, ModalIds } from '../common/modals';
 import { actionTypes } from './constants';
 import { NotificationActions, areaIDs } from '../common/Notifications';
-import * as TokenStorage from './lib/TokenStorage';
+import * as TokenStorage from './services/TokenStorage';
 import { formIDs } from './constants';
 
 // TODO's
 // * Move notifications to a separate file
 // * Move all thunks to sagas
 
-const verifyToken = (accessToken) => ({
-  type: actionTypes.VERIFY_TOKEN,
+export const verifyTokenRequest = accessToken => ({
+  type: actionTypes.VERIFY_TOKEN_REQUEST,
   accessToken,
 });
 
-const authenticateFailure = (error) => ({
+export const verifyTokenSuccess = user => ({
+  type: actionTypes.VERIFY_TOKEN_SUCCESS,
+  user,
+});
+
+export const verifyTokenFailure = () => ({
+  type: actionTypes.VERIFY_TOKEN_FAILURE,
+});
+
+export const refreshTokenRequest = () => ({
+  type: actionTypes.REFRESH_TOKEN_REQUEST,
+});
+
+export const refreshTokenSuccess = () => ({
+  type: actionTypes.REFRESH_TOKEN_SUCCESS,
+});
+
+export const refreshTokenFailure = () => ({
+  type: actionTypes.REFRESH_TOKEN_FAILURE,
+});
+
+export const refreshTokenRequestCancelled = () => ({
+  type: actionTypes.REFRESH_TOKEN_REQUEST_CANCELLED,
+});
+
+export const authenticateWithStoredToken = () => ({
+  type: actionTypes.AUTHENTICATE_WITH_STORED_TOKEN_REQUEST,
+});
+
+export const authenticateFailure = error => ({
   type: actionTypes.AUTHENTICATE_FAILURE,
   error,
 });
-
-export const authenticate = () => {
-  return dispatch => {
-    return TokenStorage.fetch()
-      .then(accessToken => dispatch(verifyToken(accessToken)))
-      .catch(err => dispatch(authenticateFailure(err)));
-  }
-}
 
 export const signOutRequest = () => ({
   type: actionTypes.SIGN_OUT_REQUEST,
@@ -44,7 +65,7 @@ export function login(loginParams) {
   return dispatch => {
     return AuthenticationSources.login(loginParams.toJS())
       .then(response => {
-        dispatch(verifyToken(response.data.accessToken))
+        dispatch(verifyTokenRequest(response.data.accessToken))
         dispatch(NotificationActions.notify('Logged in successfully'))
         dispatch(ModalActions.hideModal(ModalIds.LOGIN_MODAL))
       })
@@ -94,7 +115,7 @@ export function confirm(confirmationParams) {
   return dispatch => {
     return AuthenticationSources.confirm(confirmationParams.toJS())
       .then(response => {
-        dispatch(verifyToken(response.data.accessToken));
+        dispatch(verifyTokenRequest(response.data.accessToken));
         dispatch(confirmationSuccess());
         dispatch(NotificationActions.notify('Account successfully confirmed! You are now logged in'));
         dispatch(ModalActions.hideModal(ModalIds.CONFIRMATION_MODAL));

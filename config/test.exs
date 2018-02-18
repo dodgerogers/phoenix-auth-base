@@ -27,6 +27,7 @@ config :teebox, :confirmation, Teebox.Accounts.ConfirmationMock
 config :teebox, :registration, Teebox.Accounts.RegistrationMock
 config :teebox, :authenticate, Teebox.Accounts.AuthenticateMock
 config :teebox, :revoke_token, Teebox.Accounts.RevokeTokenMock
+config :teebox, :refresh_token, Teebox.Accounts.RefreshTokenMock
 config :teebox, :forgot_password, Teebox.Accounts.ForgotPasswordMock
 config :teebox, :reset_password, Teebox.Accounts.ResetPasswordMock
 config :teebox, :password_encryption, Teebox.Accounts.Services.PasswordEncryptionMock

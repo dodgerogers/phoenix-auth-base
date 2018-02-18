@@ -1,14 +1,21 @@
 import { all } from 'redux-saga/effects';
-import AuthenticateSaga from '../authentication/sagas/AuthenticateSaga';
-import SignOutSaga from '../authentication/sagas/SignOutSaga';
-import ForgotPasswordSaga from '../authentication/sagas/ForgotPasswordSaga';
-import ResetPasswordSaga from '../authentication/sagas/ResetPasswordSaga';
+import VerifyAccessToken from '../authentication/sagas/VerifyAccessToken';
+import SignOut from '../authentication/sagas/SignOut';
+import ForgotPassword from '../authentication/sagas/ForgotPassword';
+import ResetPassword from '../authentication/sagas/ResetPassword';
+import SessionRefreshTimer from '../authentication/sagas/SessionRefreshTimer';
+import RefreshToken from '../authentication/sagas/RefreshToken';
+import AuthenticateFromCookie from '../authentication/sagas/AuthenticateFromCookie';
+
 
 export default function* rootSaga() {
   yield all([
-    AuthenticateSaga(),
-    SignOutSaga(),
-    ForgotPasswordSaga(),
-    ResetPasswordSaga(),
+    AuthenticateFromCookie(),
+    VerifyAccessToken(),
+    SignOut(),
+    ForgotPassword(),
+    ResetPassword(),
+    SessionRefreshTimer(),
+    RefreshToken(),
   ]);
 }

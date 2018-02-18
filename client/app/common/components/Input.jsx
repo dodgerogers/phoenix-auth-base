@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Form, Label } from 'semantic-ui-react';
 
 
@@ -13,7 +14,7 @@ const Input = (props) => {
         error={hasError}
         {...inputProps}
       />
-      {hasError && <Label style={{ marginTop: '-1em' }} basic color="red" pointing>{props.meta.error}</Label>}
+      {hasError && <Label style={{ marginTop: '0em' }} basic color="red" pointing>{props.meta.error}</Label>}
     </div>
   )
 }
@@ -24,7 +25,11 @@ Input.propTypes = {
   }),
   meta: PropTypes.shape({
     touched: PropTypes.bool.isRequired,
-    error: PropTypes.string,
+    error: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.array,
+      ImmutablePropTypes.list
+    ]),
   }).isRequired
 }
 

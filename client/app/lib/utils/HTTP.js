@@ -1,16 +1,44 @@
 import axios from 'axios';
 import normalize from 'normalize-object';
 import store from '../../store';
+import { currentAccessTokenValue, isTokenRefreshing } from '../../authentication/selector';
+import wait from './wait';
 
-export const API_BASE = 'http://localhost:4000'; // TODO window.location.origin
 
-const HTTP = axios.create({
-  baseURL: API_BASE,
+const testUrl = 'http://localhost';
+const API_BASE = process.env.NODE_ENV === 'test' ? testUrl : window.location.origin;
+const HTTP = axios.create({ baseURL: API_BASE });
+
+HTTP.interceptors.request.use(requestInterceptor, error => Promise.reject(error));
+HTTP.interceptors.response.use(config => { // TODO: Handle 401
+  config.data = normalize(config.data);
+  return config;
+}, error => {
+  error.response.data = normalize(error.response.data);
+  return Promise.reject(error);
 });
 
-HTTP.interceptors.request.use(config => {
-  const accessToken = store.getState().authentication.getIn(['accessToken', 'accessToken']);
+const normalizeKeys = data => normalize(data, 'snake');
 
+async function requestInterceptor(config) {
+  return waitForAccessToken(config.url)
+    .then(accessToken => transformRequest(config, accessToken));
+};
+
+async function waitForAccessToken(url) {
+  try {
+    if (!isTokenRefreshRequest(url) && isTokenRefreshing(store.getState())) {
+      return await wait(waitForAccessToken, url);
+    }
+    return currentAccessTokenValue(store.getState());
+  } catch(e) {
+    return null;
+  }
+}
+
+const isTokenRefreshRequest = url => url && url.indexOf('/oauth/token/refresh') > -1;
+
+function transformRequest(config, accessToken) {
   if (accessToken) {
     config.headers.common['Authorization'] = `Bearer ${accessToken}`;
   } else {
@@ -21,16 +49,6 @@ HTTP.interceptors.request.use(config => {
   config.data = normalize(config.data, 'snake');
 
   return config;
-}, function(error) {
-  return Promise.reject(error);
-});
-
-HTTP.interceptors.response.use(response => {
-  response.data = normalize(response.data);
-  return response;
-}, function(error) {
-  return Promise.reject(error);
-});
-
+}
 
 export default HTTP;

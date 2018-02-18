@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HTTP request adds authorization header when accessToken is present 1`] = `
+Object {
+  "data": Object {
+    "data_payload": Object {
+      "array_key": Array [
+        Object {
+          "nested_key": "key",
+        },
+      ],
+      "data_key": "data",
+    },
+  },
+  "headers": Object {
+    "common": Object {
+      "Authorization": "Bearer token",
+    },
+  },
+}
+`;
+
+exports[`HTTP request transforms request keys to snake case 1`] = `
+Object {
+  "data": Object {
+    "data_payload": Object {
+      "array_key": Array [
+        Object {
+          "nested_key": "key",
+        },
+      ],
+      "data_key": "data",
+    },
+  },
+  "headers": Object {
+    "common": Object {},
+  },
+}
+`;
+
+exports[`HTTP response transforms response 1`] = `
+Object {
+  "data": Object {
+    "dataPayload": Object {
+      "arrayKey": Array [
+        Object {
+          "nestedKey": "key",
+        },
+      ],
+      "dataKey": "data",
+    },
+  },
+  "headers": Object {
+    "common": Object {},
+  },
+}
+`;
+
+exports[`HTTP response transforms response error 1`] = `
+Object {
+  "response": Object {
+    "data": Object {
+      "error": Object {
+        "arrayKey": Array [
+          Object {
+            "dataKey": "data",
+          },
+        ],
+        "dataKey": "Page not found",
+      },
+    },
+    "status": 400,
+    "statusText": "BadRequest",
+  },
+}
+`;

@@ -6,7 +6,7 @@ import { fromJS } from 'immutable';
 import normalize from 'normalize-object';
 import * as AuthenticationActions from '../actions';
 import * as AuthenticationSources from '../sources';
-import * as TokenStorage from '../lib/TokenStorage';
+import * as TokenStorage from '../services/TokenStorage';
 
 
 const middlewares = [thunk];
@@ -26,32 +26,9 @@ describe('async AuthenticationActions', () => {
     mockAxios.restore();
   });
 
-  describe('authenticate', () => {
-    afterEach(() => {
-      TokenStorage.fetch.mockReset();
-    });
-
-    it('when TokenStore.fetch is successful', () => {
-      const mockToken = { accessToken: "token" };
-      TokenStorage.fetch = jest.fn(() => Promise.resolve(mockToken));
-
-      const store = mockStore();
-
-      return store.dispatch(AuthenticationActions.authenticate())
-        .then(() => {
-          expect(store.getActions()).toMatchSnapshot();
-        });
-    });
-
-    it('when TokenStore.fetch fails', () => {
-      TokenStorage.fetch = jest.fn(() => Promise.reject("Error"));
-
-      const store = mockStore();
-
-      return store.dispatch(AuthenticationActions.authenticate())
-        .then((err) => {
-          expect(store.getActions()).toMatchSnapshot();
-        });
+  describe('authenticateWithStoredToken', () => {
+    it('matches snapshot', () => {
+      expect(AuthenticationActions.authenticateWithStoredToken()).toMatchSnapshot();
     });
   });
 
@@ -66,6 +43,34 @@ describe('async AuthenticationActions', () => {
 
     it('signOutFailure matches snapshot', () => {
       expect(AuthenticationActions.signOutFailure()).toMatchSnapshot();
+    });
+  });
+
+  describe('verifyToken', () => {
+    it('verifyTokenRequest matches snapshot', () => {
+      expect(AuthenticationActions.verifyTokenRequest()).toMatchSnapshot();
+    });
+
+    it('verifyTokenSuccess matches snapshot', () => {
+      expect(AuthenticationActions.verifyTokenSuccess()).toMatchSnapshot();
+    });
+
+    it('verifyTokenFailure matches snapshot', () => {
+      expect(AuthenticationActions.verifyTokenFailure()).toMatchSnapshot();
+    });
+  });
+
+  describe('refreshToken', () => {
+    it('refreshToken matches snapshot', () => {
+      expect(AuthenticationActions.refreshTokenRequest()).toMatchSnapshot();
+    });
+
+    it('refreshTokenSuccess matches snapshot', () => {
+      expect(AuthenticationActions.refreshTokenSuccess()).toMatchSnapshot();
+    });
+
+    it('refreshTokenFailure matches snapshot', () => {
+      expect(AuthenticationActions.refreshTokenFailure()).toMatchSnapshot();
     });
   });
 

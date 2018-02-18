@@ -29,8 +29,6 @@ export function* handleForgotPasswordRequest(action) {
   }
 }
 
-export function* ForgotPasswordSaga() {
+export default function* ForgotPassword() {
   yield takeLatest(actionTypes.PASSWORD_RESET_REQUEST_SUCCESS, handleForgotPasswordRequest);
 }
-
-export default ForgotPasswordSaga;

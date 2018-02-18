@@ -40,7 +40,7 @@ defmodule Teebox.Factory do
       resource_owner: build(:user),
       application: build(:oauth_application),
       token: Faker.String.base64(),
-      refresh_token: nil,
+      refresh_token: Faker.String.base64(),
       expires_in: 900,
       revoked_at: nil,
       scopes: nil,

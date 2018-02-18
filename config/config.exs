@@ -35,6 +35,7 @@ config :teebox, :confirmation, Teebox.Accounts.Confirmation
 config :teebox, :registration, Teebox.Accounts.Registration
 config :teebox, :authenticate, Teebox.Accounts.Authenticate
 config :teebox, :revoke_token, Teebox.Accounts.RevokeToken
+config :teebox, :refresh_token, Teebox.Accounts.RefreshToken
 config :teebox, :forgot_password, Teebox.Accounts.ForgotPassword
 config :teebox, :reset_password, Teebox.Accounts.ResetPassword
 config :teebox, :password_encryption, Teebox.Accounts.Services.PasswordEncryption
@@ -49,8 +50,9 @@ config :ex_oauth2_provider, ExOauth2Provider,
   repo: Teebox.Repo,
   resource_owner: Teebox.Accounts.Schemas.User,
   application_owner: Teebox.Accounts.Schemas.OauthApplicationUser,
-  use_refresh_token: false,
-  grant_flows: ~w(password),
+  use_refresh_token: true,
+  revoke_refresh_token_on_use: true,
+  grant_flows: ~w(password refresh_token),
   access_token_expires_in: 900,
   password_auth: {Teebox.Accounts.Authenticate, :validate_user_credentials}
 

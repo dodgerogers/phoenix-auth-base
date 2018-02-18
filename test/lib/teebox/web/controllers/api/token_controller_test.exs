@@ -48,4 +48,22 @@ defmodule Teebox.Web.Api.TokenControllerTest do
 
     assert 401 == conn.status
   end
+
+  test "POST refresh with valid params returns 200 and access token" do
+    oauth_access_token = insert(:oauth_access_token)
+
+    conn = build_conn()
+    |> put_req_header("authorization", "Bearer " <> oauth_access_token.token)
+    |> post("/api/oauth/token/refresh")
+
+    response = json_response(conn, 200)
+    assert response["access_token"]
+  end
+
+  test "POST refresh with no authentication token returns 401" do
+    conn = build_conn()
+    |> post("/api/oauth/token/refresh")
+
+    assert 401 == conn.status
+  end
 end
