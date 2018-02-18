@@ -32,11 +32,6 @@ export const currentUser = () => {
   return HTTP.get('/api/users/me');
 };
 
-// remove
-export const test = () => {
-  return HTTP.get('/api/users/test');
-};
-
 export const extendSession = () => {
   return HTTP.post('/api/oauth/token/refresh');
 };
