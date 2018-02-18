@@ -6,7 +6,6 @@ defmodule Teebox.Web.Api.TokenView do
       access_token: %{
         created_at: token.created_at,
         expires_in: token.expires_in,
-        scope: token.scope,
         token_type: token.token_type,
         access_token: token.access_token
       }

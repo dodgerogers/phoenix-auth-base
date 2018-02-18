@@ -1,7 +1,8 @@
 import axios from 'axios';
 import normalize from 'normalize-object';
 import store from '../../store';
-import { currentAccessToken } from '../../authentication/selector';
+import { currentAccessTokenValue, isTokenRefreshing } from '../../authentication/selector';
+import wait from './wait';
 
 
 const localhost = 'http://localhost';
@@ -19,9 +20,6 @@ HTTP.interceptors.response.use(response => { // TODO: Handle 401
   return Promise.reject(error);
 });
 
-const getAccessToken = state => state.authentication.getIn(['accessToken', 'accessToken']);
-const isTokenRefreshing = state => state.authentication.get('refreshing');
-
 async function requestInterceptor(config) {
   return waitForAccessToken(config.url)
     .then(accessToken => transformRequest(config, accessToken));
@@ -30,22 +28,16 @@ async function requestInterceptor(config) {
 async function waitForAccessToken(url) {
   try {
     if (!isTokenRefreshRequest(url) && isTokenRefreshing(store.getState())) {
-      return await sleep(waitForAccessToken, url);
+      return await wait(waitForAccessToken, url);
     }
-    return getAccessToken(store.getState());
+    return currentAccessTokenValue(store.getState());
   } catch(e) {
     return null;
   }
 }
 
 function isTokenRefreshRequest(url) {
-  return url && url.indexOf('/oauth/token/refresh') > -1; // TODO: ?
-}
-
-function sleep(fn, args) {
-  return new Promise(resolve => {
-    setTimeout(() => resolve(fn(args)), 1000)
-  });
+  return url && url.indexOf('/oauth/token/refresh') > -1;
 }
 
 function transformRequest(config, accessToken) {

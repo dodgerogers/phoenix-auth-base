@@ -29,12 +29,12 @@ describe('BaseLayout', () => {
 
     it('calls authenticate on mount', () => {
       const props = {
-        authenticate: jest.fn(),
+        authenticateWithStoredToken: jest.fn(),
       };
 
       const wrapper = functionalComponent(props);
 
-      expect(props.authenticate).toHaveBeenCalled();
+      expect(props.authenticateWithStoredToken).toHaveBeenCalled();
     });
   });
 });

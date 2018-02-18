@@ -3,7 +3,7 @@ import * as AuthenticationSources from '../sources';
 import { signOutSuccess, signOutFailure } from '../actions';
 import { NotificationActions } from '../../common/Notifications';
 import { actionTypes } from '../constants';
-import * as TokenStorage from '../lib/TokenStorage';
+import * as TokenStorage from '../services/TokenStorage';
 
 
 function notifyUserSignedOutSuccessfully() {
@@ -28,8 +28,6 @@ export function* revokeAndPurgeToken(action) {
   }
 }
 
-export function* SignOut() {
+export default function* SignOut() {
   yield takeLatest(actionTypes.SIGN_OUT_REQUEST, revokeAndPurgeToken);
 }
-
-export default SignOut;

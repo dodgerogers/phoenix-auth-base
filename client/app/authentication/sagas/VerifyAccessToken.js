@@ -2,7 +2,7 @@ import { call, put, takeEvery, takeLatest, select } from 'redux-saga/effects'
 import * as AuthenticationSources from '../sources';
 import { actionTypes } from '../constants';
 import { verifyTokenSuccess, verifyTokenFailure } from '../actions';
-import * as TokenStorage from '../lib/TokenStorage';
+import * as TokenStorage from '../services/TokenStorage';
 
 
 export function* storeTokenAndFetchCurrentUser(action) {
@@ -17,8 +17,6 @@ export function* storeTokenAndFetchCurrentUser(action) {
   }
 }
 
-export function* VerifyAccessToken() {
-  yield takeLatest(actionTypes.VERIFY_TOKEN, storeTokenAndFetchCurrentUser);
+export default function* VerifyAccessToken() {
+  yield takeLatest(actionTypes.VERIFY_TOKEN_REQUEST, storeTokenAndFetchCurrentUser);
 }
-
-export default VerifyAccessToken;

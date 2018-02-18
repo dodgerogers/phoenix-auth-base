@@ -3,15 +3,15 @@ import * as AuthenticationSources from './sources';
 import { ModalActions, ModalIds } from '../common/modals';
 import { actionTypes } from './constants';
 import { NotificationActions, areaIDs } from '../common/Notifications';
-import * as TokenStorage from './lib/TokenStorage';
+import * as TokenStorage from './services/TokenStorage';
 import { formIDs } from './constants';
 
 // TODO's
 // * Move notifications to a separate file
 // * Move all thunks to sagas
 
-export const verifyToken = accessToken => ({
-  type: actionTypes.VERIFY_TOKEN,
+export const verifyTokenRequest = accessToken => ({
+  type: actionTypes.VERIFY_TOKEN_REQUEST,
   accessToken,
 });
 
@@ -34,6 +34,10 @@ export const refreshTokenSuccess = () => ({
 
 export const refreshTokenFailure = () => ({
   type: actionTypes.REFRESH_TOKEN_FAILURE,
+});
+
+export const refreshTokenRequestCancelled = () => ({
+  type: actionTypes.REFRESH_TOKEN_REQUEST_CANCELLED,
 });
 
 export const authenticateWithStoredToken = () => ({
@@ -61,7 +65,7 @@ export function login(loginParams) {
   return dispatch => {
     return AuthenticationSources.login(loginParams.toJS())
       .then(response => {
-        dispatch(verifyToken(response.data.accessToken))
+        dispatch(verifyTokenRequest(response.data.accessToken))
         dispatch(NotificationActions.notify('Logged in successfully'))
         dispatch(ModalActions.hideModal(ModalIds.LOGIN_MODAL))
       })
@@ -111,7 +115,7 @@ export function confirm(confirmationParams) {
   return dispatch => {
     return AuthenticationSources.confirm(confirmationParams.toJS())
       .then(response => {
-        dispatch(verifyToken(response.data.accessToken));
+        dispatch(verifyTokenRequest(response.data.accessToken));
         dispatch(confirmationSuccess());
         dispatch(NotificationActions.notify('Account successfully confirmed! You are now logged in'));
         dispatch(ModalActions.hideModal(ModalIds.CONFIRMATION_MODAL));

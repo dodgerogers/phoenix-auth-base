@@ -2,13 +2,13 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { fromJS } from 'immutable';
 import { call, put, take } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
-import * as sagas from '../ResetPassword';
+import ResetPassword from '../ResetPassword';
 import { actionTypes } from '../../constants';
 
 
 describe('ResetPassword', () => {
   it('dispatches show modals and notification', () => {
-    return expectSaga(sagas.ResetPassword)
+    return expectSaga(ResetPassword)
       .put({ type: 'SHOW_MODAL', data: { id: 'LOGIN_MODAL' }})
       .put({
         type: '@@redux-form/INITIALIZE',

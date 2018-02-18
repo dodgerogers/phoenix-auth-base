@@ -1,23 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`async AuthenticationActions authenticate when TokenStore.fetch fails 1`] = `
-Array [
-  Object {
-    "error": "Error",
-    "type": "AUTHENTICATE_FAILURE",
-  },
-]
-`;
-
-exports[`async AuthenticationActions authenticate when TokenStore.fetch is successful 1`] = `
-Array [
-  Object {
-    "accessToken": Object {
-      "accessToken": "token",
-    },
-    "type": "VERIFY_TOKEN",
-  },
-]
+exports[`async AuthenticationActions authenticateWithStoredToken matches snapshot 1`] = `
+Object {
+  "type": "AUTHENTICATE_WITH_STORED_TOKEN_REQUEST",
+}
 `;
 
 exports[`async AuthenticationActions confirmation when confirmation fails 1`] = `
@@ -35,7 +21,7 @@ Array [
     "accessToken": Object {
       "accessToken": "token",
     },
-    "type": "VERIFY_TOKEN",
+    "type": "VERIFY_TOKEN_REQUEST",
   },
   Object {
     "type": "CONFIRMATION_SUCCESS",
@@ -72,7 +58,7 @@ Array [
     "accessToken": Object {
       "accessToken": "code",
     },
-    "type": "VERIFY_TOKEN",
+    "type": "VERIFY_TOKEN_REQUEST",
   },
   Object {
     "id": undefined,
@@ -97,6 +83,24 @@ Object {
     "formValues": Object {},
   },
   "type": "PASSWORD_RESET_REQUEST_SUCCESS",
+}
+`;
+
+exports[`async AuthenticationActions refreshToken refreshToken matches snapshot 1`] = `
+Object {
+  "type": "REFRESH_TOKEN_REQUEST",
+}
+`;
+
+exports[`async AuthenticationActions refreshToken refreshTokenFailure matches snapshot 1`] = `
+Object {
+  "type": "REFRESH_TOKEN_FAILURE",
+}
+`;
+
+exports[`async AuthenticationActions refreshToken refreshTokenSuccess matches snapshot 1`] = `
+Object {
+  "type": "REFRESH_TOKEN_SUCCESS",
 }
 `;
 
@@ -213,5 +217,25 @@ Object {
 exports[`async AuthenticationActions signOut signOutSuccess matches snapshot 1`] = `
 Object {
   "type": "SIGN_OUT_SUCCESS",
+}
+`;
+
+exports[`async AuthenticationActions verifyToken verifyTokenFailure matches snapshot 1`] = `
+Object {
+  "type": "VERIFY_TOKEN_FAILURE",
+}
+`;
+
+exports[`async AuthenticationActions verifyToken verifyTokenRequest matches snapshot 1`] = `
+Object {
+  "accessToken": undefined,
+  "type": "VERIFY_TOKEN_REQUEST",
+}
+`;
+
+exports[`async AuthenticationActions verifyToken verifyTokenSuccess matches snapshot 1`] = `
+Object {
+  "type": "VERIFY_TOKEN_SUCCESS",
+  "user": undefined,
 }
 `;

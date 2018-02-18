@@ -1,33 +1,44 @@
 import moment from 'moment';
 import * as SessionTimer from '../SessionTimer';
 
-jest.mock('moment', () => {
-  const moment = require.requireActual('moment');
-  return (time = '2018-01-01') => moment(time);
-});
-
 
 describe('SessionTimer', () => {
-  const expireAt = moment().add(10, 'minutes').format();
+  const fronzenTime = '2018-01-01';
   const oneMinInMs = 60000;
   const elevenMinutesInMs = 610000;
 
-  describe('call', () => {
-    it('executes timerFn with expected args when current time is outside the expiration window', () => {
-      const expirationWindow = oneMinInMs;
+  let originalNow, originalUTC, expireAt;
+  beforeEach(() => {
+    originalNow = moment.now;
+    originalUTC = moment.utc;
 
-      const msToExecute = SessionTimer.refreshIn(expireAt, expirationWindow);
+    moment.now = (time = fronzenTime) => originalNow(time);
+    moment.utc = (time = fronzenTime, ...args) => originalUTC(time, ...args);
+
+    expireAt = moment.utc().add(10, 'minutes').format();
+  });
+
+  afterEach(() => {
+    moment.now = originalNow;
+    moment.utc = originalUTC;
+  });
+
+  describe('call', () => {
+    it('executes timerFn with expected args when current time is before the expiration window', () => {
+      const executeBeforeExpirationInMs = oneMinInMs;
+
+      const msToExecute = SessionTimer.refreshIn(expireAt, executeBeforeExpirationInMs);
 
       const nineMinutes = 540000
-      expect(msToExecute).to.equal(nineMinutes);
+      expect(msToExecute).toEqual(nineMinutes);
     });
 
-    it('executes callback when current time is within the expiration window', () => {
-      const expirationWindow = elevenMinutesInMs;
+    it('executes callback when current time is in the expiration window', () => {
+      const executeBeforeExpirationInMs = elevenMinutesInMs;
 
-      const msToExecute = SessionTimer.refreshIn(expireAt, expirationWindow);
+      const msToExecute = SessionTimer.refreshIn(expireAt, executeBeforeExpirationInMs);
 
-      expect(msToExecute).to.equal(0);
+      expect(msToExecute).toEqual(0);
     });
   });
 });
