@@ -9,19 +9,33 @@ defmodule Teebox.Web.Api.RegistrationControllerTest do
     password_confirmation: @password
   }
 
+  @invalid_attrs %{
+    name: 1,
+    email: nil,
+    password: to_string(Faker.Lorem.characters(255)),
+    password_confirmation: ""
+  }
+
   test "POST create with valid params returns message and user" do
     conn = build_conn()
-    |> post("/api/registrations", %{registration: @valid_attrs})
+    |> post("/api/registrations", @valid_attrs)
 
-    response = json_response(conn, 200)
-    assert response["user"]
+    body = json_response(conn, 200)
+    assert body["user"]
   end
 
   test "POST create with invalid params returns errors" do
     conn = build_conn()
-    |> post("/api/registrations", %{registration: nil})
+    |> post("/api/registrations", @invalid_attrs)
 
-    response = json_response(conn, 400)
-    assert response["error"]
+    body = json_response(conn, 400)
+    assert body == %{
+      "error" => %{
+        "email" => ["can't be blank"],
+        "name" => ["is invalid"],
+        "password" => ["should be at most 254 character(s)"],
+        "password_confirmation" => ["can't be blank"]
+      }
+    }
   end
 end

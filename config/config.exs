@@ -15,7 +15,7 @@ config :teebox, Teebox.Web.Endpoint,
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
   render_errors: [
     view: Teebox.Web.ErrorView,
-    accepts: ~w(html json)
+    accepts: ~w(json)
   ],
   pubsub: [
     name: Teebox.PubSub,
