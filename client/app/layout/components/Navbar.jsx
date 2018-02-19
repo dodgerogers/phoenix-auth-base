@@ -24,7 +24,7 @@ const Navbar = (props) => {
 
 
   const nonLoggedInLinks = () => ([
-    <ModalTrigger key="login" text="Login" id={ModalIds.LOGIN_MODAL} wrapper={Menu.Item} />,
+    <ModalTrigger key="login" text="Login" id={ModalIds.SIGN_IN_MODAL} wrapper={Menu.Item} />,
     <ModalTrigger key="signup" text="Sign up" id={ModalIds.REGISTRATION_MODAL} wrapper={Menu.Item} />,
   ]);
 

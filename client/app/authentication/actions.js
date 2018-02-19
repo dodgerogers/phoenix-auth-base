@@ -61,27 +61,17 @@ export const signOutFailure = () => ({
   type: actionTypes.SIGN_OUT_FAILURE,
 });
 
-export function login(loginParams) {
-  return dispatch => {
-    return AuthenticationSources.login(loginParams.toJS())
-      .then(response => {
-        dispatch(verifyTokenRequest(response.data.accessToken))
-        dispatch(NotificationActions.notify('Logged in successfully'))
-        dispatch(ModalActions.hideModal(ModalIds.LOGIN_MODAL))
-      })
-      .catch(err => {
-        dispatch(authenticateFailure(err.response.data.error))
-        throw new SubmissionError({ _error: err.response.data.error });
-      });
-  };
-}
+export const signInSuccess = response => ({
+  type: actionTypes.SIGN_IN_SUCCESS,
+  accessToken: response.data.accessToken,
+});
 
-const registerSuccess = (user) => ({
+const registerSuccess = user => ({
   type: actionTypes.REGISTER_SUCCESS,
   user,
 });
 
-const registerFailure = (error) => ({
+const registerFailure = error => ({
   type: actionTypes.REGISTER_FAILURE,
   error,
 });
@@ -152,12 +142,12 @@ export function resendConfirmation(resendConfirmation) {
   }
 };
 
-export const passwordResetRequestSuccess = (result, dispatch, { values }) => ({
+export const passwordResetRequestSuccess = (_result, _dispatch, { values }) => ({
   type: actionTypes.PASSWORD_RESET_REQUEST_SUCCESS,
   data: { formValues: values },
 });
 
-export const resetPasswordSuccess = (result, dispatch, { values }) => ({
+export const resetPasswordSuccess = (_result, _dispatch, { values }) => ({
   type: actionTypes.RESET_PASSWORD_SUCCESS,
   data: { formValues: values },
 });

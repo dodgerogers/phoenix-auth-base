@@ -20,7 +20,7 @@ exports[`Navbar matches pure component snapshot 1`] = `
         position="right"
       >
         <Connect(ModalTrigger)
-          id="LOGIN_MODAL"
+          id="SIGN_IN_MODAL"
           text="Login"
           wrapper={[Function]}
         />

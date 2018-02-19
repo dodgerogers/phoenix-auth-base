@@ -7,7 +7,7 @@ export const actionTypes = mirrorCreator([
 ]);
 
 export const modalIds = mirrorCreator([
-  'LOGIN_MODAL',
+  'SIGN_IN_MODAL',
   'REGISTRATION_MODAL',
   'CONFIRMATION_MODAL',
   'RESEND_CONFIRMATION_MODAL',

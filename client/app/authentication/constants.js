@@ -2,7 +2,7 @@ import mirrorCreator from 'mirror-creator';
 
 
 export const formIDs = mirrorCreator([
-  'SESSION',
+  'SIGN_IN',
   'REGISTRATION',
   'CONFIRMATION',
   'RESEND_CONFIRMATION',
@@ -14,6 +14,7 @@ export const actionTypes = mirrorCreator([
   'AUTHENTICATE_WITH_STORED_TOKEN_REQUEST',
   'AUTHENTICATE_SUCCESS',
   'AUTHENTICATE_FAILURE',
+  'SIGN_IN_SUCCESS',
   'SIGN_OUT_REQUEST',
   'SIGN_OUT_SUCCESS',
   'SIGN_OUT_FAILURE',

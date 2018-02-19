@@ -9,11 +9,11 @@ import { actionTypes } from '../../constants';
 describe('ResetPassword', () => {
   it('dispatches show modals and notification', () => {
     return expectSaga(ResetPassword)
-      .put({ type: 'SHOW_MODAL', data: { id: 'LOGIN_MODAL' }})
+      .put({ type: 'SHOW_MODAL', data: { id: 'SIGN_IN_MODAL' }})
       .put({
         type: '@@redux-form/INITIALIZE',
         meta: {
-          form: 'SESSION',
+          form: 'SIGN_IN',
           keepDirty: undefined,
         },
         payload: fromJS({

@@ -43,40 +43,6 @@ Array [
 ]
 `;
 
-exports[`async AuthenticationActions login when login fails 1`] = `
-Array [
-  Object {
-    "error": "Invalid credentials",
-    "type": "AUTHENTICATE_FAILURE",
-  },
-]
-`;
-
-exports[`async AuthenticationActions login when login is successful 1`] = `
-Array [
-  Object {
-    "accessToken": Object {
-      "accessToken": "code",
-    },
-    "type": "VERIFY_TOKEN_REQUEST",
-  },
-  Object {
-    "id": undefined,
-    "notification": Object {
-      "level": "success",
-      "message": "Logged in successfully",
-    },
-    "type": "CREATE_NOTIFICATION",
-  },
-  Object {
-    "data": Object {
-      "id": "LOGIN_MODAL",
-    },
-    "type": "HIDE_MODAL",
-  },
-]
-`;
-
 exports[`async AuthenticationActions passwordResetRequestSuccess matches snapshot 1`] = `
 Object {
   "data": Object {
@@ -199,6 +165,13 @@ Object {
     "formValues": Object {},
   },
   "type": "RESET_PASSWORD_SUCCESS",
+}
+`;
+
+exports[`async AuthenticationActions signInSuccess matches snapshot 1`] = `
+Object {
+  "accessToken": "token",
+  "type": "SIGN_IN_SUCCESS",
 }
 `;
 
