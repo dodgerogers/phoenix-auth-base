@@ -6,12 +6,12 @@ import { actionTypes, formIDs } from '../constants';
 import { take } from '../../lib/utils/MapHelper';
 
 function showLoginModal() {
-  return ModalActions.showModal(ModalIds.LOGIN_MODAL)
+  return ModalActions.showModal(ModalIds.SIGN_IN_MODAL)
 }
 
 function populateLoginForm(formValues) {
   const fields = take(formValues, ['email']);
-  return initialize(formIDs.SESSION, fields);
+  return initialize(formIDs.SIGN_IN, fields);
 }
 
 function notifyUserPasswordResetSucceeded() {

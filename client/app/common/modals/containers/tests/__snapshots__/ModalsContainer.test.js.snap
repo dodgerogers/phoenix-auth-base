@@ -4,7 +4,7 @@ exports[`ModalsContainer PureComponent matches snapshot 1`] = `
 <div
   className="modals"
 >
-  <LoginModal
+  <SignInModal
     close={[Function]}
   />
   <RegistrationFormModal

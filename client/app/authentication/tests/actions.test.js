@@ -74,6 +74,17 @@ describe('async AuthenticationActions', () => {
     });
   });
 
+  describe('signInSuccess', () => {
+    it('matches snapshot', () => {
+      const mockResponse = {
+        data: {
+          accessToken: 'token',
+        },
+      };
+      expect(AuthenticationActions.signInSuccess(mockResponse)).toMatchSnapshot();
+    });
+  });
+
   describe('register', () => {
     let args;
     beforeEach(() => {
@@ -155,55 +166,6 @@ describe('async AuthenticationActions', () => {
       const params = fromJS(args);
 
       return store.dispatch(AuthenticationActions.confirm(params))
-        .catch(() => {
-          expect(store.getActions()).toMatchSnapshot();
-        });
-    });
-  });
-
-  describe('login', () => {
-    let email, password;
-    beforeAll(() => {
-      email = 'email@email.com';
-      password = 'password';
-    });
-
-    it('when login is successful', () => {
-      const mockTokenResponse = {
-        accessToken: {
-          accessToken: "code",
-        }
-      };
-
-      mockAxios.onPost('api/oauth/token', { grant_type: 'password', username: email, password })
-        .reply(200, mockTokenResponse);
-
-      const mockUserResponse = {
-        id: 1,
-        name: 'name',
-      }
-
-      const store = mockStore();
-      const params = fromJS({ email, password });
-
-      return store.dispatch(AuthenticationActions.login(params))
-        .then(() => {
-          expect(store.getActions()).toMatchSnapshot();
-        });
-    });
-
-    it('when login fails', () => {
-      const mockResponse = {
-        error: 'Invalid credentials',
-      };
-
-      mockAxios.onPost('api/oauth/token', { grant_type: 'password', username: email, password })
-        .reply(401, mockResponse);
-
-      const store = mockStore();
-      const params = fromJS({ email, password });
-
-      return store.dispatch(AuthenticationActions.login(params))
         .catch(() => {
           expect(store.getActions()).toMatchSnapshot();
         });

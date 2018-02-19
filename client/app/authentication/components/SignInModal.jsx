@@ -1,17 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import AuthenticationModal from './AuthenticationModal';
-import LoginFormContainer from '../containers/LoginFormContainer';
+import SignInFormContainer from '../containers/SignInFormContainer';
 import AuthenticationLinks from './AuthenticationLinks';
 
 
-const LoginModal = (props) => {
+const SignInModal = (props) => {
   return (
     <AuthenticationModal title="Login" {...props}>
-      <LoginFormContainer {...props} />
+      <SignInFormContainer {...props} />
       <AuthenticationLinks />
     </AuthenticationModal>
   );
 }
 
-export default LoginModal;
+export default SignInModal;

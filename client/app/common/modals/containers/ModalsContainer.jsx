@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import LoginModal from '../../../authentication/components/LoginModal';
+import SignInModal from '../../../authentication/components/SignInModal';
 import RegistrationFormModal from '../../../authentication/components/RegistrationFormModal';
 import ConfirmationModal from '../../../authentication/components/ConfirmationModal';
 import ResendConfirmationModal from '../../../authentication/components/ResendConfirmationModal';
@@ -13,7 +13,7 @@ import { modalIds } from '../constants';
 
 const ModalsContainer = (props) => {
   const registeredModals = [
-    { component: LoginModal, id: modalIds.LOGIN_MODAL },
+    { component: SignInModal, id: modalIds.SIGN_IN_MODAL },
     { component: RegistrationFormModal, id: modalIds.REGISTRATION_MODAL },
     { component: ConfirmationModal, id: modalIds.CONFIRMATION_MODAL },
     { component: ResendConfirmationModal, id: modalIds.RESEND_CONFIRMATION_MODAL },

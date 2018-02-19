@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import { PureComponent } from '../LoginForm';
+import SignInForm from '../SignInForm';
 
 
-describe('LoginForm', () => {
+describe('SignInForm', () => {
   const fullProps = {};
 
   const pureComponent = (props) => shallow(
-    <PureComponent {...props} />
+    <SignInForm {...props} />
   );
 
   it('matches component snapshot', () => {

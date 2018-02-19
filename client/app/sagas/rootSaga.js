@@ -6,6 +6,7 @@ import ResetPassword from '../authentication/sagas/ResetPassword';
 import SessionRefreshTimer from '../authentication/sagas/SessionRefreshTimer';
 import RefreshToken from '../authentication/sagas/RefreshToken';
 import AuthenticateFromCookie from '../authentication/sagas/AuthenticateFromCookie';
+import SignInSuccess from '../authentication/sagas/SignInSuccess';
 
 
 export default function* rootSaga() {
@@ -17,5 +18,6 @@ export default function* rootSaga() {
     ResetPassword(),
     SessionRefreshTimer(),
     RefreshToken(),
+    SignInSuccess(),
   ]);
 }
