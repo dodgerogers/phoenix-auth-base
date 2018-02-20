@@ -3,9 +3,6 @@ defmodule Teebox.Accounts.Message do
 
   use Bamboo.Phoenix, view: Teebox.Web.EmailView
 
-  @doc """
-  An email with a confirmation link in it.
-  """
   def confirm_request(user) do
     prep_mail(user)
     |> subject("Confirm your account")
