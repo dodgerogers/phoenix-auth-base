@@ -9,7 +9,7 @@ export const signOut = () => {
 };
 
 export const register = ({ name, email, password, passwordConfirmation }) => {
-  return HTTP.post('/api/registrations', { registration: { name, email, password, passwordConfirmation } });
+  return HTTP.post('/api/registrations', { name, email, password, passwordConfirmation });
 };
 
 export const confirm = ({ confirmationToken, email, password }) => {

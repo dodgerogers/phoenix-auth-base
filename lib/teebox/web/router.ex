@@ -14,7 +14,7 @@ defmodule Teebox.Web.Router do
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug :put_format, :json
     plug ExOauth2Provider.Plug.VerifyHeader, realm: "Bearer"
   end
 

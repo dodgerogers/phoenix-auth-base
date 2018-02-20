@@ -99,7 +99,7 @@ describe('async AuthenticationActions', () => {
 
     it('when registration is successful', () => {
       const mockResponse = { id: 1, name: args.name, email: args.email };
-      mockAxios.onPost('api/registrations', { registration: normalize(args, 'snake') })
+      mockAxios.onPost('api/registrations', normalize(args, 'snake'))
         .reply(200, mockResponse);
 
       const store = mockStore();
@@ -117,7 +117,7 @@ describe('async AuthenticationActions', () => {
           email: 'Has already been taken',
         }
       };
-      mockAxios.onPost('api/registrations', { registration: normalize(args, 'snake') })
+      mockAxios.onPost('api/registrations', normalize(args, 'snake'))
         .reply(400, mockResponse);
 
       const store = mockStore();

@@ -31,6 +31,8 @@ defmodule Teebox.Web do
       use Phoenix.Controller, namespace: Teebox.Web
 
       alias Teebox.Repo
+      alias Teebox.Web.Plugs.ValidateParams
+
       import Ecto
       import Ecto.Query
 
