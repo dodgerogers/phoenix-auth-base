@@ -13,11 +13,11 @@ export const register = ({ name, email, password, passwordConfirmation }) => {
 };
 
 export const confirm = ({ confirmationToken, email, password }) => {
-  return HTTP.put('/api/confirmations', { confirmation: { confirmationToken, email, password } });
+  return HTTP.put('/api/confirmations', { confirmationToken, email, password });
 };
 
 export const resendConfirmation = ({ email }) => {
-  return HTTP.post('/api/confirmations', { confirmation: { email } });
+  return HTTP.post('/api/confirmations', { email });
 };
 
 export const passwordResetRequest = ({ email }) => {

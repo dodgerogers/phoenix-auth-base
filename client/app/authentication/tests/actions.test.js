@@ -145,7 +145,7 @@ describe('async AuthenticationActions', () => {
 
     it('when confirmation is successful', () => {
       const mockResponse = { access_token: { access_token: "token" } };
-      mockAxios.onPut('api/confirmations', { confirmation: normalize(args, 'snake') })
+      mockAxios.onPut('api/confirmations', normalize(args, 'snake'))
         .reply(200, mockResponse);
 
       const store = mockStore();
@@ -159,7 +159,7 @@ describe('async AuthenticationActions', () => {
 
     it('when confirmation fails', () => {
       const mockResponse = { error: "Invalid credentials" };
-      mockAxios.onPut('api/confirmations', { confirmation: normalize(args, 'snake') })
+      mockAxios.onPut('api/confirmations', normalize(args, 'snake'))
         .reply(400, mockResponse);
 
       const store = mockStore();
@@ -182,7 +182,7 @@ describe('async AuthenticationActions', () => {
     });
 
     it('when resendConfirmation is successful', () => {
-      mockAxios.onPost('api/confirmations', { confirmation: args })
+      mockAxios.onPost('api/confirmations', args)
         .reply(200, {});
 
       const store = mockStore();
@@ -198,7 +198,7 @@ describe('async AuthenticationActions', () => {
       const mockResponse = {
         error: "Invalid credentials",
       };
-      mockAxios.onPost('api/confirmations', { confirmation: args })
+      mockAxios.onPost('api/confirmations', args)
         .reply(400, mockResponse);
 
       const store = mockStore();

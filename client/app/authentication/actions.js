@@ -5,6 +5,7 @@ import { actionTypes } from './constants';
 import { NotificationActions, areaIDs } from '../common/Notifications';
 import * as TokenStorage from './services/TokenStorage';
 import { formIDs } from './constants';
+import formatErrors from '../lib/utils/ReduxFormError';
 
 // TODO's
 // * Move notifications to a separate file
@@ -112,7 +113,7 @@ export function confirm(confirmationParams) {
       })
       .catch(err => {
         dispatch(confirmationFailure(err.response.data.error));
-        throw new SubmissionError({ _error: err.response.data.error });
+        throw new SubmissionError(formatErrors(err.response.data.error));
       });
   }
 }
@@ -137,7 +138,7 @@ export function resendConfirmation(resendConfirmation) {
       })
       .catch(err => {
         dispatch(resendConfirmationFailure(err.response.data.error));
-        throw new SubmissionError({ _error: err.response.data.error });
+        throw new SubmissionError(formatErrors(err.response.data.error));
       });
   }
 };
