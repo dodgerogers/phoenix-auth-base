@@ -14,5 +14,8 @@ defmodule Teebox.Web.Validators.ConfirmationUpdate do
     %Teebox.Web.Validators.ConfirmationUpdate{}
     |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
+    |> validate_length(:email, max: 254)
+    |> validate_length(:password, max: 254)
+    |> validate_length(:confirmation_token, max: 254)
   end
 end
