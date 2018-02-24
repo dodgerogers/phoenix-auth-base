@@ -1,4 +1,4 @@
-import formatErrors from '../ReduxFormError';
+import { formatErrors } from '../handleFormErrors';
 
 
 describe('formatErrors', () => {

@@ -14,7 +14,7 @@ defmodule Teebox.Accounts.AuthenticateTest do
     test "with valid params returns an access token" do
       create_confirmed_user(%{email: @email, password: @password})
 
-      {:ok, code} = Authenticate.call(%{"grant_type" => "password", "username" => @email, "password" => @password})
+      {:ok, code} = Authenticate.call(%{"grant_type" => "password", "email" => @email, "password" => @password})
 
       assert code.access_token
       assert code.refresh_token
@@ -22,10 +22,10 @@ defmodule Teebox.Accounts.AuthenticateTest do
       assert 900 == code.expires_in
     end
 
-    test "with invalid username returns an error tuple" do
+    test "with invalid email returns an error tuple" do
       create_confirmed_user(%{email: @email, password: @password})
 
-      {:error, message, status} = Authenticate.call(%{"grant_type" => "password", "username" => @email <> "1", "password" => @password})
+      {:error, message, status} = Authenticate.call(%{"grant_type" => "password", "email" => @email <> "1", "password" => @password})
 
       assert @invalid_credentials_msg == message
       assert :unauthorized == status
@@ -34,7 +34,7 @@ defmodule Teebox.Accounts.AuthenticateTest do
     test "with invalid password returns an error tuple" do
       create_confirmed_user(%{email: @email, password: @password})
 
-      {:error, message, status} = Authenticate.call(%{"grant_type" => "password", "username" => @email, "password" => @password <> "1"})
+      {:error, message, status} = Authenticate.call(%{"grant_type" => "password", "email" => @email, "password" => @password <> "1"})
 
       assert @invalid_credentials_msg == message
       assert :unauthorized == status
@@ -43,7 +43,7 @@ defmodule Teebox.Accounts.AuthenticateTest do
     test "with unconfirmed account returns an error tuple" do
       create_unconfirmed_user(%{email: @email, password: @password})
 
-      {:error, message, status} = Authenticate.call(%{"grant_type" => "password", "username" => @email, "password" => @password})
+      {:error, message, status} = Authenticate.call(%{"grant_type" => "password", "email" => @email, "password" => @password})
 
       assert @invalid_credentials_msg == message
       assert :unauthorized == status

@@ -6,13 +6,12 @@ import * as AuthenticationSources from '../sources';
 import ForgotPasswordForm from '../components/ForgotPasswordForm';
 import { passwordResetRequestSuccess } from '../actions';
 import { formIDs } from '../constants';
+import handleFormErrors from '../../lib/utils/handleFormErrors';
 
 
 function onSubmit(formData) {
   return AuthenticationSources.passwordResetRequest(formData.toJS())
-    .catch(err => {
-      throw new SubmissionError({ _error: err.response.data.error });
-    });
+    .catch(err => handleFormErrors(err.response.data.error));
 }
 
 function mergeProps(stateProps, dispatchProps, ownProps) {

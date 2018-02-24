@@ -1,11 +1,11 @@
-import { stopAsyncValidation, SubmissionError, initialize } from 'redux-form/immutable';
+import { initialize } from 'redux-form/immutable';
 import * as AuthenticationSources from './sources';
 import { ModalActions, ModalIds } from '../common/modals';
 import { actionTypes } from './constants';
 import { NotificationActions, areaIDs } from '../common/Notifications';
 import * as TokenStorage from './services/TokenStorage';
 import { formIDs } from './constants';
-import formatErrors from '../lib/utils/ReduxFormError';
+import handleFormErrors from '../lib/utils/handleFormErrors';
 
 // TODO's
 // * Move notifications to a separate file
@@ -88,7 +88,7 @@ export function register(registerParams) {
       })
       .catch(err => {
         dispatch(registerFailure(err.response.data.error));
-        throw new SubmissionError(err.response.data.error);
+        handleFormErrors(err.response.data.error);
       });
   };
 }
@@ -113,7 +113,7 @@ export function confirm(confirmationParams) {
       })
       .catch(err => {
         dispatch(confirmationFailure(err.response.data.error));
-        throw new SubmissionError(formatErrors(err.response.data.error));
+        handleFormErrors(err.response.data.error);
       });
   }
 }
@@ -138,7 +138,7 @@ export function resendConfirmation(resendConfirmation) {
       })
       .catch(err => {
         dispatch(resendConfirmationFailure(err.response.data.error));
-        throw new SubmissionError(formatErrors(err.response.data.error));
+        handleFormErrors(err.response.data.error);
       });
   }
 };
