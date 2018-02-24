@@ -1,11 +1,14 @@
 defmodule Teebox.Web.Api.TokenController do
   use Teebox.Web, :controller
 
+  alias ExOauth2Provider.OauthAccessTokens.OauthAccessToken
+  alias Teebox.Web.Validators.TokenCreate
+
+  plug ValidateParams, {TokenCreate, :call} when action == :create
+
   @authenticate Application.get_env(:teebox, :authenticate)
   @revoke_token Application.get_env(:teebox, :revoke_token)
   @refresh_token Application.get_env(:teebox, :refresh_token)
-
-  alias ExOauth2Provider.OauthAccessTokens.OauthAccessToken
 
   def create(conn, params) do
     with {:ok, access_token} <- @authenticate.call(params) do

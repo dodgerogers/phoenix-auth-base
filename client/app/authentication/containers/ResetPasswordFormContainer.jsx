@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { reduxForm, SubmissionError } from 'redux-form/immutable';
+import { reduxForm } from 'redux-form/immutable';
 import * as AuthenticationSources from '../sources';
 import { resetPasswordSuccess } from '../actions';
 import ResetPasswordForm from '../components/ResetPasswordForm';
 import { formIDs } from '../constants';
+import handleFormErrors from '../../lib/utils/handleFormErrors';
 
 function onSubmit(formData) {
   return AuthenticationSources.resetPassword(formData.toJS())
-    .catch(err => {
-      throw new SubmissionError({ _error: err.response.data.error });
-    });
+    .catch(err => handleFormErrors(err.response.data.error));
 }
 
 function mergeProps(stateProps, dispatchProps, ownProps) {

@@ -5,10 +5,9 @@ defmodule Teebox.Accounts.Authenticate do
   alias Teebox.Accounts.Repositories.UsersRepository
   alias ExOauth2Provider.Token
 
-
   @error_message "Invalid email or password"
 
-  def call(%{"grant_type" => "password", "username" => _, "password" => _} = params) do
+  def call(%{"grant_type" => "password", "email" => _, "password" => _} = params) do
     with {:ok, app} <- Applications.default_application(),
          {:ok, access_token} <- grant_access_token(app, params)
     do
@@ -21,7 +20,11 @@ defmodule Teebox.Accounts.Authenticate do
   def call(_), do: {:error, "Invalid arguments"}
 
   defp grant_access_token(app, %{} = params) do
-    Map.merge(params, %{"client_id" => app.uid, "client_secret" => app.secret})
+    Map.merge(params, %{
+      "client_id" => app.uid,
+      "client_secret" => app.secret,
+      "username" => params["email"]
+    })
     |> Token.grant()
   end
 

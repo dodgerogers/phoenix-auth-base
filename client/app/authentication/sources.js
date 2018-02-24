@@ -1,7 +1,7 @@
 import HTTP from '../lib/utils/HTTP';
 
 export const login = ({ email, password }) => {
-  return HTTP.post('/api/oauth/token', { grant_type: 'password', username: email, password });
+  return HTTP.post('/api/oauth/token', { grant_type: 'password', email, password });
 };
 
 export const signOut = () => {

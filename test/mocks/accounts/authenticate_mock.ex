@@ -3,7 +3,7 @@ defmodule Teebox.Accounts.AuthenticateMock do
 
   @error_msg "Failure"
 
-  def call(%{"grant_type" => "password", "username" => _, "password" => _}) do
+  def call(%{"grant_type" => "password", "email" => _, "password" => _}) do
     mock_token = build(:oauth_access_token)
     {:ok, %{
         access_token: mock_token.token,
@@ -13,7 +13,7 @@ defmodule Teebox.Accounts.AuthenticateMock do
       }
     }
   end
-  def call(%{"grant_type" => _, "username" => _, "password" => _}) do
+  def call(%{"grant_type" => _, "email" => _, "password" => _}) do
     {:error, @error_msg}
   end
   def call(_), do: {:error, @error_msg, 401}

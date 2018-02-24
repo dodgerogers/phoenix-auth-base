@@ -2,7 +2,7 @@ defmodule Teebox.Web.Api.TokenControllerTest do
   use Teebox.Web.ConnCase, async: true
 
   @valid_params %{
-    username: "email@email.com",
+    email: "email@email.com",
     password: "Pword12345678!$%",
     grant_type: "password"
   }
@@ -21,15 +21,21 @@ defmodule Teebox.Web.Api.TokenControllerTest do
     |> post("/api/oauth/token", invalid_params)
 
     response = json_response(conn, 400)
-    assert response["error"] == "Failure"
+    assert response["error"] == %{
+      "grant_type" => ["is invalid"]
+    }
   end
 
   test "POST create with invalid credentials returns 401" do
     conn = build_conn()
     |> post("/api/oauth/token", %{})
 
-    response = json_response(conn, 401)
-    assert response["error"] == "Failure"
+    response = json_response(conn, 400)
+    assert response["error"] == %{
+      "email" => ["can't be blank"],
+      "password" => ["can't be blank"],
+      "grant_type" => ["can't be blank"]
+    }
   end
 
   test "DELETE revoke with valid params returns 204" do
