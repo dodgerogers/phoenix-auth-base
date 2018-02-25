@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form/immutable';
-import { reduxForm } from 'redux-form/immutable';
 import { Form, Message, Button, Icon } from 'semantic-ui-react';
 import Input from '../../common/components/Input';
 import { isRequired, isEmail, matchField, minLength } from '../../lib/utils/validation';
-import { formIDs } from '../constants';
 
 const passwordsMatch = matchField('password');
 const minPasswordLength = minLength(8);
@@ -78,5 +76,4 @@ RegistrationForm.propTypes = {
   submitting: PropTypes.bool,
 }
 
-export { RegistrationForm as PureComponent };
-export default reduxForm({ form: formIDs.REGISTRATION })(RegistrationForm);
+export default RegistrationForm;

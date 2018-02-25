@@ -45,9 +45,7 @@ Array [
 
 exports[`async AuthenticationActions passwordResetRequestSuccess matches snapshot 1`] = `
 Object {
-  "data": Object {
-    "formValues": Object {},
-  },
+  "formValues": Object {},
   "type": "PASSWORD_RESET_REQUEST_SUCCESS",
 }
 `;
@@ -70,55 +68,18 @@ Object {
 }
 `;
 
-exports[`async AuthenticationActions register when registration fails 1`] = `
-Array [
-  Object {
-    "error": Object {
-      "email": "Has already been taken",
-    },
-    "type": "REGISTER_FAILURE",
-  },
-]
+exports[`async AuthenticationActions register registerFailure matches snapshot 1`] = `
+Object {
+  "error": null,
+  "type": "REGISTER_FAILURE",
+}
 `;
 
-exports[`async AuthenticationActions register when registration is successful 1`] = `
-Array [
-  Object {
-    "type": "REGISTER_SUCCESS",
-    "user": Object {
-      "email": "email@email.com",
-      "id": 1,
-      "name": "Bob",
-    },
-  },
-  Object {
-    "id": "AUTHENTICATION",
-    "notification": Object {
-      "level": "success",
-      "message": "An email confirmation has been sent",
-    },
-    "type": "CREATE_NOTIFICATION",
-  },
-  Object {
-    "data": Object {
-      "id": "CONFIRMATION_MODAL",
-    },
-    "type": "SHOW_MODAL",
-  },
-  Object {
-    "meta": Object {
-      "form": "CONFIRMATION",
-      "keepDirty": undefined,
-    },
-    "payload": Immutable.Map {
-      name: "Bob",
-      email: "email@email.com",
-      password: "password",
-      passwordConfirmation: "password",
-},
-    "type": "@@redux-form/INITIALIZE",
-  },
-]
+exports[`async AuthenticationActions register registerSuccess matches snapshot 1`] = `
+Object {
+  "formValues": Object {},
+  "type": "REGISTER_SUCCESS",
+}
 `;
 
 exports[`async AuthenticationActions resendConfirmation when resendConfirmation fails 1`] = `
@@ -161,9 +122,7 @@ Array [
 
 exports[`async AuthenticationActions resetPasswordSuccess matches snapshot 1`] = `
 Object {
-  "data": Object {
-    "formValues": Object {},
-  },
+  "formValues": Object {},
   "type": "RESET_PASSWORD_SUCCESS",
 }
 `;

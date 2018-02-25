@@ -67,31 +67,15 @@ export const signInSuccess = response => ({
   accessToken: response.data.accessToken,
 });
 
-const registerSuccess = user => ({
+export const registerSuccess = (_result, _dispatch, { values }) => ({
   type: actionTypes.REGISTER_SUCCESS,
-  user,
+  formValues: values,
 });
 
-const registerFailure = error => ({
+export const registerFailure = error => ({
   type: actionTypes.REGISTER_FAILURE,
   error,
 });
-
-export function register(registerParams) {
-  return dispatch => {
-    return AuthenticationSources.register(registerParams.toJS())
-      .then(response => {
-        dispatch(registerSuccess(response.data));
-        dispatch(NotificationActions.notify('An email confirmation has been sent', areaIDs.AUTHENTICATION))
-        dispatch(ModalActions.showModal(ModalIds.CONFIRMATION_MODAL))
-        dispatch(initialize(formIDs.CONFIRMATION, registerParams));
-      })
-      .catch(err => {
-        dispatch(registerFailure(err.response.data.error));
-        handleFormErrors(err.response.data.error);
-      });
-  };
-}
 
 const confirmationSuccess = () => ({
   type: actionTypes.CONFIRMATION_SUCCESS,
@@ -145,10 +129,10 @@ export function resendConfirmation(resendConfirmation) {
 
 export const passwordResetRequestSuccess = (_result, _dispatch, { values }) => ({
   type: actionTypes.PASSWORD_RESET_REQUEST_SUCCESS,
-  data: { formValues: values },
+  formValues: values,
 });
 
 export const resetPasswordSuccess = (_result, _dispatch, { values }) => ({
   type: actionTypes.RESET_PASSWORD_SUCCESS,
-  data: { formValues: values },
+  formValues: values,
 });

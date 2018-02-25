@@ -21,7 +21,7 @@ function notifyUserPasswordResetSucceeded() {
 export function* promptUserLogin(action) {
   try {
     yield put(showLoginModal());
-    yield put(populateLoginForm(action.data.formValues));
+    yield put(populateLoginForm(action.formValues));
     yield put(notifyUserPasswordResetSucceeded());
   } catch (err) {
     yield put(NotificationActions.notifyError(err));
