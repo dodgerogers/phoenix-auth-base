@@ -86,47 +86,12 @@ describe('async AuthenticationActions', () => {
   });
 
   describe('register', () => {
-    let args;
-    beforeEach(() => {
-      const password = 'password';
-      args = {
-        name: 'Bob',
-        email: 'email@email.com',
-        password,
-        passwordConfirmation: password,
-      };
+    it('registerSuccess matches snapshot', () => {
+      expect(AuthenticationActions.registerSuccess(null, null, { values: {}})).toMatchSnapshot();
     });
 
-    it('when registration is successful', () => {
-      const mockResponse = { id: 1, name: args.name, email: args.email };
-      mockAxios.onPost('api/registrations', normalize(args, 'snake'))
-        .reply(200, mockResponse);
-
-      const store = mockStore();
-      const params = fromJS(args);
-
-      return store.dispatch(AuthenticationActions.register(params))
-        .then(() => {
-          expect(store.getActions()).toMatchSnapshot();
-        });
-    });
-
-    it('when registration fails', () => {
-      const mockResponse = {
-        error: {
-          email: 'Has already been taken',
-        }
-      };
-      mockAxios.onPost('api/registrations', normalize(args, 'snake'))
-        .reply(400, mockResponse);
-
-      const store = mockStore();
-      const params = fromJS(args);
-
-      return store.dispatch(AuthenticationActions.register(params))
-        .catch(() => {
-          expect(store.getActions()).toMatchSnapshot();
-        });
+    it('registerFailure matches snapshot', () => {
+      expect(AuthenticationActions.registerFailure(null)).toMatchSnapshot();
     });
   });
 

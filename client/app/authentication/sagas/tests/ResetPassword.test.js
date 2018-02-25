@@ -30,13 +30,11 @@ describe('ResetPassword', () => {
       })
       .dispatch({
         type: actionTypes.RESET_PASSWORD_SUCCESS,
-        data: {
-          formValues: fromJS({
-            email: 'email',
-            password: 'password',
-            passwordConfirmation: 'passwordConfirmation',
-          }),
-        },
+        formValues: fromJS({
+          email: 'email',
+          password: 'password',
+          passwordConfirmation: 'passwordConfirmation',
+        }),
       })
       .run({ silenceTimeout: true });
   });

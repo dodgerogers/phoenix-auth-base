@@ -30,6 +30,7 @@ describe('RefreshToken', () => {
 
     return expectSaga(RefreshToken)
       .provide([call(AuthenticationSources.extendSession)])
+      .put({ type: 'SIGN_OUT_REQUEST' })
       .put({ type: 'REFRESH_TOKEN_FAILURE' })
       .dispatch({ type: 'REFRESH_TOKEN_REQUEST' })
       .run({ silenceTimeout: true });

@@ -29,11 +29,7 @@ defmodule Teebox.Accounts.ConfirmAndAuthenticate do
   end
 
   defp auth_params(%{} = params) do
-    %{
-      "grant_type" => "password",
-      "username"=> params["email"],
-      "password" => params["password"]
-    }
+    Map.merge(params, %{"grant_type" => "password"})
   end
 
   defp format_result(result) do

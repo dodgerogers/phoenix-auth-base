@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import { PureComponent } from '../RegistrationForm';
+import RegistrationForm from '../RegistrationForm';
 
 
 describe('RegistrationForm', () => {
@@ -11,7 +11,7 @@ describe('RegistrationForm', () => {
   };
 
   const pureComponent = (props) => shallow(
-    <PureComponent {...props} />
+    <RegistrationForm {...props} />
   );
 
   it('matches component snapshot', () => {

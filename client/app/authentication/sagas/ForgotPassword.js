@@ -22,7 +22,7 @@ function notifyUserResetHasBeenSent() {
 export function* handleForgotPasswordRequest(action) {
   try {
     yield put(showPasswordResetModal());
-    yield put(populatePasswordResetForm(action.data.formValues));
+    yield put(populatePasswordResetForm(action.formValues));
     yield put(notifyUserResetHasBeenSent());
   } catch (err) {
     yield put(NotificationActions.notifyError(err));
