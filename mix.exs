@@ -64,6 +64,7 @@ defmodule Teebox.Mixfile do
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.6"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:sobelow, "~> 0.6.8"},
       {:timex, "~> 3.1"}
     ]
   end

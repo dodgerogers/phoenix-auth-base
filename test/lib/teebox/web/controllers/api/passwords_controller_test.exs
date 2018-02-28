@@ -13,7 +13,7 @@ defmodule Teebox.Web.Api.PasswordResetControllerTest do
     |> post("/api/passwords", %{})
 
     response = json_response(conn, 400)
-    assert response["error"] == "Failure"
+    assert response["error"] == %{"email" => ["can't be blank"]}
   end
 
   test "PUT update with valid params returns 200 success message" do
@@ -34,6 +34,11 @@ defmodule Teebox.Web.Api.PasswordResetControllerTest do
     |> put("/api/passwords", %{})
 
     response = json_response(conn, 400)
-    assert response["error"] == "Failure"
+    assert response["error"] == %{
+      "email" => ["can't be blank"],
+      "password" => ["can't be blank"],
+      "password_confirmation" => ["can't be blank"],
+      "reset_password_token" => ["can't be blank"]
+    }
   end
 end
