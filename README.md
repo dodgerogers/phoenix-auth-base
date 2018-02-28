@@ -18,3 +18,7 @@ To deploy the application
   * All three `docker-compose exec web mix docker.shipit`
   * Run the release locally `docker-compose up run_release`
   * Remove stale images `docker rmi -f $(docker images -f "dangling=true" -q)`
+
+Tasks
+
+  * Run security checks `docker exec -t DOCKER_ID mix sobelow`

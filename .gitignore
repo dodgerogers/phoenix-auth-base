@@ -15,6 +15,7 @@ npm-debug.log
 
 priv/static
 priv/static/**/*
+.sobelow
 
 # Generated on crash by the VM
 erl_crash.dump
