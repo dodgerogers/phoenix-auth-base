@@ -96,44 +96,12 @@ describe('async AuthenticationActions', () => {
   });
 
   describe('confirmation', () => {
-    let args;
-    beforeEach(() => {
-      const email = 'email@email.com';
-      const password = 'password';
-      const confirmationToken = 'token';
-      args = {
-        email,
-        password,
-        confirmationToken: confirmationToken,
-      };
+    it('confirmationSuccess matches snapshot', () => {
+      expect(AuthenticationActions.confirmationSuccess({ data: { accessToken: 'token'}})).toMatchSnapshot();
     });
 
-    it('when confirmation is successful', () => {
-      const mockResponse = { access_token: { access_token: "token" } };
-      mockAxios.onPut('api/confirmations', normalize(args, 'snake'))
-        .reply(200, mockResponse);
-
-      const store = mockStore();
-      const params = fromJS(args);
-
-      return store.dispatch(AuthenticationActions.confirm(params))
-        .then(() => {
-          expect(store.getActions()).toMatchSnapshot();
-        });
-    });
-
-    it('when confirmation fails', () => {
-      const mockResponse = { error: "Invalid credentials" };
-      mockAxios.onPut('api/confirmations', normalize(args, 'snake'))
-        .reply(400, mockResponse);
-
-      const store = mockStore();
-      const params = fromJS(args);
-
-      return store.dispatch(AuthenticationActions.confirm(params))
-        .catch(() => {
-          expect(store.getActions()).toMatchSnapshot();
-        });
+    it('confirmationFailure matches snapshot', () => {
+      expect(AuthenticationActions.confirmationFailure('error')).toMatchSnapshot();
     });
   });
 

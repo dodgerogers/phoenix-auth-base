@@ -8,6 +8,7 @@ import RefreshToken from '../authentication/sagas/RefreshToken';
 import AuthenticateFromCookie from '../authentication/sagas/AuthenticateFromCookie';
 import SignInSuccess from '../authentication/sagas/SignInSuccess';
 import RegisterSuccess from '../authentication/sagas/RegisterSuccess';
+import ConfirmationSuccess from '../authentication/sagas/ConfirmationSuccess';
 
 
 export default function* rootSaga() {
@@ -21,5 +22,6 @@ export default function* rootSaga() {
     RefreshToken(),
     SignInSuccess(),
     RegisterSuccess(),
+    ConfirmationSuccess(),
   ]);
 }
