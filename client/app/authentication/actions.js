@@ -77,30 +77,15 @@ export const registerFailure = error => ({
   error,
 });
 
-const confirmationSuccess = () => ({
+export const confirmationSuccess = response => ({
   type: actionTypes.CONFIRMATION_SUCCESS,
+  accessToken: response.data.accessToken,
 });
 
-const confirmationFailure = (error) => ({
+export const confirmationFailure = (error) => ({
   type: actionTypes.CONFIRMATION_FAILURE,
   error,
 });
-
-export function confirm(confirmationParams) {
-  return dispatch => {
-    return AuthenticationSources.confirm(confirmationParams.toJS())
-      .then(response => {
-        dispatch(verifyTokenRequest(response.data.accessToken));
-        dispatch(confirmationSuccess());
-        dispatch(NotificationActions.notify('Account successfully confirmed! You are now logged in'));
-        dispatch(ModalActions.hideModal(ModalIds.CONFIRMATION_MODAL));
-      })
-      .catch(err => {
-        dispatch(confirmationFailure(err.response.data.error));
-        handleFormErrors(err.response.data.error);
-      });
-  }
-}
 
 const resendConfirmationSuccess = (user) => ({
   type: actionTypes.RESEND_CONFIRMATION_SUCCESS,

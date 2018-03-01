@@ -1,10 +1,8 @@
 import React from 'react'
 import { Field } from 'redux-form/immutable';
-import { reduxForm } from 'redux-form/immutable';
 import { Form, Message, Button, Icon } from 'semantic-ui-react';
 import Input from '../../common/components/Input';
 import { isRequired, isEmail } from '../../lib/utils/validation';
-import { formIDs } from '../constants';
 
 
 const ConfirmationForm = (props) => {
@@ -57,5 +55,4 @@ const ConfirmationForm = (props) => {
   );
 }
 
-export { ConfirmationForm as PureComponent };
-export default reduxForm({ form: formIDs.CONFIRMATION })(ConfirmationForm);
+export default ConfirmationForm;

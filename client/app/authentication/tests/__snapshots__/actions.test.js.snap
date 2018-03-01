@@ -6,41 +6,18 @@ Object {
 }
 `;
 
-exports[`async AuthenticationActions confirmation when confirmation fails 1`] = `
-Array [
-  Object {
-    "error": "Invalid credentials",
-    "type": "CONFIRMATION_FAILURE",
-  },
-]
+exports[`async AuthenticationActions confirmation confirmationFailure matches snapshot 1`] = `
+Object {
+  "error": "error",
+  "type": "CONFIRMATION_FAILURE",
+}
 `;
 
-exports[`async AuthenticationActions confirmation when confirmation is successful 1`] = `
-Array [
-  Object {
-    "accessToken": Object {
-      "accessToken": "token",
-    },
-    "type": "VERIFY_TOKEN_REQUEST",
-  },
-  Object {
-    "type": "CONFIRMATION_SUCCESS",
-  },
-  Object {
-    "id": undefined,
-    "notification": Object {
-      "level": "success",
-      "message": "Account successfully confirmed! You are now logged in",
-    },
-    "type": "CREATE_NOTIFICATION",
-  },
-  Object {
-    "data": Object {
-      "id": "CONFIRMATION_MODAL",
-    },
-    "type": "HIDE_MODAL",
-  },
-]
+exports[`async AuthenticationActions confirmation confirmationSuccess matches snapshot 1`] = `
+Object {
+  "accessToken": "token",
+  "type": "CONFIRMATION_SUCCESS",
+}
 `;
 
 exports[`async AuthenticationActions passwordResetRequestSuccess matches snapshot 1`] = `
