@@ -59,42 +59,18 @@ Object {
 }
 `;
 
-exports[`async AuthenticationActions resendConfirmation when resendConfirmation fails 1`] = `
-Array [
-  Object {
-    "error": "Invalid credentials",
-    "type": "RESEND_CONFIRMATION_FAILURE",
-  },
-]
+exports[`async AuthenticationActions resendConfirmation resendConfirmationFailure matches snapshot 1`] = `
+Object {
+  "error": "error",
+  "type": "RESEND_CONFIRMATION_FAILURE",
+}
 `;
 
-exports[`async AuthenticationActions resendConfirmation when resendConfirmation is successful 1`] = `
-Array [
-  Object {
-    "id": "AUTHENTICATION",
-    "notification": Object {
-      "level": "success",
-      "message": "If an account exists we have sent a confirmation code",
-    },
-    "type": "CREATE_NOTIFICATION",
-  },
-  Object {
-    "data": Object {
-      "id": "CONFIRMATION_MODAL",
-    },
-    "type": "SHOW_MODAL",
-  },
-  Object {
-    "meta": Object {
-      "form": "CONFIRMATION",
-      "keepDirty": undefined,
-    },
-    "payload": Immutable.Map {
-      email: "email@email.com",
-},
-    "type": "@@redux-form/INITIALIZE",
-  },
-]
+exports[`async AuthenticationActions resendConfirmation resendConfirmationSuccess matches snapshot 1`] = `
+Object {
+  "formValues": Object {},
+  "type": "RESEND_CONFIRMATION_SUCCESS",
+}
 `;
 
 exports[`async AuthenticationActions resetPasswordSuccess matches snapshot 1`] = `

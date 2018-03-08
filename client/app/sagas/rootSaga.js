@@ -9,6 +9,7 @@ import AuthenticateFromCookie from '../authentication/sagas/AuthenticateFromCook
 import SignInSuccess from '../authentication/sagas/SignInSuccess';
 import RegisterSuccess from '../authentication/sagas/RegisterSuccess';
 import ConfirmationSuccess from '../authentication/sagas/ConfirmationSuccess';
+import ResendConfirmationSuccess from '../authentication/sagas/ResendConfirmationSuccess';
 
 
 export default function* rootSaga() {
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     SignInSuccess(),
     RegisterSuccess(),
     ConfirmationSuccess(),
+    ResendConfirmationSuccess(),
   ]);
 }

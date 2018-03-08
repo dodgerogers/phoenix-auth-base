@@ -1,7 +1,5 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import HTTP from '../../lib/utils/HTTP';
-import MockAdapter from 'axios-mock-adapter';
 import { fromJS } from 'immutable';
 import normalize from 'normalize-object';
 import * as AuthenticationActions from '../actions';
@@ -13,19 +11,6 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('async AuthenticationActions', () => {
-  let mockAxios;
-  beforeAll(() => {
-    mockAxios = new MockAdapter(HTTP);
-  });
-
-  afterEach(() => {
-    mockAxios.reset();
-  });
-
-  afterAll(() => {
-    mockAxios.restore();
-  });
-
   describe('authenticateWithStoredToken', () => {
     it('matches snapshot', () => {
       expect(AuthenticationActions.authenticateWithStoredToken()).toMatchSnapshot();
@@ -106,41 +91,12 @@ describe('async AuthenticationActions', () => {
   });
 
   describe('resendConfirmation', () => {
-    let args;
-    beforeEach(() => {
-      const email = 'email@email.com';
-      args = {
-        email,
-      };
+    it('resendConfirmationSuccess matches snapshot', () => {
+      expect(AuthenticationActions.resendConfirmationSuccess(null, null, { values: {}})).toMatchSnapshot();
     });
 
-    it('when resendConfirmation is successful', () => {
-      mockAxios.onPost('api/confirmations', args)
-        .reply(200, {});
-
-      const store = mockStore();
-      const params = fromJS(args);
-
-      return store.dispatch(AuthenticationActions.resendConfirmation(params))
-        .then(() => {
-          expect(store.getActions()).toMatchSnapshot();
-        });
-    });
-
-    it('when resendConfirmation fails', () => {
-      const mockResponse = {
-        error: "Invalid credentials",
-      };
-      mockAxios.onPost('api/confirmations', args)
-        .reply(400, mockResponse);
-
-      const store = mockStore();
-      const params = fromJS(args);
-
-      return store.dispatch(AuthenticationActions.resendConfirmation(params))
-        .catch(() => {
-          expect(store.getActions()).toMatchSnapshot();
-        });
+    it('resendConfirmationFailure matches snapshot', () => {
+      expect(AuthenticationActions.resendConfirmationFailure('error')).toMatchSnapshot();
     });
   });
 
