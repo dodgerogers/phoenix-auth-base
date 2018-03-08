@@ -7,9 +7,6 @@ import * as TokenStorage from './services/TokenStorage';
 import { formIDs } from './constants';
 import handleFormErrors from '../lib/utils/handleFormErrors';
 
-// TODO's
-// * Move notifications to a separate file
-// * Move all thunks to sagas
 
 export const verifyTokenRequest = accessToken => ({
   type: actionTypes.VERIFY_TOKEN_REQUEST,
@@ -87,30 +84,15 @@ export const confirmationFailure = (error) => ({
   error,
 });
 
-const resendConfirmationSuccess = (user) => ({
+export const resendConfirmationSuccess = (_result, _dispatch, { values }) => ({
   type: actionTypes.RESEND_CONFIRMATION_SUCCESS,
-  user,
+  formValues: values,
 });
 
-const resendConfirmationFailure = (error) => ({
+export const resendConfirmationFailure = (error) => ({
   type: actionTypes.RESEND_CONFIRMATION_FAILURE,
   error,
 });
-
-export function resendConfirmation(resendConfirmation) {
-  return dispatch => {
-    return AuthenticationSources.resendConfirmation(resendConfirmation.toJS())
-      .then(response => {
-        dispatch(NotificationActions.notify('If an account exists we have sent a confirmation code', areaIDs.AUTHENTICATION))
-        dispatch(ModalActions.showModal(ModalIds.CONFIRMATION_MODAL));
-        dispatch(initialize(formIDs.CONFIRMATION, resendConfirmation));
-      })
-      .catch(err => {
-        dispatch(resendConfirmationFailure(err.response.data.error));
-        handleFormErrors(err.response.data.error);
-      });
-  }
-};
 
 export const passwordResetRequestSuccess = (_result, _dispatch, { values }) => ({
   type: actionTypes.PASSWORD_RESET_REQUEST_SUCCESS,

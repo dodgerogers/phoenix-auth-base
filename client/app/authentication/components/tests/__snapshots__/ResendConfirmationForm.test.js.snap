@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResendConfirmationForm matches component snapshot 1`] = `
+<div
+  className="resend-confirmation-form"
+>
+  <Form
+    as="form"
+    size="large"
+  >
+    <Field
+      component={[Function]}
+      fluid={true}
+      icon="mail"
+      iconPosition="left"
+      name="email"
+      placeholder="Email"
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
+    />
+    <Button
+      as="button"
+      color="teal"
+      disabled={true}
+      fluid={true}
+      type="submit"
+    >
+      Submit
+    </Button>
+  </Form>
+</div>
+`;
