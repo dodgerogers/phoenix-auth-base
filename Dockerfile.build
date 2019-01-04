@@ -31,10 +31,10 @@ RUN mix do deps.get, deps.compile
 COPY . .
 
 # Cache node deps
-RUN npm --prefix client/ install
+RUN yarn --cwd client/ install
 
 # Compile the client
-RUN npm --prefix client/ run release
+RUN yarn --cwd client/ run release
 
 # Build the release
 RUN mix release --env=prod --verbose
