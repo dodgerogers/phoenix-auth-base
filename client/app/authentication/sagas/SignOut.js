@@ -11,7 +11,7 @@ function notifyUserSignedOutSuccessfully() {
 };
 
 function notifyErrorSigningOut(err) {
-  const errorMsg = err.response ? err.response.data.error : err
+  const errorMsg = err.response ? err.response.data.error : toString(err);
   return NotificationActions.notifyError(errorMsg);
 }
 
