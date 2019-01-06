@@ -71,6 +71,7 @@ exports[`RegistrationForm matches component snapshot 1`] = `
       color="teal"
       disabled={true}
       fluid={true}
+      role="button"
     >
       Create account
     </Button>

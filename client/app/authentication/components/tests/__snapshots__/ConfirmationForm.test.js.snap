@@ -52,6 +52,7 @@ exports[`ConfirmationForm matches component snapshot 1`] = `
       color="teal"
       disabled={true}
       fluid={true}
+      role="button"
       type="submit"
     >
       Submit

@@ -4,6 +4,7 @@ exports[`ModalTrigger PureComponent matches snapshot 1`] = `
 <Button
   as="button"
   onClick={[Function]}
+  role="button"
 >
   Open my modal
 </Button>

@@ -58,6 +58,7 @@ exports[`Navbar matches pure component when currentUser is present snapshot 1`] 
           additionLabel="Add "
           additionPosition="top"
           closeOnBlur={true}
+          deburr={false}
           icon="dropdown"
           item={true}
           minCharacters={1}
@@ -66,6 +67,7 @@ exports[`Navbar matches pure component when currentUser is present snapshot 1`] 
           renderLabel={[Function]}
           searchInput="text"
           selectOnBlur={true}
+          selectOnNavigation={true}
           trigger={
             <UserAvatar
               user={
@@ -75,6 +77,7 @@ exports[`Navbar matches pure component when currentUser is present snapshot 1`] 
               }
             />
           }
+          wrapSelection={true}
         >
           <DropdownMenu>
             <DropdownHeader>
