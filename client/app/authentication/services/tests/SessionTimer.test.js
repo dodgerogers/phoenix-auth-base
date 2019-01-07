@@ -3,7 +3,7 @@ import * as SessionTimer from '../SessionTimer';
 
 
 describe('SessionTimer', () => {
-  const fronzenTime = '2018-01-01';
+  const frozenTime = '2018-01-01';
   const oneMinInMs = 60000;
   const elevenMinutesInMs = 610000;
 
@@ -12,8 +12,8 @@ describe('SessionTimer', () => {
     originalNow = moment.now;
     originalUTC = moment.utc;
 
-    moment.now = (time = fronzenTime) => originalNow(time);
-    moment.utc = (time = fronzenTime, ...args) => originalUTC(time, ...args);
+    moment.now = (time = frozenTime) => originalNow(time);
+    moment.utc = (time = frozenTime, ...args) => originalUTC(time, ...args);
 
     expireAt = moment.utc().add(10, 'minutes').format();
   });
@@ -23,7 +23,7 @@ describe('SessionTimer', () => {
     moment.utc = originalUTC;
   });
 
-  describe('call', () => {
+  describe('refreshIn', () => {
     it('executes timerFn with expected args when current time is before the expiration window', () => {
       const executeBeforeExpirationInMs = oneMinInMs;
 

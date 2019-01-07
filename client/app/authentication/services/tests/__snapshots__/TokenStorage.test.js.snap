@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Token COOKIE_KEY matches snapshot 1`] = `"token"`;
+exports[`TokenStorage COOKIE_KEY matches snapshot 1`] = `undefined`;
 
-exports[`Token generateExpiry constructs date from the created_at and expires_in properties 1`] = `2000-12-12T05:16:01.000Z`;
+exports[`TokenStorage generateExpiry constructs date from the created_at and expires_in properties 1`] = `2000-12-12T05:16:01.000Z`;
 
-exports[`Token remove should reject promise with null when Cookies.remove fails 1`] = `
+exports[`TokenStorage remove should reject promise with null when storage.remove fails 1`] = `
 Array [
   Array [
     "token",
@@ -12,7 +12,7 @@ Array [
 ]
 `;
 
-exports[`Token remove should resolve promise with null when Cookies.remove is successful 1`] = `
+exports[`TokenStorage remove should resolve promise with null when storage.remove is successful 1`] = `
 Array [
   Array [
     "token",
@@ -20,26 +20,11 @@ Array [
 ]
 `;
 
-exports[`Token store should resolve falsey when not able to set cookie 1`] = `
+exports[`TokenStorage store should resolve truthy when able to set token 1`] = `
 Array [
   Array [
     "token",
     "eyJhY2Nlc3NUb2tlbiI6ImExYjJjM2Q0ZTVmNiIsImV4cGlyZXNJbiI6OTAwLCJjcmVhdGVkQXQiOiIyMDAwLTEyLTEyVDAwOjAxOjAxIn0=",
-    Object {
-      "expires": 2000-12-12T05:16:01.000Z,
-    },
-  ],
-]
-`;
-
-exports[`Token store should resolve truthy when able to set cookie 1`] = `
-Array [
-  Array [
-    "token",
-    "eyJhY2Nlc3NUb2tlbiI6ImExYjJjM2Q0ZTVmNiIsImV4cGlyZXNJbiI6OTAwLCJjcmVhdGVkQXQiOiIyMDAwLTEyLTEyVDAwOjAxOjAxIn0=",
-    Object {
-      "expires": 2000-12-12T05:16:01.000Z,
-    },
   ],
 ]
 `;

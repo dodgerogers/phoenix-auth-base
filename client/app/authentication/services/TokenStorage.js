@@ -1,10 +1,12 @@
-import Cookies from 'js-cookie';
 import moment from 'moment';
 
 
-export const COOKIE_KEY = 'token';
-export const generateExpiry = token => moment(token.createdAt).add(token.expiresIn, 'seconds').toDate();
+export const STORAGE_KEY = 'token';
+const storage = global.localStorage;
+
 export const encode = token => btoa(JSON.stringify(token));
+export const generateExpiry = token => moment(token.createdAt).add(token.expiresIn, 'seconds').toDate();
+
 export const decode = token => {
   try {
     return JSON.parse(atob(token));
@@ -15,35 +17,32 @@ export const decode = token => {
 
 export const store = token => {
   return new Promise((resolve, reject) => {
-    const expires = generateExpiry(token);
-    const cookie = Cookies.set(COOKIE_KEY, encode(token), { expires });
-
-    if (cookie) {
-      return resolve(cookie);
+    try {
+      storage.setItem(STORAGE_KEY, encode(token));
+      resolve();
+    } catch (err) {
+      reject(err);
     }
-
-    reject(null);
   });
 }
 
 export const fetch = () => {
   return new Promise((resolve, reject) => {
-    const encodedToken = Cookies.get(COOKIE_KEY);
-
-    if (encodedToken) {
-      const decodedToken = decode(encodedToken);
-      return resolve(decodedToken);
+    const foundToken = storage.getItem(STORAGE_KEY);
+    if (foundToken === null) {
+      return reject(null);
     }
 
-    reject(null);
+    const decodedToken = decode(foundToken);
+    return resolve(decodedToken);
   });
 };
 
 export const remove = () => {
   return new Promise((resolve, reject) => {
     try {
-      const result = Cookies.remove(COOKIE_KEY);
-      resolve(result);
+      storage.removeItem(STORAGE_KEY);
+      resolve(null);
     } catch (err) {
       reject(err);
     }
