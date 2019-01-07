@@ -14,6 +14,6 @@ export function* fetchAndVerifyStoredToken() {
   }
 }
 
-export default function* AuthenticateFromCookie() {
+export default function* AuthenticateFromStoredToken() {
   yield takeLatest(actionTypes.AUTHENTICATE_WITH_STORED_TOKEN_REQUEST, fetchAndVerifyStoredToken);
 }

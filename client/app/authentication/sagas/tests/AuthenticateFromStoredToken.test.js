@@ -3,7 +3,7 @@ import { call, put, take } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { fromJS } from 'immutable';
 import * as TokenStorage from '../../services/TokenStorage';
-import AuthenticateFromCookie from '../AuthenticateFromCookie';
+import AuthenticateFromStoredToken from '../AuthenticateFromStoredToken';
 
 
 describe('AuthenticateFromCookie', () => {
@@ -12,7 +12,7 @@ describe('AuthenticateFromCookie', () => {
   it('dispatches VERIFY_TOKEN_REQUEST when TokenStorage.fetch is successful', () => {
     TokenStorage.fetch = jest.fn(() => Promise.resolve(accessToken));
 
-    return expectSaga(AuthenticateFromCookie)
+    return expectSaga(AuthenticateFromStoredToken)
       .provide([call(TokenStorage.fetch, accessToken)])
       .put({
         type: 'VERIFY_TOKEN_REQUEST',
@@ -30,7 +30,7 @@ describe('AuthenticateFromCookie', () => {
       throw 'error';
     });
 
-    return expectSaga(AuthenticateFromCookie)
+    return expectSaga(AuthenticateFromStoredToken)
       .provide([call(TokenStorage.fetch, accessToken)])
       .put({
         type: 'AUTHENTICATE_FAILURE',

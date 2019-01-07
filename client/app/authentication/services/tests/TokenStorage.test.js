@@ -1,7 +1,8 @@
-import Cookies from 'js-cookie';
 import * as TokenStorage from '../TokenStorage';
+import moment from 'moment';
 
-describe('Token', () => {
+
+describe('TokenStorage', () => {
   const token = () => ({
     accessToken: 'a1b2c3d4e5f6',
     expiresIn: 900,
@@ -39,31 +40,29 @@ describe('Token', () => {
   });
 
   describe('store', () => {
-    it('should resolve truthy when able to set cookie', () => {
-      const cookie = 'token cookie';
-      Cookies.set = jest.fn(() => cookie);
+    it('should resolve truthy when able to set token', () => {
+      window.localStorage.setItem = jest.fn(() => null);
 
       return TokenStorage.store(token())
         .then(result => {
-          expect(Cookies.set.mock.calls).toMatchSnapshot();
-          expect(result).toEqual(cookie);
+          expect(window.localStorage.setItem.mock.calls).toMatchSnapshot();
         });
     });
 
-    it('should resolve falsey when not able to set cookie', () => {
-      Cookies.set = jest.fn(() => null);
+    it('should resolve falsey when not able to set token', () => {
+      window.localStorage.setItem = jest.fn(() => null);
 
       return TokenStorage.store(token())
         .catch(result => {
-          expect(Cookies.set.mock.calls).toMatchSnapshot();
+          expect(window.localStorage.setItem.mock.calls).toMatchSnapshot();
           expect(result).toEqual(null);
         });
     });
   });
 
   describe('fetch', () => {
-    it('should resolve with the decoded token when Cookies.get is successful', () => {
-      Cookies.get = jest.fn(() => encodedToken);
+    it('should resolve with the decoded token when storage.getItem is successful', () => {
+      window.localStorage.getItem = jest.fn(() => encodedToken);
 
       return TokenStorage.fetch()
         .then(result => {
@@ -71,8 +70,8 @@ describe('Token', () => {
         });
     });
 
-    it('should reject with false when Cookies.get fails', () => {
-      Cookies.get = jest.fn(() => null);
+    it('should reject with null when storage.getItem fails', () => {
+      window.localStorage.getItem = jest.fn(() => null);
 
       return TokenStorage.fetch()
         .catch(result => {
@@ -82,25 +81,25 @@ describe('Token', () => {
   });
 
   describe('remove', () => {
-    it('should resolve promise with null when Cookies.remove is successful', () => {
-      Cookies.remove = jest.fn(() => null);
+    it('should resolve promise with null when storage.remove is successful', () => {
+      window.localStorage.removeItem = jest.fn(() => null);
 
       return TokenStorage.remove()
         .then(result => {
-          expect(Cookies.remove.mock.calls).toMatchSnapshot();
+          expect(window.localStorage.removeItem.mock.calls).toMatchSnapshot();
           expect(result).toEqual(null);
         });
     });
 
-    it('should reject promise with null when Cookies.remove fails', () => {
+    it('should reject promise with null when storage.remove fails', () => {
       const error = 'Something went wrong';
-      Cookies.remove = jest.fn(() => {
+      window.localStorage.removeItem = jest.fn(() => {
         throw(error);
       });
 
       return TokenStorage.remove()
         .catch(result => {
-          expect(Cookies.remove.mock.calls).toMatchSnapshot();
+          expect(window.localStorage.removeItem.mock.calls).toMatchSnapshot();
           expect(result).toEqual(error);
         });
     });
