@@ -9,14 +9,14 @@ defmodule Teebox.Accounts.Authenticate do
 
   def call(%{"grant_type" => "password", "email" => _, "password" => _} = params) do
     with {:ok, app} <- Applications.default_application(),
-         {:ok, access_token} <- grant_access_token(app, params)
-    do
+         {:ok, access_token} <- grant_access_token(app, params) do
       {:ok, access_token}
     else
       {:error, _, status} -> {:error, @error_message, status}
       {:error, _} -> {:error, @error_message}
     end
   end
+
   def call(_), do: {:error, "Invalid arguments"}
 
   defp grant_access_token(app, %{} = params) do
@@ -31,8 +31,7 @@ defmodule Teebox.Accounts.Authenticate do
   def validate_user_credentials(email, password) do
     with %User{} = user <- UsersRepository.find_by_email(email),
          true <- Password.checkpw(password, user.password_hash),
-         {:ok} <- is_confirmed?(user)
-    do
+         {:ok} <- is_confirmed?(user) do
       {:ok, user}
     else
       {:error, message} -> {:error, message}
