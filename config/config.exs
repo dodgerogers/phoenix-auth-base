@@ -27,9 +27,6 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
- # TODO: Secrets
-config :mix_docker, image: "377092858912.dkr.ecr.us-east-1.amazonaws.com/teebox.io"
-
 config :teebox, :confirm_and_authenticate, Teebox.Accounts.ConfirmAndAuthenticate
 config :teebox, :confirmation, Teebox.Accounts.Confirmation
 config :teebox, :registration, Teebox.Accounts.Registration
@@ -43,8 +40,7 @@ config :teebox, :password_encryption, Teebox.Accounts.Services.PasswordEncryptio
 config :teebox, :reset_password_token_expiry, 600
 config :teebox, :confirmation_token_expiry, 600
 
-config :teebox, Teebox.Mailer,
-  adapter: Bamboo.LocalAdapter
+config :teebox, Teebox.Mailer, adapter: Bamboo.LocalAdapter
 
 config :ex_oauth2_provider, ExOauth2Provider,
   repo: Teebox.Repo,
@@ -58,4 +54,4 @@ config :ex_oauth2_provider, ExOauth2Provider,
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"

@@ -10,14 +10,18 @@ defmodule Teebox.Web.Controller.Helper do
   end
 
   def render_error(conn, message, status \\ 400)
+
   def render_error(conn, %Ecto.Changeset{} = changeset, status) do
     conn
     |> put_status(status)
-    |> render(Teebox.Web.ChangesetView, "error.json", %{changeset: changeset})
+    |> put_view(Teebox.Web.ChangesetView)
+    |> render("error.json", %{changeset: changeset})
   end
+
   def render_error(conn, message, status) do
     conn
     |> put_status(status)
-    |> render(Teebox.Web.ErrorView, "error.json", %{message: message})
+    |> put_view(Teebox.Web.ErrorView)
+    |> render("error.json", %{message: message})
   end
 end
