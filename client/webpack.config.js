@@ -76,7 +76,10 @@ if (devBuild) {
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new UglifyPlugin()
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      sourceMap: true
+    })
   );
   console.log('Webpack production build'); // eslint-disable-line no-console
 }

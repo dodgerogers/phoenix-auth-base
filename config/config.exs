@@ -27,9 +27,6 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-# TODO: Secrets
-config :mix_docker, image: "377092858912.dkr.ecr.us-east-1.amazonaws.com/teebox.io"
-
 config :teebox, :confirm_and_authenticate, Teebox.Accounts.ConfirmAndAuthenticate
 config :teebox, :confirmation, Teebox.Accounts.Confirmation
 config :teebox, :registration, Teebox.Accounts.Registration

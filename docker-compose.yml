@@ -47,7 +47,7 @@ services:
     image: postgres
 
   run_release:
-    image: IMAGE:TAG
+    image: teebox-api:latest
     command: foreground
     env_file:
       - secrets.env

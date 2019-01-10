@@ -5,7 +5,7 @@ MAINTAINER Andy Rogers
 # Install hex
 RUN mix local.hex --force
 
-# Install Erland build tool
+# Install Erlang build tool
 RUN mix local.rebar --force
 
 # Install Phoenix
