@@ -10,7 +10,7 @@ defmodule Teebox.Web.Endpoint do
   plug(Plug.Static,
     at: "/",
     from: :teebox,
-    gzip: false,
+    gzip: Mix.env() == :prod,
     only: ~w(css fonts images js favicon.ico robots.txt)
   )
 

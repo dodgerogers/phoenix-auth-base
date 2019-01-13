@@ -2,12 +2,15 @@ var webpack = require('webpack');
 var path = require('path');
 const devBuild = process.env.NODE_ENV !== 'production';
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 var APP_DIR = path.resolve(__dirname);
 var BUILD_DIR = path.resolve(__dirname, '../priv/static/js/');
 var entry = APP_DIR + '/app/index.js';
 
 var config = {
+  mode: devBuild ? 'development' : 'production',
   entry: ['babel-polyfill', entry],
   output: {
     path: BUILD_DIR,
@@ -41,12 +44,12 @@ var config = {
         },
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      },
-      {
-        test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+        ]
       },
       {
         test: /\.(ttf|eot|svg|woff2?)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -63,7 +66,7 @@ var config = {
 
 if (devBuild) {
   console.log('Webpack dev build'); // eslint-disable-line no-console
-  config.devtool = 'eval';
+  // config.devtool = 'eval'; // TODO: Produces massive bundles
   config.plugins.push(
     new BundleAnalyzerPlugin({
       analyzerMode: 'server',
@@ -71,17 +74,42 @@ if (devBuild) {
     })
   )
 } else {
-  config.devtool = 'cheap-module-eval-source-map';
-  config.plugins.push(
-    new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      sourceMap: true
-    })
-  );
   console.log('Webpack production build'); // eslint-disable-line no-console
+  config.devtool = ''; // TODO: Produces massive bundles
+  config.optimization = {
+    minimizer: [
+      new UglifyJsPlugin({
+        sourceMap: false,
+        parallel: true,
+        extractComments: true,
+        uglifyOptions: {
+          compress: {
+            inline: true
+          }
+        }
+      })
+    ],
+    runtimeChunk: false,
+    splitChunks: {
+      cacheGroups: {
+        default: false,
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+          minChunks: 2
+        }
+      }
+    }
+  },
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      },
+    }),
+    new CompressionPlugin()
+  )
 }
 
 module.exports = config;
