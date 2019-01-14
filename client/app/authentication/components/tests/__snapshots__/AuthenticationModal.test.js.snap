@@ -24,7 +24,6 @@ exports[`AuthenticationModal matches snapshot 1`] = `
     <Button
       as="button"
       onClick={[Function]}
-      role="button"
     >
       Close
     </Button>

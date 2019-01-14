@@ -5,6 +5,7 @@ exports[`NotificationList PureComponent matches snapshot when no notifications p
 exports[`NotificationList PureComponent matches snapshot with at least one notification 1`] = `
 <styled.div>
   <Connect(Notification)
+    key="0"
     notification={
       Immutable.Map {
         message: "Information",

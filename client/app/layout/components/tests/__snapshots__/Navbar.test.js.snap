@@ -21,11 +21,13 @@ exports[`Navbar matches pure component snapshot 1`] = `
       >
         <Connect(ModalTrigger)
           id="SIGN_IN_MODAL"
+          key="login"
           text="Login"
           wrapper={[Function]}
         />
         <Connect(ModalTrigger)
           id="REGISTRATION_MODAL"
+          key="signup"
           text="Sign up"
           wrapper={[Function]}
         />
