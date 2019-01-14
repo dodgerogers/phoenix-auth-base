@@ -66,7 +66,7 @@ var config = {
 
 if (devBuild) {
   console.log('Webpack dev build'); // eslint-disable-line no-console
-  // config.devtool = 'eval'; // TODO: Produces massive bundles
+  config.devtool = ''; // TODO: anything other than '' produces a massive bundle
   config.plugins.push(
     new BundleAnalyzerPlugin({
       analyzerMode: 'server',
@@ -75,7 +75,7 @@ if (devBuild) {
   )
 } else {
   console.log('Webpack production build'); // eslint-disable-line no-console
-  config.devtool = ''; // TODO: Produces massive bundles
+  config.devtool = ''; // TODO: anything other than '' produces a massive bundle
   config.optimization = {
     minimizer: [
       new UglifyJsPlugin({

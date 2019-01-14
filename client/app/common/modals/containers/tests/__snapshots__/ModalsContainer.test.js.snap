@@ -6,21 +6,27 @@ exports[`ModalsContainer PureComponent matches snapshot 1`] = `
 >
   <SignInModal
     close={[Function]}
+    key="SIGN_IN_MODAL"
   />
   <RegistrationFormModal
     close={[Function]}
+    key="REGISTRATION_MODAL"
   />
   <ConfirmationModal
     close={[Function]}
+    key="CONFIRMATION_MODAL"
   />
   <ResendConfirmationModal
     close={[Function]}
+    key="RESEND_CONFIRMATION_MODAL"
   />
   <ForgotPasswordModal
     close={[Function]}
+    key="FORGOT_PASSWORD_MODAL"
   />
   <ResetPasswordModal
     close={[Function]}
+    key="RESET_PASSWORD_MODAL"
   />
 </div>
 `;

@@ -4,28 +4,36 @@ exports[`AuthenticationLinks matches snapshot 1`] = `
 <div
   className="authentication-links"
 >
-  <styled.div>
+  <styled.div
+    key="CONFIRMATION"
+  >
     <Connect(ModalTrigger)
       id="CONFIRMATION_MODAL"
       text="I have a confirmation code"
       wrapper={[Function]}
     />
   </styled.div>
-  <styled.div>
+  <styled.div
+    key="RESEND_CONFIRMATION"
+  >
     <Connect(ModalTrigger)
       id="RESEND_CONFIRMATION_MODAL"
       text="Didn't receive confirmation instructions?"
       wrapper={[Function]}
     />
   </styled.div>
-  <styled.div>
+  <styled.div
+    key="FORGOT_PASSWORD"
+  >
     <Connect(ModalTrigger)
       id="FORGOT_PASSWORD_MODAL"
       text="Forgot your password?"
       wrapper={[Function]}
     />
   </styled.div>
-  <styled.div>
+  <styled.div
+    key="RESET_PASSWORD"
+  >
     <Connect(ModalTrigger)
       id="RESET_PASSWORD_MODAL"
       text="I have a password reset code"
@@ -45,28 +53,36 @@ exports[`AuthenticationLinks matches snapshot with one link excluded 1`] = `
 <div
   className="authentication-links"
 >
-  <styled.div>
+  <styled.div
+    key="CONFIRMATION"
+  >
     <Connect(ModalTrigger)
       id="CONFIRMATION_MODAL"
       text="I have a confirmation code"
       wrapper={[Function]}
     />
   </styled.div>
-  <styled.div>
+  <styled.div
+    key="RESEND_CONFIRMATION"
+  >
     <Connect(ModalTrigger)
       id="RESEND_CONFIRMATION_MODAL"
       text="Didn't receive confirmation instructions?"
       wrapper={[Function]}
     />
   </styled.div>
-  <styled.div>
+  <styled.div
+    key="FORGOT_PASSWORD"
+  >
     <Connect(ModalTrigger)
       id="FORGOT_PASSWORD_MODAL"
       text="Forgot your password?"
       wrapper={[Function]}
     />
   </styled.div>
-  <styled.div>
+  <styled.div
+    key="RESET_PASSWORD"
+  >
     <Connect(ModalTrigger)
       id="RESET_PASSWORD_MODAL"
       text="I have a password reset code"

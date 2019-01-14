@@ -11,6 +11,7 @@ teebox.tar.gz
 node_modules
 /assets/node_modules
 /client/node_modules
+yarn-error.log
 npm-debug.log
 
 priv/static
