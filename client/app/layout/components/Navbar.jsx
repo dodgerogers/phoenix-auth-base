@@ -29,7 +29,7 @@ const Navbar = (props) => {
   ]);
 
   return (
-    <navbar>
+    <div id="navbar">
       <Menu
         fixed="top"
         style={{
@@ -47,7 +47,7 @@ const Navbar = (props) => {
           </Menu.Menu>
         </Container>
       </Menu>
-    </navbar>
+    </div>
   );
 }
 

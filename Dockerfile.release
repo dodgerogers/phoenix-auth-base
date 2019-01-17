@@ -13,7 +13,7 @@ RUN mix local.hex --force && \
     mix local.rebar --force
 
 # Install NodeJS 6.x and the NPM
-RUN apk add --update nodejs
+RUN apk add --update nodejs-lts
 
 # Install yarn
 RUN apk add --update yarn

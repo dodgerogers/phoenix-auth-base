@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Navbar matches pure component snapshot 1`] = `
-<navbar>
+<div
+  id="navbar"
+>
   <Menu
     fixed="top"
     style={
@@ -34,11 +36,13 @@ exports[`Navbar matches pure component snapshot 1`] = `
       </MenuMenu>
     </Container>
   </Menu>
-</navbar>
+</div>
 `;
 
 exports[`Navbar matches pure component when currentUser is present snapshot 1`] = `
-<navbar>
+<div
+  id="navbar"
+>
   <Menu
     fixed="top"
     style={
@@ -97,5 +101,5 @@ exports[`Navbar matches pure component when currentUser is present snapshot 1`] 
       </MenuMenu>
     </Container>
   </Menu>
-</navbar>
+</div>
 `;
