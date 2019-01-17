@@ -1,21 +1,33 @@
 var webpack = require('webpack');
 var path = require('path');
-const devBuild = process.env.NODE_ENV !== 'production';
+const glob = require('glob');
+const devMode = process.env.NODE_ENV !== 'production';
+
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const ExtractCssChunks = require("extract-css-chunks-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var APP_DIR = path.resolve(__dirname);
-var BUILD_DIR = path.resolve(__dirname, '../priv/static/js/');
+var BUILD_DIR = path.resolve(__dirname, '../priv/static/dist/');
 var entry = APP_DIR + '/app/index.js';
 
 var config = {
-  mode: devBuild ? 'development' : 'production',
-  entry: ['babel-polyfill', entry],
+  mode: devMode ? 'development' : 'production',
+  entry: {
+    app: ['babel-polyfill', entry],
+  },
   output: {
     path: BUILD_DIR,
-    filename: '[name].js',
-    publicPath: '/js/',
+    filename: "[name].js",
+    publicPath: '/assets/dist/',
+  },
+
+  optimization: {
+    splitChunks: {
+      chunks: "all"
+    }
   },
 
   watchOptions: {
@@ -28,8 +40,7 @@ var config = {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx'],
-    modules: ['node_modules']
+    extensions: ['*', '.js', '.jsx']
   },
 
   module: {
@@ -46,10 +57,10 @@ var config = {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          'style-loader',
+          devMode ? 'style-loader' : ExtractCssChunks.loader,
           'css-loader',
           'sass-loader',
-        ]
+        ],
       },
       {
         test: /\.(ttf|eot|svg|woff2?)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -61,12 +72,30 @@ var config = {
       }
     ],
   },
-  plugins: [],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: require('html-webpack-template'),
+      appMountId: 'app',
+      filename: BUILD_DIR + '/main.html',
+      inject: false,
+      title: 'Teebox',
+      mobile: true,
+      mata: {
+        charset: 'utf-8',
+        ['X-UA-Compatible']: 'IE=edge'
+      },
+      bodyHtmlSnippet: devMode ? '<iframe src="/phoenix/live_reload/frame" style="display:none"></iframe>' : ''
+    }),
+    new ExtractCssChunks({
+      filename: devMode ? '[name].css' : '[name].[hash].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+      hot: true
+    })
+  ],
 };
 
-if (devBuild) {
+if (devMode) {
   console.log('Webpack dev build'); // eslint-disable-line no-console
-  config.devtool = ''; // TODO: anything other than '' produces a massive bundle
   config.plugins.push(
     new BundleAnalyzerPlugin({
       analyzerMode: 'server',
@@ -75,33 +104,18 @@ if (devBuild) {
   )
 } else {
   console.log('Webpack production build'); // eslint-disable-line no-console
-  config.devtool = ''; // TODO: anything other than '' produces a massive bundle
-  config.optimization = {
-    minimizer: [
-      new UglifyJsPlugin({
-        sourceMap: false,
-        parallel: true,
-        extractComments: true,
-        uglifyOptions: {
-          compress: {
-            inline: true
-          }
-        }
-      })
-    ],
-    runtimeChunk: false,
-    splitChunks: {
-      cacheGroups: {
-        default: false,
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
-          chunks: 'all',
-          minChunks: 2
+  config.optimization.minimizer = [
+    new UglifyJsPlugin({
+      sourceMap: false,
+      parallel: true,
+      extractComments: true,
+      uglifyOptions: {
+        compress: {
+          inline: true
         }
       }
-    }
-  },
+    })
+  ];
   config.plugins.push(
     new webpack.DefinePlugin({
       'process.env': {
@@ -109,7 +123,7 @@ if (devBuild) {
       },
     }),
     new CompressionPlugin()
-  )
+  );
 }
 
 module.exports = config;

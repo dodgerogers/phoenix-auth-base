@@ -14,7 +14,7 @@ config :teebox, Teebox.Web.Endpoint,
   watchers: [npm: ["run", "watch", cd: Path.expand("../assets", __DIR__)]],
   live_reload: [
     patterns: [
-      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
+      ~r{priv/static/*/.*(js|css|png|jpeg|jpg|gif|svg|html)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/teebox/*/.*(eex|ex)$},
       ~r{lib/teebox_web/*/.*(eex|ex)$}

@@ -15,10 +15,13 @@ To deploy the application
   * Publish release `docker.publish ...` # See secrets.sample for the docker registry
   * Update the compose file run_release service with the release tag, then run locally `docker-compose up run_release`
 
-Tasks
-  * Run the tests `docker-compose run --rm test`
-  * Run security checks `docker exec -t CONTAINER_ID mix sobelow`
+Run the tests
 
+  * Run the tests `docker-compose run --rm test`
+
+Static code analysis  
+
+  * Run security checks `docker exec -t CONTAINER_ID mix sobelow`
 
 Tidying up  
   * Remove stale images `docker rmi -f $(docker images -f "dangling=true" -q)`
