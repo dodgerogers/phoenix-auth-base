@@ -13,15 +13,15 @@ use Mix.Config
 # which you typically run after static files are built.
 config :teebox, Teebox.Web.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: "${HOST}", port: {:system, "PORT"}], # This is critical for ensuring web-sockets properly authorize.
+  # This is critical for ensuring web-sockets properly authorize.
+  url: [host: "${HOST}", port: {:system, "PORT"}],
   # cache_static_manifest: "priv/static/manifest.json",
   code_reloader: false,
   server: true,
   root: ".",
-  version: Mix.Project.config[:version]
+  version: Mix.Project.config()[:version]
 
-config :teebox, Teebox.Web.Endpoint,
-  secret_key_base: "${SECRET_KEY_BASE}"
+config :teebox, Teebox.Web.Endpoint, secret_key_base: "${SECRET_KEY_BASE}"
 
 # Configure your database
 db_config = [
@@ -32,10 +32,21 @@ db_config = [
   database: "${DB_ENV_NAME}",
   pool_size: 20
 ]
+
 config :teebox, Teebox.Repo, db_config
 
 # Do not print debug messages in production
 config :logger, level: :info
+
+config :sentry,
+  dsn: "${SENTRY_DSN}",
+  environment_name: :prod,
+  enable_source_code_context: true,
+  root_source_code_path: File.cwd!(),
+  tags: %{
+    env: "production"
+  },
+  included_environments: [:prod]
 
 # ## SSL Support
 #
@@ -66,12 +77,12 @@ config :logger, level: :info
 # If you are doing OTP releases, you need to instruct Phoenix
 # to start the server for all endpoints:
 #
-    # config :phoenix, :serve_endpoints, true
+# config :phoenix, :serve_endpoints, true
 #
 # Alternatively, you can configure exactly which server to
 # start per endpoint:
 #
-    # config :teebox, Teebox.Endpoint, server: true
+# config :teebox, Teebox.Endpoint, server: true
 #
 
 # Finally import the config/prod.secret.exs
