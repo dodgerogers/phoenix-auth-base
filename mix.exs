@@ -37,6 +37,7 @@ defmodule Teebox.Mixfile do
         :phoenix_html,
         :phoenix_ecto,
         :postgrex,
+        :sentry,
         :timex
       ]
     ]
@@ -69,6 +70,7 @@ defmodule Teebox.Mixfile do
       {:phoenix_live_reload, "~> 1.2.0", only: :dev},
       {:plug, "~> 1.7"},
       {:plug_cowboy, "~> 2.0"},
+      {:sentry, "~> 7.0.3"},
       {:sobelow, "~> 0.6.8"},
       {:timex, "~> 3.1"}
     ]

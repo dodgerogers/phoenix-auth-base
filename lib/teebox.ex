@@ -11,7 +11,7 @@ defmodule Teebox do
       # Start the Ecto repository
       supervisor(Teebox.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(Teebox.Web.Endpoint, []),
+      supervisor(Teebox.Web.Endpoint, [])
       # Start your own worker by calling: Teebox.Worker.start_link(arg1, arg2, arg3)
       # worker(Teebox.Worker, [arg1, arg2, arg3]),
     ]
@@ -19,6 +19,9 @@ defmodule Teebox do
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Teebox.Supervisor]
+
+    {:ok, _} = Logger.add_backend(Sentry.LoggerBackend)
+
     Supervisor.start_link(children, opts)
   end
 

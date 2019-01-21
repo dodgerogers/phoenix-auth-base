@@ -90,7 +90,8 @@ var config = {
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
       hot: true
-    })
+    }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],
 };
 

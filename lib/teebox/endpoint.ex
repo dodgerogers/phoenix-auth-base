@@ -1,5 +1,8 @@
 defmodule Teebox.Web.Endpoint do
   use Phoenix.Endpoint, otp_app: :teebox
+  use Plug.ErrorHandler
+  use Sentry.Plug
+  use Sentry.Phoenix.Endpoint
 
   socket("/socket", Teebox.Web.UserSocket, websocket: true)
 
