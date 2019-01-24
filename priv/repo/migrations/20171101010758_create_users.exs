@@ -5,9 +5,6 @@ defmodule Teebox.Repo.Migrations.CreateUsers do
     # TODO: Rename to accounts
     create table(:users) do
       add(:email, :string, null: false)
-      # TODO: Move to profiles
-      add(:name, :string, null: false)
-      add(:avatar, :string)
 
       # confirmable
       add(:confirmation_token, :string)

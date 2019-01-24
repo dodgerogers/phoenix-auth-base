@@ -3,12 +3,9 @@ defmodule Teebox.Web.Api.UsersView do
 
   def render("me.json", %{user: user}) do
     %{
-      user: %{
-        id: user.id,
-        name: user.name,
-        avatar: user.avatar,
-        active: user.active
-      }
+      id: user.id,
+      profiles: render_many(user.profiles, Teebox.Web.Api.ProfileView, "profile.json"),
+      active: user.active
     }
   end
 end

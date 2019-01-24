@@ -31,7 +31,7 @@ services:
     image: teebox_web
     volumes_from:
       - web
-    command: mix test test/lib/teebox/profiles/schemas/profile_test.exs
+    command: mix test
     environment:
       - MIX_ENV=test
       - PORT=4001

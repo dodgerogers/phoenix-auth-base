@@ -3,11 +3,8 @@ defmodule Teebox.Web.Api.RegistrationView do
 
   def render("registration.json", %{user: user}) do
     %{
-      user: %{
-        id: user.id,
-        name: user.name,
-        email: user.email
-      }
+      id: user.id,
+      email: user.email
     }
   end
 end

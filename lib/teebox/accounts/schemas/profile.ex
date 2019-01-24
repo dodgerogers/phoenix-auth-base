@@ -15,10 +15,11 @@ defmodule Teebox.Accounts.Schemas.Profile do
   @optional_fields ~w(avatar)a
   def optional_fields, do: @optional_fields
 
-  def changeset(%Teebox.Profiles.Schemas.Profile{} = profile, %{} = params \\ %{}) do
+  def changeset(%Teebox.Accounts.Schemas.Profile{} = profile, %{} = params \\ %{}) do
     profile
     |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
+    # |> validate_format(:name, ~r/^[0-9|a-z|A-Z]*$/)
     |> unique_name()
   end
 

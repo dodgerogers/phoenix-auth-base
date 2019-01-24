@@ -3,9 +3,7 @@ defmodule Teebox.Factory do
 
   def user_factory do
     %Teebox.Accounts.Schemas.User{
-      name: Faker.Name.name(),
       email: Faker.Internet.email(),
-      avatar: "http://#{Faker.Lorem.characters(8..20)}.png",
       active: true,
       confirmed_at: NaiveDateTime.utc_now(),
       confirmation_token: nil,
@@ -19,9 +17,14 @@ defmodule Teebox.Factory do
     }
   end
 
+  def with_profile(user) do
+    build(:profile, user: user)
+    user
+  end
+
   def profile_factory do
-    %Teebox.Profiles.Schemas.Profile{
-      name: Faker.Name.name(),
+    %Teebox.Accounts.Schemas.Profile{
+      name: Faker.Name.name() <> "12345678",
       avatar: "http://#{Faker.Lorem.characters(8..20)}.png",
       user: build(:user)
     }

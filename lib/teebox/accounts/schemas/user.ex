@@ -1,14 +1,14 @@
+# TODO: Rename this model (account etc)
 defmodule Teebox.Accounts.Schemas.User do
   use Teebox.Web, :model
 
   alias ExOauth2Provider.OauthAccessTokens.OauthAccessToken
+  alias Teebox.Accounts.Schemas.Profile
   alias Teebox.Services.StringUtil
   alias Teebox.Accounts.Services.Password
 
   schema "users" do
-    field(:name, :string)
     field(:email, :string)
-    field(:avatar, :string)
     field(:confirmation_token, :string)
     field(:confirmed_at, :naive_datetime)
     field(:confirmation_sent_at, :naive_datetime)
@@ -22,20 +22,19 @@ defmodule Teebox.Accounts.Schemas.User do
     field(:reset_password_token, :string)
     field(:reset_password_sent_at, :naive_datetime)
 
+    has_many(:profiles, Profile, foreign_key: :user_id)
     has_many(:tokens, OauthAccessToken, foreign_key: :resource_owner_id)
 
     timestamps()
   end
 
   # TODO: Move changesets into boundaries
-  @required_fields ~w(name email password password_confirmation)a
+  @required_fields ~w(email password password_confirmation)a
   def required_fields, do: @required_fields
-  @optional_fields ~w(avatar)a
-  def optional_fields, do: @optional_fields
 
   def changeset(:registration, user, params) do
     user
-    |> cast(params, @required_fields ++ @optional_fields)
+    |> cast(params, @required_fields)
     |> validate_required(@required_fields)
     |> validate_format(:email, ~r/@/)
     |> unique_email()
@@ -65,15 +64,6 @@ defmodule Teebox.Accounts.Schemas.User do
     |> change(%{confirmation_sent_at: NaiveDateTime.utc_now()})
     |> change(%{confirmation_token: StringUtil.random_string()})
     |> unique_constraint(:confirmation_token)
-  end
-
-  def confirm(changeset) do
-    changeset
-    |> change(%{
-      confirmed_at: NaiveDateTime.utc_now(),
-      confirmation_sent_at: nil,
-      confirmation_token: nil
-    })
   end
 
   defp unique_email(changeset) do
