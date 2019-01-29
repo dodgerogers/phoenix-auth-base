@@ -9,13 +9,13 @@ import AuthenticateFromStoredToken from '../AuthenticateFromStoredToken';
 describe('AuthenticateFromCookie', () => {
   const accessToken = { accessToken: 'token' };
 
-  it('dispatches VERIFY_TOKEN_REQUEST when TokenStorage.fetch is successful', () => {
+  it('dispatches GET_CURRENT_USER_REQUEST when TokenStorage.fetch is successful', () => {
     TokenStorage.fetch = jest.fn(() => Promise.resolve(accessToken));
 
     return expectSaga(AuthenticateFromStoredToken)
       .provide([call(TokenStorage.fetch, accessToken)])
       .put({
-        type: 'VERIFY_TOKEN_REQUEST',
+        type: 'GET_CURRENT_USER_REQUEST',
         accessToken,
       })
       .dispatch({

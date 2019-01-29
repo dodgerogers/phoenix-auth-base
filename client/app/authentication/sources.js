@@ -28,10 +28,6 @@ export const resetPassword = ({ email, resetPasswordToken, password, passwordCon
   return HTTP.put('/api/passwords', { email, resetPasswordToken, password, passwordConfirmation });
 };
 
-export const currentUser = () => {
-  return HTTP.get('/api/users/me');
-};
-
 export const extendSession = () => {
   return HTTP.post('/api/oauth/token/refresh');
 };

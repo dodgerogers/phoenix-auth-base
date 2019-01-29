@@ -7,12 +7,12 @@ import { actionTypes } from '../../constants';
 
 
 describe('ForgotSignInSuccessPassword', () => {
-  it('makes verifyTokenRequest and notifies user', () => {
+  it('makes getCurrentUserRequest and notifies user', () => {
     const accessToken = { token: 'token' };
 
     return expectSaga(SignInSuccess)
       .put({ type: 'HIDE_MODAL', data: { id: 'SIGN_IN_MODAL' }})
-      .put({ type: 'VERIFY_TOKEN_REQUEST', accessToken })
+      .put({ type: 'GET_CURRENT_USER_REQUEST', accessToken })
       .put({
         id: undefined,
         type: 'CREATE_NOTIFICATION',

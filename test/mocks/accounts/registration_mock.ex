@@ -3,7 +3,7 @@ defmodule Teebox.Accounts.RegistrationMock do
   alias Teebox.Accounts.Schemas.User
 
   def call(%{} = _params) do
-    user = build(:user, id: 1) |> with_profile()
+    user = build(:user, id: 1)
     {:ok, user}
   end
 

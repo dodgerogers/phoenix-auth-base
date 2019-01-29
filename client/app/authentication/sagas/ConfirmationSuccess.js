@@ -4,7 +4,7 @@ import { NotificationActions, areaIDs } from '../../common/Notifications';
 import { ModalActions, ModalIds } from '../../common/modals';
 import { actionTypes, formIDs } from '../constants';
 import { take } from '../../lib/utils/MapHelper';
-import { verifyTokenRequest, confirmationFailure } from '../actions';
+import { getCurrentUserRequest, confirmationFailure } from '../actions';
 
 
 function hideConfirmationModal() {
@@ -15,9 +15,9 @@ function notifyConfirmationSuccess() {
   return NotificationActions.notify('Account successfully confirmed! You are now logged in')
 }
 
-export function* verifyTokenAndNotifyUser(action) {
+export function* getCurrentUserAndNotifyUser(action) {
   try {
-    yield put(verifyTokenRequest(action.accessToken));
+    yield put(getCurrentUserRequest());
     yield put(hideConfirmationModal());
     yield put(notifyConfirmationSuccess());
   } catch (err) {
@@ -27,5 +27,5 @@ export function* verifyTokenAndNotifyUser(action) {
 }
 
 export default function* ConfirmationSuccess() {
-  yield takeLatest(actionTypes.CONFIRMATION_SUCCESS, verifyTokenAndNotifyUser);
+  yield takeLatest(actionTypes.CONFIRMATION_SUCCESS, getCurrentUserAndNotifyUser);
 }

@@ -11,14 +11,14 @@ defmodule Teebox.Accounts.Registration do
   end
 
   defp create_user(%{} = params) do
-    user_params = Map.take(params, [:email, :password, :password_confirmation])
+    user_params = Map.take(params, ["email", "password", "password_confirmation"])
 
     User.changeset(:registration, %User{}, user_params)
     |> Teebox.Repo.insert()
   end
 
   defp create_profile(%User{} = user, %{} = params) do
-    profile_params = %{user_id: user.id, name: params.name}
+    profile_params = %{user_id: user.id, name: params["name"]}
 
     Profile.changeset(%Profile{}, profile_params)
     |> Teebox.Repo.insert()

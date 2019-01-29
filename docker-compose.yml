@@ -14,13 +14,9 @@ services:
       - DB_ENV_NAME=teebox_dev
     volumes:
       - .:/app
-      - /var/run/docker.sock:/tmp/sock
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /usr/local/bin/docker:/usr/local/bin/docker
     ports:
       - "4000:4000"
       - "8888:8888"
-    privileged: true
     depends_on:
       - dev_db
 

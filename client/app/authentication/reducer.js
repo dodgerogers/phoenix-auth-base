@@ -2,7 +2,6 @@ import { fromJS } from 'immutable';
 import { actionTypes } from './constants';
 
 export const initialState = fromJS({
-  currentUser: null,
   accessToken: null,
   refreshing: false,
 });
@@ -12,9 +11,7 @@ export default function authenticationReducer(state = initialState, action) {
 
   switch (type) {
     case actionTypes.VERIFY_TOKEN_REQUEST:
-      return state.set('accessToken', fromJS(action.accessToken));
-    case actionTypes.VERIFY_TOKEN_SUCCESS:
-      return state.set('currentUser', fromJS(action.user));
+       return state.set('accessToken', fromJS(action.accessToken));
     case actionTypes.AUTHENTICATE_FAILURE:
     case actionTypes.VERIFY_TOKEN_FAILURE:
     case actionTypes.SIGN_OUT_SUCCESS:

@@ -16,7 +16,7 @@ describe('RefreshToken', () => {
       .provide([call(AuthenticationSources.extendSession, accessToken)])
       .put({ type: 'REFRESH_TOKEN_SUCCESS' })
       .put({
-        type: 'VERIFY_TOKEN_REQUEST',
+        type: 'GET_CURRENT_USER_REQUEST',
         accessToken,
       })
       .dispatch({ type: 'REFRESH_TOKEN_REQUEST' })

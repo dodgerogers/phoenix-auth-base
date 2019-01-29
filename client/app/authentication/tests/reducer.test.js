@@ -4,32 +4,32 @@ import authReducer, { initialState } from '../reducer';
 
 
 describe('authReducer', () => {
-  describe('VERIFY_TOKEN_REQUEST', () => {
+  describe('GET_CURRENT_USER_REQUEST', () => {
     it('sets accessToken property', () => {
-      const verifyToken = {
-        type: actionTypes.VERIFY_TOKEN_REQUEST,
+      const getCurrentUser = {
+        type: actionTypes.GET_CURRENT_USER_REQUEST,
         accessToken: { accessToken: "token" },
       };
 
-      expect(authReducer(initialState, verifyToken)).toMatchSnapshot();
+      expect(authReducer(initialState, getCurrentUser)).toMatchSnapshot();
     });
   });
 
-  describe('VERIFY_TOKEN_SUCCESS', () => {
+  describe('GET_CURRENT_USER_SUCCESS', () => {
     it('sets currentUser property', () => {
-      const verifyTokenSuccess = {
-        type: actionTypes.VERIFY_TOKEN_SUCCESS,
+      const getCurrentUserSuccess = {
+        type: actionTypes.GET_CURRENT_USER_SUCCESS,
         user: { id: 1 },
       };
 
-      expect(authReducer(initialState, verifyTokenSuccess)).toMatchSnapshot();
+      expect(authReducer(initialState, getCurrentUserSuccess)).toMatchSnapshot();
     });
   });
 
-  describe('VERIFY_TOKEN_FAILURE', () => {
+  describe('GET_CURRENT_USER_FAILURE', () => {
     it('nulls currentUser and accessToken properties', () => {
       const authenticateFailure = {
-        type: actionTypes.VERIFY_TOKEN_FAILURE,
+        type: actionTypes.GET_CURRENT_USER_FAILURE,
       };
 
       expect(authReducer(initialState, authenticateFailure)).toMatchSnapshot();

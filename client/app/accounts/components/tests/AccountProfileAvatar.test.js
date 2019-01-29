@@ -2,17 +2,17 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { fromJS } from 'immutable';
 import toJson from 'enzyme-to-json';
-import UserAvatar from '../UserAvatar';
+import AccountProfileAvatar from '../AccountProfileAvatar';
 
 
-describe('UserAvatar', () => {
+describe('AccountProfileAvatar', () => {
   const fullProps = () => ({
     user: fromJS({
       name: "bob",
     }),
   });
 
-  const pureComponent = (props) => shallow(<UserAvatar {...props} />);
+  const pureComponent = (props) => shallow(<AccountProfileAvatar {...props} />);
 
   it('matches snapshot', () => {
     const component = pureComponent(fullProps());

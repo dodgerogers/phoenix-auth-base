@@ -7,10 +7,10 @@ defmodule Teebox.Accounts.RegistrationTest do
 
   @password "Pword12345678!$%"
   @valid_attrs %{
-    name: "profile123",
-    email: "email@email.com",
-    password: @password,
-    password_confirmation: @password
+    "name" => "profile123",
+    "email" => "email@email.com",
+    "password" => @password,
+    "password_confirmation" => @password
   }
 
   defp user_count, do: length(Teebox.Repo.all(User))
@@ -31,7 +31,7 @@ defmodule Teebox.Accounts.RegistrationTest do
     initial_user_count = user_count()
     initial_profile_count = profile_count()
 
-    invalid_attrs = @valid_attrs |> Map.merge(%{email: nil})
+    invalid_attrs = @valid_attrs |> Map.merge(%{"email" => nil})
     {:error, changeset} = Registration.call(invalid_attrs)
 
     assert user_count() == initial_user_count
@@ -43,7 +43,7 @@ defmodule Teebox.Accounts.RegistrationTest do
     initial_user_count = user_count()
     initial_profile_count = profile_count()
 
-    invalid_attrs = @valid_attrs |> Map.put(:name, nil)
+    invalid_attrs = @valid_attrs |> Map.put("name", nil)
     {:error, changeset} = Registration.call(invalid_attrs)
 
     assert user_count() == initial_user_count

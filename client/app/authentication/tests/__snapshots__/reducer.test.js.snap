@@ -32,7 +32,7 @@ Immutable.Map {
 }
 `;
 
-exports[`authReducer VERIFY_TOKEN_FAILURE nulls currentUser and accessToken properties 1`] = `
+exports[`authReducer GET_CURRENT_USER_FAILURE nulls currentUser and accessToken properties 1`] = `
 Immutable.Map {
   currentUser: null,
   accessToken: null,
@@ -40,7 +40,7 @@ Immutable.Map {
 }
 `;
 
-exports[`authReducer VERIFY_TOKEN_REQUEST sets accessToken property 1`] = `
+exports[`authReducer GET_CURRENT_USER_REQUEST sets accessToken property 1`] = `
 Immutable.Map {
   currentUser: null,
   accessToken: Immutable.Map {
@@ -50,7 +50,7 @@ Immutable.Map {
 }
 `;
 
-exports[`authReducer VERIFY_TOKEN_SUCCESS sets currentUser property 1`] = `
+exports[`authReducer GET_CURRENT_USER_SUCCESS sets currentUser property 1`] = `
 Immutable.Map {
   currentUser: Immutable.Map {
     id: 1,

@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Menu, Button, Header, Container, Dropdown, Image } from 'semantic-ui-react';
 import { ModalIds, ModalTrigger } from '../../common/modals';
-import UserAvatar from '../../common/components/UserAvatar';
+import AccountProfileAvatar from '../../accounts/components/AccountProfileAvatar';
 
 
 const Navbar = (props) => {
   const loggedInLinks = () => {
-    const trigger = (<UserAvatar user={props.currentUser} />)
+    const trigger = (<AccountProfileAvatar profile={props.currentProfile} />)
 
     return (
       <Dropdown item trigger={trigger}>
@@ -53,6 +53,7 @@ const Navbar = (props) => {
 
 Navbar.propTypes = {
   currentUser: ImmutablePropTypes.map,
+  currentProfile: ImmutablePropTypes.map,
   signOut: PropTypes.func.isRequired,
 };
 

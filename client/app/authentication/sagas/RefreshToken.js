@@ -2,7 +2,7 @@ import { call, put, takeLatest, select } from 'redux-saga/effects';
 import * as AuthenticationSources from '../sources';
 import { actionTypes } from '../constants';
 import {
-  refreshTokenSuccess, refreshTokenFailure, verifyTokenRequest, signOutRequest
+  refreshTokenSuccess, refreshTokenFailure, getCurrentUserRequest, signOutRequest
 } from '../actions';
 
 
@@ -11,7 +11,7 @@ export function* refreshCurrentToken() {
     const response = yield call(AuthenticationSources.extendSession);
 
     yield put(refreshTokenSuccess());
-    yield put(verifyTokenRequest(response.data.accessToken));
+    yield put(getCurrentUserRequest(response.data.accessToken));
   } catch (err) {
     yield put(signOutRequest());
     yield put(refreshTokenFailure());

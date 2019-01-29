@@ -20,6 +20,7 @@ defmodule Teebox.Accounts.Schemas.Profile do
     |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
     # |> validate_format(:name, ~r/^[0-9|a-z|A-Z]*$/)
+    # |> validate_format(:name, no whitespace)
     |> unique_name()
   end
 

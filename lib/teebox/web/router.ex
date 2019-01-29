@@ -37,7 +37,8 @@ defmodule Teebox.Web.Router do
   scope "/api" do
     pipe_through(:authenticated_api)
 
-    get("/users/me", Teebox.Web.Api.UsersController, :me)
+    get("/current_user", Teebox.Web.Api.UsersController, :show)
+    get("/current_user/profiles", Teebox.Web.Api.ProfilesController, :index)
     post("/oauth/token/refresh", Teebox.Web.Api.TokenController, :refresh)
     delete("/oauth/token", Teebox.Web.Api.TokenController, :revoke)
   end

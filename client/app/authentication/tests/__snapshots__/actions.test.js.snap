@@ -105,22 +105,22 @@ Object {
 }
 `;
 
-exports[`async AuthenticationActions verifyToken verifyTokenFailure matches snapshot 1`] = `
+exports[`async AuthenticationActions getCurrentUser getCurrentUserFailure matches snapshot 1`] = `
 Object {
-  "type": "VERIFY_TOKEN_FAILURE",
+  "type": "GET_CURRENT_USER_FAILURE",
 }
 `;
 
-exports[`async AuthenticationActions verifyToken verifyTokenRequest matches snapshot 1`] = `
+exports[`async AuthenticationActions getCurrentUser getCurrentUserRequest matches snapshot 1`] = `
 Object {
   "accessToken": undefined,
-  "type": "VERIFY_TOKEN_REQUEST",
+  "type": "GET_CURRENT_USER_REQUEST",
 }
 `;
 
-exports[`async AuthenticationActions verifyToken verifyTokenSuccess matches snapshot 1`] = `
+exports[`async AuthenticationActions getCurrentUser getCurrentUserSuccess matches snapshot 1`] = `
 Object {
-  "type": "VERIFY_TOKEN_SUCCESS",
+  "type": "GET_CURRENT_USER_SUCCESS",
   "user": undefined,
 }
 `;

@@ -31,17 +31,17 @@ describe('async AuthenticationActions', () => {
     });
   });
 
-  describe('verifyToken', () => {
-    it('verifyTokenRequest matches snapshot', () => {
-      expect(AuthenticationActions.verifyTokenRequest()).toMatchSnapshot();
+  describe('getCurrentUser', () => {
+    it('getCurrentUserRequest matches snapshot', () => {
+      expect(AuthenticationActions.getCurrentUserRequest()).toMatchSnapshot();
     });
 
-    it('verifyTokenSuccess matches snapshot', () => {
-      expect(AuthenticationActions.verifyTokenSuccess()).toMatchSnapshot();
+    it('getCurrentUserSuccess matches snapshot', () => {
+      expect(AuthenticationActions.getCurrentUserSuccess()).toMatchSnapshot();
     });
 
-    it('verifyTokenFailure matches snapshot', () => {
-      expect(AuthenticationActions.verifyTokenFailure()).toMatchSnapshot();
+    it('getCurrentUserFailure matches snapshot', () => {
+      expect(AuthenticationActions.getCurrentUserFailure()).toMatchSnapshot();
     });
   });
 

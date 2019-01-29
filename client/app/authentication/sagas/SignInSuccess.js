@@ -3,7 +3,7 @@ import { initialize } from 'redux-form/immutable';
 import { NotificationActions, areaIDs } from '../../common/Notifications';
 import { ModalActions, ModalIds } from '../../common/modals';
 import { actionTypes } from '../constants';
-import { verifyTokenRequest, authenticateFailure } from '../actions';
+import { getCurrentUserRequest, authenticateFailure } from '../actions';
 
 
 function hideSignInModal() {
@@ -16,7 +16,7 @@ function notifyUserSignInWasSuccessful() {
 
 export function* handleSignInSuccess(action) {
   try {
-    yield put(verifyTokenRequest(action.accessToken));
+    yield put(getCurrentUserRequest(action.accessToken));
     yield put(hideSignInModal());
     yield put(notifyUserSignInWasSuccessful());
   } catch (err) {

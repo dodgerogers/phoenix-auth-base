@@ -8,4 +8,10 @@ defmodule Teebox.Web.Api.ProfileView do
       avatar: profile.avatar
     }
   end
+
+  def render("profiles.json", %{profiles: profiles}) do
+    %{
+      profiles: render_many(profiles, Teebox.Web.Api.ProfileView, "profile.json")
+    }
+  end
 end

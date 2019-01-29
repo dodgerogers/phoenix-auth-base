@@ -1,21 +1,12 @@
-import { initialize } from 'redux-form/immutable';
-import * as AuthenticationSources from './sources';
-import { ModalActions, ModalIds } from '../common/modals';
 import { actionTypes } from './constants';
-import { NotificationActions, areaIDs } from '../common/Notifications';
-import * as TokenStorage from './services/TokenStorage';
-import { formIDs } from './constants';
-import handleFormErrors from '../lib/utils/handleFormErrors';
-
 
 export const verifyTokenRequest = accessToken => ({
   type: actionTypes.VERIFY_TOKEN_REQUEST,
   accessToken,
 });
 
-export const verifyTokenSuccess = user => ({
+export const verifyTokenSuccess = () => ({
   type: actionTypes.VERIFY_TOKEN_SUCCESS,
-  user,
 });
 
 export const verifyTokenFailure = () => ({

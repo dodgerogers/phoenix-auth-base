@@ -40,6 +40,6 @@ function* cancelRefreshTimer(task) {
 }
 
 export default function* SessionRefreshTimer() {
-  const refreshTimer = yield takeLatest(actionTypes.VERIFY_TOKEN_SUCCESS, refreshDelay);
+  const refreshTimer = yield takeLatest(actionTypes.GET_CURRENT_USER_SUCCESS, refreshDelay);
   yield takeLatest(actionTypes.SIGN_OUT_SUCCESS, cancelRefreshTimer, refreshTimer);
 }

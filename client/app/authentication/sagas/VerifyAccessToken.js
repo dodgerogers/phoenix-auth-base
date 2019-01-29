@@ -1,19 +1,22 @@
 import { call, put, takeEvery, takeLatest, select } from 'redux-saga/effects'
-import * as AuthenticationSources from '../sources';
 import { actionTypes } from '../constants';
-import { verifyTokenSuccess, verifyTokenFailure } from '../actions';
+import * as AccountSources from '../../accounts/sources';
+import * as AccountActions from '../../accounts/actions';
 import * as TokenStorage from '../services/TokenStorage';
 
 
 export function* storeTokenAndFetchCurrentUser(action) {
   try {
-    const response = yield call(AuthenticationSources.currentUser);
+    const currentUserResponse = yield call(AccountSources.currentUser);
+    const profilesResponse = yield call(AccountSources.currentUserProfiles);
     const tokenCookie = yield call(TokenStorage.store, action.accessToken);
 
-    yield put(verifyTokenSuccess(response.data.user));
+    yield put(AccountActions.getCurrentUserSuccess(currentUserResponse.data));
+    yield put(AccountActions.getCurrentUserProfilesSuccess(profilesResponse.data.profiles));
   } catch (_err) {
     yield call(TokenStorage.remove);
-    yield put(verifyTokenFailure());
+    yield put(AccountActions.getCurrentUserFailure());
+    yield put(AccountActions.getCurrentUserProfilesFailure());
   }
 }
 
