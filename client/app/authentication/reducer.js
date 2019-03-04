@@ -10,7 +10,7 @@ export default function authenticationReducer(state = initialState, action) {
   const { type } = action;
 
   switch (type) {
-    case actionTypes.VERIFY_TOKEN_REQUEST:
+    case actionTypes.SIGN_IN_SUCCESS:
        return state.set('accessToken', fromJS(action.accessToken));
     case actionTypes.AUTHENTICATE_FAILURE:
     case actionTypes.VERIFY_TOKEN_FAILURE:

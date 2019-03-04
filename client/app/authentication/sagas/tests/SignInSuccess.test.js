@@ -1,18 +1,22 @@
 import { expectSaga } from 'redux-saga-test-plan';
 import { fromJS } from 'immutable';
-import { call, put, take } from 'redux-saga/effects';
+import { call, put, take, provide } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import SignInSuccess from '../SignInSuccess';
+import * as TokenStorage from '../../services/TokenStorage';
 import { actionTypes } from '../../constants';
 
 
 describe('ForgotSignInSuccessPassword', () => {
   it('makes getCurrentUserRequest and notifies user', () => {
     const accessToken = { token: 'token' };
+    const mockCookie = 'cookie';
+    TokenStorage.store = jest.fn(() => Promise.resolve(mockCookie));
 
     return expectSaga(SignInSuccess)
+      .provide([call(TokenStorage.store, accessToken)])
+      .put({ type: 'GET_CURRENT_USER_REQUEST' })
       .put({ type: 'HIDE_MODAL', data: { id: 'SIGN_IN_MODAL' }})
-      .put({ type: 'GET_CURRENT_USER_REQUEST', accessToken })
       .put({
         id: undefined,
         type: 'CREATE_NOTIFICATION',
@@ -27,4 +31,6 @@ describe('ForgotSignInSuccessPassword', () => {
       })
       .run({ silenceTimeout: true });
   });
+
+  // TODO: Extra cases
 });

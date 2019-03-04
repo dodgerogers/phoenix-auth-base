@@ -1,7 +1,8 @@
 import { call, put, cancelled, cancel, takeLatest, select } from 'redux-saga/effects'
 import { delay } from 'redux-saga';
 import moment from 'moment';
-import { actionTypes } from '../constants';
+import { actionTypes as accountActionTypes } from '../../accounts/constants';
+import { actionTypes as authActionTypes } from '../constants';
 import {
   refreshTokenRequest,
   refreshTokenFailure,
@@ -15,9 +16,10 @@ const refreshTokenIn = token => {
   const expiresIn = token.get('expiresIn');
   const createdAt = token.get('createdAt');
   const expireAt = moment.utc(createdAt).add(expiresIn, 'seconds').format();
-  const tenSecondsInMsBeforeExpiry = 10000;
+  const tenSeconds = 10000;
+  const durationBeforeExpiry = tenSeconds;
 
-  return SessionTimer.refreshIn(expireAt, tenSecondsInMsBeforeExpiry);
+  return SessionTimer.refreshIn(expireAt, durationBeforeExpiry);
 }
 
 export function* refreshDelay(action) {
@@ -40,6 +42,6 @@ function* cancelRefreshTimer(task) {
 }
 
 export default function* SessionRefreshTimer() {
-  const refreshTimer = yield takeLatest(actionTypes.GET_CURRENT_USER_SUCCESS, refreshDelay);
-  yield takeLatest(actionTypes.SIGN_OUT_SUCCESS, cancelRefreshTimer, refreshTimer);
+  const refreshTimer = yield takeLatest(accountActionTypes.GET_CURRENT_USER_REQUEST, refreshDelay);
+  yield takeLatest(authActionTypes.SIGN_OUT_SUCCESS, cancelRefreshTimer, refreshTimer);
 }

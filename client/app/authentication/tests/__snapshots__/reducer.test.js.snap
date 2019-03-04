@@ -2,7 +2,6 @@
 
 exports[`authReducer AUTHENTICATE_FAILURE nulls currentUser and accessToken properties 1`] = `
 Immutable.Map {
-  currentUser: null,
   accessToken: null,
   refreshing: false,
 }
@@ -10,7 +9,6 @@ Immutable.Map {
 
 exports[`authReducer REFRESH_TOKEN REFRESH_TOKEN_FAILURE sets refreshing to false 1`] = `
 Immutable.Map {
-  currentUser: null,
   accessToken: null,
   refreshing: true,
 }
@@ -18,7 +16,6 @@ Immutable.Map {
 
 exports[`authReducer REFRESH_TOKEN REFRESH_TOKEN_REQUEST sets refreshing to true 1`] = `
 Immutable.Map {
-  currentUser: null,
   accessToken: null,
   refreshing: true,
 }
@@ -26,36 +23,7 @@ Immutable.Map {
 
 exports[`authReducer REFRESH_TOKEN REFRESH_TOKEN_SUCCESS sets refreshing to false 1`] = `
 Immutable.Map {
-  currentUser: null,
   accessToken: null,
   refreshing: true,
-}
-`;
-
-exports[`authReducer GET_CURRENT_USER_FAILURE nulls currentUser and accessToken properties 1`] = `
-Immutable.Map {
-  currentUser: null,
-  accessToken: null,
-  refreshing: false,
-}
-`;
-
-exports[`authReducer GET_CURRENT_USER_REQUEST sets accessToken property 1`] = `
-Immutable.Map {
-  currentUser: null,
-  accessToken: Immutable.Map {
-    accessToken: "token",
-  },
-  refreshing: false,
-}
-`;
-
-exports[`authReducer GET_CURRENT_USER_SUCCESS sets currentUser property 1`] = `
-Immutable.Map {
-  currentUser: Immutable.Map {
-    id: 1,
-  },
-  accessToken: null,
-  refreshing: false,
 }
 `;

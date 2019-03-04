@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`accountsReducer GET_CURRENT_USER_FAILURE nulls currentUser and accessToken properties 1`] = `
+Immutable.Map {
+  currentUser: null,
+  currentProfile: null,
+  userProfiles: Immutable.List [
+  ],
+}
+`;
+
+exports[`accountsReducer GET_CURRENT_USER_REQUEST sets accessToken property 1`] = `
+Immutable.Map {
+  currentUser: null,
+  currentProfile: null,
+  userProfiles: Immutable.List [
+  ],
+}
+`;
+
+exports[`accountsReducer GET_CURRENT_USER_SUCCESS sets currentUser property 1`] = `
+Immutable.Map {
+  currentUser: Immutable.Map {
+    id: 1,
+  },
+  currentProfile: null,
+  userProfiles: Immutable.List [
+  ],
+}
+`;

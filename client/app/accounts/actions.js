@@ -2,7 +2,6 @@ import { actionTypes } from './constants';
 
 export const getCurrentUserRequest = () => ({
   type: actionTypes.GET_CURRENT_USER_REQUEST,
-  accessToken,
 });
 
 export const getCurrentUserSuccess = user => ({
@@ -16,7 +15,6 @@ export const getCurrentUserFailure = () => ({
 
 export const getCurrentUserProfilesRequest = () => ({
   type: actionTypes.GET_CURRENT_USER_PROFILES_REQUEST,
-  accessToken,
 });
 
 export const getCurrentUserProfilesSuccess = profiles => ({

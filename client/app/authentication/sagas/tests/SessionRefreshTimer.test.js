@@ -24,7 +24,7 @@ describe('SessionRefreshTimer', () => {
     return expectSaga(SessionRefreshTimer)
       .withReducer(mockReducer)
       .put({ type: 'REFRESH_TOKEN_REQUEST' })
-      .dispatch({ type: 'GET_CURRENT_USER_SUCCESS' })
+      .dispatch({ type: 'GET_CURRENT_USER_REQUEST' })
       .run({ silenceTimeout: true });
   });
 
@@ -34,7 +34,7 @@ describe('SessionRefreshTimer', () => {
     return expectSaga(SessionRefreshTimer)
       .withReducer(mockReducer)
       .put({ type: 'REFRESH_TOKEN_REQUEST_CANCELLED' })
-      .dispatch({ type: 'GET_CURRENT_USER_SUCCESS' })
+      .dispatch({ type: 'GET_CURRENT_USER_REQUEST' })
       .dispatch({ type: 'SIGN_OUT_SUCCESS' })
       .run({ silenceTimeout: true });
   });
@@ -47,7 +47,7 @@ describe('SessionRefreshTimer', () => {
     return expectSaga(SessionRefreshTimer)
       .withReducer(mockReducer)
       .put({ type: 'REFRESH_TOKEN_FAILURE' })
-      .dispatch({ type: 'GET_CURRENT_USER_SUCCESS' })
+      .dispatch({ type: 'GET_CURRENT_USER_REQUEST' })
       .run({ silenceTimeout: true });
   });
 });

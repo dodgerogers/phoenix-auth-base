@@ -14,10 +14,7 @@ describe('AuthenticateFromCookie', () => {
 
     return expectSaga(AuthenticateFromStoredToken)
       .provide([call(TokenStorage.fetch, accessToken)])
-      .put({
-        type: 'GET_CURRENT_USER_REQUEST',
-        accessToken,
-      })
+      .put({ type: 'GET_CURRENT_USER_REQUEST' })
       .dispatch({
         type: 'AUTHENTICATE_WITH_STORED_TOKEN_REQUEST',
         accessToken,
