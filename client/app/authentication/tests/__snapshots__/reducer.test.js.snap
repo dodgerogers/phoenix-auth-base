@@ -10,7 +10,7 @@ Immutable.Map {
 exports[`authReducer REFRESH_TOKEN REFRESH_TOKEN_FAILURE sets refreshing to false 1`] = `
 Immutable.Map {
   accessToken: null,
-  refreshing: true,
+  refreshing: false,
 }
 `;
 
@@ -23,7 +23,7 @@ Immutable.Map {
 
 exports[`authReducer REFRESH_TOKEN REFRESH_TOKEN_SUCCESS sets refreshing to false 1`] = `
 Immutable.Map {
-  accessToken: null,
-  refreshing: true,
+  accessToken: "token",
+  refreshing: false,
 }
 `;

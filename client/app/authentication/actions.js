@@ -17,8 +17,9 @@ export const refreshTokenRequest = () => ({
   type: actionTypes.REFRESH_TOKEN_REQUEST,
 });
 
-export const refreshTokenSuccess = () => ({
+export const refreshTokenSuccess = accessToken => ({
   type: actionTypes.REFRESH_TOKEN_SUCCESS,
+  accessToken
 });
 
 export const refreshTokenFailure = () => ({
@@ -50,9 +51,9 @@ export const signOutFailure = () => ({
   type: actionTypes.SIGN_OUT_FAILURE,
 });
 
-export const signInSuccess = response => ({
+export const signInSuccess = accessToken => ({
   type: actionTypes.SIGN_IN_SUCCESS,
-  accessToken: response.data.accessToken,
+  accessToken,
 });
 
 export const registerSuccess = (_result, _dispatch, { values }) => ({
@@ -67,7 +68,7 @@ export const registerFailure = error => ({
 
 export const confirmationSuccess = response => ({
   type: actionTypes.CONFIRMATION_SUCCESS,
-  accessToken: response.data.accessToken,
+  accessToken: response.data.accessToken, // Only pass accessToken not whole response
 });
 
 export const confirmationFailure = (error) => ({

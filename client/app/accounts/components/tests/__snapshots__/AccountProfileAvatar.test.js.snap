@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccountProfileAvatar matches snapshot 1`] = `
+<div>
+  <div
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#a70122",
+        "borderRadius": "50%",
+        "color": "#fff",
+        "display": "inline-flex",
+        "fontSize": "16px",
+        "height": "30px",
+        "justifyContent": "center",
+        "marginRight": "5px",
+        "width": "30px",
+      }
+    }
+  >
+    B
+  </div>
+  bob
+</div>
+`;

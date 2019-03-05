@@ -26,7 +26,7 @@ export const getCurrentUserProfilesFailure = () => ({
   type: actionTypes.GET_CURRENT_USER_PROFILES_FAILURE,
 });
 
-export const setCurrentUserProfile = (profileId) => ({
+export const setCurrentUserProfile = profileId => ({
   type: actionTypes.SET_CURRENT_USER_PROFILE,
   profileId,
 })

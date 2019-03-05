@@ -17,7 +17,7 @@ describe('authReducer', () => {
   describe('REFRESH_TOKEN', () => {
     it('REFRESH_TOKEN_REQUEST sets refreshing to true', () => {
       const refreshRequest = {
-        type: actionTypes.REFRESH_TOKEN_REQUEST,
+        type: actionTypes.REFRESH_TOKEN_REQUEST
       };
 
       expect(authReducer(initialState, refreshRequest)).toMatchSnapshot();
@@ -25,7 +25,8 @@ describe('authReducer', () => {
 
     it('REFRESH_TOKEN_SUCCESS sets refreshing to false', () => {
       const refreshSuccess = {
-        type: actionTypes.REFRESH_TOKEN_REQUEST,
+        type: actionTypes.REFRESH_TOKEN_SUCCESS,
+        accessToken: 'token'
       };
 
       expect(authReducer(initialState, refreshSuccess)).toMatchSnapshot();
@@ -33,7 +34,7 @@ describe('authReducer', () => {
 
     it('REFRESH_TOKEN_FAILURE sets refreshing to false', () => {
       const refreshFailure = {
-        type: actionTypes.REFRESH_TOKEN_REQUEST,
+        type: actionTypes.REFRESH_TOKEN_FAILURE,
       };
 
       expect(authReducer(initialState, refreshFailure)).toMatchSnapshot();

@@ -13,12 +13,9 @@ describe('RefreshToken', () => {
     AuthenticationSources.extendSession = jest.fn(() => Promise.resolve(mockResponse));
 
     return expectSaga(RefreshToken)
-      .provide([call(AuthenticationSources.extendSession, accessToken)])
-      .put({ type: 'REFRESH_TOKEN_SUCCESS' })
-      .put({
-        type: 'GET_CURRENT_USER_REQUEST',
-        accessToken,
-      })
+      .provide([call(AuthenticationSources.extendSession, mockResponse)])
+      .put({ type: 'REFRESH_TOKEN_SUCCESS', accessToken })
+      .put({ type: 'GET_CURRENT_USER_REQUEST' })
       .dispatch({ type: 'REFRESH_TOKEN_REQUEST' })
       .run({ silenceTimeout: true });
   });

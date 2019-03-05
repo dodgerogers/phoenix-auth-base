@@ -4,7 +4,8 @@ import { NotificationActions, areaIDs } from '../../common/Notifications';
 import { ModalActions, ModalIds } from '../../common/modals';
 import { actionTypes, formIDs } from '../constants';
 import { take } from '../../lib/utils/MapHelper';
-import { getCurrentUserRequest, confirmationFailure } from '../actions';
+import { confirmationFailure } from '../actions';
+import { getCurrentUserRequest } from '../../accounts/actions';
 
 
 function hideConfirmationModal() {

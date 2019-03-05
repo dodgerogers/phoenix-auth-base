@@ -11,7 +11,7 @@ describe('ConfirmationSuccess', () => {
     const accessToken = 'token';
 
     return expectSaga(ConfirmationSuccess)
-      .put({ type: 'GET_CURRENT_USER_REQUEST', accessToken })
+      .put({ type: 'GET_CURRENT_USER_REQUEST' })
       .put({ type: 'HIDE_MODAL', data: { id: 'CONFIRMATION_MODAL' }})
       .put({
         id: undefined,

@@ -7,7 +7,7 @@ import AccountProfileAvatar from '../AccountProfileAvatar';
 
 describe('AccountProfileAvatar', () => {
   const fullProps = () => ({
-    user: fromJS({
+    profile: fromJS({
       name: "bob",
     }),
   });

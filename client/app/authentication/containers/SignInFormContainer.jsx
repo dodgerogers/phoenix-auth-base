@@ -16,7 +16,7 @@ function onSubmit(formData) {
 function mergeProps(stateProps, dispatchProps, ownProps) {
   return Object.assign({}, ownProps, stateProps, dispatchProps, {
     onSubmit: onSubmit,
-    onSubmitSuccess: dispatchProps.signInSuccess,
+    onSubmitSuccess: response => dispatchProps.signInSuccess(response.data.accessToken),
   });
 }
 

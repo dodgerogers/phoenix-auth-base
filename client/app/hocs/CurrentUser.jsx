@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 
 const CurrentUser = (ComposedComponent, opts = {}) => {
   const Wrapper = (props) => (
-    <ComposedComponent currentUser={props.currentUser}
+    <ComposedComponent
+      currentUser={props.currentUser}
       currentProfile={props.currentProfile} {...props} />
   );
 

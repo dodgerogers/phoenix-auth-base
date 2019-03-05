@@ -75,10 +75,10 @@ exports[`Navbar matches pure component when currentUser is present snapshot 1`] 
           selectOnBlur={true}
           selectOnNavigation={true}
           trigger={
-            <UserAvatar
-              user={
+            <AccountProfileAvatar
+              profile={
                 Immutable.Map {
-                  name: "Billy",
+                  name: "name",
                 }
               }
             />

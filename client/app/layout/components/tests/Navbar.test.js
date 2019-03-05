@@ -21,7 +21,11 @@ describe('Navbar', () => {
   });
 
   it('matches pure component when currentUser is present snapshot', () => {
-    const props = Object.assign({}, fullProps(), { currentUser: fromJS({ name: 'Billy' }) });
+    const accountProps = {
+      currentUser: fromJS({ name: 'Billy' }),
+      currentProfile: fromJS({ name: 'name' })
+    };
+    const props = Object.assign({}, fullProps(), accountProps);
     const wrapper = component(props);
 
     expect(toJson(wrapper)).toMatchSnapshot();

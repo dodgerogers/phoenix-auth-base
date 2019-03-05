@@ -19,6 +19,7 @@ export default function authenticationReducer(state = initialState, action) {
     case actionTypes.REFRESH_TOKEN_REQUEST:
       return state.set('refreshing', true);
     case actionTypes.REFRESH_TOKEN_SUCCESS:
+      return initialState.set('accessToken', fromJS(action.accessToken));
     case actionTypes.REFRESH_TOKEN_FAILURE:
       return state.set('refreshing', false);
     default:
