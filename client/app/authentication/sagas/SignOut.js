@@ -1,9 +1,9 @@
 import { call, put, takeEvery, takeLatest, select } from 'redux-saga/effects'
 import * as AuthenticationSources from '../sources';
-import { signOutSuccess, signOutFailure } from '../actions';
+import { signOutSuccess, signOutFailure, removeTokenRequest } from '../actions';
 import { NotificationActions } from '../../common/Notifications';
 import { actionTypes } from '../constants';
-import * as TokenStorage from '../services/TokenStorage';
+import { removeCurrentAccountRequest } from '../../accounts/actions';
 
 
 function notifyUserSignedOutSuccessfully() {
@@ -15,19 +15,18 @@ function notifyErrorSigningOut(err) {
   return NotificationActions.notifyError(errorMsg);
 }
 
-export function* revokeAndPurgeToken(action) {
+export function* signOutAndRemoveToken(action) {
   try {
-    const response = yield call(AuthenticationSources.signOut);
-    const tokenCookie = yield call(TokenStorage.remove);
+    yield call(AuthenticationSources.signOut);
 
-    yield put(signOutSuccess());
+    yield put(removeTokenRequest());
+    yield put(removeCurrentAccountRequest())
     yield put(notifyUserSignedOutSuccessfully());
   } catch (err) {
-    yield put(signOutFailure());
     yield put(notifyErrorSigningOut(err));
   }
 }
 
 export default function* SignOut() {
-  yield takeLatest(actionTypes.SIGN_OUT_REQUEST, revokeAndPurgeToken);
+  yield takeLatest(actionTypes.SIGN_OUT_REQUEST, signOutAndRemoveToken);
 }

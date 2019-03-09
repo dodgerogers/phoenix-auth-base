@@ -43,7 +43,7 @@ const Navbar = (props) => {
             </Header>
           </Menu.Item>
           <Menu.Menu position='right'>
-            {props.currentUser ? loggedInLinks() : nonLoggedInLinks()}
+            {props.isSignedIn ? loggedInLinks() : nonLoggedInLinks()}
           </Menu.Menu>
         </Container>
       </Menu>

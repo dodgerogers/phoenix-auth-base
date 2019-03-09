@@ -2,10 +2,11 @@ import { call, put, takeLatest, select } from 'redux-saga/effects'
 import { initialize } from 'redux-form/immutable';
 import { NotificationActions, areaIDs } from '../../common/Notifications';
 import { ModalActions, ModalIds } from '../../common/modals';
+import * as TokenStorage from '../services/TokenStorage';
 import { actionTypes, formIDs } from '../constants';
 import { take } from '../../lib/utils/MapHelper';
-import { confirmationFailure } from '../actions';
-import { getCurrentUserRequest } from '../../accounts/actions';
+import { confirmationFailure, refreshTokenSuccess } from '../actions';
+import { storeTokenRequest, getCurrentAccountRequest } from '../../accounts/actions';
 
 
 function hideConfirmationModal() {
@@ -18,11 +19,11 @@ function notifyConfirmationSuccess() {
 
 export function* getCurrentUserAndNotifyUser(action) {
   try {
-    yield put(getCurrentUserRequest());
+    yield put(storeTokenRequest(action.accessToken));
+    yield put(getCurrentAccountRequest());
     yield put(hideConfirmationModal());
     yield put(notifyConfirmationSuccess());
   } catch (err) {
-    yield put(confirmationFailure(err));
     yield put(NotificationActions.notifyError(err));
   }
 }

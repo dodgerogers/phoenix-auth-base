@@ -42,6 +42,7 @@ function* cancelRefreshTimer(task) {
 }
 
 export default function* SessionRefreshTimer() {
-  const refreshTimer = yield takeLatest(accountActionTypes.GET_CURRENT_USER_REQUEST, refreshDelay);
+  // What does this line do
+  const refreshTimer = yield takeLatest(authActionTypes.STORE_TOKEN_SUCCESS, refreshDelay);
   yield takeLatest(authActionTypes.SIGN_OUT_SUCCESS, cancelRefreshTimer, refreshTimer);
 }

@@ -1,17 +1,18 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import * as TokenStorage from '../services/TokenStorage';
 import { actionTypes } from '../constants';
-import { authenticateFailure } from '../actions';
-import * as AccountActions from '../../accounts/actions';
+import { storeTokenRequest, removeTokenRequest } from '../actions';
+import { getCurrentAccountRequest } from '../../accounts/actions';
 
 
 export function* fetchAndVerifyStoredToken() {
   try {
     const accessToken = yield call(TokenStorage.fetch);
 
-    yield put(AccountActions.getCurrentUserRequest(accessToken));
+    yield put(storeTokenRequest(accessToken));
+    yield put(getCurrentAccountRequest());
   } catch (err) {
-    yield put(authenticateFailure());
+    yield put(removeTokenRequest());
   }
 }
 

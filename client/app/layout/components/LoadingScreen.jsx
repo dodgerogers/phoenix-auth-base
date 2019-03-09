@@ -18,10 +18,13 @@ const errorScreen = text => (
 
 const LoadingScreen = props => {
   if (props.error) {
+    console.log(props.error);
     return errorScreen('We\'re sorry we can\'t load the page');
   } else if (props.timedOut) {
+    console.log('Timed out');
     return errorScreen('Refresh the page');
   } else if (props.pastDelay) {
+    console.log('Took too long');
     return <Loader active />;
   } else {
     return null;

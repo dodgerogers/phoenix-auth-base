@@ -1,9 +1,9 @@
 import { call, put, takeLatest, select } from 'redux-saga/effects';
 import * as AuthenticationSources from '../sources';
 import { actionTypes } from '../constants';
-import { getCurrentUserRequest } from '../../accounts/actions';
+import { getCurrentAccountRequest } from '../../accounts/actions';
 import {
-  refreshTokenSuccess, refreshTokenFailure, signOutRequest
+  storeTokenRequest, refreshTokenFailure, signOutRequest
 } from '../actions';
 
 
@@ -11,8 +11,7 @@ export function* refreshCurrentToken() {
   try {
     const response = yield call(AuthenticationSources.extendSession);
 
-    yield put(refreshTokenSuccess(response.data.accessToken));
-    yield put(getCurrentUserRequest());
+    yield put(storeTokenRequest(response.data.accessToken));
   } catch (err) {
     yield put(signOutRequest());
     yield put(refreshTokenFailure());

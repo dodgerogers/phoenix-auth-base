@@ -5,20 +5,26 @@ import { connect } from 'react-redux';
 
 
 const CurrentUser = (ComposedComponent, opts = {}) => {
-  const Wrapper = (props) => (
-    <ComposedComponent
-      currentUser={props.currentUser}
-      currentProfile={props.currentProfile} {...props} />
-  );
+  const Wrapper = (props) => {
+    const isSignedIn = props.currentUser !== null && props.currentProfile !== null;
+    return (
+      <ComposedComponent
+        currentUser={props.currentUser}
+        currentProfile={props.currentProfile}
+        isSignedIn={isSignedIn}
+        {...props} />
+    );
+  }
 
-  function mapStateToProps({ authentication }) {
+  function mapStateToProps({ accounts }) {
     return {
-      currentUser: authentication.get('currentUser'),
-      currentProfile: authentication.get('currentProfile'),
+      currentUser: accounts.get('currentUser'),
+      currentProfile: accounts.get('currentProfile'),
     };
   }
 
   Wrapper.propTypes = {
+    isSignedIn: PropTypes.bool,
     currentUser: ImmutablePropTypes.map,
     currentProfile: ImmutablePropTypes.map,
   };

@@ -10,17 +10,16 @@ export default function authenticationReducer(state = initialState, action) {
   const { type } = action;
 
   switch (type) {
-    case actionTypes.SIGN_IN_SUCCESS:
-       return state.set('accessToken', fromJS(action.accessToken));
-    case actionTypes.AUTHENTICATE_FAILURE:
-    case actionTypes.VERIFY_TOKEN_FAILURE:
-    case actionTypes.SIGN_OUT_SUCCESS:
-      return initialState;
+    case actionTypes.STORE_TOKEN_SUCCESS:
+      return state.set('accessToken', fromJS(action.accessToken));
+    case actionTypes.STORE_TOKEN_FAILURE:
+    case actionTypes.REMOVE_TOKEN_SUCCESS:
+      return state.set('accessToken', initialState.get('accessToken'));
     case actionTypes.REFRESH_TOKEN_REQUEST:
       return state.set('refreshing', true);
     case actionTypes.REFRESH_TOKEN_SUCCESS:
-      return initialState.set('accessToken', fromJS(action.accessToken));
     case actionTypes.REFRESH_TOKEN_FAILURE:
+      return state.set('refreshing', false);
       return state.set('refreshing', false);
     default:
       return state;

@@ -49,7 +49,7 @@ config :ex_oauth2_provider, ExOauth2Provider,
   use_refresh_token: true,
   revoke_refresh_token_on_use: true,
   grant_flows: ~w(password refresh_token),
-  access_token_expires_in: 900,
+  access_token_expires_in: 60,
   password_auth: {Teebox.Accounts.Authenticate, :validate_user_credentials}
 
 # Import environment specific config. This must remain at the bottom

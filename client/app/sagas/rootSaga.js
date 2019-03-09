@@ -9,6 +9,8 @@ import SignInSuccess from '../authentication/sagas/SignInSuccess';
 import RegisterSuccess from '../authentication/sagas/RegisterSuccess';
 import ConfirmationSuccess from '../authentication/sagas/ConfirmationSuccess';
 import ResendConfirmationSuccess from '../authentication/sagas/ResendConfirmationSuccess';
+import StoreToken from '../authentication/sagas/StoreToken';
+import RemoveToken from '../authentication/sagas/RemoveToken';
 import FetchCurrentUserInformation from '../accounts/sagas/FetchCurrentUserInformation';
 
 
@@ -25,5 +27,7 @@ export default function* rootSaga() {
     ConfirmationSuccess(),
     ResendConfirmationSuccess(),
     FetchCurrentUserInformation(),
+    StoreToken(),
+    RemoveToken(),
   ]);
 }

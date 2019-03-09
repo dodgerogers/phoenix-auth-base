@@ -2,9 +2,8 @@ import { call, put, takeEvery, takeLatest, select } from 'redux-saga/effects'
 import { initialize } from 'redux-form/immutable';
 import { NotificationActions, areaIDs } from '../../common/Notifications';
 import { ModalActions, ModalIds } from '../../common/modals';
-import * as TokenStorage from '../services/TokenStorage';
-import * as AccountActions from '../../accounts/actions';
-import { authenticateFailure } from '../actions';
+import { getCurrentAccountRequest } from '../../accounts/actions';
+import { storeTokenRequest } from '../actions';
 import { actionTypes } from '../constants';
 
 
@@ -18,16 +17,11 @@ function notifyUserSignInWasSuccessful() {
 
 export function* handleSignInSuccess(action) {
   try {
-    const accessToken = action.accessToken;
-
-    yield call(TokenStorage.store, accessToken);
-    yield put(AccountActions.getCurrentUserRequest());
+    yield put(storeTokenRequest(action.accessToken));
+    yield put(getCurrentAccountRequest());
     yield put(hideSignInModal());
     yield put(notifyUserSignInWasSuccessful());
   } catch (err) {
-    console.log(err);
-    yield call(TokenStorage.remove);
-    yield put(authenticateFailure(err));
     yield put(NotificationActions.notifyError(err));
   }
 }

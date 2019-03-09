@@ -1,5 +1,13 @@
 import { actionTypes } from './constants';
 
+export const getCurrentAccountRequest = () => ({
+  type: actionTypes.GET_CURRENT_ACCOUNT_REQUEST,
+});
+
+export const removeCurrentAccountRequest = () => ({
+  type: actionTypes.REMOVE_CURRENT_ACCOUNT_REQUEST,
+})
+
 export const getCurrentUserRequest = () => ({
   type: actionTypes.GET_CURRENT_USER_REQUEST,
 });
@@ -29,4 +37,4 @@ export const getCurrentUserProfilesFailure = () => ({
 export const setCurrentUserProfile = profileId => ({
   type: actionTypes.SET_CURRENT_USER_PROFILE,
   profileId,
-})
+});

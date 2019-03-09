@@ -8,6 +8,7 @@ defmodule Teebox.Web.Api.ProfilesController do
     profiles = Teebox.Repo.all(Profile, user_id: user.id)
 
     conn
+    |> put_view(Teebox.Web.Api.ProfileView)
     |> render("profiles.json", %{profiles: profiles})
   end
 end

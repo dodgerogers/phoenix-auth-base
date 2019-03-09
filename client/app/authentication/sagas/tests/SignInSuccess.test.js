@@ -8,7 +8,7 @@ import { actionTypes } from '../../constants';
 
 
 describe('ForgotSignInSuccessPassword', () => {
-  it('makes getCurrentUserRequest and notifies user', () => {
+  it('makes getCurrentAccountRequest and notifies user', () => {
     const accessToken = { token: 'token' };
     const mockCookie = 'cookie';
     TokenStorage.store = jest.fn(() => Promise.resolve(mockCookie));

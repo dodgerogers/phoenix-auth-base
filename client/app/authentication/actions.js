@@ -1,20 +1,33 @@
 import { actionTypes } from './constants';
 
-export const verifyTokenRequest = accessToken => ({
-  type: actionTypes.VERIFY_TOKEN_REQUEST,
-  accessToken,
+export const storeTokenRequest = (accessToken) => ({
+  type: actionTypes.STORE_TOKEN_REQUEST,
+  accessToken
 });
 
-export const verifyTokenSuccess = () => ({
-  type: actionTypes.VERIFY_TOKEN_SUCCESS,
+export const storeTokenSuccess = (accessToken) => ({
+  type: actionTypes.STORE_TOKEN_SUCCESS,
+  accessToken
 });
 
-export const verifyTokenFailure = () => ({
-  type: actionTypes.VERIFY_TOKEN_FAILURE,
+export const storeTokenFailure = () => ({
+  type: actionTypes.STORE_TOKEN_FAILURE,
+});
+
+export const removeTokenRequest = () => ({
+  type: actionTypes.REMOVE_TOKEN_REQUEST
+});
+
+export const removeTokenSuccess = () => ({
+  type: actionTypes.REMOVE_TOKEN_SUCCESS
+});
+
+export const removeTokenFailure = () => ({
+  type: actionTypes.REMOVE_TOKEN_FAILURE,
 });
 
 export const refreshTokenRequest = () => ({
-  type: actionTypes.REFRESH_TOKEN_REQUEST,
+  type: actionTypes.REFRESH_TOKEN_REQUEST
 });
 
 export const refreshTokenSuccess = accessToken => ({
@@ -68,7 +81,7 @@ export const registerFailure = error => ({
 
 export const confirmationSuccess = response => ({
   type: actionTypes.CONFIRMATION_SUCCESS,
-  accessToken: response.data.accessToken, // Only pass accessToken not whole response
+  accessToken: response.data.accessToken,
 });
 
 export const confirmationFailure = (error) => ({

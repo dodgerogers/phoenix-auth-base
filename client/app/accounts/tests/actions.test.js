@@ -7,8 +7,8 @@ const mockStore = configureMockStore(middlewares);
 
 describe('AccountActions', () => {
   describe('getCurrentUser', () => {
-    it('getCurrentUserRequest matches snapshot', () => {
-      expect(AccountActions.getCurrentUserRequest()).toMatchSnapshot();
+    it('getCurrentAccountRequest matches snapshot', () => {
+      expect(AccountActions.getCurrentAccountRequest()).toMatchSnapshot();
     });
 
     it('getCurrentUserSuccess matches snapshot', () => {
