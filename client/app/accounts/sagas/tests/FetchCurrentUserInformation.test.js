@@ -5,8 +5,9 @@ import { fromJS } from 'immutable';
 import MockAdapter from 'axios-mock-adapter';
 import HTTP from '../../../lib/utils/HTTP';
 import * as AuthenticationSources from '../../sources';
-import * as AccountSources from '../../../accounts/sources';
 import FetchCurrentUserInformation from '../FetchCurrentUserInformation';
+
+import rootReducer from '../../../reducer';
 
 describe('FetchCurrentUserInformation', () => {
   let mockAxios;
@@ -23,8 +24,8 @@ describe('FetchCurrentUserInformation', () => {
     mockAxios.restore();
   });
 
-  it('dispatches expected actions when all API calls are successful', () => {
-    const mockUser = { id: 42, name: 'Tucker' };
+  it('dispatches expected actions when all API calls are successful', async () => {
+    const mockUser = { id: 42 };
     const mockProfile = { id: 1, name: 'name' };
     const mockUserResponse = { user: mockUser };
     const mockProfilesResponse = { profiles: [mockProfile] };
@@ -34,15 +35,9 @@ describe('FetchCurrentUserInformation', () => {
     return expectSaga(FetchCurrentUserInformation)
       .provide([call(AccountSources.currentUser), mockUserResponse])
       .provide([call(AccountSources.currentUserProfiles), mockProfilesResponse])
-      .put({
-        type: 'GET_CURRENT_USER_SUCCESS',
-        user: mockUser,
-      })
-      .put({
-        type: 'GET_CURRENT_USER_PROFILES_SUCCESS',
-        profiles: [mockProfile],
-      })
-      .dispatch({ type: 'GET_CURRENT_USER_REQUEST' })
+      .put({ type: 'GET_CURRENT_USER_SUCCESS', user: mockUser })
+      .put({ type: 'GET_CURRENT_USER_PROFILES_SUCCESS', profiles: [mockProfile] })
+      .dispatch({ type: 'GET_CURRENT_ACCOUNT_REQUEST' })
       .run({ silenceTimeout: true });
   });
 
@@ -58,19 +53,22 @@ describe('FetchCurrentUserInformation', () => {
       .provide([call(AccountSources.currentUserProfiles), mockProfileResponse])
       .put({ type: 'GET_CURRENT_USER_FAILURE' })
       .put({ type: 'GET_CURRENT_USER_PROFILES_FAILURE' })
-      .dispatch({ type: 'GET_CURRENT_USER_REQUEST' })
+      .dispatch({ type: 'GET_CURRENT_ACCOUNT_REQUEST' })
       .run({ silenceTimeout: true });
   });
 
   it('dispatches GET_CURRENT_USER_PROFILES_FAILURE when AuthenticationSources.currentUserProfiles fails', () => {
-    const mockUserResponse = { error: 'Something went wrong' };
+    const mockUser = { id: 42, name: 'Tucker' };
+    const mockUserResponse = { user: mockUser };
+    const mockProfileResponse = { error: 'Something went wrong' };
     mockAxios.onGet('api/current_user').reply(400, mockUserResponse);
 
     return expectSaga(FetchCurrentUserInformation)
-      .provide([call(AuthenticationSources.currentUser), mockUserResponse])
+      .provide([call(AccountSources.currentUser), mockUserResponse])
+      .provide([call(AccountSources.currentUserProfiles), mockProfileResponse])
       .put({ type: 'GET_CURRENT_USER_FAILURE' })
       .put({ type: 'GET_CURRENT_USER_PROFILES_FAILURE' })
-      .dispatch({ type: 'GET_CURRENT_USER_REQUEST' })
+      .dispatch({ type: 'GET_CURRENT_ACCOUNT_REQUEST' })
       .run({ silenceTimeout: true });
   });
 });

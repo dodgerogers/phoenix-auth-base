@@ -13,9 +13,10 @@ import {
 
 export function* fetchCurrentUserAndProfiles(action) {
   try {
+    console.log('called');
     const currentUserResponse = yield call(AccountSources.currentUser);
     yield put(getCurrentUserSuccess(currentUserResponse.data));
-    
+
     const profilesResponse = yield call(AccountSources.currentUserProfiles);
     let profileID = yield call(SelectedProfileStorage.fetch);
 

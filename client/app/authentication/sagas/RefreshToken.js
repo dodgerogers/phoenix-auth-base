@@ -10,11 +10,12 @@ import {
 export function* refreshCurrentToken() {
   try {
     const response = yield call(AuthenticationSources.extendSession);
+    const { accessToken } = response.data;
 
-    yield put(storeTokenRequest(response.data.accessToken));
+    yield put(storeTokenRequest(accessToken));
   } catch (err) {
-    yield put(signOutRequest());
     yield put(refreshTokenFailure());
+    yield put(signOutRequest());
   }
 }
 

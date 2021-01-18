@@ -5281,6 +5281,11 @@ redux-saga-test-plan@^3.3.1:
     object-assign "^4.1.0"
     util-inspect "^0.1.8"
 
+redux-saga-tester@^1.0.395:
+  version "1.0.395"
+  resolved "https://registry.yarnpkg.com/redux-saga-tester/-/redux-saga-tester-1.0.395.tgz#2493f26b4ef0c2d9cb27b2b28c03d9a3fc4f8117"
+  integrity sha512-i5GADpyN/vu96FevjhNdH/uv/O6Qi/dEJg4Yx+JUnjxZ9vznX6iJR/Gy/HWsPJA1QJYWyMGkP+gTDXejNBwUcQ==
+
 redux-saga@^0.16.0:
   version "0.16.2"
   resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.16.2.tgz#993662e86bc945d8509ac2b8daba3a8c615cc971"

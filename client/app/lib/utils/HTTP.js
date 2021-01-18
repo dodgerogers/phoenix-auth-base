@@ -27,7 +27,6 @@ HTTP.interceptors.response.use(config => {
 const normalizeKeys = data => normalize(data, 'snake');
 
 async function requestInterceptor(config) {
-  console.log(config.url);
   return waitForAccessToken(config.url)
     .then(accessToken => transformRequest(config, accessToken));
 };

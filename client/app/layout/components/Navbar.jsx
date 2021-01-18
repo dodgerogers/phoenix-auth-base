@@ -52,6 +52,7 @@ const Navbar = (props) => {
 }
 
 Navbar.propTypes = {
+  isSignedIn: PropTypes.bool.isRequired,
   currentUser: ImmutablePropTypes.map,
   currentProfile: ImmutablePropTypes.map,
   signOut: PropTypes.func.isRequired,
