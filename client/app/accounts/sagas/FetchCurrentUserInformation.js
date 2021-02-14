@@ -10,11 +10,11 @@ import {
   getCurrentUserProfilesFailure,
 } from "../actions";
 
-export function* fetchCurrentUserAndProfiles(action) {
+export function* fetchAccountInformation(action) {
   try {
     const currentUserResponse = yield call(AccountSources.currentUser);
 
-    yield put(getCurrentUserSuccess(currentUserResponse.data.user));
+    yield put(getCurrentUserSuccess(currentUserResponse.data));
 
     const profilesResponse = yield call(AccountSources.currentUserProfiles);
     let profileID = yield call(SelectedProfileStorage.fetch);
@@ -36,6 +36,6 @@ export function* fetchCurrentUserAndProfiles(action) {
 export default function* FetchCurrentUserInformation() {
   yield takeLatest(
     actionTypes.GET_CURRENT_ACCOUNT_REQUEST,
-    fetchCurrentUserAndProfiles
+    fetchAccountInformation
   );
 }

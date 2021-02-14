@@ -27,15 +27,14 @@ describe("FetchCurrentUserInformation", () => {
   it("dispatches expected actions when all API calls are successful", async () => {
     const mockUser = { id: 42 };
     const mockProfile = { id: 1, name: "name" };
-    const mockUserResponse = { user: mockUser };
     const mockProfilesResponse = { profiles: [mockProfile] };
-    mockAxios.onGet("api/current_user").reply(200, mockUserResponse);
+    mockAxios.onGet("api/current_user").reply(200, mockUser);
     mockAxios
       .onGet("api/current_user/profiles")
       .reply(200, mockProfilesResponse);
 
     return expectSaga(FetchCurrentUserInformation)
-      .provide([call(AccountSources.currentUser), mockUserResponse])
+      .provide([call(AccountSources.currentUser), mockUser])
       .provide([call(AccountSources.currentUserProfiles), mockProfilesResponse])
       .put({ type: "GET_CURRENT_USER_SUCCESS", user: mockUser })
       .put({
@@ -49,15 +48,14 @@ describe("FetchCurrentUserInformation", () => {
 
   it("dispatches GET_CURRENT_USER_FAILURE when AuthenticationSources.currentUser fails", () => {
     const mockUser = { id: 42, name: "Tucker" };
-    const mockUserResponse = { user: mockUser };
     const mockProfileResponse = { error: "Something went wrong" };
-    mockAxios.onGet("api/current_user").reply(200, mockUserResponse);
+    mockAxios.onGet("api/current_user").reply(200, mockUser);
     mockAxios
       .onGet("api/current_user/profiles")
       .reply(400, mockProfileResponse);
 
     return expectSaga(FetchCurrentUserInformation)
-      .provide([call(AccountSources.currentUser), mockUserResponse])
+      .provide([call(AccountSources.currentUser), mockUser])
       .provide([call(AccountSources.currentUserProfiles), mockProfileResponse])
       .put({ type: "GET_CURRENT_USER_FAILURE" })
       .put({ type: "GET_CURRENT_USER_PROFILES_FAILURE" })
@@ -67,12 +65,11 @@ describe("FetchCurrentUserInformation", () => {
 
   it("dispatches GET_CURRENT_USER_PROFILES_FAILURE when AuthenticationSources.currentUserProfiles fails", () => {
     const mockUser = { id: 42, name: "Tucker" };
-    const mockUserResponse = { user: mockUser };
     const mockProfileResponse = { error: "Something went wrong" };
-    mockAxios.onGet("api/current_user").reply(400, mockUserResponse);
+    mockAxios.onGet("api/current_user").reply(400, mockUser);
 
     return expectSaga(FetchCurrentUserInformation)
-      .provide([call(AccountSources.currentUser), mockUserResponse])
+      .provide([call(AccountSources.currentUser), mockUser])
       .provide([call(AccountSources.currentUserProfiles), mockProfileResponse])
       .put({ type: "GET_CURRENT_USER_FAILURE" })
       .put({ type: "GET_CURRENT_USER_PROFILES_FAILURE" })
