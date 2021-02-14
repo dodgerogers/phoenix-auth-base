@@ -2,6 +2,7 @@ import axios from 'axios';
 import normalize from 'normalize-object';
 import store from '../../store';
 import { currentAccessTokenValue, isTokenRefreshing } from '../../authentication/selector';
+import { removeTokenRequest } from '../../authentication/actions';
 import wait from './wait';
 
 
@@ -10,10 +11,15 @@ const API_BASE = process.env.NODE_ENV === 'test' ? testUrl : window.location.ori
 const HTTP = axios.create({ baseURL: API_BASE });
 
 HTTP.interceptors.request.use(requestInterceptor, error => Promise.reject(error));
-HTTP.interceptors.response.use(config => { // TODO: Handle 401
+HTTP.interceptors.response.use(config => {
   config.data = normalize(config.data);
+
   return config;
 }, error => {
+  if (error.response.status === 401) {
+    store.dispatch(removeTokenRequest());
+  }
+
   error.response.data = normalize(error.response.data);
   return Promise.reject(error);
 });

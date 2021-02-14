@@ -5,7 +5,6 @@ defmodule Teebox.Accounts.Schemas.UserTest do
 
   @password "strongpw123!"
   @valid_attrs %{
-    name: "name",
     email: "valid@email.com",
     password: @password,
     password_confirmation: @password
@@ -17,9 +16,11 @@ defmodule Teebox.Accounts.Schemas.UserTest do
 
     assert changeset.valid?
     changes = changeset.changes
+    assert changes.email
+    assert changes.password
+    assert changes.password_hash
     assert changes.confirmation_token
     assert changes.confirmation_sent_at
-    assert changes.password_hash
   end
 
   test "registration changeset with invalid attributes" do

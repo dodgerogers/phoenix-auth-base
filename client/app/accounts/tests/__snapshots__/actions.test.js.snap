@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccountActions getCurrentUser getCurrentAccountRequest matches snapshot 1`] = `
+Object {
+  "type": "GET_CURRENT_ACCOUNT_REQUEST",
+}
+`;
+
+exports[`AccountActions getCurrentUser getCurrentUserFailure matches snapshot 1`] = `
+Object {
+  "type": "GET_CURRENT_USER_FAILURE",
+}
+`;
+
+exports[`AccountActions getCurrentUser getCurrentUserSuccess matches snapshot 1`] = `
+Object {
+  "type": "GET_CURRENT_USER_SUCCESS",
+  "user": undefined,
+}
+`;
+
+exports[`AccountActions getCurrentUserProfiles getCurrentUserProfilesFailure matches snapshot 1`] = `
+Object {
+  "type": "GET_CURRENT_USER_PROFILES_FAILURE",
+}
+`;
+
+exports[`AccountActions getCurrentUserProfiles getCurrentUserProfilesRequest matches snapshot 1`] = `
+Object {
+  "type": "GET_CURRENT_USER_PROFILES_REQUEST",
+}
+`;
+
+exports[`AccountActions getCurrentUserProfiles getCurrentUserProfilesSuccess matches snapshot 1`] = `
+Object {
+  "profiles": Array [
+    Object {
+      "id": 1,
+    },
+  ],
+  "type": "GET_CURRENT_USER_PROFILES_SUCCESS",
+}
+`;

@@ -56,7 +56,7 @@ defmodule Teebox.Mixfile do
       {:comeonin, "~> 3.2.0"},
       {:cowboy, "~> 2.0"},
       {:distillery, "~> 1.2"},
-      {:ex_machina, "~> 2.0", only: :test},
+      {:ex_machina, "~> 2.2.2", only: :test},
       {:ex_oauth2_provider, "~> 0.4.3"},
       {:faker, "~> 0.11.2"},
       {:gettext, "~> 0.13.1"},

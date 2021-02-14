@@ -1,10 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { fromJS } from 'immutable';
-import normalize from 'normalize-object';
 import * as AuthenticationActions from '../actions';
-import * as AuthenticationSources from '../sources';
-import * as TokenStorage from '../services/TokenStorage';
 
 
 const middlewares = [thunk];
@@ -31,27 +27,13 @@ describe('async AuthenticationActions', () => {
     });
   });
 
-  describe('verifyToken', () => {
-    it('verifyTokenRequest matches snapshot', () => {
-      expect(AuthenticationActions.verifyTokenRequest()).toMatchSnapshot();
-    });
-
-    it('verifyTokenSuccess matches snapshot', () => {
-      expect(AuthenticationActions.verifyTokenSuccess()).toMatchSnapshot();
-    });
-
-    it('verifyTokenFailure matches snapshot', () => {
-      expect(AuthenticationActions.verifyTokenFailure()).toMatchSnapshot();
-    });
-  });
-
   describe('refreshToken', () => {
     it('refreshToken matches snapshot', () => {
       expect(AuthenticationActions.refreshTokenRequest()).toMatchSnapshot();
     });
 
     it('refreshTokenSuccess matches snapshot', () => {
-      expect(AuthenticationActions.refreshTokenSuccess()).toMatchSnapshot();
+      expect(AuthenticationActions.refreshTokenSuccess("token")).toMatchSnapshot();
     });
 
     it('refreshTokenFailure matches snapshot', () => {
@@ -61,12 +43,7 @@ describe('async AuthenticationActions', () => {
 
   describe('signInSuccess', () => {
     it('matches snapshot', () => {
-      const mockResponse = {
-        data: {
-          accessToken: 'token',
-        },
-      };
-      expect(AuthenticationActions.signInSuccess(mockResponse)).toMatchSnapshot();
+      expect(AuthenticationActions.signInSuccess('token')).toMatchSnapshot();
     });
   });
 

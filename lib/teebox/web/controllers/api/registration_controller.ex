@@ -1,12 +1,15 @@
 defmodule Teebox.Web.Api.RegistrationController do
   use Teebox.Web, :controller
 
+  require Logger
+
   alias Teebox.Web.Validators.RegistrationCreate
 
-  plug ValidateParams, {RegistrationCreate, :call} when action in [:create]
+  plug(ValidateParams, {RegistrationCreate, :call} when action in [:create])
 
   def create(conn, params) do
     registration = Application.get_env(:teebox, :registration)
+
     with {:ok, user} <- registration.call(params) do
       conn
       |> render("registration.json", %{user: user})

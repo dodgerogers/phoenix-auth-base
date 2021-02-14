@@ -5,12 +5,10 @@ defmodule Teebox.Web.Api.RegistrationViewTest do
     user = build(:user, id: 1)
 
     rendered_view = Teebox.Web.Api.RegistrationView.render("registration.json", %{user: user})
+
     assert rendered_view == %{
-      user: %{
-        id: user.id,
-        name: user.name,
-        email: user.email
-      }
-    }
+             id: user.id,
+             email: user.email
+           }
   end
 end

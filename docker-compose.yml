@@ -1,4 +1,4 @@
-version: '2'
+version: "3.9"
 services:
   web:
     build: .
@@ -14,18 +14,18 @@ services:
       - DB_ENV_NAME=teebox_dev
     volumes:
       - .:/app
-      - /var/run/docker.sock:/tmp/sock
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /usr/local/bin/docker:/usr/local/bin/docker
     ports:
       - "4000:4000"
       - "8888:8888"
-    privileged: true
     depends_on:
       - dev_db
 
   dev_db:
     image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=teebox_dev
 
   test:
     image: teebox_web
@@ -40,11 +40,15 @@ services:
       - DB_ENV_POSTGRES_PASSWORD=postgres
       - DB_ENV_POSTGRES_HOST=test_db
       - SECRET_KEY_BASE=SECRET_KEY_BASE
-    depends_on:
+    links:
       - test_db
 
   test_db:
     image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=teebox_test
 
   run_release:
     image: teebox-api:latest
@@ -61,7 +65,7 @@ services:
       - SECRET_KEY_BASE=SECRET_KEY_BASE
     ports:
       - "5001:5001"
-    depends_on:
+    links:
       - release_db
 
   release_db:

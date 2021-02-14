@@ -8,6 +8,7 @@ import Navbar from '../Navbar';
 describe('Navbar', () => {
   const fullProps = () => ({
     signOut: jest.fn(),
+    isSignedIn: false,
   });
 
   const component = (props) => shallow(
@@ -21,7 +22,12 @@ describe('Navbar', () => {
   });
 
   it('matches pure component when currentUser is present snapshot', () => {
-    const props = Object.assign({}, fullProps(), { currentUser: fromJS({ name: 'Billy' }) });
+    const accountProps = {
+      currentUser: fromJS({ name: 'Billy' }),
+      currentProfile: fromJS({ name: 'name' }),
+      isSignedIn: true,
+    };
+    const props = Object.assign({}, fullProps(), accountProps);
     const wrapper = component(props);
 
     expect(toJson(wrapper)).toMatchSnapshot();

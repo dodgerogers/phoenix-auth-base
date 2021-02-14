@@ -26,7 +26,7 @@ export function* handleRegisterSuccess(action) {
     yield put(showConfirmationModal());
     yield put(initializeConfirmationForm(action.formValues));
   } catch (err) {
-    yield put(dispatch(registerFailure(err)));
+    yield put(registerFailure(err));
   }
 }
 

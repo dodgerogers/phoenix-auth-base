@@ -35,6 +35,9 @@ db_config = [
 
 config :teebox, Teebox.Repo, db_config
 
+config :ex_oauth2_provider,
+  access_token_expires_in: 60
+
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20

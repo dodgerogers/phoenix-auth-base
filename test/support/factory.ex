@@ -3,9 +3,7 @@ defmodule Teebox.Factory do
 
   def user_factory do
     %Teebox.Accounts.Schemas.User{
-      name: Faker.Name.name,
-      email: Faker.Internet.email,
-      avatar: "http://#{Faker.Lorem.characters(8..20)}.png",
+      email: Faker.Internet.email(),
       active: true,
       confirmed_at: NaiveDateTime.utc_now(),
       confirmation_token: nil,
@@ -19,16 +17,29 @@ defmodule Teebox.Factory do
     }
   end
 
+  def with_profile(user) do
+    build(:profile, user: user)
+    user
+  end
+
+  def profile_factory do
+    %Teebox.Accounts.Schemas.Profile{
+      name: Faker.Name.name() <> "12345678",
+      avatar: "http://#{Faker.Lorem.characters(8..20)}.png",
+      user: build(:user)
+    }
+  end
+
   def oauth_application_user_factory do
     %Teebox.Accounts.Schemas.OauthApplicationUser{
-      name: Faker.Name.name
+      name: Faker.Name.name()
     }
   end
 
   def oauth_application_factory do
     %ExOauth2Provider.OauthApplications.OauthApplication{
       owner: build(:oauth_application_user),
-      name: Faker.Name.name,
+      name: Faker.Name.name(),
       uid: Faker.String.base64(),
       secret: Faker.String.base64(),
       redirect_uri: "https://" <> Faker.Internet.domain_name()

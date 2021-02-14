@@ -1,24 +1,28 @@
-import { expectSaga } from 'redux-saga-test-plan';
-import { fromJS } from 'immutable';
-import { call, put, take } from 'redux-saga/effects';
-import * as matchers from 'redux-saga-test-plan/matchers';
-import SignInSuccess from '../SignInSuccess';
-import { actionTypes } from '../../constants';
+import { expectSaga } from "redux-saga-test-plan";
+import { fromJS } from "immutable";
+import { call, put, take, provide } from "redux-saga/effects";
+import * as matchers from "redux-saga-test-plan/matchers";
+import SignInSuccess from "../SignInSuccess";
+import * as TokenStorage from "../../services/TokenStorage";
+import { actionTypes } from "../../constants";
 
-
-describe('ForgotSignInSuccessPassword', () => {
-  it('makes verifyTokenRequest and notifies user', () => {
-    const accessToken = { token: 'token' };
+describe("ForgotSignInSuccessPassword", () => {
+  it("makes getCurrentAccountRequest and notifies user", () => {
+    const accessToken = { token: "token" };
+    const mockCookie = "cookie";
+    TokenStorage.store = jest.fn(() => Promise.resolve(mockCookie));
 
     return expectSaga(SignInSuccess)
-      .put({ type: 'HIDE_MODAL', data: { id: 'SIGN_IN_MODAL' }})
-      .put({ type: 'VERIFY_TOKEN_REQUEST', accessToken })
+      .provide([call(TokenStorage.store, accessToken)])
+      .put({ type: "STORE_TOKEN_REQUEST", accessToken })
+      .put({ type: "GET_CURRENT_ACCOUNT_REQUEST" })
+      .put({ type: "HIDE_MODAL", data: { id: "SIGN_IN_MODAL" } })
       .put({
         id: undefined,
-        type: 'CREATE_NOTIFICATION',
+        type: "CREATE_NOTIFICATION",
         notification: {
-          level: 'success',
-          message: 'Logged in successfully',
+          level: "success",
+          message: "Logged in successfully",
         },
       })
       .dispatch({

@@ -3,9 +3,10 @@ defmodule Teebox.Accounts.RegistrationMock do
   alias Teebox.Accounts.Schemas.User
 
   def call(%{} = _params) do
-    user = build(:user)
+    user = build(:user, id: 1)
     {:ok, user}
   end
+
   def call(_params) do
     invalid_changeset = Teebox.Accounts.Schemas.User.changeset(:registration, %User{}, %{})
     {:error, invalid_changeset}

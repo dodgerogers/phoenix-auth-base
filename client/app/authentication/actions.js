@@ -1,33 +1,38 @@
-import { initialize } from 'redux-form/immutable';
-import * as AuthenticationSources from './sources';
-import { ModalActions, ModalIds } from '../common/modals';
 import { actionTypes } from './constants';
-import { NotificationActions, areaIDs } from '../common/Notifications';
-import * as TokenStorage from './services/TokenStorage';
-import { formIDs } from './constants';
-import handleFormErrors from '../lib/utils/handleFormErrors';
 
-
-export const verifyTokenRequest = accessToken => ({
-  type: actionTypes.VERIFY_TOKEN_REQUEST,
-  accessToken,
+export const storeTokenRequest = (accessToken) => ({
+  type: actionTypes.STORE_TOKEN_REQUEST,
+  accessToken
 });
 
-export const verifyTokenSuccess = user => ({
-  type: actionTypes.VERIFY_TOKEN_SUCCESS,
-  user,
+export const storeTokenSuccess = (accessToken) => ({
+  type: actionTypes.STORE_TOKEN_SUCCESS,
+  accessToken
 });
 
-export const verifyTokenFailure = () => ({
-  type: actionTypes.VERIFY_TOKEN_FAILURE,
+export const storeTokenFailure = () => ({
+  type: actionTypes.STORE_TOKEN_FAILURE,
+});
+
+export const removeTokenRequest = () => ({
+  type: actionTypes.REMOVE_TOKEN_REQUEST
+});
+
+export const removeTokenSuccess = () => ({
+  type: actionTypes.REMOVE_TOKEN_SUCCESS
+});
+
+export const removeTokenFailure = () => ({
+  type: actionTypes.REMOVE_TOKEN_FAILURE,
 });
 
 export const refreshTokenRequest = () => ({
-  type: actionTypes.REFRESH_TOKEN_REQUEST,
+  type: actionTypes.REFRESH_TOKEN_REQUEST
 });
 
-export const refreshTokenSuccess = () => ({
+export const refreshTokenSuccess = accessToken => ({
   type: actionTypes.REFRESH_TOKEN_SUCCESS,
+  accessToken
 });
 
 export const refreshTokenFailure = () => ({
@@ -59,9 +64,9 @@ export const signOutFailure = () => ({
   type: actionTypes.SIGN_OUT_FAILURE,
 });
 
-export const signInSuccess = response => ({
+export const signInSuccess = accessToken => ({
   type: actionTypes.SIGN_IN_SUCCESS,
-  accessToken: response.data.accessToken,
+  accessToken,
 });
 
 export const registerSuccess = (_result, _dispatch, { values }) => ({

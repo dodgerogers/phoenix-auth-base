@@ -41,6 +41,7 @@ Object {
 
 exports[`async AuthenticationActions refreshToken refreshTokenSuccess matches snapshot 1`] = `
 Object {
+  "accessToken": "token",
   "type": "REFRESH_TOKEN_SUCCESS",
 }
 `;
@@ -102,25 +103,5 @@ Object {
 exports[`async AuthenticationActions signOut signOutSuccess matches snapshot 1`] = `
 Object {
   "type": "SIGN_OUT_SUCCESS",
-}
-`;
-
-exports[`async AuthenticationActions verifyToken verifyTokenFailure matches snapshot 1`] = `
-Object {
-  "type": "VERIFY_TOKEN_FAILURE",
-}
-`;
-
-exports[`async AuthenticationActions verifyToken verifyTokenRequest matches snapshot 1`] = `
-Object {
-  "accessToken": undefined,
-  "type": "VERIFY_TOKEN_REQUEST",
-}
-`;
-
-exports[`async AuthenticationActions verifyToken verifyTokenSuccess matches snapshot 1`] = `
-Object {
-  "type": "VERIFY_TOKEN_SUCCESS",
-  "user": undefined,
 }
 `;

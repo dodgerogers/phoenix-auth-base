@@ -1,10 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Message } from 'semantic-ui-react';
-import styled from 'styled-components';
-import Notification from './Notification';
-
+import React from "react";
+import PropTypes from "prop-types";
+import ImmutablePropTypes from "react-immutable-proptypes";
+import { Message } from "semantic-ui-react";
+import styled from "styled-components";
+import Notification from "./Notification";
 
 const NotificationWrapper = styled.div`
   margin-bottom: 10px;
@@ -29,8 +28,8 @@ const NotificationList = (props) => {
     );
   }
 
-  return (<noscript />);
-}
+  return <noscript />;
+};
 
 NotificationList.propTypes = {
   id: PropTypes.string.isRequired,

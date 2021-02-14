@@ -5,8 +5,8 @@ import { Label } from 'semantic-ui-react';
 import ColorCodeGenerator from '../../lib/utils/ColorCodeGenerator';
 
 
-function UserAvatar(props) {
-  const username = props.user.get('name');
+function AccountProfileAvatar(props) {
+  const username = props.profile.get('name');
   const firstCharOfUsername = username[0];
   const colorCodeForUsername = ColorCodeGenerator.call(firstCharOfUsername) || '#000';
 
@@ -33,10 +33,10 @@ function UserAvatar(props) {
   );
 }
 
-UserAvatar.propTypes = {
-  user: ImmutablePropTypes.contains({
+AccountProfileAvatar.propTypes = {
+  profile: ImmutablePropTypes.contains({
     name: PropTypes.string.isRequired,
   }),
 };
 
-export default UserAvatar;
+export default AccountProfileAvatar;
