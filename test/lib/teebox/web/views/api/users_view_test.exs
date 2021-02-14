@@ -5,7 +5,7 @@ defmodule Teebox.Web.Api.UsersViewTest do
     user = insert(:user) |> with_profile()
     user = Teebox.Repo.preload(user, :profiles)
 
-    rendered_view = Teebox.Web.Api.UsersView.render("me.json", %{user: user})
+    rendered_view = Teebox.Web.Api.UsersView.render("current_user.json", %{user: user})
 
     expected_profiles =
       Enum.map(user.profiles, fn p -> %{avatar: p.avatar, id: p.id, name: p.name} end)

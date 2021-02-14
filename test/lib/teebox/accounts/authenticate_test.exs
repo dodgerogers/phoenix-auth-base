@@ -19,7 +19,7 @@ defmodule Teebox.Accounts.AuthenticateTest do
       assert code.access_token
       assert code.refresh_token
       assert "bearer" == code.token_type
-      assert 900 == code.expires_in
+      assert 600 == code.expires_in
     end
 
     test "with invalid email returns an error tuple" do
