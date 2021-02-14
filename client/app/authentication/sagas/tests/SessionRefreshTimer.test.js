@@ -1,14 +1,13 @@
-import { expectSaga } from 'redux-saga-test-plan';
-import * as matchers from 'redux-saga-test-plan/matchers';
-import { fromJS } from 'immutable';
-import moment from 'moment';
-import * as SessionTimer from '../../services/SessionTimer';
-import SessionRefreshTimer from '../SessionRefreshTimer';
+import { expectSaga } from "redux-saga-test-plan";
+import * as matchers from "redux-saga-test-plan/matchers";
+import { fromJS } from "immutable";
+import moment from "moment";
+import * as SessionTimer from "../../services/SessionTimer";
+import SessionRefreshTimer from "../SessionRefreshTimer";
 
-
-describe('SessionRefreshTimer', () => {
+describe("SessionRefreshTimer", () => {
   const accessToken = {
-    accessToken: 'token',
+    accessToken: "token",
     createdAt: moment(),
     expiresIn: 1000,
   };
@@ -18,36 +17,36 @@ describe('SessionRefreshTimer', () => {
   };
   const mockReducer = (state = initialState) => state;
 
-  it('dispatches REFRESH_TOKEN_REQUEST when accessToken is present in state tree', () => {
+  it("dispatches REFRESH_TOKEN_REQUEST when accessToken is present in state tree", () => {
     SessionTimer.refreshIn = jest.fn(() => 0);
 
     return expectSaga(SessionRefreshTimer)
       .withReducer(mockReducer)
-      .put({ type: 'REFRESH_TOKEN_REQUEST' })
-      .dispatch({ type: 'GET_CURRENT_USER_REQUEST' })
+      .put({ type: "REFRESH_TOKEN_REQUEST" })
+      .dispatch({ type: "STORE_TOKEN_SUCCESS" })
       .run({ silenceTimeout: true });
   });
 
-  it('does not call REFRESH_TOKEN_REQUEST when SIGN_OUT_SUCCESS is dispatched', () => {
+  it("does not call REFRESH_TOKEN_REQUEST when SIGN_OUT_SUCCESS is dispatched", () => {
     SessionTimer.refreshIn = jest.fn(() => 1000);
 
     return expectSaga(SessionRefreshTimer)
       .withReducer(mockReducer)
-      .put({ type: 'REFRESH_TOKEN_REQUEST_CANCELLED' })
-      .dispatch({ type: 'GET_CURRENT_USER_REQUEST' })
-      .dispatch({ type: 'SIGN_OUT_SUCCESS' })
+      .put({ type: "REFRESH_TOKEN_REQUEST_CANCELLED" })
+      .dispatch({ type: "STORE_TOKEN_SUCCESS" })
+      .dispatch({ type: "SIGN_OUT_SUCCESS" })
       .run({ silenceTimeout: true });
   });
 
-  it('dispatches REFRESH_TOKEN_FAILURE when SessionTimer throws an error', () => {
+  it("dispatches REFRESH_TOKEN_FAILURE when SessionTimer throws an error", () => {
     SessionTimer.refreshIn = jest.fn(() => {
-      throw 'error';
+      throw "error";
     });
 
     return expectSaga(SessionRefreshTimer)
       .withReducer(mockReducer)
-      .put({ type: 'REFRESH_TOKEN_FAILURE' })
-      .dispatch({ type: 'GET_CURRENT_USER_REQUEST' })
+      .put({ type: "REFRESH_TOKEN_FAILURE" })
+      .dispatch({ type: "STORE_TOKEN_SUCCESS" })
       .run({ silenceTimeout: true });
   });
 });

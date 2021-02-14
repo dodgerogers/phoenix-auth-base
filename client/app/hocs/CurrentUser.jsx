@@ -1,25 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
-import { connect } from 'react-redux';
-
+import React from "react";
+import PropTypes from "prop-types";
+import ImmutablePropTypes from "react-immutable-proptypes";
+import { connect } from "react-redux";
 
 const CurrentUser = (ComposedComponent, opts = {}) => {
   const Wrapper = (props) => {
-    const isSignedIn = props.currentUser !== null && props.currentProfile !== null;
+    const isSignedIn = !!(props.currentUser && props.currentProfile);
+
     return (
       <ComposedComponent
         currentUser={props.currentUser}
         currentProfile={props.currentProfile}
         isSignedIn={isSignedIn}
-        {...props} />
+        {...props}
+      />
     );
-  }
+  };
 
   function mapStateToProps({ accounts }) {
     return {
-      currentUser: accounts.get('currentUser'),
-      currentProfile: accounts.get('currentProfile'),
+      currentUser: accounts.get("currentUser"),
+      currentProfile: accounts.get("currentProfile"),
     };
   }
 
@@ -30,6 +31,6 @@ const CurrentUser = (ComposedComponent, opts = {}) => {
   };
 
   return connect(mapStateToProps, null)(Wrapper);
-}
+};
 
 export default CurrentUser;

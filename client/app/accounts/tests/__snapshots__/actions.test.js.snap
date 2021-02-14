@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AccountActions getCurrentUser getCurrentUserFailure matches snapshot 1`] = `
+exports[`AccountActions getCurrentUser getCurrentAccountRequest matches snapshot 1`] = `
 Object {
-  "type": "GET_CURRENT_USER_FAILURE",
+  "type": "GET_CURRENT_ACCOUNT_REQUEST",
 }
 `;
 
-exports[`AccountActions getCurrentUser getCurrentAccountRequest matches snapshot 1`] = `
+exports[`AccountActions getCurrentUser getCurrentUserFailure matches snapshot 1`] = `
 Object {
-  "type": "GET_CURRENT_USER_REQUEST",
+  "type": "GET_CURRENT_USER_FAILURE",
 }
 `;
 
